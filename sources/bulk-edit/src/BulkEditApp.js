@@ -1,26 +1,12 @@
-import React from 'react';
-import { Typography } from '@mui/material';
-import { useIntl } from 'react-intl';
+import * as React from 'react';
+import { Button, Stack } from '@mui/material';
 
 function ReactComponent({ text}) {
-  const { formatMessage } = useIntl()
   return (
-    <Typography
-      sx={{
-        margin: '.5em',
-        padding: '.5em',
-        border: '2px solid #000',
-        textAlign: 'center'
-      }}
-    >
-      Hello from the react world, {text}.{' '}
-      {formatMessage({
-        id: 'myTestTranslation',
-        defaultMessage: 'Hello, this is a test translation'
-      })}
-      .
-    </Typography>
-  )
+    <Stack spacing={2} direction="row">
+      <Button variant="contained">Bulk Edit</Button>
+    </Stack>
+  );
 }
 
 export default ReactComponent;

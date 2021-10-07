@@ -1,24 +1,14 @@
-var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { Typography } = craftercms.libs.MaterialUI;
-var { useIntl } = craftercms.libs.ReactIntl;
+var * as React = craftercms.libs.React;
+var { Stack, Button } = craftercms.libs.MaterialUI;
 
 function ReactComponent(_ref) {
-  var text = _ref.text;
-
-  var _useIntl = useIntl(),
-      formatMessage = _useIntl.formatMessage;
-
-  return /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      margin: '.5em',
-      padding: '.5em',
-      border: '2px solid #000',
-      textAlign: 'center'
-    }
-  }, "Hello from the react world, ", text, ".", ' ', formatMessage({
-    id: 'myTestTranslation',
-    defaultMessage: 'Hello, this is a test translation'
-  }), ".");
+  _ref.text;
+  return /*#__PURE__*/React.createElement(Stack, {
+    spacing: 2,
+    direction: "row"
+  }, /*#__PURE__*/React.createElement(Button, {
+    variant: "contained"
+  }, "Bulk Edit"));
 }
 
 var myTestTranslation$1 = "Hello, this is a test translation";
