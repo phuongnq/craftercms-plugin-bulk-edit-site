@@ -17,19 +17,36 @@ function createCommonjsModule(fn, basedir, module) {
 	}, fn(module, module.exports), module.exports;
 }
 
+function getAugmentedNamespace(n) {
+	if (n.__esModule) return n;
+	var a = Object.defineProperty({}, '__esModule', {value: true});
+	Object.keys(n).forEach(function (k) {
+		var d = Object.getOwnPropertyDescriptor(n, k);
+		Object.defineProperty(a, k, d.get ? d : {
+			enumerable: true,
+			get: function () {
+				return n[k];
+			}
+		});
+	});
+	return a;
+}
+
 function commonjsRequire () {
 	throw new Error('Dynamic requires are not currently supported by @rollup/plugin-commonjs');
 }
 
-var interopRequireDefault = createCommonjsModule(function (module) {
-function _interopRequireDefault(obj) {
+function _interopRequireDefault$1(obj) {
   return obj && obj.__esModule ? obj : {
     "default": obj
   };
 }
 
-module.exports = _interopRequireDefault;
+module.exports = _interopRequireDefault$1;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+var interopRequireDefault = /*#__PURE__*/Object.freeze({
+	__proto__: null
 });
 
 var createSvgIcon = createCommonjsModule(function (module, exports) {
@@ -45,6 +62,8 @@ Object.defineProperty(exports, "default", {
 });
 });
 
+var _interopRequireDefault = /*@__PURE__*/getAugmentedNamespace(interopRequireDefault);
+
 var require$$0 = createSvgIcon;
 
 var AutoAwesomeMotionOutlined = createCommonjsModule(function (module, exports) {
@@ -56,7 +75,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _createSvgIcon = interopRequireDefault(require$$0);
+var _createSvgIcon = _interopRequireDefault(require$$0);
 
 
 
