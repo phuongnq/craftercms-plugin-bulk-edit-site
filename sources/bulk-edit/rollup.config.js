@@ -63,7 +63,7 @@ export default {
   output: [
     {
       file: pkg.module,
-      format: 'iife',
+      format: 'esm',
       globals,
     }
   ],
