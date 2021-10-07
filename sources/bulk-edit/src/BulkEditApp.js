@@ -5,6 +5,7 @@ import AutoAwesomeMotionOutlinedIcon from '@mui/icons-material/AutoAwesomeMotion
 function BulkEditApp() {
   return (
     <Stack spacing={2} direction="row">
+      <AutoAwesomeMotionOutlinedIcon />
       <Button variant="contained">Bulk Edit</Button>
     </Stack>
   );
