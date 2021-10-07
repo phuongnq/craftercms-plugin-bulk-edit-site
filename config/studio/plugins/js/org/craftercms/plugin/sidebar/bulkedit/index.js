@@ -89,12 +89,7 @@ exports.default = _default;
 var AutoAwesomeMotionOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(AutoAwesomeMotionOutlined);
 
 function BulkEditApp() {
-  return /*#__PURE__*/React.createElement(Stack, {
-    spacing: 2,
-    direction: "row"
-  }, /*#__PURE__*/React.createElement(AutoAwesomeMotionOutlinedIcon, null), /*#__PURE__*/React.createElement(Button, {
-    variant: "contained"
-  }, "Bulk Edit"));
+  return "test";
 }
 
 var myTestTranslation$1 = "Hello, this is a test translation";

@@ -93,11 +93,7 @@ export default {
     replaceImportsWithVars({ varType: 'var', replacementLookup: globals }),
     resolve({ extensions }),
     commonjs({
-      include: /node_modules/,
-      namedExports: {
-        'react-is': ['isValidElementType', 'ForwardRef', 'Memo', 'isFragment'],
-        'prop-types': ['elementType'],
-      }
+      include: '/node_modules/@mui/icons-material/**',
     }),
     copy({
       targets: [{ src: 'dist/*', dest: '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit' }],
