@@ -2,6 +2,7 @@ var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(crafte
 var { Stack, Button } = craftercms.libs.MaterialUI;
 
 function BulkEditApp() {
+  console.log('BulkEditApp');
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
     direction: "row"
