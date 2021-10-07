@@ -69,6 +69,7 @@
     "react-scripts": "^4.0.0",
     "rollup": "^2.33.2",
     "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commit": "^0.0.3",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-replace-imports-with-vars": "^1.0.0",

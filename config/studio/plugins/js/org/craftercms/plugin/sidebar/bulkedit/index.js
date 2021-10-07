@@ -1,7 +1,6 @@
 var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { Typography } = craftercms.libs.MaterialUI;
 var { useIntl } = craftercms.libs.ReactIntl;
-var createEmotion = craftercms.libs.createEmotion && Object.prototype.hasOwnProperty.call(craftercms.libs.createEmotion, 'default') ? craftercms.libs.createEmotion['default'] : craftercms.libs.createEmotion;
 
 function ReactComponent(_ref) {
   var text = _ref.text;
@@ -22,38 +21,6 @@ function ReactComponent(_ref) {
   }), ".");
 }
 
-var _createEmotion = createEmotion({
-  key: 'NonReactComponentEmotionKey'
-}),
-    css = _createEmotion.css,
-    flush = _createEmotion.flush;
-
-var NonReactComponent = {
-  main: function main(_ref) {
-    var craftercms = _ref.craftercms,
-        element = _ref.element,
-        configuration = _ref.configuration;
-    var store = craftercms.getStore();
-    var className = css({
-      margin: '.5em',
-      padding: '.5em',
-      border: '2px solid #000',
-      textAlign: 'center',
-      color: configuration.fontColor || 'green'
-    });
-    var user = store.getState().user.username;
-    element.classList.add(className);
-    element.innerHTML = "Hello from the non-react world, ".concat(user, ". ").concat(craftercms.getIntl().formatMessage({
-      id: 'myTestTranslation',
-      defaultMessage: 'Showing the default translation'
-    }), ".");
-    return function () {
-      // Component destruction logic
-      flush();
-    };
-  }
-};
-
 var myTestTranslation$1 = "Hello, this is a test translation";
 var en = {
 	myTestTranslation: myTestTranslation$1
@@ -64,12 +31,10 @@ var es = {
 	myTestTranslation: myTestTranslation
 };
 
-var plugin
-/*: PluginDescriptor */
-= {
-  id: 'org.craftercms.sampleComponentLibraryPlugin',
-  name: 'Sample component library',
-  description: 'An example plugin of a component library',
+var plugin = {
+  id: 'org.craftercms.bulkEditPlugin',
+  name: 'Bulk Edit Plugin',
+  description: 'A plugin to do bulk edit',
   author: 'Roy Art',
   logo: null,
   locales: {
@@ -79,12 +44,11 @@ var plugin
   apps: [{
     route: '/yada-yada',
     widget: {
-      id: 'org.craftercms.sampleComponentLibraryPlugin.components.reactComponent'
+      id: 'org.craftercms.bulkEditPlugin.components.reactComponent'
     }
   }],
   widgets: {
-    'org.craftercms.sampleComponentLibraryPlugin.components.reactComponent': ReactComponent,
-    'org.craftercms.sampleComponentLibraryPlugin.components.nonReactComponent': NonReactComponent
+    'org.craftercms.bulkEditPlugin.components.reactComponent': ReactComponent
   },
   scripts: [{
     src: 'https://code.jquery.com/jquery-3.5.1.min.js',
@@ -95,4 +59,4 @@ var plugin
   themes: []
 };
 
-export { NonReactComponent, ReactComponent, plugin as default };
+export { ReactComponent, plugin as default };

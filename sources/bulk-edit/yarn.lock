@@ -10315,6 +10315,11 @@ rollup-plugin-babel@^4.3.3, rollup-plugin-babel@^4.4.0:
     "@babel/helper-module-imports" "^7.0.0"
     rollup-pluginutils "^2.8.1"
 
+rollup-plugin-commit@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-commit/-/rollup-plugin-commit-0.0.3.tgz#b6f000be5957342a2797e5a0ebfe5274bbf51a9f"
+  integrity sha512-r8apx1ARYWnKPyZK5nGurezsNxWFo7Tnqpc+IBcnmDJ9gvbOI4FuWxmiucG79KNMwtVgwgVtmXb5Izw2wlmotg==
+
 rollup-plugin-copy@^3.3.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-copy/-/rollup-plugin-copy-3.4.0.tgz#f1228a3ffb66ffad8606e2f3fb7ff23141ed3286"

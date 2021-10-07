@@ -6,6 +6,7 @@ import json from '@rollup/plugin-json';
 import pkg from './package.json';
 import copy from 'rollup-plugin-copy';
 import babel from 'rollup-plugin-babel';
+import commit from 'rollup-plugin-commit';
 
 const extensions = ['.js', '.jsx']
 
@@ -50,11 +51,12 @@ export default {
     resolve({ extensions }),
     commonjs(),
     copy({
+      targets: [{ src: 'dist/*', dest: '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit' }],
+      hook: 'writeBundle'
+    }),
+    commit({
       targets: [
-        {
-          src: './src/{script,index}.{js,css}',
-          dest: './dist'
-        }
+        '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit/index.js'
       ]
     })
   ]

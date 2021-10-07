@@ -1,13 +1,12 @@
-import ReactComponent from './ReactComponent'
-import NonReactComponent from './NonReactComponent'
-import en from './i18n/translations/en.json'
-import es from './i18n/translations/es.json'
-// import PluginDescriptor from '@craftercms/studio-ui'
+import ReactComponent from './ReactComponent';
 
-const plugin /*: PluginDescriptor */ = {
-  id: 'org.craftercms.sampleComponentLibraryPlugin',
-  name: 'Sample component library',
-  description: 'An example plugin of a component library',
+import en from './i18n/translations/en.json';
+import es from './i18n/translations/es.json';
+
+const plugin = {
+  id: 'org.craftercms.bulkEditPlugin',
+  name: 'Bulk Edit Plugin',
+  description: 'A plugin to do bulk edit',
   author: 'Roy Art',
   logo: null,
   locales: {
@@ -17,12 +16,11 @@ const plugin /*: PluginDescriptor */ = {
   apps: [
     {
       route: '/yada-yada',
-      widget: { id: 'org.craftercms.sampleComponentLibraryPlugin.components.reactComponent' }
+      widget: { id: 'org.craftercms.bulkEditPlugin.components.reactComponent' }
     }
   ],
   widgets: {
-    'org.craftercms.sampleComponentLibraryPlugin.components.reactComponent': ReactComponent,
-    'org.craftercms.sampleComponentLibraryPlugin.components.nonReactComponent': NonReactComponent
+    'org.craftercms.bulkEditPlugin.components.reactComponent': ReactComponent,
   },
   scripts: [
     {
@@ -36,6 +34,6 @@ const plugin /*: PluginDescriptor */ = {
   themes: []
 };
 
-export { ReactComponent, NonReactComponent };
+export { ReactComponent };
 
 export default plugin;
