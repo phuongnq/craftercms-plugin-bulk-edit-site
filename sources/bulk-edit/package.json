@@ -79,5 +79,7 @@
   "files": [
     "dist"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "@mui/icons-material": "^5.0.1"
+  }
 }

@@ -6,7 +6,7 @@ import json from '@rollup/plugin-json';
 import pkg from './package.json';
 import copy from 'rollup-plugin-copy';
 import babel from 'rollup-plugin-babel';
-import commit from 'rollup-plugin-commit';
+const { exec } = require('child_process');
 
 const extensions = ['.js', '.jsx']
 
@@ -21,13 +21,50 @@ const globals = {
   '@craftercms/studio-ui': 'craftercms.libs.StudioUI'
 }
 
+function cleanName(name) {
+  if (name.includes('/')) {
+    const i = name.lastIndexOf('/');
+    console.log(name.substr(i + 1));
+    return name.substr(i + 1);
+  }
+  return name;
+}
+
+function commitMessage(tpl, file) {
+  const now = new Date();
+  const date = `${now.getFullYear()}.${now.getDate()}.${now.getDay()}`;
+  const time = `${now.getHours()}:${now.getMinutes()}`;
+  return tpl.replace('{file}', file).replace('{date}', date).replace('{time}', time);
+}
+
+function rollupPluginCommit() {
+  const target = '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit/index.js';
+  const message = 'Updates to {file} @ {date} {time}';
+  return {
+    name: 'rollup-plugin-commit',
+    writeBundle() {
+      if (target) {
+        const callback = (op) => (error, stdout, stderr) => (error)
+            ? console.error(stderr || `Failed to ${op} "${target}" \n ${error.cmd}. ${stdout ? ('\n' + stdout) : ''}`)
+            : console.log(stdout || `Git ${op} successful for "${target}".`);
+        exec(
+          `git add ${target} ${
+            '&&'
+          } git commit ${target} -m "${commitMessage(message, cleanName(target))}"`,
+          callback('add/commit')
+        );
+      }
+    }
+  };
+}
+
 export default {
   input: pkg.source,
   output: [
     {
       file: pkg.module,
       format: 'es',
-      globals
+      globals,
     }
   ],
   plugins: [
@@ -52,10 +89,6 @@ export default {
       targets: [{ src: 'dist/*', dest: '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit' }],
       hook: 'writeBundle'
     }),
-    commit({
-      targets: [
-        '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit/index.js'
-      ]
-    })
+    rollupPluginCommit()
   ]
 }
