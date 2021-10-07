@@ -18,7 +18,7 @@
   <widget id="craftercms.components.ToolsPanel">
     <configuration>
       <widgets>
-        <widget id="org.craftercms.bulkEditPlugin.components.reactComponent">
+        <widget id="org.craftercms.bulkEditPlugin.components.BulkEditApp">
              <plugin id="org.craftercms.plugin"
                  type="sidebar"
                  name="bulkedit"
