@@ -1,8 +1,8 @@
 var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { Stack, Button } = craftercms.libs.MaterialUI;
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
-function BulkEditApp(_ref) {
-  _ref.text;
+function BulkEditApp() {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
     direction: "row"

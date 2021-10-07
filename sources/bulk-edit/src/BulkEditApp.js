@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Stack } from '@mui/material';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
-function BulkEditApp({ text}) {
+function BulkEditApp() {
   return (
     <Stack spacing={2} direction="row">
       <Button variant="contained">Bulk Edit</Button>
