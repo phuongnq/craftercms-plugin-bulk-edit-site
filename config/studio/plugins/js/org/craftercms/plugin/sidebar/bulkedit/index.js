@@ -1,12 +1,19 @@
-var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { Stack, Button } = craftercms.libs.MaterialUI;
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var React = require('react');
+var material = require('@mui/material');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 function BulkEditApp() {
-  console.log('BulkEditApp');
-  return /*#__PURE__*/React.createElement(Stack, {
+  return /*#__PURE__*/React__default["default"].createElement(material.Stack, {
     spacing: 2,
     direction: "row"
-  }, /*#__PURE__*/React.createElement(Button, {
+  }, /*#__PURE__*/React__default["default"].createElement(material.Button, {
     variant: "contained"
   }, "Bulk Edit"));
 }
@@ -45,4 +52,5 @@ var plugin = {
   themes: []
 };
 
-export { BulkEditApp, plugin as default };
+exports.BulkEditApp = BulkEditApp;
+exports["default"] = plugin;
