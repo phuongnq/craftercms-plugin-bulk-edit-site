@@ -30,8 +30,6 @@ export default {
       globals
     }
   ],
-  // If not using "rollup-plugin-peer-deps-external" plugin
-  // external: Object.keys(globals),
   plugins: [
     babel({
       exclude: 'node_modules/**',
