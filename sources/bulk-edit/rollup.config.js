@@ -63,7 +63,7 @@ export default {
   output: [
     {
       file: pkg.module,
-      format: 'esm',
+      format: 'es',
       globals,
     }
   ],
@@ -92,7 +92,13 @@ export default {
     json(),
     replaceImportsWithVars({ varType: 'var', replacementLookup: globals }),
     resolve({ extensions }),
-    commonjs(),
+    commonjs({
+      include: /node_modules/,
+      namedExports: {
+        'react-is': ['isValidElementType', 'ForwardRef', 'Memo', 'isFragment'],
+        'prop-types': ['elementType'],
+      }
+    }),
     copy({
       targets: [{ src: 'dist/*', dest: '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit' }],
       hook: 'writeBundle'
