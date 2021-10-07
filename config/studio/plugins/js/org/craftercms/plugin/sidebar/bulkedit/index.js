@@ -1,7 +1,7 @@
 var * as React = craftercms.libs.React;
 var { Stack, Button } = craftercms.libs.MaterialUI;
 
-function ReactComponent(_ref) {
+function BulkEditApp(_ref) {
   _ref.text;
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
@@ -38,11 +38,11 @@ var plugin = {
     }
   }],
   widgets: {
-    'org.craftercms.bulkEditPlugin.components.BulkEditApp': ReactComponent
+    'org.craftercms.bulkEditPlugin.components.BulkEditApp': BulkEditApp
   },
   scripts: [],
   stylesheets: [],
   themes: []
 };
 
-export { ReactComponent as BulkEditApp, plugin as default };
+export { BulkEditApp, plugin as default };
