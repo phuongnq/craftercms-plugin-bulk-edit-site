@@ -1,6 +1,5 @@
 var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+var { Stack, Button } = craftercms.libs.MaterialUI;
 
 function BulkEditApp() {
   return /*#__PURE__*/React.createElement(Stack, {
