@@ -21,7 +21,7 @@
         <widget id="org.craftercms.sampleComponentLibraryPlugin.components.reactComponent">
              <plugin id="org.craftercms.plugin"
                  type="sidebar"
-                 name="bulk-edit"
+                 name="bulkedit"
                  file="index.js"/> 
         </widget>
         <widget id="craftercms.components.ToolsPanelEmbeddedAppViewButton">
