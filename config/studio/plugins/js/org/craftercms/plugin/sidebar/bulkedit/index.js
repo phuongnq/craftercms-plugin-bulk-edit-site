@@ -69,9 +69,8 @@ exports.default = _default;
 
 var AutoAwesomeMotionOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(AutoAwesomeMotionOutlined);
 
-console.log(AutoAwesomeMotionOutlinedIcon);
-
 function BulkEditApp() {
+  console.log(AutoAwesomeMotionOutlinedIcon);
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
     direction: "row"
