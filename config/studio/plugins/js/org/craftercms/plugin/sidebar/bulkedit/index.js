@@ -75,7 +75,7 @@ function BulkEditApp() {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
     direction: "row"
-  }, /*#__PURE__*/React.createElement(AutoAwesomeMotionOutlinedIcon, null), /*#__PURE__*/React.createElement(Button, {
+  }, /*#__PURE__*/React.createElement(Button, {
     variant: "contained"
   }, "Bulk Edit"));
 }
