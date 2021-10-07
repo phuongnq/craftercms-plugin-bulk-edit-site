@@ -17,7 +17,7 @@ const globals = {
   '@emotion/css/create-instance': 'craftercms.libs.createEmotion',
   'react-dom': 'craftercms.libs.ReactDOM',
   'react-intl': 'craftercms.libs.ReactIntl',
-  '@mui/material': 'craftercms.libs.MaterialUI',
+  // '@mui/material': 'craftercms.libs.MaterialUI',
   '@craftercms/studio-ui': 'craftercms.libs.StudioUI'
 }
 
@@ -92,11 +92,7 @@ export default {
     json(),
     replaceImportsWithVars({ varType: 'var', replacementLookup: globals }),
     resolve({ extensions }),
-    commonjs({
-      dynamicRequireTargets: [
-        '/node_modules/**',
-      ],
-    }),
+    commonjs(),
     copy({
       targets: [{ src: 'dist/*', dest: '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit' }],
       hook: 'writeBundle'

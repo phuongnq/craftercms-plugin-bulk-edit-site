@@ -1,5 +1,5 @@
 var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { Stack, Button } = craftercms.libs.MaterialUI;
+import { Stack, Button } from '@mui/material';
 import _jsxRuntime from 'react/jsx-runtime';
 import _utils from '@mui/material/utils';
 
