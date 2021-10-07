@@ -71,6 +71,7 @@ var AutoAwesomeMotionOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(AutoAwe
 
 function BulkEditApp() {
   console.log(AutoAwesomeMotionOutlinedIcon);
+  console.log("BulkEditApp");
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
     direction: "row"
