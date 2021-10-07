@@ -63,9 +63,17 @@ export default {
   output: [
     {
       file: pkg.module,
-      format: 'cjs',
+      format: 'iife',
       globals,
     }
+  ],
+  external: [
+    'rxjs',
+    'rxjs/operators',
+    'react',
+    'react-dom',
+    'CrafterCMSNext',
+    '@craftercms/studio'
   ],
   plugins: [
     babel({
