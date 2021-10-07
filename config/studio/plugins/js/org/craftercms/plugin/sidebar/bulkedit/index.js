@@ -44,19 +44,15 @@ var plugin = {
   apps: [{
     route: '/yada-yada',
     widget: {
-      id: 'org.craftercms.bulkEditPlugin.components.reactComponent'
+      id: 'org.craftercms.bulkEditPlugin.components.BulkEditApp'
     }
   }],
   widgets: {
-    'org.craftercms.bulkEditPlugin.components.reactComponent': ReactComponent
+    'org.craftercms.bulkEditPlugin.components.BulkEditApp': ReactComponent
   },
-  scripts: [{
-    src: 'https://code.jquery.com/jquery-3.5.1.min.js',
-    integrity: 'sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=',
-    crossorigin: 'anonymous'
-  }, 'script.js'],
-  stylesheets: ['index.css'],
+  scripts: [],
+  stylesheets: [],
   themes: []
 };
 
-export { ReactComponent, plugin as default };
+export { ReactComponent as BulkEditApp, plugin as default };
