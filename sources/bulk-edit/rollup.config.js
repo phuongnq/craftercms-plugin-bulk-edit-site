@@ -17,14 +17,13 @@ const globals = {
   '@emotion/css/create-instance': 'craftercms.libs.createEmotion',
   'react-dom': 'craftercms.libs.ReactDOM',
   'react-intl': 'craftercms.libs.ReactIntl',
-  // '@mui/material': 'craftercms.libs.MaterialUI',
+  '@mui/material': 'craftercms.libs.MaterialUI',
   '@craftercms/studio-ui': 'craftercms.libs.StudioUI'
 }
 
 function cleanName(name) {
   if (name.includes('/')) {
     const i = name.lastIndexOf('/');
-    console.log(name.substr(i + 1));
     return name.substr(i + 1);
   }
   return name;
@@ -67,17 +66,8 @@ export default {
       globals,
     }
   ],
-  external: [
-    'rxjs',
-    'rxjs/operators',
-    'react',
-    'react-dom',
-    'CrafterCMSNext',
-    '@craftercms/studio'
-  ],
   plugins: [
     babel({
-      exclude: 'node_modules/**',
       presets: [
         '@babel/preset-env',
         '@babel/preset-react'
