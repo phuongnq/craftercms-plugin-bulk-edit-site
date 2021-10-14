@@ -654,6 +654,11 @@ function ContentTypeSelect() {
       contentType = _React$useState2[0],
       setContentType = _React$useState2[1];
 
+  var _React$useState3 = React.useState([]),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      contentTypes = _React$useState4[0],
+      setContentTypes = _React$useState4[1];
+
   React.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       var data;
@@ -697,11 +702,11 @@ function ContentTypeSelect() {
     label: "Content Type"
   }, /*#__PURE__*/React.createElement(MenuItem, {
     value: ""
-  }, /*#__PURE__*/React.createElement("em", null, "None")), contentTypes.map(function (contentType) {
+  }, /*#__PURE__*/React.createElement("em", null, "None")), contentTypes.map(function (ct) {
     return /*#__PURE__*/React.createElement(MenuItem, {
-      key: contentType.name,
-      value: contentType.name
-    }, contentType.label);
+      key: ct.name,
+      value: ct.name
+    }, ct.label);
   }))));
 }
 
