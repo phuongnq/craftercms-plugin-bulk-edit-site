@@ -653,7 +653,7 @@ var StudioAPI = {
           switch (_context2.prev = _context2.next) {
             case 0:
               path = "/content-types".concat(contentType, "/form-definition.xml");
-              url = "".concat(StudioAPI.origin()).concat(API_GET_CONFIGURATION, "?module=studio&path=").concat(path, "&sideId=").concat(StudioAPI.siteId());
+              url = "".concat(StudioAPI.origin()).concat(API_GET_CONFIGURATION, "?module=studio&path=").concat(path, "&siteId=").concat(StudioAPI.siteId());
               _context2.next = 4;
               return HttpHelper.get(url);
 
