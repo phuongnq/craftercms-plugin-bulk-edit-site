@@ -1,12 +1,13 @@
 import React from 'react';
-import { Button, Stack } from '@mui/material';
-import AutoAwesomeMotionOutlinedIcon from '@mui/icons-material/AutoAwesomeMotionOutlined';
+import MainDialog from './components/MainDialog';
+import {
+  Stack,
+} from '@mui/material';
 
 function BulkEditApp() {
   return (
-    <Stack spacing={2} direction="row">
-      <AutoAwesomeMotionOutlinedIcon />
-      <Button variant="contained">Bulk Edit</Button>
+    <Stack spacing={2}>
+      <MainDialog />
     </Stack>
   );
 }
