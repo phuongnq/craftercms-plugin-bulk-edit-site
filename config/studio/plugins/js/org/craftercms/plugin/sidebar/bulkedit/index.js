@@ -707,9 +707,8 @@ function MainDialog() {
     onClose: handleClose,
     "aria-labelledby": "customized-dialog-title",
     open: open,
-    sx: {
-      maxWidth: 'xl'
-    }
+    fullWidth: true,
+    maxWidth: false
   }, /*#__PURE__*/React.createElement(BootstrapDialogTitle, {
     id: "customized-dialog-title",
     onClose: handleClose
