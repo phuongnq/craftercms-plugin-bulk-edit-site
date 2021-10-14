@@ -1,5 +1,5 @@
 var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { Box, CssBaseline, AppBar, Toolbar, IconButton, Typography, Drawer, Divider, List, ListItem, ListItemIcon, ListItemText, styled, Dialog, ListItemButton, DialogContent, DialogActions, Button, DialogTitle, Stack } = craftercms.libs.MaterialUI;
+var { FormControl, InputLabel, Select, MenuItem, Box, CssBaseline, AppBar, Toolbar, IconButton, Typography, Drawer, Divider, List, ListItem, ListItemIcon, ListItemText, styled, Dialog, ListItemButton, DialogContent, DialogActions, Button, DialogTitle, Stack } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 
 function _extends() {
@@ -520,6 +520,62 @@ exports["default"] = _default;
 
 var MenuIcon = /*@__PURE__*/getDefaultExportFromCjs(Menu);
 
+function ContentTypeSelect() {
+  var _React$useState = React.useState(''),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      age = _React$useState2[0],
+      setAge = _React$useState2[1];
+
+  var handleChange = function handleChange(event) {
+    setAge(event.target.value);
+  };
+
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(FormControl, {
+    variant: "standard",
+    sx: {
+      m: 1,
+      minWidth: 120
+    }
+  }, /*#__PURE__*/React.createElement(InputLabel, {
+    id: "demo-simple-select-standard-label"
+  }, "Age"), /*#__PURE__*/React.createElement(Select, {
+    labelId: "demo-simple-select-standard-label",
+    id: "demo-simple-select-standard",
+    value: age,
+    onChange: handleChange,
+    label: "Age"
+  }, /*#__PURE__*/React.createElement(MenuItem, {
+    value: ""
+  }, /*#__PURE__*/React.createElement("em", null, "None")), /*#__PURE__*/React.createElement(MenuItem, {
+    value: 10
+  }, "Ten"), /*#__PURE__*/React.createElement(MenuItem, {
+    value: 20
+  }, "Twenty"), /*#__PURE__*/React.createElement(MenuItem, {
+    value: 30
+  }, "Thirty"))), /*#__PURE__*/React.createElement(FormControl, {
+    variant: "filled",
+    sx: {
+      m: 1,
+      minWidth: 120
+    }
+  }, /*#__PURE__*/React.createElement(InputLabel, {
+    id: "demo-simple-select-filled-label"
+  }, "Age"), /*#__PURE__*/React.createElement(Select, {
+    labelId: "demo-simple-select-filled-label",
+    id: "demo-simple-select-filled",
+    value: age,
+    onChange: handleChange
+  }, /*#__PURE__*/React.createElement(MenuItem, {
+    value: ""
+  }, /*#__PURE__*/React.createElement("em", null, "None")), /*#__PURE__*/React.createElement(MenuItem, {
+    value: 10
+  }, "Ten"), /*#__PURE__*/React.createElement(MenuItem, {
+    value: 20
+  }, "Twenty"), /*#__PURE__*/React.createElement(MenuItem, {
+    value: 30
+  }, "Thirty"))));
+}
+
 var drawerWidth = 240;
 
 function Editor(props) {
@@ -534,7 +590,7 @@ function Editor(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  var drawer = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Toolbar, null), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(List, null, ['Inbox', 'Starred', 'Send email', 'Drafts'].map(function (text, index) {
+  var drawer = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Toolbar, null), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(List, null, /*#__PURE__*/React.createElement(ListItem, null, /*#__PURE__*/React.createElement(ContentTypeSelect, null))), /*#__PURE__*/React.createElement(Divider, null), /*#__PURE__*/React.createElement(List, null, ['Inbox', 'Starred', 'Send email', 'Drafts'].map(function (text, index) {
     return /*#__PURE__*/React.createElement(ListItem, {
       button: true,
       key: text
