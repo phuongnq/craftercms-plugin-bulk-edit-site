@@ -685,7 +685,11 @@ function ContentTypeSelect() {
     setContentType(event.target.value);
   };
 
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(FormControl, {
+  return /*#__PURE__*/React.createElement("div", {
+    sx: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/React.createElement(FormControl, {
     fullWidth: true
   }, /*#__PURE__*/React.createElement(InputLabel, {
     id: "select-content-type"
