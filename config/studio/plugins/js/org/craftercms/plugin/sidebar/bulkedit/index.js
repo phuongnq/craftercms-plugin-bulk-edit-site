@@ -253,7 +253,8 @@ function BulkEditApp() {
     sx: {
       width: '100%',
       maxWidth: 360,
-      bgcolor: 'background.paper'
+      bgcolor: 'background.paper',
+      borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
     },
     component: "nav",
     "aria-labelledby": "nested-list-subheader"
