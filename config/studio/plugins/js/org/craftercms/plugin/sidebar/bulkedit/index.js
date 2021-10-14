@@ -583,7 +583,6 @@ var HttpHelper = {
   get: function get(url) {
     return new Promise(function (resolve, reject) {
       CrafterCMSNext.util.ajax.get(url).subscribe(function (response) {
-        console.log(response);
         resolve(response);
       });
     });
@@ -687,16 +686,12 @@ function ContentTypeSelect() {
   };
 
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(FormControl, {
-    variant: "standard",
-    sx: {
-      m: 1,
-      minWidth: 120
-    }
+    fullWidth: true
   }, /*#__PURE__*/React.createElement(InputLabel, {
-    id: "demo-simple-select-standard-label"
+    id: "select-content-type"
   }, "Content Type"), /*#__PURE__*/React.createElement(Select, {
-    labelId: "demo-simple-select-standard-label",
-    id: "demo-simple-select-standard",
+    labelId: "select-content-type",
+    id: "select-content-type-id",
     value: contentType,
     onChange: handleChange,
     label: "Content Type"
