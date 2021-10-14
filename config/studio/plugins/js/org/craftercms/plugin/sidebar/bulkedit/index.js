@@ -590,6 +590,7 @@ var HttpHelper = {
 };
 
 var API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-types.json';
+var API_GET_CONFIGURATION = '/studio/api/2/configuration/get_configuration';
 var StudioAPI = {
   origin: function origin() {
     return window.location.origin;
@@ -606,7 +607,6 @@ var StudioAPI = {
 
     return CookieHelper.get('crafterSite');
   },
-  authToken: function authToken() {},
   getContentTypes: function getContentTypes() {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       var url, res, data;
@@ -644,6 +644,39 @@ var StudioAPI = {
         }
       }, _callee);
     }))();
+  },
+  getContentTypeConfig: function getContentTypeConfig(contentType) {
+    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var path, url, res;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              path = "/content-types".concat(contentType, "/form-definition.xml");
+              url = "".concat(StudioAPI.origin()).concat(API_GET_CONFIGURATION, "?module=studio&path=").concat(path, "&sideId=").concat(StudioAPI.sideId());
+              _context2.next = 4;
+              return HttpHelper.get(url);
+
+            case 4:
+              res = _context2.sent;
+
+              if (!(res.status === 200)) {
+                _context2.next = 7;
+                break;
+              }
+
+              return _context2.abrupt("return", res.response);
+
+            case 7:
+              return _context2.abrupt("return", null);
+
+            case 8:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }
 };
 
@@ -680,6 +713,28 @@ function ContentTypeSelect() {
       }, _callee);
     }))();
   }, []);
+  React.useEffect(function () {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var data;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return StudioAPI.getContentTypeConfig(contentType);
+
+            case 2:
+              data = _context2.sent;
+              console.log(data);
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  }, [contentType]);
 
   var handleChange = function handleChange(event) {
     setContentType(event.target.value);
