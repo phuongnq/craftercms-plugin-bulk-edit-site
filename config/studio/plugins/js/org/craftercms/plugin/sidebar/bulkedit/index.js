@@ -541,8 +541,7 @@ function MainDialog() {
 
 function BulkEditApp() {
   return /*#__PURE__*/React.createElement(Stack, {
-    spacing: 2,
-    direction: "row"
+    spacing: 2
   }, /*#__PURE__*/React.createElement(MainDialog, null));
 }
 
