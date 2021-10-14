@@ -715,11 +715,12 @@ function MainDialog() {
   }, "Bulk Edit Plugin"), /*#__PURE__*/React.createElement(DialogContent, {
     dividers: true
   }, /*#__PURE__*/React.createElement(Editor, null)), /*#__PURE__*/React.createElement(DialogActions, null, /*#__PURE__*/React.createElement(Button, {
+    color: "secondary",
+    onClick: handleClose
+  }, "Close"), /*#__PURE__*/React.createElement(Button, {
     autoFocus: true,
     onClick: handleClose
-  }, "Save changes"), /*#__PURE__*/React.createElement(Button, {
-    onClick: handleClose
-  }, "Close"))));
+  }, "Save changes"))));
 }
 
 function BulkEditApp() {
