@@ -582,7 +582,7 @@ var CookieHelper = {
 var HttpHelper = {
   get: function get(url) {
     return new Promise(function (resolve, reject) {
-      CrafterCMSNext.util.ajax.get(url).subsscribe(function (response) {
+      CrafterCMSNext.util.ajax.get(url).subscribe(function (response) {
         resolve(response);
       });
     });
