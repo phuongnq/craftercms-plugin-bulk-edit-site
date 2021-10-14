@@ -523,11 +523,11 @@ var MenuIcon = /*@__PURE__*/getDefaultExportFromCjs(Menu);
 function ContentTypeSelect() {
   var _React$useState = React.useState(''),
       _React$useState2 = _slicedToArray(_React$useState, 2),
-      age = _React$useState2[0],
-      setAge = _React$useState2[1];
+      contentType = _React$useState2[0],
+      setContentType = _React$useState2[1];
 
   var handleChange = function handleChange(event) {
-    setAge(event.target.value);
+    setContentType(event.target.value);
   };
 
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(FormControl, {
@@ -538,33 +538,12 @@ function ContentTypeSelect() {
     }
   }, /*#__PURE__*/React.createElement(InputLabel, {
     id: "demo-simple-select-standard-label"
-  }, "Age"), /*#__PURE__*/React.createElement(Select, {
+  }, "Content Type"), /*#__PURE__*/React.createElement(Select, {
     labelId: "demo-simple-select-standard-label",
     id: "demo-simple-select-standard",
-    value: age,
+    value: contentType,
     onChange: handleChange,
-    label: "Age"
-  }, /*#__PURE__*/React.createElement(MenuItem, {
-    value: ""
-  }, /*#__PURE__*/React.createElement("em", null, "None")), /*#__PURE__*/React.createElement(MenuItem, {
-    value: 10
-  }, "Ten"), /*#__PURE__*/React.createElement(MenuItem, {
-    value: 20
-  }, "Twenty"), /*#__PURE__*/React.createElement(MenuItem, {
-    value: 30
-  }, "Thirty"))), /*#__PURE__*/React.createElement(FormControl, {
-    variant: "filled",
-    sx: {
-      m: 1,
-      minWidth: 120
-    }
-  }, /*#__PURE__*/React.createElement(InputLabel, {
-    id: "demo-simple-select-filled-label"
-  }, "Age"), /*#__PURE__*/React.createElement(Select, {
-    labelId: "demo-simple-select-filled-label",
-    id: "demo-simple-select-filled",
-    value: age,
-    onChange: handleChange
+    label: "Content Type"
   }, /*#__PURE__*/React.createElement(MenuItem, {
     value: ""
   }, /*#__PURE__*/React.createElement("em", null, "None")), /*#__PURE__*/React.createElement(MenuItem, {
