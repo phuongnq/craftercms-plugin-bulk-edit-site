@@ -579,6 +579,16 @@ var CookieHelper = {
   }
 };
 
+var HttpHelper = {
+  get: function get(url) {
+    return new Promise(function (resolve, reject) {
+      CrafterCMSNext.util.ajax.get(url).subsscribe(function (response) {
+        resolve(response);
+      });
+    });
+  }
+};
+
 var API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-types.json';
 var StudioAPI = {
   origin: function origin() {
@@ -599,34 +609,24 @@ var StudioAPI = {
   authToken: function authToken() {},
   getContentTypes: function getContentTypes() {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var res, data;
+      var url, res, data;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return fetch("".concat(StudioAPI.origin()).concat(API_GET_CONTENT_TYPE, "?site=").concat(StudioAPI.siteId()), {
-                method: 'GET',
-                headers: {
-                  'content-type': 'application/json; charset=UTF-8',
-                  'x-xsrf-token': StudioAPI.xsrfToken()
-                },
-                credentials: 'include'
-              });
+              url = "".concat(StudioAPI.origin()).concat(API_GET_CONTENT_TYPE, "?site=").concat(StudioAPI.siteId());
+              _context.next = 3;
+              return HttpHelper.get(url);
 
-            case 2:
+            case 3:
               res = _context.sent;
 
               if (!(res.status === 200)) {
-                _context.next = 8;
+                _context.next = 7;
                 break;
               }
 
-              _context.next = 6;
-              return res.json();
-
-            case 6:
-              data = _context.sent;
+              data = res.response;
               return _context.abrupt("return", data.item.map(function (ct) {
                 return {
                   name: ct.name,
@@ -634,10 +634,10 @@ var StudioAPI = {
                 };
               }));
 
-            case 8:
+            case 7:
               return _context.abrupt("return", []);
 
-            case 9:
+            case 8:
             case "end":
               return _context.stop();
           }
