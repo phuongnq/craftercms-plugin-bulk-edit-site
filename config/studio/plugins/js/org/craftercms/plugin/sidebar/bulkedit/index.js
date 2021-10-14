@@ -621,10 +621,9 @@ var StudioAPI = {
 
             case 3:
               res = _context.sent;
-              console.log(res);
 
               if (!(res.status === 200)) {
-                _context.next = 8;
+                _context.next = 7;
                 break;
               }
 
@@ -636,10 +635,10 @@ var StudioAPI = {
                 };
               }));
 
-            case 8:
+            case 7:
               return _context.abrupt("return", []);
 
-            case 9:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -657,7 +656,7 @@ function ContentTypeSelect() {
 
   React.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var contentTypes;
+      var data;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -666,8 +665,8 @@ function ContentTypeSelect() {
               return StudioAPI.getContentTypes();
 
             case 2:
-              contentTypes = _context.sent;
-              console.log(contentTypes);
+              data = _context.sent;
+              setContentTypes(data);
 
             case 4:
             case "end":
@@ -698,13 +697,12 @@ function ContentTypeSelect() {
     label: "Content Type"
   }, /*#__PURE__*/React.createElement(MenuItem, {
     value: ""
-  }, /*#__PURE__*/React.createElement("em", null, "None")), /*#__PURE__*/React.createElement(MenuItem, {
-    value: 10
-  }, "Ten"), /*#__PURE__*/React.createElement(MenuItem, {
-    value: 20
-  }, "Twenty"), /*#__PURE__*/React.createElement(MenuItem, {
-    value: 30
-  }, "Thirty"))));
+  }, /*#__PURE__*/React.createElement("em", null, "None")), contentTypes.map(function (contentType) {
+    return /*#__PURE__*/React.createElement(MenuItem, {
+      key: contentType.name,
+      value: contentType.name
+    }, contentType.label);
+  }))));
 }
 
 var drawerWidth = 240;
