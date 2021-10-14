@@ -1,5 +1,4 @@
 import commonjs from '@rollup/plugin-commonjs';
-import external from 'rollup-plugin-peer-deps-external';
 import resolve from '@rollup/plugin-node-resolve';
 import replaceImportsWithVars from 'rollup-plugin-replace-imports-with-vars';
 import json from '@rollup/plugin-json';
@@ -13,7 +12,6 @@ const { exec } = require('child_process');
 const extensions = ['.js', '.jsx']
 
 const globals = {
-  jss: 'craftercms.libs.jss',
   react: 'craftercms.libs.React',
   '@emotion/css': 'craftercms.libs.EmotionCSS',
   '@emotion/css/create-instance': 'craftercms.libs.createEmotion',
@@ -69,6 +67,7 @@ export default {
       globals,
     }
   ],
+  external: Object.keys(globals),
   plugins: [
     babel({
       presets: [
@@ -81,7 +80,6 @@ export default {
         '@babel/plugin-proposal-optional-chaining'
       ]
     }),
-    external(),
     json(),
     replace({
       preventAssignment: true,
