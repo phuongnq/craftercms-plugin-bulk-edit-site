@@ -1,5 +1,5 @@
 var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { styled, Dialog, List, ListItemButton, ListItemIcon, ListItemText, DialogContent, Typography, DialogActions, Button, DialogTitle, IconButton } = craftercms.libs.MaterialUI;
+var { styled, Dialog, List, ListItemButton, ListItemIcon, ListItemText, DialogContent, Typography, DialogActions, Button, DialogTitle, IconButton, Stack } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 
 function _extends() {
@@ -540,11 +540,6 @@ function MainDialog() {
 }
 
 function BulkEditApp() {
-  var _React$useState = React.useState(false),
-      _React$useState2 = _slicedToArray(_React$useState, 2);
-      _React$useState2[0];
-      _React$useState2[1];
-
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
     direction: "row"
