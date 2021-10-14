@@ -6,6 +6,8 @@ import json from '@rollup/plugin-json';
 import pkg from './package.json';
 import copy from 'rollup-plugin-copy';
 import babel from 'rollup-plugin-babel';
+import replace from '@rollup/plugin-replace';
+
 const { exec } = require('child_process');
 
 const extensions = ['.js', '.jsx']
@@ -18,7 +20,8 @@ const globals = {
   'react-dom': 'craftercms.libs.ReactDOM',
   'react-intl': 'craftercms.libs.ReactIntl',
   '@mui/material': 'craftercms.libs.MaterialUI',
-  '@craftercms/studio-ui': 'craftercms.libs.StudioUI'
+  '@craftercms/studio-ui': 'craftercms.libs.StudioUI',
+  '@mui/material/utils': 'craftercms.libs.MaterialUI'
 }
 
 function cleanName(name) {
@@ -80,6 +83,10 @@ export default {
     }),
     external(),
     json(),
+    replace({
+      preventAssignment: true,
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
     replaceImportsWithVars({ varType: 'var', replacementLookup: globals }),
     resolve({ extensions }),
     commonjs(),
