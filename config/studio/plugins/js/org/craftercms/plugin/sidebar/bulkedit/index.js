@@ -620,24 +620,25 @@ var StudioAPI = {
 
             case 3:
               res = _context.sent;
+              console.log(res);
 
               if (!(res.status === 200)) {
-                _context.next = 7;
+                _context.next = 8;
                 break;
               }
 
               data = res.response;
-              return _context.abrupt("return", data.item.map(function (ct) {
+              return _context.abrupt("return", data.map(function (ct) {
                 return {
                   name: ct.name,
                   label: ct.label
                 };
               }));
 
-            case 7:
+            case 8:
               return _context.abrupt("return", []);
 
-            case 8:
+            case 9:
             case "end":
               return _context.stop();
           }
