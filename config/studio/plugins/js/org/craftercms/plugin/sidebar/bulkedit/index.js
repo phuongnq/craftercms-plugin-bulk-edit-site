@@ -581,7 +581,7 @@ function Editor(props) {
     variant: "h6",
     noWrap: true,
     component: "div"
-  }, "Responsive drawer"))), /*#__PURE__*/React.createElement(Box, {
+  }, "Bulk Edit"))), /*#__PURE__*/React.createElement(Box, {
     component: "nav",
     sx: {
       width: {
@@ -717,7 +717,9 @@ function MainDialog() {
   }, /*#__PURE__*/React.createElement(Editor, null)), /*#__PURE__*/React.createElement(DialogActions, null, /*#__PURE__*/React.createElement(Button, {
     autoFocus: true,
     onClick: handleClose
-  }, "Save changes"))));
+  }, "Save changes"), /*#__PURE__*/React.createElement(Button, {
+    onClick: handleClose
+  }, "Close"))));
 }
 
 function BulkEditApp() {
