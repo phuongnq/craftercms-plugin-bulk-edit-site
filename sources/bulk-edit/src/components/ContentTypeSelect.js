@@ -6,32 +6,42 @@ import {
   FormControl,
 } from '@mui/material';
 
+import StudioAPI from '../api/studio';
+
 export default function ContentTypeSelect() {
   const [contentType, setContentType] = React.useState('');
+  const [contentTypes, setContentTypes] = React.useState([]);
+
+  React.useEffect(() => {
+    (async () => {
+      const data = await StudioAPI.getContentTypes();
+      setContentTypes(data);
+    })();
+  }, []);
 
   const handleChange = (event) => {
     setContentType(event.target.value);
   };
 
   return (
-    <div>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-standard-label">Content Type</InputLabel>
-        <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          value={contentType}
-          onChange={handleChange}
-          label="Content Type"
-        >
-          <MenuItem value="">
-            <em>None</em>
+    <FormControl fullWidth>
+      <InputLabel id="select-content-type">Content Type</InputLabel>
+      <Select
+        labelId="select-content-type"
+        id="select-content-type-id"
+        value={contentType}
+        onChange={handleChange}
+        label="Content Type"
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        {contentTypes.map((ct) => (
+          <MenuItem key={ct.name} value={ct.name}>
+            {ct.label}
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </div>
+        ))}
+      </Select>
+    </FormControl>
   );
 }

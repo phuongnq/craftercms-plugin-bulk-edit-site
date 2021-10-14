@@ -15,11 +15,9 @@
  */
 
 import CookieHelper from '../helpers/cookie';
+import HttpHelper from '../helpers/http';
 
-const API_GET_ITEM_TREE = '/studio/api/1/services/api/1/content/get-items-tree.json';
-const API_GET_ITEM = '/studio/api/1/services/api/1/content/get-item.json';
-const API_CLIPBOARD_COPY = '/studio/api/1/services/api/1/clipboard/copy-item.json';
-const API_CLIPBOARD_PASTE = '/studio/api/1/services/api/1/clipboard/paste-item.json';
+const API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-types.json';
 
 const StudioAPI = {
   origin() {
@@ -36,7 +34,25 @@ const StudioAPI = {
 
     return CookieHelper.get('crafterSite');
   },
+  authToken() {
 
+  },
+  async getContentTypes() {
+    const url = `${StudioAPI.origin()}${API_GET_CONTENT_TYPE}?site=${StudioAPI.siteId()}`;
+    const res = await HttpHelper.get(url);
+
+    if (res.status === 200) {
+      const data = res.response;
+      return data.map(ct => {
+        return {
+          name: ct.name,
+          label: ct.label,
+        };
+      });
+    }
+
+    return [];
+  }
 };
 
 export default StudioAPI;
