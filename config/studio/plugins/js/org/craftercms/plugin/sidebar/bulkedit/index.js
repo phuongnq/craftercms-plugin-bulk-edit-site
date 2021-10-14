@@ -223,6 +223,28 @@ exports["default"] = _default;
 
 var AutoAwesomeMotionOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(AutoAwesomeMotionOutlined);
 
+var KeyboardArrowRight = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon["default"])( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+}), 'KeyboardArrowRight');
+
+exports["default"] = _default;
+});
+
+var KeyboardArrowRightIcon = /*@__PURE__*/getDefaultExportFromCjs(KeyboardArrowRight);
+
 function BulkEditApp() {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
@@ -237,7 +259,7 @@ function BulkEditApp() {
     "aria-labelledby": "nested-list-subheader"
   }, /*#__PURE__*/React.createElement(ListItemButton, null, /*#__PURE__*/React.createElement(ListItemIcon, null, /*#__PURE__*/React.createElement(AutoAwesomeMotionOutlinedIcon, null)), /*#__PURE__*/React.createElement(ListItemText, {
     primary: "Bulk Edit Plugin"
-  }))));
+  }), /*#__PURE__*/React.createElement(KeyboardArrowRightIcon, null))));
 }
 
 var myTestTranslation$1 = "Hello, this is a test translation";
