@@ -2,6 +2,42 @@ var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(crafte
 var { FormControl, InputLabel, Select, MenuItem, Box, CssBaseline, AppBar, Toolbar, IconButton, Typography, Drawer, Divider, List, ListItem, ListItemIcon, ListItemText, styled, Dialog, ListItemButton, DialogContent, DialogActions, Button, DialogTitle, Stack } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
 function _extends() {
   _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -520,11 +556,125 @@ exports["default"] = _default;
 
 var MenuIcon = /*@__PURE__*/getDefaultExportFromCjs(Menu);
 
+/*
+ * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+var CookieHelper = {
+  get: function get(name) {
+    var value = '; ' + document.cookie;
+    var parts = value.split('; ' + name + '=');
+    if (parts.length >= 2) return parts.pop().split(';').shift();
+  }
+};
+
+var API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-types.json';
+var StudioAPI = {
+  origin: function origin() {
+    return window.location.origin;
+  },
+  xsrfToken: function xsrfToken() {
+    return CookieHelper.get('XSRF-TOKEN');
+  },
+  siteId: function siteId() {
+    var url = new URL(window.location.href);
+
+    if (url.searchParams.has('site')) {
+      return url.searchParams.get('site');
+    }
+
+    return CookieHelper.get('crafterSite');
+  },
+  authToken: function authToken() {},
+  getContentTypes: function getContentTypes() {
+    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var res, data;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return fetch("".concat(StudioAPI.origin()).concat(API_GET_CONTENT_TYPE, "?site=").concat(StudioAPI.siteId()), {
+                method: 'GET',
+                headers: {
+                  'content-type': 'application/json; charset=UTF-8',
+                  'x-xsrf-token': StudioAPI.xsrfToken()
+                },
+                credentials: 'include'
+              });
+
+            case 2:
+              res = _context.sent;
+
+              if (!(res.status === 200)) {
+                _context.next = 8;
+                break;
+              }
+
+              _context.next = 6;
+              return res.json();
+
+            case 6:
+              data = _context.sent;
+              return _context.abrupt("return", data.item.map(function (ct) {
+                return {
+                  name: ct.name,
+                  label: ct.label
+                };
+              }));
+
+            case 8:
+              return _context.abrupt("return", []);
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  }
+};
+
 function ContentTypeSelect() {
   var _React$useState = React.useState(''),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       contentType = _React$useState2[0],
       setContentType = _React$useState2[1];
+
+  React.useEffect(function () {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var contentTypes;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return StudioAPI.getContentTypes();
+
+            case 2:
+              contentTypes = _context.sent;
+              console.log(contentTypes);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  }, []);
 
   var handleChange = function handleChange(event) {
     setContentType(event.target.value);
