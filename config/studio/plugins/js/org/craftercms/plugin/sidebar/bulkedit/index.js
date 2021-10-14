@@ -706,7 +706,10 @@ function MainDialog() {
   }), /*#__PURE__*/React.createElement(KeyboardArrowRightIcon, null))), /*#__PURE__*/React.createElement(BootstrapDialog, {
     onClose: handleClose,
     "aria-labelledby": "customized-dialog-title",
-    open: open
+    open: open,
+    sx: {
+      maxWidth: 'xl'
+    }
   }, /*#__PURE__*/React.createElement(BootstrapDialogTitle, {
     id: "customized-dialog-title",
     onClose: handleClose
