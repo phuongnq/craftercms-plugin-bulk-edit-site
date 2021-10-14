@@ -583,6 +583,7 @@ var HttpHelper = {
   get: function get(url) {
     return new Promise(function (resolve, reject) {
       CrafterCMSNext.util.ajax.get(url).subscribe(function (response) {
+        console.log(response);
         resolve(response);
       });
     });
