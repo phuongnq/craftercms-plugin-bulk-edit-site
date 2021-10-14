@@ -557,7 +557,7 @@ function Editor(props) {
       display: 'flex'
     }
   }, /*#__PURE__*/React.createElement(CssBaseline, null), /*#__PURE__*/React.createElement(AppBar, {
-    position: "fixed",
+    position: "absolute",
     sx: {
       width: {
         sm: "calc(100% - ".concat(drawerWidth, "px)")
@@ -608,7 +608,8 @@ function Editor(props) {
       },
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
-        width: drawerWidth
+        width: drawerWidth,
+        position: 'absolute'
       }
     }
   }, drawer), /*#__PURE__*/React.createElement(Drawer, {
@@ -620,7 +621,8 @@ function Editor(props) {
       },
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
-        width: drawerWidth
+        width: drawerWidth,
+        position: 'absolute'
       }
     },
     open: true
