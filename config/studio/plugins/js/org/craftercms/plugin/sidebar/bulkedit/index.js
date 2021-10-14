@@ -1,7 +1,3 @@
-function getDefaultExportFromCjs (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
 function createCommonjsModule(fn, basedir, module) {
 	return module = {
 		path: basedir,
@@ -568,12 +564,12 @@ var react_production_min = /*#__PURE__*/Object.freeze({
 	__proto__: null
 });
 
-var require$$0$2 = /*@__PURE__*/getAugmentedNamespace(react_production_min);
+var require$$0$1 = /*@__PURE__*/getAugmentedNamespace(react_production_min);
 
 var react = createCommonjsModule(function (module) {
 
 {
-  module.exports = require$$0$2;
+  module.exports = require$$0$1;
 }
 });
 
@@ -1892,12 +1888,12 @@ var reactIs_production_min = /*#__PURE__*/Object.freeze({
 	__proto__: null
 });
 
-var require$$0$1 = /*@__PURE__*/getAugmentedNamespace(reactIs_production_min);
+var require$$0 = /*@__PURE__*/getAugmentedNamespace(reactIs_production_min);
 
 var reactIs = createCommonjsModule(function (module) {
 
 {
-  module.exports = require$$0$1;
+  module.exports = require$$0;
 }
 });
 
@@ -2837,90 +2833,6 @@ function capitalize(string) {
 }
 
 /**
- * Safe chained function.
- *
- * Will only create a new function if needed,
- * otherwise will pass back existing functions or null.
- */
-function createChainedFunction() {
-  for (var _len = arguments.length, funcs = new Array(_len), _key = 0; _key < _len; _key++) {
-    funcs[_key] = arguments[_key];
-  }
-
-  return funcs.reduce(function (acc, func) {
-    if (func == null) {
-      return acc;
-    }
-
-    return function chainedFunction() {
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-
-      acc.apply(this, args);
-      func.apply(this, args);
-    };
-  }, function () {});
-}
-
-// Corresponds to 10 frames at 60 Hz.
-// A few bytes payload overhead when lodash/debounce is ~3 kB and debounce ~300 B.
-function debounce(func) {
-  var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 166;
-  var timeout;
-
-  function debounced() {
-    var _this = this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    var later = function later() {
-      func.apply(_this, args);
-    };
-
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  }
-
-  debounced.clear = function () {
-    clearTimeout(timeout);
-  };
-
-  return debounced;
-}
-
-function deprecatedPropType(validator, reason) {
-  {
-    return function () {
-      return null;
-    };
-  }
-}
-
-function isMuiElement(element, muiNames) {
-  return /*#__PURE__*/ /*#__PURE__*/react.isValidElement(element) && muiNames.indexOf(element.type.muiName) !== -1;
-}
-
-function ownerDocument(node) {
-  return node && node.ownerDocument || document;
-}
-
-function ownerWindow(node) {
-  var doc = ownerDocument(node);
-  return doc.defaultView || window;
-}
-
-function requirePropFactory(componentNameInError, Component) {
-  {
-    return function () {
-      return null;
-    };
-  } // eslint-disable-next-line react/forbid-foreign-prop-types
-}
-
-/**
  * TODO v5: consider making it private
  *
  * passes {value} to {ref}
@@ -2943,55 +2855,6 @@ function setRef(ref, value) {
 
 var useEnhancedEffect = typeof window !== 'undefined' ? react.useLayoutEffect : react.useEffect;
 var useEnhancedEffect$1 = useEnhancedEffect;
-
-function useId(idOverride) {
-  var _React$useState = react.useState(idOverride),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      defaultId = _React$useState2[0],
-      setDefaultId = _React$useState2[1];
-
-  var id = idOverride || defaultId;
-  react.useEffect(function () {
-    if (defaultId == null) {
-      // Fallback to this default id when possible.
-      // Use the random value for client-side rendering only.
-      // We can't use it server-side.
-      setDefaultId("mui-".concat(Math.round(Math.random() * 1e9)));
-    }
-  }, [defaultId]);
-  return id;
-}
-
-function unsupportedProp(props, propName, componentName, location, propFullName) {
-  {
-    return null;
-  }
-}
-
-function useControlled(_ref) {
-  var controlled = _ref.controlled,
-      defaultProp = _ref["default"];
-      _ref.name;
-      _ref.state;
-
-  // isControlled is ignored in the hook dependency lists as it should never change.
-  var _React$useRef = react.useRef(controlled !== undefined),
-      isControlled = _React$useRef.current;
-
-  var _React$useState = react.useState(defaultProp),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      valueState = _React$useState2[0],
-      setValue = _React$useState2[1];
-
-  var value = isControlled ? controlled : valueState;
-
-  var setValueIfUncontrolled = react.useCallback(function (newValue) {
-    if (!isControlled) {
-      setValue(newValue);
-    }
-  }, []);
-  return [value, setValueIfUncontrolled];
-}
 
 /**
  * https://github.com/facebook/react/issues/14099#issuecomment-440013892
@@ -4013,7 +3876,7 @@ function styleFunctionSx(props) {
 
 styleFunctionSx.filterProps = ['sx'];
 
-var _excluded$d = ["sx"];
+var _excluded$c = ["sx"];
 
 var splitProps = function splitProps(props) {
   var result = {
@@ -4032,7 +3895,7 @@ var splitProps = function splitProps(props) {
 
 function extendSxProp(props) {
   var inSx = props.sx,
-      other = _objectWithoutPropertiesLoose(props, _excluded$d);
+      other = _objectWithoutPropertiesLoose(props, _excluded$c);
 
   var _splitProps = splitProps(other),
       systemProps = _splitProps.systemProps,
@@ -4091,7 +3954,7 @@ function clsx () {
   return str;
 }
 
-var _excluded$c = ["values", "unit", "step"]; // Sorted ASC by size. That's important.
+var _excluded$b = ["values", "unit", "step"]; // Sorted ASC by size. That's important.
 
 function createBreakpoints(breakpoints) {
   var _breakpoints$values = breakpoints.values,
@@ -4111,7 +3974,7 @@ function createBreakpoints(breakpoints) {
       unit = _breakpoints$unit === void 0 ? 'px' : _breakpoints$unit,
       _breakpoints$step = breakpoints.step,
       step = _breakpoints$step === void 0 ? 5 : _breakpoints$step,
-      other = _objectWithoutPropertiesLoose(breakpoints, _excluded$c);
+      other = _objectWithoutPropertiesLoose(breakpoints, _excluded$b);
 
   var keys = Object.keys(values);
 
@@ -4187,7 +4050,7 @@ function createSpacing() {
   return spacing;
 }
 
-var _excluded$b = ["breakpoints", "palette", "spacing", "shape"];
+var _excluded$a = ["breakpoints", "palette", "spacing", "shape"];
 
 function createTheme$1() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -4199,7 +4062,7 @@ function createTheme$1() {
       spacingInput = options.spacing,
       _options$shape = options.shape,
       shapeInput = _options$shape === void 0 ? {} : _options$shape,
-      other = _objectWithoutPropertiesLoose(options, _excluded$b);
+      other = _objectWithoutPropertiesLoose(options, _excluded$a);
 
   var breakpoints = createBreakpoints(breakpointsInput);
   var spacing = createSpacing(spacingInput);
@@ -4252,7 +4115,7 @@ function useTheme() {
   return useTheme$1(defaultTheme);
 }
 
-var _excluded$a = ["variant"];
+var _excluded$9 = ["variant"];
 
 function isEmpty$1(string) {
   return string.length === 0;
@@ -4266,7 +4129,7 @@ function isEmpty$1(string) {
 
 function propsToClassKey(props) {
   var variant = props.variant,
-      other = _objectWithoutPropertiesLoose(props, _excluded$a);
+      other = _objectWithoutPropertiesLoose(props, _excluded$9);
 
   var classKey = variant || '';
   Object.keys(other).sort().forEach(function (key) {
@@ -4279,7 +4142,7 @@ function propsToClassKey(props) {
   return classKey;
 }
 
-var _excluded$9 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"],
+var _excluded$8 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"],
     _excluded2 = ["theme"],
     _excluded3 = ["theme"];
 
@@ -4357,7 +4220,7 @@ function createStyled() {
         inputSkipVariantsResolver = inputOptions.skipVariantsResolver,
         inputSkipSx = inputOptions.skipSx,
         overridesResolver = inputOptions.overridesResolver,
-        options = _objectWithoutPropertiesLoose(inputOptions, _excluded$9); // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
+        options = _objectWithoutPropertiesLoose(inputOptions, _excluded$8); // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
 
 
     var skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver : componentSlot && componentSlot !== 'Root' || false;
@@ -4811,7 +4674,7 @@ function createMixins(breakpoints, spacing, mixins) {
   }, mixins);
 }
 
-var _excluded$8 = ["mode", "contrastThreshold", "tonalOffset"];
+var _excluded$7 = ["mode", "contrastThreshold", "tonalOffset"];
 var light = {
   // The colors used to style the text.
   text: {
@@ -5008,7 +4871,7 @@ function createPalette(palette) {
       contrastThreshold = _palette$contrastThre === void 0 ? 3 : _palette$contrastThre,
       _palette$tonalOffset = palette.tonalOffset,
       tonalOffset = _palette$tonalOffset === void 0 ? 0.2 : _palette$tonalOffset,
-      other = _objectWithoutPropertiesLoose(palette, _excluded$8);
+      other = _objectWithoutPropertiesLoose(palette, _excluded$7);
 
   var primary = palette.primary || getDefaultPrimary(mode);
   var secondary = palette.secondary || getDefaultSecondary(mode);
@@ -5118,7 +4981,7 @@ function createPalette(palette) {
   return paletteOutput;
 }
 
-var _excluded$7 = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
+var _excluded$6 = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
 
 function round(value) {
   return Math.round(value * 1e5) / 1e5;
@@ -5151,7 +5014,7 @@ function createTypography(palette, typography) {
       htmlFontSize = _ref$htmlFontSize === void 0 ? 16 : _ref$htmlFontSize,
       allVariants = _ref.allVariants,
       pxToRem2 = _ref.pxToRem,
-      other = _objectWithoutPropertiesLoose(_ref, _excluded$7);
+      other = _objectWithoutPropertiesLoose(_ref, _excluded$6);
 
   var coef = fontSize / 14;
 
@@ -5213,7 +5076,7 @@ function createShadow() {
 var shadows = ['none', createShadow(0, 2, 1, -1, 0, 1, 1, 0, 0, 1, 3, 0), createShadow(0, 3, 1, -2, 0, 2, 2, 0, 0, 1, 5, 0), createShadow(0, 3, 3, -2, 0, 3, 4, 0, 0, 1, 8, 0), createShadow(0, 2, 4, -1, 0, 4, 5, 0, 0, 1, 10, 0), createShadow(0, 3, 5, -1, 0, 5, 8, 0, 0, 1, 14, 0), createShadow(0, 3, 5, -1, 0, 6, 10, 0, 0, 1, 18, 0), createShadow(0, 4, 5, -2, 0, 7, 10, 1, 0, 2, 16, 1), createShadow(0, 5, 5, -3, 0, 8, 10, 1, 0, 3, 14, 2), createShadow(0, 5, 6, -3, 0, 9, 12, 1, 0, 3, 16, 2), createShadow(0, 6, 6, -3, 0, 10, 14, 1, 0, 4, 18, 3), createShadow(0, 6, 7, -4, 0, 11, 15, 1, 0, 4, 20, 3), createShadow(0, 7, 8, -4, 0, 12, 17, 2, 0, 5, 22, 4), createShadow(0, 7, 8, -4, 0, 13, 19, 2, 0, 5, 24, 4), createShadow(0, 7, 9, -4, 0, 14, 21, 2, 0, 5, 26, 4), createShadow(0, 8, 9, -5, 0, 15, 22, 2, 0, 6, 28, 5), createShadow(0, 8, 10, -5, 0, 16, 24, 2, 0, 6, 30, 5), createShadow(0, 8, 11, -5, 0, 17, 26, 2, 0, 6, 32, 5), createShadow(0, 9, 11, -5, 0, 18, 28, 2, 0, 7, 34, 6), createShadow(0, 9, 12, -6, 0, 19, 29, 2, 0, 7, 36, 6), createShadow(0, 10, 13, -6, 0, 20, 31, 3, 0, 8, 38, 7), createShadow(0, 10, 13, -6, 0, 21, 33, 3, 0, 8, 40, 7), createShadow(0, 10, 14, -6, 0, 22, 35, 3, 0, 8, 42, 7), createShadow(0, 11, 14, -7, 0, 23, 36, 3, 0, 9, 44, 8), createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8)];
 var shadows$1 = shadows;
 
-var _excluded$6 = ["duration", "easing", "delay"]; // Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
+var _excluded$5 = ["duration", "easing", "delay"]; // Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
 // to learn the context in which each easing should be used.
 
 var easing = {
@@ -5272,7 +5135,7 @@ function createTransitions(inputTransitions) {
         easingOption = _options$easing === void 0 ? mergedEasing.easeInOut : _options$easing,
         _options$delay = options.delay,
         delay = _options$delay === void 0 ? 0 : _options$delay;
-        _objectWithoutPropertiesLoose(options, _excluded$6);
+        _objectWithoutPropertiesLoose(options, _excluded$5);
 
     return (Array.isArray(props) ? props : [props]).map(function (animatedProp) {
       return "".concat(animatedProp, " ").concat(typeof durationOption === 'string' ? durationOption : formatMs(durationOption), " ").concat(easingOption, " ").concat(typeof delay === 'string' ? delay : formatMs(delay));
@@ -5301,7 +5164,7 @@ var zIndex = {
 };
 var zIndex$1 = zIndex;
 
-var _excluded$5 = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
+var _excluded$4 = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
 
 function createTheme() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -5314,7 +5177,7 @@ function createTheme() {
       transitionsInput = _options$transitions === void 0 ? {} : _options$transitions,
       _options$typography = options.typography,
       typographyInput = _options$typography === void 0 ? {} : _options$typography,
-      other = _objectWithoutPropertiesLoose(options, _excluded$5);
+      other = _objectWithoutPropertiesLoose(options, _excluded$4);
 
   var palette = createPalette(paletteInput);
   var systemTheme = createTheme$1(options);
@@ -5361,142 +5224,6 @@ var styled = createStyled({
   rootShouldForwardProp: rootShouldForwardProp
 });
 var styled$1 = styled;
-
-function getSvgIconUtilityClass(slot) {
-  return generateUtilityClass('MuiSvgIcon', slot);
-}
-generateUtilityClasses('MuiSvgIcon', ['root', 'colorPrimary', 'colorSecondary', 'colorAction', 'colorError', 'colorDisabled', 'fontSizeInherit', 'fontSizeSmall', 'fontSizeMedium', 'fontSizeLarge']);
-
-var _excluded$4 = ["children", "className", "color", "component", "fontSize", "htmlColor", "titleAccess", "viewBox"];
-
-var useUtilityClasses$2 = function useUtilityClasses(ownerState) {
-  var color = ownerState.color,
-      fontSize = ownerState.fontSize,
-      classes = ownerState.classes;
-  var slots = {
-    root: ['root', color !== 'inherit' && "color".concat(capitalize(color)), "fontSize".concat(capitalize(fontSize))]
-  };
-  return composeClasses(slots, getSvgIconUtilityClass, classes);
-};
-
-var SvgIconRoot = styled$1('svg', {
-  name: 'MuiSvgIcon',
-  slot: 'Root',
-  overridesResolver: function overridesResolver(props, styles) {
-    var ownerState = props.ownerState;
-    return [styles.root, ownerState.color !== 'inherit' && styles["color".concat(capitalize(ownerState.color))], styles["fontSize".concat(capitalize(ownerState.fontSize))]];
-  }
-})(function (_ref) {
-  var theme = _ref.theme,
-      ownerState = _ref.ownerState;
-
-  var _theme$palette$ownerS, _theme$palette$ownerS2;
-
-  return {
-    userSelect: 'none',
-    width: '1em',
-    height: '1em',
-    display: 'inline-block',
-    fill: 'currentColor',
-    flexShrink: 0,
-    transition: theme.transitions.create('fill', {
-      duration: theme.transitions.duration.shorter
-    }),
-    fontSize: {
-      inherit: 'inherit',
-      small: theme.typography.pxToRem(20),
-      medium: theme.typography.pxToRem(24),
-      large: theme.typography.pxToRem(35)
-    }[ownerState.fontSize],
-    // TODO v5 deprecate, v6 remove for sx
-    color: (_theme$palette$ownerS = (_theme$palette$ownerS2 = theme.palette[ownerState.color]) == null ? void 0 : _theme$palette$ownerS2.main) != null ? _theme$palette$ownerS : {
-      action: theme.palette.action.active,
-      disabled: theme.palette.action.disabled,
-      inherit: undefined
-    }[ownerState.color]
-  };
-});
-var SvgIcon = /*#__PURE__*/react.forwardRef(function SvgIcon(inProps, ref) {
-  var props = useThemeProps({
-    props: inProps,
-    name: 'MuiSvgIcon'
-  });
-
-  var children = props.children,
-      className = props.className,
-      _props$color = props.color,
-      color = _props$color === void 0 ? 'inherit' : _props$color,
-      _props$component = props.component,
-      component = _props$component === void 0 ? 'svg' : _props$component,
-      _props$fontSize = props.fontSize,
-      fontSize = _props$fontSize === void 0 ? 'medium' : _props$fontSize,
-      htmlColor = props.htmlColor,
-      titleAccess = props.titleAccess,
-      _props$viewBox = props.viewBox,
-      viewBox = _props$viewBox === void 0 ? '0 0 24 24' : _props$viewBox,
-      other = _objectWithoutPropertiesLoose(props, _excluded$4);
-
-  var ownerState = _extends({}, props, {
-    color: color,
-    component: component,
-    fontSize: fontSize,
-    viewBox: viewBox
-  });
-
-  var classes = useUtilityClasses$2(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsxs(SvgIconRoot, _extends({
-    as: component,
-    className: clsx(classes.root, className),
-    ownerState: ownerState,
-    focusable: "false",
-    viewBox: viewBox,
-    color: htmlColor,
-    "aria-hidden": titleAccess ? undefined : true,
-    role: titleAccess ? 'img' : undefined,
-    ref: ref
-  }, other, {
-    children: [children, titleAccess ? /*#__PURE__*/jsxRuntime.jsx("title", {
-      children: titleAccess
-    }) : null]
-  }));
-});
-SvgIcon.muiName = 'SvgIcon';
-var SvgIcon$1 = SvgIcon;
-
-function createSvgIcon$1(path, displayName) {
-  var Component = function Component(props, ref) {
-    return /*#__PURE__*/jsxRuntime.jsx(SvgIcon$1, _extends({
-      "data-testid": "".concat(displayName, "Icon"),
-      ref: ref
-    }, props, {
-      children: path
-    }));
-  };
-
-  Component.muiName = SvgIcon$1.muiName;
-  return /*#__PURE__*/react.memo( /*#__PURE__*/react.forwardRef(Component));
-}
-
-var utils = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	capitalize: capitalize,
-	createChainedFunction: createChainedFunction,
-	createSvgIcon: createSvgIcon$1,
-	debounce: debounce,
-	deprecatedPropType: deprecatedPropType,
-	isMuiElement: isMuiElement,
-	ownerDocument: ownerDocument,
-	ownerWindow: ownerWindow,
-	requirePropFactory: requirePropFactory,
-	setRef: setRef,
-	unstable_useEnhancedEffect: useEnhancedEffect$1,
-	unstable_useId: useId,
-	unsupportedProp: unsupportedProp,
-	useControlled: useControlled,
-	useEventCallback: useEventCallback,
-	useForkRef: useForkRef,
-	useIsFocusVisible: useIsFocusVisible
-});
 
 function _setPrototypeOf(o, p) {
   _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
@@ -6833,61 +6560,11 @@ var Stack = /*#__PURE__*/react.forwardRef(function Stack(inProps, ref) {
 });
 var Stack$1 = Stack;
 
-var interopRequireDefault = createCommonjsModule(function (module) {
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
-
-module.exports = _interopRequireDefault;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-});
-
-var _utils = /*@__PURE__*/getAugmentedNamespace(utils);
-
-var createSvgIcon = createCommonjsModule(function (module, exports) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-Object.defineProperty(exports, "default", {
-  enumerable: true,
-  get: function get() {
-    return _utils.createSvgIcon;
-  }
-});
-});
-
-var require$$0 = createSvgIcon;
-
-var AutoAwesomeMotionOutlined = createCommonjsModule(function (module, exports) {
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-
-var _createSvgIcon = interopRequireDefault(require$$0);
-
-
-
-var _default = (0, _createSvgIcon["default"])( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M14 2H4c-1.1 0-2 .9-2 2v10h2V4h10V2zm4 4H8c-1.1 0-2 .9-2 2v10h2V8h10V6zm2 4h-8c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zm0 10h-8v-8h8v8z"
-}), 'AutoAwesomeMotionOutlined');
-
-exports["default"] = _default;
-});
-
-var AutoAwesomeMotionOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(AutoAwesomeMotionOutlined);
-
 function BulkEditApp() {
   return /*#__PURE__*/react.createElement(Stack$1, {
     spacing: 2,
     direction: "row"
-  }, /*#__PURE__*/react.createElement(AutoAwesomeMotionOutlinedIcon, null), /*#__PURE__*/react.createElement(Button$1, {
+  }, /*#__PURE__*/react.createElement(Button$1, {
     variant: "contained"
   }, "Bulk Edit"));
 }
