@@ -1,5 +1,5 @@
 var React = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { Stack, Button } = craftercms.libs.MaterialUI;
+var { Stack, List, ListItemButton, ListItemIcon, ListItemText } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 
 function getDefaultExportFromCjs (x) {
@@ -227,9 +227,17 @@ function BulkEditApp() {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
     direction: "row"
-  }, /*#__PURE__*/React.createElement(AutoAwesomeMotionOutlinedIcon, null), /*#__PURE__*/React.createElement(Button, {
-    variant: "contained"
-  }, "Bulk Edit"));
+  }, /*#__PURE__*/React.createElement(List, {
+    sx: {
+      width: '100%',
+      maxWidth: 360,
+      bgcolor: 'background.paper'
+    },
+    component: "nav",
+    "aria-labelledby": "nested-list-subheader"
+  }, /*#__PURE__*/React.createElement(ListItemButton, null, /*#__PURE__*/React.createElement(ListItemIcon, null, /*#__PURE__*/React.createElement(AutoAwesomeMotionOutlinedIcon, null)), /*#__PURE__*/React.createElement(ListItemText, {
+    primary: "Bulk Edit Plugin"
+  }))));
 }
 
 var myTestTranslation$1 = "Hello, this is a test translation";
