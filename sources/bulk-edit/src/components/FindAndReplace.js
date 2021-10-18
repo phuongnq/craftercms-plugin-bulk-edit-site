@@ -41,7 +41,6 @@ export default function FindAndReplaceDialog({ isOpen, handleClose }) {
   const [replaceText, setReplaceText] = React.useState('');
 
   const isButtonsDisable = (text) => {
-    console.log(text)
     return !text;
   };
 

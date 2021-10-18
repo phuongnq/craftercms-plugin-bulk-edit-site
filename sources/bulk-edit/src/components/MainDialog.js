@@ -15,7 +15,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   styled,
   Dialog,
@@ -66,11 +65,6 @@ const BootstrapDialogTitle = (props) => {
       ) : null}
     </DialogTitle>
   );
-};
-
-BootstrapDialogTitle.propTypes = {
-  children: PropTypes.node,
-  onClose: PropTypes.func.isRequired,
 };
 
 export default function MainDialog() {
