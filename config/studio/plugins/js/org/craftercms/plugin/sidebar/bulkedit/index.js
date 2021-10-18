@@ -22251,12 +22251,15 @@ var getColumns = function getColumns(data) {
   var fields = xml.getElementsByTagName('field');
   console.log(fields);
   var columns = [];
-  fields.each(function (field) {
+
+  for (var i = 0; i < fields.length; i += 1) {
+    var field = fields[i];
     var fieldType = field.getElementsByTagName('type')[0].value;
-    if (fieldType !== 'input') return;
+    if (fieldType !== 'input') continue;
     var fieldId = field.getElementsByTagName('i')[0].value;
     columns.push(fieldId);
-  });
+  }
+
   return columns;
 };
 
