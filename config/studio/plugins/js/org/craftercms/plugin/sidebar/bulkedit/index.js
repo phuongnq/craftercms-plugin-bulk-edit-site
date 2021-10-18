@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, Box, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, styled: styled$3, Dialog, ListItemButton, DialogContent, DialogActions, Button: Button$1, DialogTitle, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, Dialog, DialogTitle, DialogContent, DialogContentText, TextField: TextField$1, DialogActions, Button: Button$1, Box, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, styled: styled$3, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
@@ -749,6 +749,40 @@ function ContentTypeSelect() {
       value: ct.name
     }, ct.label);
   })));
+}
+
+function FormDialog(_ref) {
+  var isOpen = _ref.isOpen;
+
+  var _React$useState = e__default.useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      open = _React$useState2[0],
+      setOpen = _React$useState2[1];
+
+  e__default.useEffect(function () {
+    setOpen(isOpen);
+  }, [isOpen]);
+
+  var handleClose = function handleClose() {
+    setOpen(false);
+  };
+
+  return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
+    open: open,
+    onClose: handleClose
+  }, /*#__PURE__*/e__default.createElement(DialogTitle, null, "Subscribe"), /*#__PURE__*/e__default.createElement(DialogContent, null, /*#__PURE__*/e__default.createElement(DialogContentText, null, "To subscribe to this website, please enter your email address here. We will send updates occasionally."), /*#__PURE__*/e__default.createElement(TextField$1, {
+    autoFocus: true,
+    margin: "dense",
+    id: "name",
+    label: "Email Address",
+    type: "email",
+    fullWidth: true,
+    variant: "standard"
+  })), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Button$1, {
+    onClick: handleClose
+  }, "Cancel"), /*#__PURE__*/e__default.createElement(Button$1, {
+    onClick: handleClose
+  }, "Subscribe"))));
 }
 
 function toVal(mix) {
@@ -22213,13 +22247,21 @@ function Editor(props) {
       mobileOpen = _React$useState2[0],
       setMobileOpen = _React$useState2[1];
 
+  var _React$useState3 = e__default.useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      findReplaceDialogOpen = _React$useState4[0],
+      setFindReplaceDialogOpen = _React$useState4[1];
+
   var handleDrawerToggle = function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
   };
 
   var drawer = /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
-    key: "Find and Replace"
+    key: "Find and Replace",
+    onClick: function onClick() {
+      setFindReplaceDialogOpen(true);
+    }
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Find and Replace"
   })), /*#__PURE__*/e__default.createElement(ListItem, {
@@ -22295,7 +22337,9 @@ function Editor(props) {
       flexGrow: 1,
       p: 3
     }
-  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(DataSheet, null)));
+  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(DataSheet, null), /*#__PURE__*/e__default.createElement(FormDialog, {
+    isOpen: findReplaceDialogOpen
+  })));
 }
 
 var _excluded = ["children", "onClose"];
