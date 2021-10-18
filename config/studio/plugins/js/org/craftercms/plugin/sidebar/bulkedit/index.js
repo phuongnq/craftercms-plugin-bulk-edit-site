@@ -798,15 +798,13 @@ function FormDialog(_ref3) {
     id: "replace",
     label: "Replace with",
     placeholder: "Enter replace words"
-  })), /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
+  }))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined"
-  }, "Find"), /*#__PURE__*/e__default.createElement(StyledButton, {
+  }, "Done"), /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined"
-  }, "Replace"), /*#__PURE__*/e__default.createElement(StyledButton, {
+  }, "Replace All"), /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined"
-  }, "Replace All"))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Button$1, {
-    onClick: handleClose
-  }, "Done"))));
+  }, "Find")))));
 }
 
 function toVal(mix) {
