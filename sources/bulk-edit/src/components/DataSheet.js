@@ -18,44 +18,10 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { contentTypeSub } from '../services/subscribe';
 
-// const columns = [
-//   { field: 'id', headerName: 'ID', width: 90 },
-//   {
-//     field: 'firstName',
-//     headerName: 'First name',
-//     width: 150,
-//     editable: true,
-//   },
-//   {
-//     field: 'lastName',
-//     headerName: 'Last name',
-//     width: 150,
-//     editable: true,
-//   },
-//   {
-//     field: 'age',
-//     headerName: 'Age',
-//     type: 'number',
-//     width: 110,
-//     editable: true,
-//   },
-//   {
-//     field: 'fullName',
-//     headerName: 'Full name',
-//     description: 'This column has a value getter and is not sortable.',
-//     sortable: false,
-//     width: 160,
-//     valueGetter: (params) =>
-//       `${params.getValue(params.id, 'firstName') || ''} ${
-//         params.getValue(params.id, 'lastName') || ''
-//       }`,
-//   },
-// ];
-
 const rows = [
-  { id: 1, 'internal-name1': 'Test 1', 'title_t': 'Test 1' },
-  { id: 2, 'internal-name2': 'Test 2', 'title_t': 'Test 2' },
-  { id: 3, 'internal-name3': 'Test 3', 'title_t': 'Test 3' },
+  { id: 1, 'internal-name': 'Test 1', 'title_t': 'Test 1' },
+  { id: 2, 'internal-name': 'Test 2', 'title_t': 'Test 2' },
+  { id: 3, 'internal-name': 'Test 3', 'title_t': 'Test 3' },
 ];
 
 const getColumns = (data) => {
@@ -84,7 +50,8 @@ const getSheetColumns = (fields) => {
     editable: false,
   }];
 
-  fields.each((field, index) => {
+  for (let i = 0; i <fields.length; i +=1 ) {
+    const field = fields[i];
     columns.push({
       field: field,
       headerName: field,
@@ -93,7 +60,7 @@ const getSheetColumns = (fields) => {
       width: 160,
       editable: true,
     });
-  });
+  }
 
   return columns;
 };
