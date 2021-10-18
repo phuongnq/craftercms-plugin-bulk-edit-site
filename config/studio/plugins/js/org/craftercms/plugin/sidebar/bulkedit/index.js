@@ -765,23 +765,18 @@ var StyledButton = styled$3(Button$1)(function (_ref2) {
   };
 });
 function FormDialog(_ref3) {
-  _ref3.isOpen;
-      var handleClose = _ref3.handleClose;
+  var isOpen = _ref3.isOpen,
+      handleClose = _ref3.handleClose;
 
-  var _React$useState = e__default.useState(false),
+  var _React$useState = e__default.useState(''),
       _React$useState2 = _slicedToArray(_React$useState, 2),
-      open = _React$useState2[0];
-      _React$useState2[1];
+      findText = _React$useState2[0],
+      setFindText = _React$useState2[1];
 
   var _React$useState3 = e__default.useState(''),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      findText = _React$useState4[0],
-      setFindText = _React$useState4[1];
-
-  var _React$useState5 = e__default.useState(''),
-      _React$useState6 = _slicedToArray(_React$useState5, 2);
-      _React$useState6[0];
-      var setReplaceText = _React$useState6[1];
+      _React$useState4 = _slicedToArray(_React$useState3, 2);
+      _React$useState4[0];
+      var setReplaceText = _React$useState4[1];
 
   var isButtonsDisable = function isButtonsDisable() {
     return !findText;
@@ -797,7 +792,7 @@ function FormDialog(_ref3) {
 
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
     maxWidth: "md",
-    open: open,
+    open: isOpen,
     onClose: handleClose
   }, /*#__PURE__*/e__default.createElement(DialogTitle, null, "Find and replace"), /*#__PURE__*/e__default.createElement(DialogContent, null, /*#__PURE__*/e__default.createElement(Box, {
     component: "form",
