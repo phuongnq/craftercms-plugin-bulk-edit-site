@@ -22258,7 +22258,7 @@ var getColumns = function getColumns(data) {
     var fieldType = field.getElementsByTagName('type')[0].textContent;
     console.log(fieldType);
     if (fieldType !== 'input') continue;
-    var fieldId = field.getElementsByTagName('i')[0].textContent;
+    var fieldId = field.getElementsByTagName('id')[0].textContent;
     columns.push(fieldId);
   }
 
