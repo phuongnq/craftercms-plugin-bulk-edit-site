@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, Dialog, DialogTitle, DialogContent, TextField: TextField$1, DialogActions, Button: Button$1, Box, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, styled: styled$3, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, Dialog, DialogTitle, DialogContent, Box, TextField: TextField$1, DialogActions, Button: Button$1, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, styled: styled$3, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
@@ -770,25 +770,21 @@ function FormDialog(_ref) {
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
     open: open,
     onClose: handleClose
-  }, /*#__PURE__*/e__default.createElement(DialogTitle, null, "Find and replace"), /*#__PURE__*/e__default.createElement(DialogContent, null, /*#__PURE__*/e__default.createElement(TextField$1, {
-    autoFocus: true,
-    margin: "dense",
-    id: "name",
+  }, /*#__PURE__*/e__default.createElement(DialogTitle, null, "Find and replace"), /*#__PURE__*/e__default.createElement(DialogContent, null, /*#__PURE__*/e__default.createElement(Box, {
+    component: "form",
+    noValidate: true,
+    autoComplete: "off"
+  }, /*#__PURE__*/e__default.createElement(TextField$1, {
+    required: true,
+    id: "outlined-required",
     label: "Find",
-    type: "text",
-    fullWidth: true,
-    variant: "standard"
+    defaultValue: "Enter keywords"
   }), /*#__PURE__*/e__default.createElement(TextField$1, {
-    autoFocus: true,
-    margin: "dense",
-    id: "name",
+    required: true,
+    id: "outlined-required",
     label: "Replace with",
-    type: "text",
-    fullWidth: true,
-    variant: "standard"
-  })), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Button$1, {
-    onClick: handleClose
-  }, "Cancel"), /*#__PURE__*/e__default.createElement(Button$1, {
+    defaultValue: "Enter replace words"
+  }))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Button$1, {
     onClick: handleClose
   }, "Done"))));
 }
