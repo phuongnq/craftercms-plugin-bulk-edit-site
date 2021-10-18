@@ -23,6 +23,7 @@ import {
 } from '@mui/material';
 
 import StudioAPI from '../api/studio';
+import { contentTypeSub } from '../services/subscribe';
 
 export default function ContentTypeSelect() {
   const [contentType, setContentType] = React.useState('');
@@ -39,7 +40,7 @@ export default function ContentTypeSelect() {
     (async () => {
       if (contentType) {
         const data = await StudioAPI.getContentTypeConfig(contentType);
-        console.log(data);
+        contentTypeSub.next(data);
       }
     })();
   }, [contentType]);

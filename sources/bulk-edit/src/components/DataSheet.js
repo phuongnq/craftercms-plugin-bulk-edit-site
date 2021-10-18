@@ -16,6 +16,8 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
+import { contentTypeSub } from '../services/subscribe';
+
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
@@ -63,6 +65,11 @@ const rows = [
 ];
 
 export default function DataSheet() {
+  React.useEffect(() => {
+    contentTypeSub.subscribe((value) => {
+      console.log(value);
+    });
+  }, []);
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
