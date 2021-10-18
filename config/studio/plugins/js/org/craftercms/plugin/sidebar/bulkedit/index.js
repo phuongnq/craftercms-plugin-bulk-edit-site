@@ -794,6 +794,14 @@ function FormDialog(_ref3) {
     return !findText;
   };
 
+  var handleFindClick = function handleFindClick() {
+    console.log('find');
+  };
+
+  var handleReplaceAllClick = function handleReplaceAllClick() {
+    console.log('replace all');
+  };
+
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
     maxWidth: "md",
     open: open,
@@ -822,13 +830,16 @@ function FormDialog(_ref3) {
       return setReplaceText(e.target.value);
     }
   }))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
-    variant: "outlined"
+    variant: "outlined",
+    onClick: handleClose
   }, "Done"), /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined",
-    disabled: isButtonsDisable()
+    disabled: isButtonsDisable(),
+    onClick: handleReplaceAllClick
   }, "Replace All"), /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined",
-    disabled: isButtonsDisable()
+    disabled: isButtonsDisable(),
+    onClick: handleFindClick
   }, "Find")))));
 }
 
