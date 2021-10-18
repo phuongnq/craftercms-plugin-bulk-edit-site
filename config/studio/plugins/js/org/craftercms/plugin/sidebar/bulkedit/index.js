@@ -22254,7 +22254,9 @@ var getColumns = function getColumns(data) {
 
   for (var i = 0; i < fields.length; i += 1) {
     var field = fields[i];
+    console.log(field);
     var fieldType = field.getElementsByTagName('type')[0].value;
+    console.log(fieldType);
     if (fieldType !== 'input') continue;
     var fieldId = field.getElementsByTagName('i')[0].value;
     columns.push(fieldId);
