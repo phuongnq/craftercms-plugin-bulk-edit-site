@@ -1,10 +1,10 @@
-var e$3 = craftercms.libs.React;
+var * as e$3 = craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, Box, CssBaseline, AppBar, Toolbar: Toolbar$2, IconButton: IconButton$1, Typography: Typography$2, Drawer, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, styled: styled$3, Dialog, ListItemButton, DialogContent, DialogActions, Button: Button$1, DialogTitle, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, Box, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, styled: styled$3, Dialog, ListItemButton, DialogContent, DialogActions, Button: Button$1, DialogTitle, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
-var ReactDOM = craftercms.libs.ReactDOM;
+var * as ReactDOM = craftercms.libs.ReactDOM;
 var ReactDOM__default = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -488,28 +488,6 @@ exports.default = _default;
 });
 
 var MailIcon = /*@__PURE__*/getDefaultExportFromCjs(Mail);
-
-var Menu$2 = createCommonjsModule(function (module, exports) {
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _createSvgIcon = interopRequireDefault(require$$0);
-
-
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-}), 'Menu');
-
-exports.default = _default;
-});
-
-var MenuIcon = /*@__PURE__*/getDefaultExportFromCjs(Menu$2);
 
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
@@ -20808,7 +20786,7 @@ const enUS = {
     MuiBreadcrumbs: { defaultProps: {
       expandText: 'Show path',
     }},
-    MuiTablePagination: { defaultProps: {
+    MuiTablePagination: { defaultProps: { 
       getItemAriaLabel: (type) => {
         if (type === 'first') {
           return 'Go to first page';
@@ -20826,21 +20804,21 @@ const enUS = {
       labelDisplayedRows: ({ from, to, count }) =>
   `${from}-${to} of ${count !== -1 ? count : `more than ${to}`}`,
     }},
-    MuiRating: { defaultProps: {
+    MuiRating: { defaultProps: { 
       getLabelText: value => `${value} Star${value !== 1 ? 's' : ''}`,
       emptyLabelText: 'Empty',
     }},
-    MuiAutocomplete: { defaultProps: {
+    MuiAutocomplete: { defaultProps: { 
       clearText: 'Clear',
       closeText: 'Close',
       loadingText: 'Loading…',
       noOptionsText: 'No options',
       openText: 'Open',
     }},
-    MuiAlert: { defaultProps: {
+    MuiAlert: { defaultProps: { 
       closeText: 'Close',
     }},
-    MuiPagination: {  defaultProps: {
+    MuiPagination: {  defaultProps: { 
       'aria-label': 'Pagination navigation',
       getItemAriaLabel: (type, page, selected) => {
         if (type === 'page') {
@@ -22218,32 +22196,7 @@ function Editor(props) {
     sx: {
       display: 'flex'
     }
-  }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(AppBar, {
-    position: "absolute",
-    sx: {
-      width: {
-        sm: "calc(100% - ".concat(drawerWidth, "px)")
-      },
-      ml: {
-        sm: "".concat(drawerWidth, "px")
-      }
-    }
-  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
-    color: "inherit",
-    "aria-label": "open drawer",
-    edge: "start",
-    onClick: handleDrawerToggle,
-    sx: {
-      mr: 2,
-      display: {
-        sm: 'none'
-      }
-    }
-  }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography$2, {
-    variant: "h6",
-    noWrap: true,
-    component: "div"
-  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Box, {
+  }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(Box, {
     component: "nav",
     sx: {
       width: {
