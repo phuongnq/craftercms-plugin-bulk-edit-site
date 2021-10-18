@@ -22438,7 +22438,8 @@ var BootstrapDialogTitle = function BootstrapDialogTitle(props) {
   return /*#__PURE__*/e__default.createElement(DialogTitle, _extends$1({
     sx: {
       m: 0,
-      p: 2
+      p: 2,
+      textAlign: 'center'
     }
   }, other), children, onClose ? /*#__PURE__*/e__default.createElement(IconButton$1, {
     "aria-label": "close",
@@ -22480,7 +22481,7 @@ function MainDialog() {
   }, /*#__PURE__*/e__default.createElement(ListItemButton, {
     onClick: handleClickOpen
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(AutoAwesomeMotionOutlinedIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
-    primary: "Bulk Edit Plugin"
+    primary: "Bulk Edit"
   }), /*#__PURE__*/e__default.createElement(KeyboardArrowRightIcon, null))), /*#__PURE__*/e__default.createElement(BootstrapDialog, {
     onClose: handleClose,
     "aria-labelledby": "customized-dialog-title",
@@ -22490,7 +22491,7 @@ function MainDialog() {
   }, /*#__PURE__*/e__default.createElement(BootstrapDialogTitle, {
     id: "customized-dialog-title",
     onClose: handleClose
-  }, "Bulk Edit Plugin"), /*#__PURE__*/e__default.createElement(DialogContent, {
+  }, "Bulk Edit"), /*#__PURE__*/e__default.createElement(DialogContent, {
     dividers: true
   }, /*#__PURE__*/e__default.createElement(Editor, null)), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Button$1, {
     color: "secondary",
