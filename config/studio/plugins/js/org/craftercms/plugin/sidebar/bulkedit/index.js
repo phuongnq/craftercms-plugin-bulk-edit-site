@@ -754,6 +754,7 @@ function ContentTypeSelect() {
 var StyledTextField = styled$3(TextField$1)(function (_ref) {
   var theme = _ref.theme;
   return {
+    padding: theme.spacing(2),
     marginBottom: theme.spacing(2)
   };
 });
@@ -772,12 +773,26 @@ function FormDialog(_ref3) {
       open = _React$useState2[0],
       setOpen = _React$useState2[1];
 
+  var _React$useState3 = e__default.useState(''),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      findText = _React$useState4[0],
+      setFindText = _React$useState4[1];
+
+  var _React$useState5 = e__default.useState(''),
+      _React$useState6 = _slicedToArray(_React$useState5, 2);
+      _React$useState6[0];
+      var setReplaceText = _React$useState6[1];
+
   e__default.useEffect(function () {
     setOpen(isOpen);
   }, [isOpen]);
 
   var handleClose = function handleClose() {
     setOpen(false);
+  };
+
+  var isButtonsDisable = function isButtonsDisable() {
+    return !!findText;
   };
 
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
@@ -787,23 +802,34 @@ function FormDialog(_ref3) {
   }, /*#__PURE__*/e__default.createElement(DialogTitle, null, "Find and replace"), /*#__PURE__*/e__default.createElement(DialogContent, null, /*#__PURE__*/e__default.createElement(Box, {
     component: "form",
     noValidate: true,
-    autoComplete: "off"
+    autoComplete: "off",
+    sx: {
+      padding: '16px'
+    }
   }, /*#__PURE__*/e__default.createElement(StyledTextField, {
     fullWidth: true,
     id: "find",
     label: "Find",
-    placeholder: "Enter keywords"
+    placeholder: "Enter keywords",
+    onChange: function onChange(e) {
+      return setFindText(e.target.value);
+    }
   }), /*#__PURE__*/e__default.createElement(StyledTextField, {
     fullWidth: true,
     id: "replace",
     label: "Replace with",
-    placeholder: "Enter replace words"
+    placeholder: "Enter replace words",
+    onChange: function onChange(e) {
+      return setReplaceText(e.target.value);
+    }
   }))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined"
   }, "Done"), /*#__PURE__*/e__default.createElement(StyledButton, {
-    variant: "outlined"
+    variant: "outlined",
+    disabled: isButtonsDisable()
   }, "Replace All"), /*#__PURE__*/e__default.createElement(StyledButton, {
-    variant: "outlined"
+    variant: "outlined",
+    disabled: isButtonsDisable()
   }, "Find")))));
 }
 
