@@ -488,6 +488,28 @@ exports.default = _default;
 
 var MailIcon = /*@__PURE__*/getDefaultExportFromCjs(Mail);
 
+var FindReplace = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z"
+}), 'FindReplace');
+
+exports.default = _default;
+});
+
+var FindReplaceIcon = /*@__PURE__*/getDefaultExportFromCjs(FindReplace);
+
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
  *
@@ -705,51 +727,6 @@ function ContentTypeSelect() {
       value: ct.name
     }, ct.label);
   })));
-}
-
-var FindReplace = createCommonjsModule(function (module, exports) {
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _createSvgIcon = interopRequireDefault(require$$0);
-
-
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M11 6c1.38 0 2.63.56 3.54 1.46L12 10h6V4l-2.05 2.05C14.68 4.78 12.93 4 11 4c-3.53 0-6.43 2.61-6.92 6H6.1c.46-2.28 2.48-4 4.9-4zm5.64 9.14c.66-.9 1.12-1.97 1.28-3.14H15.9c-.46 2.28-2.48 4-4.9 4-1.38 0-2.63-.56-3.54-1.46L10 12H4v6l2.05-2.05C7.32 17.22 9.07 18 11 18c1.55 0 2.98-.51 4.14-1.36L20 21.49 21.49 20l-4.85-4.86z"
-}), 'FindReplace');
-
-exports.default = _default;
-});
-
-var FindReplaceIcon = /*@__PURE__*/getDefaultExportFromCjs(FindReplace);
-
-/*
- * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as published by
- * the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-function FindAndReplace() {
-  return /*#__PURE__*/e__default.createElement(FormControl$1, {
-    fullWidth: true
-  }, /*#__PURE__*/e__default.createElement(InputLabel$1, {
-    id: "select-content-type"
-  }, "Find and Replace"), /*#__PURE__*/e__default.createElement(FindReplaceIcon, null));
 }
 
 function toVal(mix) {
@@ -22218,7 +22195,12 @@ function Editor(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  var drawer = /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null)), /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(FindAndReplace, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, ['Inbox', 'Starred', 'Send email', 'Drafts'].map(function (text, index) {
+  var drawer = /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null)), /*#__PURE__*/e__default.createElement(ListItem, {
+    button: true,
+    key: "Find and Replace"
+  }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
+    primary: "Find and Replace"
+  }))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, ['Inbox', 'Starred', 'Send email', 'Drafts'].map(function (text, index) {
     return /*#__PURE__*/e__default.createElement(ListItem, {
       button: true,
       key: text
