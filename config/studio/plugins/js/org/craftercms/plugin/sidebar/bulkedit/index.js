@@ -22255,10 +22255,10 @@ var getColumns = function getColumns(data) {
   for (var i = 0; i < fields.length; i += 1) {
     var field = fields[i];
     console.log(field);
-    var fieldType = field.getElementsByTagName('type')[0].value;
+    var fieldType = field.getElementsByTagName('type')[0].nodeValue;
     console.log(fieldType);
     if (fieldType !== 'input') continue;
-    var fieldId = field.getElementsByTagName('i')[0].value;
+    var fieldId = field.getElementsByTagName('i')[0].nodeValue;
     columns.push(fieldId);
   }
 
