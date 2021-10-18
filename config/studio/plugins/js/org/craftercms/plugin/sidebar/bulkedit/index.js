@@ -488,6 +488,50 @@ exports.default = _default;
 
 var FilterListIcon = /*@__PURE__*/getDefaultExportFromCjs(FilterList);
 
+var Save = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
+}), 'Save');
+
+exports.default = _default;
+});
+
+var SaveIcon = /*@__PURE__*/getDefaultExportFromCjs(Save);
+
+var Undo = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"
+}), 'Undo');
+
+exports.default = _default;
+});
+
+var UndoIcon = /*@__PURE__*/getDefaultExportFromCjs(Undo);
+
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
  *
@@ -22183,6 +22227,16 @@ function Editor(props) {
     key: "Apply Filters"
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(FilterListIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Apply Filters"
+  }))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
+    button: true,
+    key: "Save Change"
+  }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(SaveIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
+    primary: "Save Change"
+  })), /*#__PURE__*/e__default.createElement(ListItem, {
+    button: true,
+    key: "Undo"
+  }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(UndoIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
+    primary: "Undo"
   }))));
   var container = window !== undefined ? function () {
     return window().document.body;
