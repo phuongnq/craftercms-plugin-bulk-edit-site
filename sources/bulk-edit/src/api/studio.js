@@ -55,11 +55,13 @@ const StudioAPI = {
     const path = `/content-types${contentType}/form-definition.xml`;
     const url = `${StudioAPI.origin()}${API_GET_CONFIGURATION}?module=studio&path=${path}&siteId=${StudioAPI.siteId()}`;
     const res = await HttpHelper.get(url);
-    if (res.status === 200) {
-      return res.response;
+    console.log(res.response);
+    console.log(res.response.content);
+    if (res.status === 200 && res.response && res.response.content) {
+      return res.response.content;
     }
 
-    return null;
+    return '';
   },
 };
 

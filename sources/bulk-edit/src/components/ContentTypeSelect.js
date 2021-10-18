@@ -37,8 +37,10 @@ export default function ContentTypeSelect() {
 
   React.useEffect(() => {
     (async () => {
-      const data = await StudioAPI.getContentTypeConfig(contentType);
-      console.log(data);
+      if (contentType) {
+        const data = await StudioAPI.getContentTypeConfig(contentType);
+        console.log(data);
+      }
     })();
   }, [contentType]);
 
