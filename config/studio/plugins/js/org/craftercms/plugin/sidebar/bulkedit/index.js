@@ -22274,7 +22274,9 @@ var getSheetColumns = function getSheetColumns(fields) {
     width: 90,
     editable: false
   }];
-  fields.each(function (field, index) {
+
+  for (var i = 0; i < fields.length; i += 1) {
+    var field = fields[i];
     columns.push({
       field: field,
       headerName: field,
@@ -22283,7 +22285,8 @@ var getSheetColumns = function getSheetColumns(fields) {
       width: 160,
       editable: true
     });
-  });
+  }
+
   return columns;
 };
 
