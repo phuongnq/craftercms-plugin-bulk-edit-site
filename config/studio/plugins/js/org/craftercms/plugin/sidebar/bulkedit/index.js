@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Dialog, DialogTitle, DialogContent, Box, Button: Button$1, DialogActions, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
@@ -754,12 +754,19 @@ function ContentTypeSelect() {
 var StyledTextField = styled$3(TextField$1)(function (_ref) {
   var theme = _ref.theme;
   return {
-    padding: theme.spacing(2),
-    marginBotton: '10px'
+    margin: theme.spacing(2),
+    paddingBottom: '10px'
   };
 });
-function FormDialog(_ref2) {
-  var isOpen = _ref2.isOpen;
+var StyledButton = styled$3(Button$1)(function (_ref2) {
+  _ref2.theme;
+  return {
+    padding: '5px',
+    "float": 'right'
+  };
+});
+function FormDialog(_ref3) {
+  var isOpen = _ref3.isOpen;
 
   var _React$useState = e__default.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -787,18 +794,18 @@ function FormDialog(_ref2) {
     fullWidth: true,
     id: "find",
     label: "Find",
-    defaultValue: "Enter keywords"
+    placeholder: "Enter keywords"
   }), /*#__PURE__*/e__default.createElement(StyledTextField, {
     required: true,
     fullWidth: true,
     id: "replace",
     label: "Replace with",
-    defaultValue: "Enter replace words"
-  })), /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(Button$1, {
+    placeholder: "Enter replace words"
+  })), /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined"
-  }, "Find"), /*#__PURE__*/e__default.createElement(Button$1, {
+  }, "Find"), /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined"
-  }, "Replace"), /*#__PURE__*/e__default.createElement(Button$1, {
+  }, "Replace"), /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined"
   }, "Replace All"))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Button$1, {
     onClick: handleClose
