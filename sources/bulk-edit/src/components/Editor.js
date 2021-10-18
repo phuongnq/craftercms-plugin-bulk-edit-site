@@ -26,10 +26,13 @@ import {
   Toolbar,
   Drawer,
 } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import FindReplaceIcon from '@mui/icons-material/FindReplace';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import SaveIcon from '@mui/icons-material/Save';
+import UndoIcon from '@mui/icons-material/Undo';
 
 import ContentTypeSelect from './ContentTypeSelect';
+import FindAndReplace from './FindAndReplace';
 import DataSheet from './DataSheet';
 
 const drawerWidth = 240;
@@ -37,6 +40,11 @@ const drawerWidth = 240;
 export default function Editor(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
+
+  const handleFindReplaceDialogClose = () => {
+    setFindReplaceDialogOpen(false);
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -53,26 +61,35 @@ export default function Editor(props) {
       </List>
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button key="Find and Replace" onClick={() => setFindReplaceDialogOpen(true)}>
+              <ListItemIcon>
+                <FindReplaceIcon />
+              </ListItemIcon>
+              <ListItemText primary="Find and Replace" />
+        </ListItem>
+        <ListItem button key="Apply Filters">
+          <ListItemIcon>
+            <FilterListIcon />
+          </ListItemIcon>
+          <ListItemText primary="Apply Filters" />
+        </ListItem>
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button key="Save Change">
+          <ListItemIcon>
+            <SaveIcon />
+          </ListItemIcon>
+          <ListItemText primary="Save Change" />
+        </ListItem>
+        <ListItem button key="Undo">
+          <ListItemIcon>
+            <UndoIcon />
+          </ListItemIcon>
+          <ListItemText primary="Undo" />
+        </ListItem>
       </List>
+      <Divider />
     </div>
   );
 
@@ -86,14 +103,13 @@ export default function Editor(props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
@@ -116,6 +132,7 @@ export default function Editor(props) {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
         <DataSheet />
+        <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
       </Box>
     </Box>
   );
