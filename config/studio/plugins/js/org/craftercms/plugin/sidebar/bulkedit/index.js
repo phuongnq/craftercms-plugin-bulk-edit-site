@@ -4,7 +4,7 @@ var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(c
 var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, CssBaseline, Drawer, Snackbar, Alert, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
-import { Subject } from 'rxjs';
+var { Subject } = CrafterCMSNext.rxjs;
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
