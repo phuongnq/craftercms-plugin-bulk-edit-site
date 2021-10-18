@@ -18,6 +18,7 @@ import CookieHelper from '../helpers/cookie';
 import HttpHelper from '../helpers/http';
 
 const API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-types.json';
+const API_GET_CONFIGURATION = '/studio/api/2/configuration/get_configuration';
 
 const StudioAPI = {
   origin() {
@@ -34,9 +35,6 @@ const StudioAPI = {
 
     return CookieHelper.get('crafterSite');
   },
-  authToken() {
-
-  },
   async getContentTypes() {
     const url = `${StudioAPI.origin()}${API_GET_CONTENT_TYPE}?site=${StudioAPI.siteId()}`;
     const res = await HttpHelper.get(url);
@@ -52,7 +50,17 @@ const StudioAPI = {
     }
 
     return [];
-  }
+  },
+  async getContentTypeConfig(contentType) {
+    const path = `/content-types${contentType}/form-definition.xml`;
+    const url = `${StudioAPI.origin()}${API_GET_CONFIGURATION}?module=studio&path=${path}&siteId=${StudioAPI.siteId()}`;
+    const res = await HttpHelper.get(url);
+    if (res.status === 200) {
+      return res.response;
+    }
+
+    return null;
+  },
 };
 
 export default StudioAPI;
