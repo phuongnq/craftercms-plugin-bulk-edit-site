@@ -4,6 +4,7 @@ var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(c
 var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, CssBaseline, Drawer, Snackbar, Alert, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
+import { Subject } from 'rxjs';
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -572,20 +573,18 @@ var StudioAPI = {
 
             case 4:
               res = _context2.sent;
-              console.log(res.response);
-              console.log(res.response.content);
 
               if (!(res.status === 200 && res.response && res.response.content)) {
-                _context2.next = 9;
+                _context2.next = 7;
                 break;
               }
 
               return _context2.abrupt("return", res.response.content);
 
-            case 9:
+            case 7:
               return _context2.abrupt("return", '');
 
-            case 10:
+            case 8:
             case "end":
               return _context2.stop();
           }
@@ -594,6 +593,23 @@ var StudioAPI = {
     }))();
   }
 };
+
+/*
+ * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+var contentTypeSub = new Subject('');
 
 function ContentTypeSelect() {
   var _React$useState = e__default.useState(''),
@@ -645,7 +661,7 @@ function ContentTypeSelect() {
 
             case 3:
               data = _context2.sent;
-              console.log(data);
+              contentTypeSub.next(data);
 
             case 5:
             case "end":
@@ -22278,6 +22294,11 @@ var rows = [{
   age: 65
 }];
 function DataSheet() {
+  e__default.useEffect(function () {
+    contentTypeSub.subscribe(function (value) {
+      console.log(value);
+    });
+  }, []);
   return /*#__PURE__*/e__default.createElement("div", {
     style: {
       height: 400,
