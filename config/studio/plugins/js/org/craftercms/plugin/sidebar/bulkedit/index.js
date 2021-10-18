@@ -22218,7 +22218,7 @@ function Editor(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  var drawer = /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null), /*#__PURE__*/e__default.createElement(FindAndReplace, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, ['Inbox', 'Starred', 'Send email', 'Drafts'].map(function (text, index) {
+  var drawer = /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null)), /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(FindAndReplace, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, ['Inbox', 'Starred', 'Send email', 'Drafts'].map(function (text, index) {
     return /*#__PURE__*/e__default.createElement(ListItem, {
       button: true,
       key: text
