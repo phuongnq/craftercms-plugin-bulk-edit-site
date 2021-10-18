@@ -765,12 +765,13 @@ var StyledButton = styled$3(Button$1)(function (_ref2) {
   };
 });
 function FormDialog(_ref3) {
-  var isOpen = _ref3.isOpen;
+  _ref3.isOpen;
+      var handleClose = _ref3.handleClose;
 
   var _React$useState = e__default.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
-      open = _React$useState2[0],
-      setOpen = _React$useState2[1];
+      open = _React$useState2[0];
+      _React$useState2[1];
 
   var _React$useState3 = e__default.useState(''),
       _React$useState4 = _slicedToArray(_React$useState3, 2),
@@ -781,15 +782,6 @@ function FormDialog(_ref3) {
       _React$useState6 = _slicedToArray(_React$useState5, 2);
       _React$useState6[0];
       var setReplaceText = _React$useState6[1];
-
-  e__default.useEffect(function () {
-    console.log(isOpen);
-    setOpen(isOpen);
-  }, [isOpen]);
-
-  var handleClose = function handleClose() {
-    setOpen(false);
-  };
 
   var isButtonsDisable = function isButtonsDisable() {
     return !findText;
@@ -22311,6 +22303,10 @@ function Editor(props) {
       findReplaceDialogOpen = _React$useState4[0],
       setFindReplaceDialogOpen = _React$useState4[1];
 
+  var handleFindReplaceDialogClose = function handleFindReplaceDialogClose() {
+    setFindReplaceDialogOpen(false);
+  };
+
   var handleDrawerToggle = function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
   };
@@ -22397,7 +22393,8 @@ function Editor(props) {
       p: 3
     }
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(DataSheet, null), /*#__PURE__*/e__default.createElement(FormDialog, {
-    isOpen: findReplaceDialogOpen
+    isOpen: findReplaceDialogOpen,
+    handleClose: handleFindReplaceDialogClose
   })));
 }
 
