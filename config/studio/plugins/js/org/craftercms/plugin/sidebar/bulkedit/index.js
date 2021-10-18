@@ -768,6 +768,7 @@ function FormDialog(_ref) {
   };
 
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
+    maxWidth: "md",
     open: open,
     onClose: handleClose
   }, /*#__PURE__*/e__default.createElement(DialogTitle, null, "Find and replace"), /*#__PURE__*/e__default.createElement(DialogContent, null, /*#__PURE__*/e__default.createElement(Box, {
