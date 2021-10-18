@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, Dialog, DialogTitle, DialogContent, DialogContentText, TextField: TextField$1, DialogActions, Button: Button$1, Box, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, styled: styled$3, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, Dialog, DialogTitle, DialogContent, TextField: TextField$1, DialogActions, Button: Button$1, Box, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, styled: styled$3, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
@@ -770,19 +770,27 @@ function FormDialog(_ref) {
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
     open: open,
     onClose: handleClose
-  }, /*#__PURE__*/e__default.createElement(DialogTitle, null, "Subscribe"), /*#__PURE__*/e__default.createElement(DialogContent, null, /*#__PURE__*/e__default.createElement(DialogContentText, null, "To subscribe to this website, please enter your email address here. We will send updates occasionally."), /*#__PURE__*/e__default.createElement(TextField$1, {
+  }, /*#__PURE__*/e__default.createElement(DialogTitle, null, "Find and replace"), /*#__PURE__*/e__default.createElement(DialogContent, null, /*#__PURE__*/e__default.createElement(TextField$1, {
     autoFocus: true,
     margin: "dense",
     id: "name",
-    label: "Email Address",
-    type: "email",
+    label: "Find",
+    type: "text",
+    fullWidth: true,
+    variant: "standard"
+  }), /*#__PURE__*/e__default.createElement(TextField$1, {
+    autoFocus: true,
+    margin: "dense",
+    id: "name",
+    label: "Replace with",
+    type: "text",
     fullWidth: true,
     variant: "standard"
   })), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Button$1, {
     onClick: handleClose
   }, "Cancel"), /*#__PURE__*/e__default.createElement(Button$1, {
     onClick: handleClose
-  }, "Subscribe"))));
+  }, "Done"))));
 }
 
 function toVal(mix) {
