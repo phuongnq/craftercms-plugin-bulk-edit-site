@@ -22249,6 +22249,7 @@ var rows = [// { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
 var getColumns = function getColumns(data) {
   var xml = new DOMParser().parseFromString(data, 'text/xml');
   var fields = xml.getElementsByTagName('field');
+  console.log(fields);
   var columns = [];
   fields.each(function (field) {
     var fieldType = field.getElementsByTagName('type')[0].value;
