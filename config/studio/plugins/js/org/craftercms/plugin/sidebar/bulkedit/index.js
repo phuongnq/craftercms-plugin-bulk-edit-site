@@ -22465,8 +22465,10 @@ function MainDialog() {
     setOpen(true);
   };
 
-  var handleClose = function handleClose() {
-    setOpen(false);
+  var handleClose = function handleClose(e, reason) {
+    if (reason !== 'backdropClick') {
+      setOpen(false);
+    }
   };
 
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(List$2, {
