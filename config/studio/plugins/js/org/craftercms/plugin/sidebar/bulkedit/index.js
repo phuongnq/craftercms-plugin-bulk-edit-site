@@ -22400,8 +22400,7 @@ function Editor(props) {
   }, drawer)), /*#__PURE__*/e__default.createElement(Box, {
     component: "main",
     sx: {
-      flexGrow: 1,
-      p: 3
+      flexGrow: 1
     }
   }, /*#__PURE__*/e__default.createElement(DataSheet, null), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
