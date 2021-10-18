@@ -6,10 +6,12 @@ import pkg from './package.json';
 import copy from 'rollup-plugin-copy';
 import babel from 'rollup-plugin-babel';
 import replace from '@rollup/plugin-replace';
+import progress from 'rollup-plugin-progress';
+import multiEntry from 'rollup-plugin-multi-entry';
 
 const { exec } = require('child_process');
 
-const extensions = ['.js', '.jsx']
+const extensions = ['.js', '.jsx'];
 
 const globals = {
   react: 'craftercms.libs.React',
@@ -69,7 +71,9 @@ export default {
   ],
   external: Object.keys(globals),
   plugins: [
+    multiEntry(),
     babel({
+      exclude: 'node_modules/**',
       presets: [
         '@babel/preset-env',
         '@babel/preset-react'
@@ -86,8 +90,13 @@ export default {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     replaceImportsWithVars({ varType: 'var', replacementLookup: globals }),
-    resolve({ extensions }),
+    resolve({
+      extensions,
+      jsnext: true,
+      browser: true
+    }),
     commonjs(),
+    progress(),
     copy({
       targets: [{ src: 'dist/*', dest: '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit' }],
       hook: 'writeBundle'

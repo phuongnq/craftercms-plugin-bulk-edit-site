@@ -23,7 +23,7 @@ const plugin = {
   id: 'org.craftercms.bulkEditPlugin',
   name: 'Bulk Edit Plugin',
   description: 'A plugin to do bulk edit',
-  author: 'Roy Art',
+  author: 'Crafter CMS',
   logo: null,
   locales: {
     en,

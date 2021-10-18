@@ -37,10 +37,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ContentTypeSelect from './ContentTypeSelect';
 import DataSheet from './DataSheet';
 
-
 const drawerWidth = 240;
 
-function Editor(props) {
+export default function Editor(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -147,14 +146,4 @@ function Editor(props) {
       </Box>
     </Box>
   );
-}
-
-Editor.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
 };
-
-export default Editor;
