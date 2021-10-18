@@ -754,7 +754,6 @@ function ContentTypeSelect() {
 var StyledTextField = styled$3(TextField$1)(function (_ref) {
   var theme = _ref.theme;
   return {
-    padding: theme.spacing(2),
     marginBottom: theme.spacing(2)
   };
 });
@@ -792,7 +791,7 @@ function FormDialog(_ref3) {
   };
 
   var isButtonsDisable = function isButtonsDisable() {
-    return !!findText;
+    return !findText;
   };
 
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
