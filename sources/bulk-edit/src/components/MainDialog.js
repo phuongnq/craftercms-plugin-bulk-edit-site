@@ -48,7 +48,7 @@ const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
 
   return (
-    <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+    <DialogTitle sx={{ m: 0, p: 2, textAlign: 'center' }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -79,8 +79,10 @@ export default function MainDialog() {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = (e, reason) => {
+    if (reason !== 'backdropClick') {
+      setOpen(false);
+    }
   };
 
   return (
@@ -94,7 +96,7 @@ export default function MainDialog() {
         <ListItemIcon>
           <AutoAwesomeMotionOutlinedIcon />
         </ListItemIcon>
-        <ListItemText primary="Bulk Edit Plugin" />
+        <ListItemText primary="Bulk Edit" />
         <KeyboardArrowRightIcon />
        </ListItemButton>
       </List>
@@ -106,17 +108,14 @@ export default function MainDialog() {
         maxWidth={false}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Bulk Edit Plugin
+          Bulk Edit
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Editor />
         </DialogContent>
         <DialogActions>
-          <Button color="secondary" onClick={handleClose}>
-            Close
-          </Button>
           <Button autoFocus onClick={handleClose}>
-            Save changes
+            Close
           </Button>
         </DialogActions>
       </BootstrapDialog>

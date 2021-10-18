@@ -36,12 +36,13 @@ const StyledButton = styled(Button)(({ theme }) => ({
   float: 'right'
 }));
 
-export default function FormDialog({ isOpen, handleClose }) {
+export default function FindAndReplaceDialog({ isOpen, handleClose }) {
   const [findText, setFindText] = React.useState('');
   const [replaceText, setReplaceText] = React.useState('');
 
-  const isButtonsDisable = () => {
-    return !findText;
+  const isButtonsDisable = (text) => {
+    console.log(text)
+    return !text;
   };
 
   const handleFindClick = () => {
@@ -68,6 +69,7 @@ export default function FormDialog({ isOpen, handleClose }) {
             id="find"
             label="Find"
             placeholder="Enter keywords"
+            value={findText}
             onChange={(e) => setFindText(e.target.value)}
           />
           <StyledTextField
@@ -75,6 +77,7 @@ export default function FormDialog({ isOpen, handleClose }) {
             id="replace"
             label="Replace with"
             placeholder="Enter replace words"
+            value={replaceText}
             onChange={(e) => setReplaceText(e.target.value)}
           />
         </Box>
@@ -84,14 +87,14 @@ export default function FormDialog({ isOpen, handleClose }) {
             <StyledButton variant="outlined" onClick={handleClose}>Done</StyledButton>
             <StyledButton
               variant="outlined"
-              disabled={isButtonsDisable()}
+              disabled={isButtonsDisable(findText)}
               onClick={handleReplaceAllClick}
             >
               Replace All
             </StyledButton>
             <StyledButton
               variant="outlined"
-              disabled={isButtonsDisable()}
+              disabled={isButtonsDisable(findText)}
               onClick={handleFindClick}
             >
               Find
@@ -101,4 +104,4 @@ export default function FormDialog({ isOpen, handleClose }) {
       </Dialog>
     </div>
   );
-}
+};
