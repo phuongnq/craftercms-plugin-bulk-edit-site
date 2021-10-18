@@ -444,50 +444,6 @@ exports.default = _default;
 
 var KeyboardArrowRightIcon = /*@__PURE__*/getDefaultExportFromCjs(KeyboardArrowRight$1);
 
-var MoveToInbox = createCommonjsModule(function (module, exports) {
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _createSvgIcon = interopRequireDefault(require$$0);
-
-
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M19 3H4.99c-1.11 0-1.98.9-1.98 2L3 19c0 1.1.88 2 1.99 2H19c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12h-4c0 1.66-1.35 3-3 3s-3-1.34-3-3H4.99V5H19v10zm-3-5h-2V7h-4v3H8l4 4 4-4z"
-}), 'MoveToInbox');
-
-exports.default = _default;
-});
-
-var InboxIcon = /*@__PURE__*/getDefaultExportFromCjs(MoveToInbox);
-
-var Mail = createCommonjsModule(function (module, exports) {
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _createSvgIcon = interopRequireDefault(require$$0);
-
-
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"
-}), 'Mail');
-
-exports.default = _default;
-});
-
-var MailIcon = /*@__PURE__*/getDefaultExportFromCjs(Mail);
-
 var FindReplace = createCommonjsModule(function (module, exports) {
 
 
@@ -509,6 +465,28 @@ exports.default = _default;
 });
 
 var FindReplaceIcon = /*@__PURE__*/getDefaultExportFromCjs(FindReplace);
+
+var FilterList = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"
+}), 'FilterList');
+
+exports.default = _default;
+});
+
+var FilterListIcon = /*@__PURE__*/getDefaultExportFromCjs(FilterList);
 
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
@@ -22200,21 +22178,12 @@ function Editor(props) {
     key: "Find and Replace"
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Find and Replace"
-  }))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, ['Inbox', 'Starred', 'Send email', 'Drafts'].map(function (text, index) {
-    return /*#__PURE__*/e__default.createElement(ListItem, {
-      button: true,
-      key: text
-    }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, index % 2 === 0 ? /*#__PURE__*/e__default.createElement(InboxIcon, null) : /*#__PURE__*/e__default.createElement(MailIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
-      primary: text
-    }));
-  })), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, ['All mail', 'Trash', 'Spam'].map(function (text, index) {
-    return /*#__PURE__*/e__default.createElement(ListItem, {
-      button: true,
-      key: text
-    }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, index % 2 === 0 ? /*#__PURE__*/e__default.createElement(InboxIcon, null) : /*#__PURE__*/e__default.createElement(MailIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
-      primary: text
-    }));
-  })));
+  }))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
+    button: true,
+    key: "Apply Filters"
+  }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(FilterListIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
+    primary: "Apply Filters"
+  }))));
   var container = window !== undefined ? function () {
     return window().document.body;
   } : undefined;
