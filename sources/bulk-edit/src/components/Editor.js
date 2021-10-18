@@ -25,6 +25,8 @@ import {
   ListItemText,
   Toolbar,
   Drawer,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import FindReplaceIcon from '@mui/icons-material/FindReplace';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -41,9 +43,18 @@ export default function Editor(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
+  const [openAlert, setOpenAlert] = React.useState(false);
 
   const handleFindReplaceDialogClose = () => {
     setFindReplaceDialogOpen(false);
+  };
+
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+  };
+
+  const handleSaveChangeClick = () => {
+    setOpenAlert(true);
   };
 
   const handleDrawerToggle = () => {
@@ -76,7 +87,7 @@ export default function Editor(props) {
       </List>
       <Divider />
       <List>
-        <ListItem button key="Save Change">
+        <ListItem button key="Save Change" onClick={handleSaveChangeClick}>
           <ListItemIcon>
             <SaveIcon />
           </ListItemIcon>
@@ -134,6 +145,11 @@ export default function Editor(props) {
         <DataSheet />
         <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
       </Box>
+      <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+          Change has been saved.
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
