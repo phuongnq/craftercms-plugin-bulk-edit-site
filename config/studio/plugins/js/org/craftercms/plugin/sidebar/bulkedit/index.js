@@ -776,11 +776,13 @@ function FormDialog(_ref) {
     autoComplete: "off"
   }, /*#__PURE__*/e__default.createElement(TextField$1, {
     required: true,
+    fullWidth: true,
     id: "outlined-required",
     label: "Find",
     defaultValue: "Enter keywords"
   }), /*#__PURE__*/e__default.createElement(TextField$1, {
     required: true,
+    fullWidth: true,
     id: "outlined-required",
     label: "Replace with",
     defaultValue: "Enter replace words"
