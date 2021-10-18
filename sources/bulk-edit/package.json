@@ -72,13 +72,8 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commit": "^0.0.3",
     "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-eslint": "^7.0.0",
-    "rollup-plugin-filesize": "^9.1.1",
-    "rollup-plugin-multi-entry": "^2.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-progress": "^1.1.2",
-    "rollup-plugin-replace-imports-with-vars": "^1.0.2",
-    "rollup-plugin-uglify": "^6.0.4"
+    "rollup-plugin-replace-imports-with-vars": "^1.0.2"
   },
   "files": [
     "dist"

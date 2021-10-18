@@ -6,8 +6,6 @@ import pkg from './package.json';
 import copy from 'rollup-plugin-copy';
 import babel from 'rollup-plugin-babel';
 import replace from '@rollup/plugin-replace';
-import progress from 'rollup-plugin-progress';
-import multiEntry from 'rollup-plugin-multi-entry';
 
 const { exec } = require('child_process');
 
@@ -71,7 +69,6 @@ export default {
   ],
   external: Object.keys(globals),
   plugins: [
-    multiEntry(),
     babel({
       exclude: 'node_modules/**',
       presets: [
@@ -96,7 +93,6 @@ export default {
       browser: true
     }),
     commonjs(),
-    progress(),
     copy({
       targets: [{ src: 'dist/*', dest: '../../config/studio/plugins/js/org/craftercms/plugin/sidebar/bulkedit' }],
       hook: 'writeBundle'
