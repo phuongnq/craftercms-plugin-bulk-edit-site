@@ -1,10 +1,10 @@
-var * as e$3 = craftercms.libs.React;
+var e$3 = craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, Box, CssBaseline, Drawer, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, styled: styled$3, Dialog, ListItemButton, DialogContent, DialogActions, Button: Button$1, DialogTitle, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
-var * as ReactDOM = craftercms.libs.ReactDOM;
+var ReactDOM = craftercms.libs.ReactDOM;
 var ReactDOM__default = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -20786,7 +20786,7 @@ const enUS = {
     MuiBreadcrumbs: { defaultProps: {
       expandText: 'Show path',
     }},
-    MuiTablePagination: { defaultProps: { 
+    MuiTablePagination: { defaultProps: {
       getItemAriaLabel: (type) => {
         if (type === 'first') {
           return 'Go to first page';
@@ -20804,21 +20804,21 @@ const enUS = {
       labelDisplayedRows: ({ from, to, count }) =>
   `${from}-${to} of ${count !== -1 ? count : `more than ${to}`}`,
     }},
-    MuiRating: { defaultProps: { 
+    MuiRating: { defaultProps: {
       getLabelText: value => `${value} Star${value !== 1 ? 's' : ''}`,
       emptyLabelText: 'Empty',
     }},
-    MuiAutocomplete: { defaultProps: { 
+    MuiAutocomplete: { defaultProps: {
       clearText: 'Clear',
       closeText: 'Close',
       loadingText: 'Loading…',
       noOptionsText: 'No options',
       openText: 'Open',
     }},
-    MuiAlert: { defaultProps: { 
+    MuiAlert: { defaultProps: {
       closeText: 'Close',
     }},
-    MuiPagination: {  defaultProps: { 
+    MuiPagination: {  defaultProps: {
       'aria-label': 'Pagination navigation',
       getItemAriaLabel: (type, page, selected) => {
         if (type === 'page') {

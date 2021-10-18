@@ -86,7 +86,7 @@ export default function Editor(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
+      {/* <AppBar
         position="absolute"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -107,7 +107,7 @@ export default function Editor(props) {
             Bulk Edit
           </Typography>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
