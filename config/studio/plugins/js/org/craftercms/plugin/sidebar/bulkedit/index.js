@@ -754,14 +754,13 @@ function ContentTypeSelect() {
 var StyledTextField = styled$3(TextField$1)(function (_ref) {
   var theme = _ref.theme;
   return {
-    margin: theme.spacing(2),
-    paddingBottom: '10px'
+    marginBottom: theme.spacing(2)
   };
 });
 var StyledButton = styled$3(Button$1)(function (_ref2) {
   _ref2.theme;
   return {
-    padding: '5px',
+    margin: '5px',
     "float": 'right'
   };
 });
@@ -790,13 +789,11 @@ function FormDialog(_ref3) {
     noValidate: true,
     autoComplete: "off"
   }, /*#__PURE__*/e__default.createElement(StyledTextField, {
-    required: true,
     fullWidth: true,
     id: "find",
     label: "Find",
     placeholder: "Enter keywords"
   }), /*#__PURE__*/e__default.createElement(StyledTextField, {
-    required: true,
     fullWidth: true,
     id: "replace",
     label: "Replace with",
