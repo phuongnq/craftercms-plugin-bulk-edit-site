@@ -73,6 +73,7 @@
     "rollup-plugin-commit": "^0.0.3",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-re": "^1.0.7",
     "rollup-plugin-replace-imports-with-vars": "^1.0.2"
   },
   "files": [

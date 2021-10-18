@@ -72,19 +72,20 @@ export default {
     babel({
       exclude: 'node_modules/**',
       presets: [
-        '@babel/preset-env',
-        '@babel/preset-react'
+        ['@babel/preset-env', { modules: false }],
+        '@babel/preset-react',
       ],
       plugins: [
         'babel-plugin-transform-react-remove-prop-types',
         '@babel/plugin-proposal-nullish-coalescing-operator',
         '@babel/plugin-proposal-optional-chaining'
-      ]
+      ],
     }),
     json(),
     replace({
       preventAssignment: true,
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'import * as': 'import',
     }),
     replaceImportsWithVars({ varType: 'var', replacementLookup: globals }),
     resolve({
