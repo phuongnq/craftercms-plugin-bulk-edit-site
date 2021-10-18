@@ -783,6 +783,7 @@ function FormDialog(_ref3) {
       var setReplaceText = _React$useState6[1];
 
   e__default.useEffect(function () {
+    console.log(isOpen);
     setOpen(isOpen);
   }, [isOpen]);
 
@@ -22318,7 +22319,7 @@ function Editor(props) {
     button: true,
     key: "Find and Replace",
     onClick: function onClick() {
-      setFindReplaceDialogOpen(true);
+      return setFindReplaceDialogOpen(true);
     }
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Find and Replace"
