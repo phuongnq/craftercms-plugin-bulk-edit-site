@@ -18,56 +18,93 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { contentTypeSub } from '../services/subscribe';
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  {
-    field: 'firstName',
-    headerName: 'First name',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'lastName',
-    headerName: 'Last name',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 110,
-    editable: true,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${
-        params.getValue(params.id, 'lastName') || ''
-      }`,
-  },
-];
+// const columns = [
+//   { field: 'id', headerName: 'ID', width: 90 },
+//   {
+//     field: 'firstName',
+//     headerName: 'First name',
+//     width: 150,
+//     editable: true,
+//   },
+//   {
+//     field: 'lastName',
+//     headerName: 'Last name',
+//     width: 150,
+//     editable: true,
+//   },
+//   {
+//     field: 'age',
+//     headerName: 'Age',
+//     type: 'number',
+//     width: 110,
+//     editable: true,
+//   },
+//   {
+//     field: 'fullName',
+//     headerName: 'Full name',
+//     description: 'This column has a value getter and is not sortable.',
+//     sortable: false,
+//     width: 160,
+//     valueGetter: (params) =>
+//       `${params.getValue(params.id, 'firstName') || ''} ${
+//         params.getValue(params.id, 'lastName') || ''
+//       }`,
+//   },
+// ];
 
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  { id: 1, 'internal-name1': 'Test 1', 'title_t': 'Test 1' },
+  { id: 2, 'internal-name2': 'Test 2', 'title_t': 'Test 2' },
+  { id: 3, 'internal-name3': 'Test 3', 'title_t': 'Test 3' },
 ];
 
+const getColumns = (data) => {
+  const xml = (new DOMParser()).parseFromString(data, 'text/xml');
+  const fields = xml.getElementsByTagName('field');
+  const columns = [];
+  for (let i = 0; i < fields.length; i += 1) {
+    const field = fields[i];
+    const fieldType = field.getElementsByTagName('type')[0].textContent;
+    if (fieldType !== 'input') continue;
+
+    const fieldId = field.getElementsByTagName('id')[0].textContent;
+    columns.push(fieldId);
+  }
+
+  return columns;
+};
+
+const getSheetColumns = (fields) => {
+  const columns = [{
+    field: 'id',
+    headerName: 'ID',
+    description: 'ID',
+    sortable: false,
+    width: 90,
+    editable: false,
+  }];
+
+  fields.each((field, index) => {
+    columns.push({
+      field: field,
+      headerName: field,
+      description: field,
+      sortable: false,
+      width: 160,
+      editable: true,
+    });
+  });
+
+  return columns;
+};
+
 export default function DataSheet() {
+  const [descriptor, setDescriptor] = React.useState('');
+  const [columns, setColumns] = React.useState([]);
   React.useEffect(() => {
     contentTypeSub.subscribe((value) => {
-      console.log(value);
+      const ctColumns = getColumns(value);
+      setColumns(getSheetColumns(ctColumns));
     });
   }, []);
   return (
