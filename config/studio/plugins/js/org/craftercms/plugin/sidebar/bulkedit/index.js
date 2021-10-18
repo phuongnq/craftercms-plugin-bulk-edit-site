@@ -633,14 +633,19 @@ function ContentTypeSelect() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
+              if (!contentType) {
+                _context2.next = 5;
+                break;
+              }
+
+              _context2.next = 3;
               return StudioAPI.getContentTypeConfig(contentType);
 
-            case 2:
+            case 3:
               data = _context2.sent;
               console.log(data);
 
-            case 4:
+            case 5:
             case "end":
               return _context2.stop();
           }
