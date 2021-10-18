@@ -22298,8 +22298,21 @@ function Editor(props) {
       findReplaceDialogOpen = _React$useState4[0],
       setFindReplaceDialogOpen = _React$useState4[1];
 
+  var _React$useState5 = e__default.useState(false),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      openAlert = _React$useState6[0],
+      setOpenAlert = _React$useState6[1];
+
   var handleFindReplaceDialogClose = function handleFindReplaceDialogClose() {
     setFindReplaceDialogOpen(false);
+  };
+
+  var handleCloseAlert = function handleCloseAlert() {
+    setOpenAlert(false);
+  };
+
+  var handleSaveChangeClick = function handleSaveChangeClick() {
+    setOpenAlert(true);
   };
 
   var handleDrawerToggle = function handleDrawerToggle() {
@@ -22321,7 +22334,8 @@ function Editor(props) {
     primary: "Apply Filters"
   }))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
-    key: "Save Change"
+    key: "Save Change",
+    onClick: handleSaveChangeClick
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(SaveIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Save Change"
   })), /*#__PURE__*/e__default.createElement(ListItem, {
@@ -22390,7 +22404,17 @@ function Editor(props) {
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(DataSheet, null), /*#__PURE__*/e__default.createElement(FormDialog, {
     isOpen: findReplaceDialogOpen,
     handleClose: handleFindReplaceDialogClose
-  })));
+  })), /*#__PURE__*/e__default.createElement(Snackbar, {
+    open: openAlert,
+    autoHideDuration: 6000,
+    onClose: handleCloseAlert
+  }, /*#__PURE__*/e__default.createElement(Alert, {
+    onClose: handleCloseAlert,
+    severity: "success",
+    sx: {
+      width: '100%'
+    }
+  }, "Change has been saved.")));
 }
 
 var _excluded = ["children", "onClose"];
