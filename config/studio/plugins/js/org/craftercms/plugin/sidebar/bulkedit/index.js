@@ -448,7 +448,7 @@ exports.default = _default;
 
 var SaveIcon = /*@__PURE__*/getDefaultExportFromCjs(Save);
 
-var Undo = createCommonjsModule(function (module, exports) {
+var ClearAll = createCommonjsModule(function (module, exports) {
 
 
 
@@ -462,13 +462,13 @@ var _createSvgIcon = interopRequireDefault(require$$0);
 
 
 var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"
-}), 'Undo');
+  d: "M5 13h14v-2H5v2zm-2 4h14v-2H3v2zM7 7v2h14V7H7z"
+}), 'ClearAll');
 
 exports.default = _default;
 });
 
-var UndoIcon = /*@__PURE__*/getDefaultExportFromCjs(Undo);
+var ClearAllIcon = /*@__PURE__*/getDefaultExportFromCjs(ClearAll);
 
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
@@ -22555,7 +22555,7 @@ var drawerWidth = 240;
 
 var updateContent = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(path, fields) {
-    var content, xml, keys, i, fieldName, value, node, res;
+    var content, xml, keys, i, fieldName, value, node;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -22576,7 +22576,6 @@ var updateContent = /*#__PURE__*/function () {
           case 5:
             xml = new DOMParser().parseFromString(content, 'text/xml');
             keys = Object.keys(fields);
-            console.log(keys);
 
             for (i = 0; i < keys.length; i++) {
               fieldName = keys[i];
@@ -22588,15 +22587,13 @@ var updateContent = /*#__PURE__*/function () {
               }
             }
 
-            console.log(new XMLSerializer().serializeToString(xml));
-            _context.next = 12;
+            _context.next = 10;
             return StudioAPI.writeContent(path, new XMLSerializer().serializeToString(xml));
 
-          case 12:
-            res = _context.sent;
-            console.log(res);
+          case 10:
+            return _context.abrupt("return", _context.sent);
 
-          case 14:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -22665,6 +22662,7 @@ function Editor(props) {
             case 3:
               keys.forEach( /*#__PURE__*/function () {
                 var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path) {
+                  var res;
                   return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                       switch (_context2.prev = _context2.next) {
@@ -22673,6 +22671,13 @@ function Editor(props) {
                           return updateContent(path, editedRows[path]);
 
                         case 2:
+                          res = _context2.sent;
+
+                          if (!res) {
+                            console.log("Error while saving path ".concat(path));
+                          }
+
+                        case 4:
                         case "end":
                           return _context2.stop();
                       }
@@ -22724,9 +22729,9 @@ function Editor(props) {
     primary: "Save Change"
   })), /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
-    key: "Undo"
-  }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(UndoIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
-    primary: "Undo"
+    key: "Cancel All Change"
+  }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
+    primary: "Cancel All Change"
   }))), /*#__PURE__*/e__default.createElement(Divider, null));
   var container = window !== undefined ? function () {
     return window().document.body;
