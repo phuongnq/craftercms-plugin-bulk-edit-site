@@ -22452,17 +22452,18 @@ function DataSheet(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              console.log(rows);
+              _context.next = 3;
               return StudioAPI.getContentTypeConfig(selectedContentType);
 
-            case 2:
+            case 3:
               config = _context.sent;
               headerList = getHeadersFromConfig(config);
               setColumns(getColumns(headerList));
-              _context.next = 7;
+              _context.next = 8;
               return StudioAPI.searchByContentType(selectedContentType);
 
-            case 7:
+            case 8:
               items = _context.sent;
               paths = items.map(function (item) {
                 return item.path;
@@ -22470,30 +22471,30 @@ function DataSheet(_ref) {
               dtRows = [];
               i = 0;
 
-            case 11:
+            case 12:
               if (!(i < paths.length)) {
-                _context.next = 21;
+                _context.next = 22;
                 break;
               }
 
               path = paths[i];
-              _context.next = 15;
+              _context.next = 16;
               return StudioAPI.getContent(path);
 
-            case 15:
+            case 16:
               content = _context.sent;
               row = getRowFromContent(i, path, content, headerList);
               dtRows.push(row);
 
-            case 18:
+            case 19:
               i += 1;
-              _context.next = 11;
+              _context.next = 12;
               break;
 
-            case 21:
+            case 22:
               setRows(dtRows);
 
-            case 22:
+            case 23:
             case "end":
               return _context.stop();
           }
