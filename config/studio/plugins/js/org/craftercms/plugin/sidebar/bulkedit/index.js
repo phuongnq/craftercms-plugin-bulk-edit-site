@@ -22348,6 +22348,7 @@ var getRowFromContent = function getRowFromContent(index, content, columns) {
     console.log(field);
     row[column] = field ? field.textContent : '';
   }
+  console.log(row);
   return row;
 };
 
