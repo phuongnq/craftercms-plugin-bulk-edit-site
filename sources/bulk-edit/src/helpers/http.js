@@ -21,6 +21,13 @@ const HttpHelper = {
         resolve(response);
       });
     });
+  },
+  post(url, body, headers) {
+    return new Promise((resolve, reject) => {
+      CrafterCMSNext.util.ajax.post(url, body, headers).subscribe((response) => {
+        resolve(response);
+      });
+    });
   }
 };
 

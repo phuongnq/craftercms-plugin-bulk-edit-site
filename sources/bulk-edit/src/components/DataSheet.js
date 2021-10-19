@@ -17,6 +17,7 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 import { contentTypeSub } from '../services/subscribe';
+import StudioAPI from '../api/studio';
 
 const rows = [
   { id: 1, 'internal-name': 'Test 1', 'title_t': 'Test 1' },
@@ -68,11 +69,18 @@ const getSheetColumns = (fields) => {
 export default function DataSheet() {
   const [descriptor, setDescriptor] = React.useState('');
   const [columns, setColumns] = React.useState([]);
+  const [contentType, setContentType] = React.useState('');
   React.useEffect(() => {
-    contentTypeSub.subscribe((value) => {
-      const ctColumns = getColumns(value);
-      setColumns(getSheetColumns(ctColumns));
-    });
+    (async () => {
+      contentTypeSub.subscribe(async (value) => {
+        const config = await StudioAPI.getContentTypeConfig(value);
+        const ctColumns = getColumns(config);
+        setColumns(getSheetColumns(ctColumns));
+
+        const data = await StudioAPI.searchByContentType(value);
+        console.log(data);
+      });
+    })();
   }, []);
   return (
     <div style={{ height: 400, width: '100%' }}>

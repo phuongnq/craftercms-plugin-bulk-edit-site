@@ -19,6 +19,7 @@ import HttpHelper from '../helpers/http';
 
 const API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-types.json';
 const API_GET_CONFIGURATION = '/studio/api/2/configuration/get_configuration';
+const API_SEARCH = '/studio/api/2/search/search.json';
 
 const StudioAPI = {
   origin() {
@@ -61,6 +62,29 @@ const StudioAPI = {
 
     return '';
   },
+  async searchByContentType(ct) {
+    const url = `${StudioAPI.origin()}${API_SEARCH}?siteId=${StudioAPI.siteId()}`;
+    const body = {
+      query: '',
+      keywords: '',
+      offset: 0,
+      limit: 100,
+      sortBy: '',
+      sortBy: '_score',
+      sortOrder: 'desc',
+      filters: {
+        'content-type': ct,
+      },
+    };
+    const res = await HttpHelper.post(url, body);
+
+    console.log(res);
+    if (res.status === 200) {
+      return res.response;
+    }
+
+    return [];
+  }
 };
 
 export default StudioAPI;
