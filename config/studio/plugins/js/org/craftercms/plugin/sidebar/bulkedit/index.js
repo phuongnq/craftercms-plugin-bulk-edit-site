@@ -22555,43 +22555,50 @@ var drawerWidth = 240;
 
 var updateContent = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data) {
-    var path, content, xml, keys, i, key, value, node, res;
+    var path, fields, content, xml, keys, i, fieldName, value, node, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             console.log(data);
-            path = data.path;
-            _context.next = 4;
+            path = Object.keys(data)[0];
+            fields = data[path];
+            _context.next = 5;
             return StudioAPI.getContent(path);
 
-          case 4:
+          case 5:
             content = _context.sent;
+
+            if (content) {
+              _context.next = 8;
+              break;
+            }
+
+            return _context.abrupt("return");
+
+          case 8:
             xml = new DOMParser().parseFromString(content, 'text/xml');
-            keys = Object.keys(data);
+            keys = Object.keys(fields);
 
             for (i = 0; i < keys.length; i++) {
-              key = keys[i];
+              fieldName = fields[keys[i]];
+              value = data[fieldName];
+              node = xml.getElementsByTagName(fieldName)[0];
 
-              if (key !== 'path') {
-                value = data[key];
-                node = xml.getElementsByTagName(key)[0];
-
-                if (node) {
-                  node.textContent = value;
-                }
+              if (node) {
+                node.textContent = value;
               }
             }
 
             console.log(new XMLSerializer().serializeToString(xml));
-            _context.next = 11;
+            _context.next = 14;
             return StudioAPI.writeContent(path, new XMLSerializer().serializeToString(xml));
 
-          case 11:
+          case 14:
             res = _context.sent;
             console.log(res);
 
-          case 13:
+          case 16:
           case "end":
             return _context.stop();
         }
