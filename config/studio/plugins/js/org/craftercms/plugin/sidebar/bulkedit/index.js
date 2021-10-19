@@ -22364,7 +22364,7 @@ var isCellEdited = function isCellEdited(params, rows) {
   if (!params || !params.isEditable || rows.length === 0) return false;
   var cellId = params.id;
   var cellField = params.field;
-  var cellValue = params.formattedValue;
+  var cellValue = params.value;
   return cellValue !== rows[cellId][cellField];
 };
 
