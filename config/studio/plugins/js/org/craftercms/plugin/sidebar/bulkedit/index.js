@@ -22421,83 +22421,111 @@ function DataSheet(_ref) {
       columns = _React$useState2[0],
       setColumns = _React$useState2[1];
 
-  var _React$useState3 = e__default.useState([]),
+  var _React$useState3 = e__default.useState(''),
       _React$useState4 = _slicedToArray(_React$useState3, 2),
-      rows = _React$useState4[0],
-      setRows = _React$useState4[1];
+      selectedContentType = _React$useState4[0],
+      setSelectedContentType = _React$useState4[1];
 
-  var _React$useState5 = e__default.useState({}),
+  var _React$useState5 = e__default.useState([]),
       _React$useState6 = _slicedToArray(_React$useState5, 2),
-      editedRows = _React$useState6[0],
-      setEditedRows = _React$useState6[1];
+      rows = _React$useState6[0],
+      setRows = _React$useState6[1];
 
   var _React$useState7 = e__default.useState({}),
       _React$useState8 = _slicedToArray(_React$useState7, 2),
-      editRowsModel = _React$useState8[0],
-      setEditRowsModel = _React$useState8[1];
+      editedRows = _React$useState8[0],
+      setEditedRows = _React$useState8[1];
+
+  var _React$useState9 = e__default.useState({}),
+      _React$useState10 = _slicedToArray(_React$useState9, 2),
+      editRowsModel = _React$useState10[0],
+      setEditRowsModel = _React$useState10[1];
 
   e__default.useReducer(function (bool) {
     return !bool;
   })[1];
+
+  var updateData = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var config, headerList, items, paths, dtRows, i, path, content, row;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return StudioAPI.getContentTypeConfig(selectedContentType);
+
+            case 2:
+              config = _context.sent;
+              headerList = getHeadersFromConfig(config);
+              setColumns(getColumns(headerList));
+              _context.next = 7;
+              return StudioAPI.searchByContentType(selectedContentType);
+
+            case 7:
+              items = _context.sent;
+              paths = items.map(function (item) {
+                return item.path;
+              });
+              dtRows = [];
+              i = 0;
+
+            case 11:
+              if (!(i < paths.length)) {
+                _context.next = 21;
+                break;
+              }
+
+              path = paths[i];
+              _context.next = 15;
+              return StudioAPI.getContent(path);
+
+            case 15:
+              content = _context.sent;
+              row = getRowFromContent(i, path, content, headerList);
+              dtRows.push(row);
+
+            case 18:
+              i += 1;
+              _context.next = 11;
+              break;
+
+            case 21:
+              setRows(dtRows);
+
+            case 22:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function updateData() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
   e__default.useEffect(function () {
     var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe( /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(clickEvt) {
-        var config, headerList, items, paths, dtRows, i, path, content, row;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(clickEvt) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.next = 2;
-                return StudioAPI.getContentTypeConfig(value);
+                _context2.next = 2;
+                return updateData();
 
               case 2:
-                config = _context.sent;
-                headerList = getHeadersFromConfig(config);
-                setColumns(getColumns(headerList));
-                _context.next = 7;
-                return StudioAPI.searchByContentType(value);
-
-              case 7:
-                items = _context.sent;
-                paths = items.map(function (item) {
-                  return item.path;
-                });
-                dtRows = [];
-                i = 0;
-
-              case 11:
-                if (!(i < paths.length)) {
-                  _context.next = 21;
-                  break;
-                }
-
-                path = paths[i];
-                _context.next = 15;
-                return StudioAPI.getContent(path);
-
-              case 15:
-                content = _context.sent;
-                row = getRowFromContent(i, path, content, headerList);
-                dtRows.push(row);
-
-              case 18:
-                i += 1;
-                _context.next = 11;
-                break;
-
-              case 21:
-                setRows(dtRows);
-
-              case 22:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }));
 
       return function (_x) {
-        return _ref2.apply(this, arguments);
+        return _ref3.apply(this, arguments);
       };
     }());
     return function () {
@@ -22507,78 +22535,79 @@ function DataSheet(_ref) {
   e__default.useEffect(function () {
     var subscriber;
 
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               subscriber = contentTypeSub.subscribe( /*#__PURE__*/function () {
-                var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(value) {
+                var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(value) {
                   var config, headerList, items, paths, dtRows, i, path, content, row;
-                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                  return regeneratorRuntime.wrap(function _callee3$(_context3) {
                     while (1) {
-                      switch (_context2.prev = _context2.next) {
+                      switch (_context3.prev = _context3.next) {
                         case 0:
-                          _context2.next = 2;
+                          setSelectedContentType(value);
+                          _context3.next = 3;
                           return StudioAPI.getContentTypeConfig(value);
 
-                        case 2:
-                          config = _context2.sent;
+                        case 3:
+                          config = _context3.sent;
                           headerList = getHeadersFromConfig(config);
                           setColumns(getColumns(headerList));
-                          _context2.next = 7;
+                          _context3.next = 8;
                           return StudioAPI.searchByContentType(value);
 
-                        case 7:
-                          items = _context2.sent;
+                        case 8:
+                          items = _context3.sent;
                           paths = items.map(function (item) {
                             return item.path;
                           });
                           dtRows = [];
                           i = 0;
 
-                        case 11:
+                        case 12:
                           if (!(i < paths.length)) {
-                            _context2.next = 21;
+                            _context3.next = 22;
                             break;
                           }
 
                           path = paths[i];
-                          _context2.next = 15;
+                          _context3.next = 16;
                           return StudioAPI.getContent(path);
 
-                        case 15:
-                          content = _context2.sent;
+                        case 16:
+                          content = _context3.sent;
                           row = getRowFromContent(i, path, content, headerList);
                           dtRows.push(row);
 
-                        case 18:
+                        case 19:
                           i += 1;
-                          _context2.next = 11;
+                          _context3.next = 12;
                           break;
 
-                        case 21:
+                        case 22:
                           setRows(dtRows);
 
-                        case 22:
+                        case 23:
                         case "end":
-                          return _context2.stop();
+                          return _context3.stop();
                       }
                     }
-                  }, _callee2);
+                  }, _callee3);
                 }));
 
                 return function (_x2) {
-                  return _ref4.apply(this, arguments);
+                  return _ref5.apply(this, arguments);
                 };
               }());
 
             case 1:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
-      }, _callee3);
+      }, _callee4);
     }))();
 
     return function () {
