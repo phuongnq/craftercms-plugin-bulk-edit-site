@@ -4,7 +4,7 @@ var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(c
 var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, CssBaseline, Drawer, Snackbar, Alert, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
-var { Subject } = CrafterCMSNext.rxjs;
+var { Subject, fromEvent } = CrafterCMSNext.rxjs;
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -22412,7 +22412,8 @@ var isCellEdited = function isCellEdited(params, rows) {
   return cellValue !== rows[cellId][cellField];
 };
 
-function DataSheet() {
+function DataSheet(_ref) {
+  var cancelBtnRef = _ref.cancelBtnRef;
   var classes = useStyles();
 
   var _React$useState = e__default.useState([]),
@@ -22436,13 +22437,24 @@ function DataSheet() {
       setEditRowsModel = _React$useState8[1];
 
   e__default.useEffect(function () {
+    var clicky = fromEvent(cancelBtnRef.current, 'click').subscribe(function (clickety) {
+      return console.log({
+        clickety: clickety
+      });
+    });
+    return function () {
+      return clicky.unsubscribe();
+    };
+  }, []);
+  e__default.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var sub;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              contentTypeSub.subscribe( /*#__PURE__*/function () {
-                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
+              sub = contentTypeSub.subscribe( /*#__PURE__*/function () {
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
                   var config, headerList, items, paths, dtRows, i, path, content, row;
                   return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
@@ -22498,11 +22510,12 @@ function DataSheet() {
                 }));
 
                 return function (_x) {
-                  return _ref2.apply(this, arguments);
+                  return _ref3.apply(this, arguments);
                 };
               }());
+              return _context2.abrupt("return", sub.unsubscribe());
 
-            case 1:
+            case 2:
             case "end":
               return _context2.stop();
           }
@@ -22629,6 +22642,7 @@ function Editor(props) {
       editedRows = _React$useState8[0],
       setEditedRows = _React$useState8[1];
 
+  var cancelBtnRef = e__default.useRef(null);
   e__default.useEffect(function () {
     editContentSub.subscribe(function (value) {
       setEditedRows(value);
@@ -22704,6 +22718,8 @@ function Editor(props) {
     };
   }();
 
+  var handleCancelAllChangeClick = function handleCancelAllChangeClick() {};
+
   var handleDrawerToggle = function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
   };
@@ -22729,7 +22745,9 @@ function Editor(props) {
     primary: "Save Change"
   })), /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
-    key: "Cancel All Change"
+    key: "Cancel All Change",
+    onClick: handleCancelAllChangeClick,
+    ref: cancelBtnRef
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Cancel All Change"
   }))), /*#__PURE__*/e__default.createElement(Divider, null));
@@ -22789,7 +22807,9 @@ function Editor(props) {
     sx: {
       flexGrow: 1
     }
-  }, /*#__PURE__*/e__default.createElement(DataSheet, null), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
+  }, /*#__PURE__*/e__default.createElement(DataSheet, {
+    cancelBtnRef: cancelBtnRef
+  }), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
     handleClose: handleFindReplaceDialogClose
   })), /*#__PURE__*/e__default.createElement(Snackbar, {
