@@ -22441,6 +22441,7 @@ function DataSheet(_ref) {
   })[1];
   e__default.useEffect(function () {
     var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(function (clickEvt) {
+      console.log(rows);
       setEditedRows({});
       setEditRowsModel({});
       forceUpdate();
