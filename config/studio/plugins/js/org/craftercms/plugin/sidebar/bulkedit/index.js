@@ -22436,16 +22436,70 @@ function DataSheet(_ref) {
       editRowsModel = _React$useState8[0],
       setEditRowsModel = _React$useState8[1];
 
-  var forceUpdate = e__default.useReducer(function (bool) {
+  e__default.useReducer(function (bool) {
     return !bool;
   })[1];
   e__default.useEffect(function () {
-    var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(function (clickEvt) {
-      console.log(rows);
-      setEditedRows({});
-      setEditRowsModel({});
-      forceUpdate();
-    });
+    var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe( /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(clickEvt) {
+        var config, headerList, items, paths, dtRows, i, path, content, row;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return StudioAPI.getContentTypeConfig(value);
+
+              case 2:
+                config = _context.sent;
+                headerList = getHeadersFromConfig(config);
+                setColumns(getColumns(headerList));
+                _context.next = 7;
+                return StudioAPI.searchByContentType(value);
+
+              case 7:
+                items = _context.sent;
+                paths = items.map(function (item) {
+                  return item.path;
+                });
+                dtRows = [];
+                i = 0;
+
+              case 11:
+                if (!(i < paths.length)) {
+                  _context.next = 21;
+                  break;
+                }
+
+                path = paths[i];
+                _context.next = 15;
+                return StudioAPI.getContent(path);
+
+              case 15:
+                content = _context.sent;
+                row = getRowFromContent(i, path, content, headerList);
+                dtRows.push(row);
+
+              case 18:
+                i += 1;
+                _context.next = 11;
+                break;
+
+              case 21:
+                setRows(dtRows);
+
+              case 22:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
     return function () {
       return subscriber.unsubscribe();
     };
@@ -22453,30 +22507,30 @@ function DataSheet(_ref) {
   e__default.useEffect(function () {
     var subscriber;
 
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               subscriber = contentTypeSub.subscribe( /*#__PURE__*/function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
+                var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(value) {
                   var config, headerList, items, paths, dtRows, i, path, content, row;
-                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
-                      switch (_context.prev = _context.next) {
+                      switch (_context2.prev = _context2.next) {
                         case 0:
-                          _context.next = 2;
+                          _context2.next = 2;
                           return StudioAPI.getContentTypeConfig(value);
 
                         case 2:
-                          config = _context.sent;
+                          config = _context2.sent;
                           headerList = getHeadersFromConfig(config);
                           setColumns(getColumns(headerList));
-                          _context.next = 7;
+                          _context2.next = 7;
                           return StudioAPI.searchByContentType(value);
 
                         case 7:
-                          items = _context.sent;
+                          items = _context2.sent;
                           paths = items.map(function (item) {
                             return item.path;
                           });
@@ -22485,22 +22539,22 @@ function DataSheet(_ref) {
 
                         case 11:
                           if (!(i < paths.length)) {
-                            _context.next = 21;
+                            _context2.next = 21;
                             break;
                           }
 
                           path = paths[i];
-                          _context.next = 15;
+                          _context2.next = 15;
                           return StudioAPI.getContent(path);
 
                         case 15:
-                          content = _context.sent;
+                          content = _context2.sent;
                           row = getRowFromContent(i, path, content, headerList);
                           dtRows.push(row);
 
                         case 18:
                           i += 1;
-                          _context.next = 11;
+                          _context2.next = 11;
                           break;
 
                         case 21:
@@ -22508,23 +22562,23 @@ function DataSheet(_ref) {
 
                         case 22:
                         case "end":
-                          return _context.stop();
+                          return _context2.stop();
                       }
                     }
-                  }, _callee);
+                  }, _callee2);
                 }));
 
-                return function (_x) {
-                  return _ref3.apply(this, arguments);
+                return function (_x2) {
+                  return _ref4.apply(this, arguments);
                 };
               }());
 
             case 1:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }))();
 
     return function () {
