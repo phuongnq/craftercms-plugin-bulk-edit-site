@@ -22413,10 +22413,12 @@ var isCellEdited = function isCellEdited(params, rows) {
 };
 
 function DataSheet(_ref) {
-  var _this = this;
-
   var cancelBtnRef = _ref.cancelBtnRef;
   var classes = useStyles();
+
+  var _useState = useState(),
+      _useState2 = _slicedToArray(_useState, 2),
+      forceUpdate = _useState2[1];
 
   var _React$useState = e__default.useState([]),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -22439,9 +22441,8 @@ function DataSheet(_ref) {
       setEditRowsModel = _React$useState8[1];
 
   e__default.useEffect(function () {
-    var self = _this;
     var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(function (clickEvt) {
-      self.forceUpdate();
+      forceUpdate();
     });
     return function () {
       return subscriber.unsubscribe();
