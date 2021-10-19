@@ -22346,7 +22346,7 @@ var getRowFromContent = function getRowFromContent(index, content, columns) {
     console.log(column);
     var field = xml.getElementsByTagName(column)[0];
     console.log(field);
-    row[column.field] = field ? field.textContent : '';
+    row[column] = field ? field.textContent : '';
   }
   return row;
 };
