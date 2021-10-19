@@ -22514,10 +22514,11 @@ function DataSheet(_ref) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                console.log(clickEvt);
+                _context2.next = 3;
                 return updateData();
 
-              case 2:
+              case 3:
               case "end":
                 return _context2.stop();
             }
@@ -22532,7 +22533,7 @@ function DataSheet(_ref) {
     return function () {
       return subscriber.unsubscribe();
     };
-  }, [selectedContentType]);
+  }, []);
   e__default.useEffect(function () {
     var subscriber;
 
