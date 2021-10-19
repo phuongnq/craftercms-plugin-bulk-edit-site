@@ -22562,6 +22562,7 @@ function DataSheet(_ref) {
     disableSelectionOnClick: true,
     editRowsModel: editRowsModel,
     getCellClassName: function getCellClassName(params) {
+      console.log(params);
       if (!params.isEditable) return '';
       return isCellEdited(params, rows) ? 'edited' : '';
     },
