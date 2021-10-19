@@ -639,19 +639,18 @@ var StudioAPI = {
 
             case 4:
               res = _context3.sent;
-              console.log(res);
 
               if (!(res.status === 200)) {
-                _context3.next = 8;
+                _context3.next = 7;
                 break;
               }
 
-              return _context3.abrupt("return", res.response);
+              return _context3.abrupt("return", res.result.items);
 
-            case 8:
+            case 7:
               return _context3.abrupt("return", []);
 
-            case 9:
+            case 8:
             case "end":
               return _context3.stop();
           }
@@ -22342,7 +22341,7 @@ function DataSheet() {
             case 0:
               contentTypeSub.subscribe( /*#__PURE__*/function () {
                 var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
-                  var config, ctColumns, data;
+                  var config, ctColumns, items, paths;
                   return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                       switch (_context.prev = _context.next) {
@@ -22358,10 +22357,13 @@ function DataSheet() {
                           return StudioAPI.searchByContentType(value);
 
                         case 7:
-                          data = _context.sent;
-                          console.log(data);
+                          items = _context.sent;
+                          paths = items.map(function (item) {
+                            return item.path;
+                          });
+                          console.log(paths);
 
-                        case 9:
+                        case 10:
                         case "end":
                           return _context.stop();
                       }
