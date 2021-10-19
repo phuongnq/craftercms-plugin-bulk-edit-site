@@ -22359,6 +22359,14 @@ var getRowFromContent = function getRowFromContent(index, content, headers) {
   return row;
 };
 
+var isCellEdited = function isCellEdited(params, rows) {
+  if (!params || !params.isEditable || rows.length === 0) return false;
+  var cellId = params.id;
+  var cellField = params.field;
+  var cellValue = params.formattedValue;
+  return cellValue !== rows[cellId][cellField];
+};
+
 function DataSheet() {
   var classes = useStyles();
 
@@ -22374,8 +22382,13 @@ function DataSheet() {
 
   var _React$useState5 = e__default.useState({}),
       _React$useState6 = _slicedToArray(_React$useState5, 2),
-      editRowsModel = _React$useState6[0],
-      setEditRowsModel = _React$useState6[1];
+      editedRows = _React$useState6[0],
+      setEditedRows = _React$useState6[1];
+
+  var _React$useState7 = e__default.useState({}),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      editRowsModel = _React$useState8[0],
+      setEditRowsModel = _React$useState8[1];
 
   e__default.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
@@ -22453,20 +22466,25 @@ function DataSheet() {
     }))();
   }, []);
   var handleEditRowsModelChange = e__default.useCallback(function (model) {
-    console.log(model);
     setEditRowsModel(model);
   }, []);
   var handleOnCellEditCommit = e__default.useCallback(function (model, event) {
     console.log(model);
+    saveEditState(model);
     console.log(event);
   }, []);
 
-  var isCellEdited = function isCellEdited(params) {
-    if (!params || !params.isEditable || rows.length === 0) return false;
-    var cellId = params.id;
-    var cellField = params.field;
-    var cellValue = params.formattedValue;
-    return cellValue !== rows[cellId][cellField];
+  var saveEditState = function saveEditState(model) {
+    var currentEditedRows = editedRows;
+    if (!isCellEdited(model, rows)) return;
+
+    if (!currentEditedRows[model.id]) {
+      currentEditedRows[model.id] = {};
+    }
+
+    currentEditedRows[model.id][model.field] = model.formattedValue;
+    setEditedRows(currentEditedRows);
+    console.log(currentEditedRows);
   };
 
   return /*#__PURE__*/e__default.createElement("div", {
@@ -22479,7 +22497,7 @@ function DataSheet() {
     disableSelectionOnClick: true,
     editRowsModel: editRowsModel,
     getCellClassName: function getCellClassName(params) {
-      return isCellEdited(params) ? 'edited' : '';
+      return isCellEdited(params, rows) ? 'edited' : '';
     },
     onEditRowsModelChange: handleEditRowsModelChange,
     onCellEditCommit: handleOnCellEditCommit
