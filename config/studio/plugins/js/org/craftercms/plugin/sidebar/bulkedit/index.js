@@ -22347,7 +22347,7 @@ var getColumns = function getColumns(fields) {
 var getRowFromContent = function getRowFromContent(index, content, headers) {
   var xml = new DOMParser().parseFromString(content, 'text/xml');
   var row = {
-    id: index + 1
+    id: index
   };
 
   for (var i = 0; i < headers.length; i += 1) {
