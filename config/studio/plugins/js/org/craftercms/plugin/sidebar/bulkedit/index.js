@@ -22565,22 +22565,21 @@ var updateContent = /*#__PURE__*/function () {
 
           case 2:
             content = _context.sent;
-            console.log(content);
 
             if (content) {
-              _context.next = 6;
+              _context.next = 5;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 6:
+          case 5:
             xml = new DOMParser().parseFromString(content, 'text/xml');
             keys = Object.keys(fields);
             console.log(keys);
 
             for (i = 0; i < keys.length; i++) {
-              fieldName = fields[keys[i]];
+              fieldName = keys[i];
               value = fields[fieldName];
               node = xml.getElementsByTagName(fieldName)[0];
 
@@ -22590,14 +22589,14 @@ var updateContent = /*#__PURE__*/function () {
             }
 
             console.log(new XMLSerializer().serializeToString(xml));
-            _context.next = 13;
+            _context.next = 12;
             return StudioAPI.writeContent(path, new XMLSerializer().serializeToString(xml));
 
-          case 13:
+          case 12:
             res = _context.sent;
             console.log(res);
 
-          case 15:
+          case 14:
           case "end":
             return _context.stop();
         }
