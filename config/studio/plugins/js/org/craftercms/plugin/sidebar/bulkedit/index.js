@@ -22358,6 +22358,11 @@ function DataSheet() {
       rows = _React$useState4[0],
       setRows = _React$useState4[1];
 
+  var _React$useState5 = e__default.useState({}),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      editRowsModel = _React$useState6[0],
+      setEditRowsModel = _React$useState6[1];
+
   e__default.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -22435,6 +22440,11 @@ function DataSheet() {
   }, []);
   var handleEditRowsModelChange = e__default.useCallback(function (model) {
     console.log(model);
+    setEditRowsModel(model);
+  }, []);
+  var handleOnCellEditCommit = e__default.useCallback(function (params, event) {
+    console.log(params);
+    console.log(event);
   }, []);
   return /*#__PURE__*/e__default.createElement("div", {
     style: {
@@ -22448,7 +22458,9 @@ function DataSheet() {
     rowsPerPageOptions: [5],
     checkboxSelection: true,
     disableSelectionOnClick: true,
-    onEditRowsModelChange: handleEditRowsModelChange
+    editRowsModel: editRowsModel,
+    onEditRowsModelChange: handleEditRowsModelChange,
+    onCellEditCommit: handleOnCellEditCommit
   }));
 }
 
