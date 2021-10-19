@@ -22343,6 +22343,7 @@ var getRowFromContent = function getRowFromContent(index, content, columns) {
 
   for (var i = 0; i < columns.length; i += 1) {
     var column = columns[i];
+    console.log(column);
     var field = xml.getElementsByTagName(column.field)[0];
     console.log(field);
     row[column.field] = field ? field.textContent : '';
