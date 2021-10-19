@@ -42,12 +42,8 @@ import StudioAPI from '../api/studio';
 
 const drawerWidth = 240;
 
-const updateContent = async (data) => {
-  const path = Object.keys(data)[0];
-  const fields = data[path];
-
+const updateContent = async (path, fields) => {
   const content = await StudioAPI.getContent(path);
-  console.log(content);
   if (!content) {
     return;
   }
@@ -55,19 +51,16 @@ const updateContent = async (data) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
 
   const keys = Object.keys(fields);
-  console.log(keys);
   for (let i = 0; i < keys.length; i++) {
-    const fieldName = fields[keys[i]];
-    const value = data[fieldName];
+    const fieldName = keys[i];
+    const value = fields[fieldName];
       const node = xml.getElementsByTagName(fieldName)[0];
       if (node) {
         node.textContent = value;
       }
   }
 
-  console.log((new XMLSerializer()).serializeToString(xml));
-  const res = await StudioAPI.writeContent(path, (new XMLSerializer()).serializeToString(xml));
-  console.log(res);
+  return await StudioAPI.writeContent(path, (new XMLSerializer()).serializeToString(xml));
 };
 
 export default function Editor(props) {
@@ -92,15 +85,16 @@ export default function Editor(props) {
   };
 
   const handleSaveChangeClick = async () => {
-    console.log(editedRows);
     const keys = Object.keys(editedRows);
     if (keys.length === 0) {
       return;
     }
 
-    keys.forEach(async (key) => {
-      const data = editedRows[key];
-      await updateContent(data);
+    keys.forEach(async (path) => {
+      const res = await updateContent(path, editedRows[path]);
+      if (!res) {
+        console.log(`Error while saving path ${path}`);
+      }
     });
 
     setOpenAlert(true);
