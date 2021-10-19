@@ -22334,19 +22334,25 @@ var getSheetColumns = function getSheetColumns(fields) {
 };
 
 var getRowFromContent = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(content) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(index, content, columns) {
+    var xml, row, i, column, field;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            return _context.abrupt("return", {
-              id: 1,
-              'internal-name': 'Test 1',
-              'title_t': 'Test 1',
-              'body_html': 'aaaa'
-            });
+            xml = new DOMParser().parseFromString(content, 'text/xml');
+            row = {
+              id: index
+            };
 
-          case 1:
+            for (i = 0; i < columns.length; i += 1) {
+              column = columns[i];
+              field = xml.getElementsByTagName(column.field)[0];
+              row[column.field] = field ? field.textContent : '';
+            }
+            return _context.abrupt("return", row);
+
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -22354,7 +22360,7 @@ var getRowFromContent = /*#__PURE__*/function () {
     }, _callee);
   }));
 
-  return function getRowFromContent(_x) {
+  return function getRowFromContent(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -22400,20 +22406,25 @@ function DataSheet() {
                           });
                           dtRows = [];
                           paths.forEach( /*#__PURE__*/function () {
-                            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path) {
-                              var row;
+                            var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path, index) {
+                              var content, row;
                               return regeneratorRuntime.wrap(function _callee2$(_context2) {
                                 while (1) {
                                   switch (_context2.prev = _context2.next) {
                                     case 0:
                                       _context2.next = 2;
-                                      return getRowFromContent(path);
+                                      return StudioAPI.getContent(path);
 
                                     case 2:
+                                      content = _context2.sent;
+                                      _context2.next = 5;
+                                      return getRowFromContent(index, content, ctColumns);
+
+                                    case 5:
                                       row = _context2.sent;
                                       dtRows.push(row);
 
-                                    case 4:
+                                    case 7:
                                     case "end":
                                       return _context2.stop();
                                   }
@@ -22421,7 +22432,7 @@ function DataSheet() {
                               }, _callee2);
                             }));
 
-                            return function (_x3) {
+                            return function (_x5, _x6) {
                               return _ref4.apply(this, arguments);
                             };
                           }());
@@ -22435,7 +22446,7 @@ function DataSheet() {
                   }, _callee3);
                 }));
 
-                return function (_x2) {
+                return function (_x4) {
                   return _ref3.apply(this, arguments);
                 };
               }());
