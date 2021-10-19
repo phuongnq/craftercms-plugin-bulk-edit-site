@@ -22442,6 +22442,7 @@ function DataSheet(_ref) {
   e__default.useEffect(function () {
     var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(function (clickEvt) {
       setEditedRows({});
+      setEditRowsModel({});
       forceUpdate();
     });
     return function () {
