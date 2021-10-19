@@ -529,6 +529,7 @@ var API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-typ
 var API_GET_CONFIGURATION = '/studio/api/2/configuration/get_configuration';
 var API_SEARCH = '/studio/api/2/search/search.json';
 var API_GET_CONTENT = '/studio/api/1/services/api/1/content/get-content.json';
+var API_WRITE_CONTENT = '/studio/api/1/services/api/1/content/write-content.json';
 var StudioAPI = {
   origin: function origin() {
     return window.location.origin;
@@ -689,6 +690,41 @@ var StudioAPI = {
           }
         }
       }, _callee4);
+    }))();
+  },
+  writeContent: function writeContent(path, content) {
+    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+      var contentType, user, fileName, url, res;
+      return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              contentType = '/page/entry';
+              user = 'admin';
+              fileName = path.split('/').pop();
+              url = "".concat(StudioAPI.origin()).concat(API_WRITE_CONTENT, "?site=").concat(StudioAPI.siteId(), "&phase=onSave&path=").concat(path, "&&fileName=").concat(fileName, "&user=").concat(user, "&contentType=").concat(contentType, "&unlock=true");
+              _context5.next = 6;
+              return HttpHelper.post(url, content);
+
+            case 6:
+              res = _context5.sent;
+
+              if (!(res.status === 200)) {
+                _context5.next = 9;
+                break;
+              }
+
+              return _context5.abrupt("return", res.response);
+
+            case 9:
+              return _context5.abrupt("return", null);
+
+            case 10:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
     }))();
   }
 };
@@ -22516,6 +22552,57 @@ function DataSheet() {
 }
 
 var drawerWidth = 240;
+
+var updateContent = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data) {
+    var path, content, xml, keys, i, key, value, node, res;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            path = data.path;
+            _context.next = 3;
+            return StudioAPI.getContent(path);
+
+          case 3:
+            content = _context.sent;
+            xml = new DOMParser().parseFromString(content, 'text/xml');
+            keys = Object.keys(data);
+
+            for (i = 0; i < keys.length; i++) {
+              key = keys[i];
+
+              if (key !== 'path') {
+                value = data[key];
+                node = xml.getElementsByTagName(key)[0];
+
+                if (node) {
+                  node.textContent = value;
+                }
+              }
+            }
+
+            console.log(new XMLSerializer().serializeToString(xml));
+            _context.next = 10;
+            return StudioAPI.writeContent(path, new XMLSerializer().serializeToString(xml));
+
+          case 10:
+            res = _context.sent;
+            console.log(res);
+
+          case 12:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function updateContent(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
 function Editor(props) {
   var window = props.window;
 
@@ -22553,10 +22640,61 @@ function Editor(props) {
     setOpenAlert(false);
   };
 
-  var handleSaveChangeClick = function handleSaveChangeClick() {
-    console.log(editedRows);
-    setOpenAlert(true);
-  };
+  var handleSaveChangeClick = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      var keys;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              console.log(editedRows);
+              keys = Object.keys(editedRows);
+
+              if (!(keys.length === 0)) {
+                _context3.next = 4;
+                break;
+              }
+
+              return _context3.abrupt("return");
+
+            case 4:
+              keys.forEach( /*#__PURE__*/function () {
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(key) {
+                  var data;
+                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          data = editedRows[key];
+                          _context2.next = 3;
+                          return updateContent(data);
+
+                        case 3:
+                        case "end":
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2);
+                }));
+
+                return function (_x2) {
+                  return _ref3.apply(this, arguments);
+                };
+              }());
+              setOpenAlert(true);
+
+            case 6:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function handleSaveChangeClick() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
 
   var handleDrawerToggle = function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
