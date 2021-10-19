@@ -22447,7 +22447,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges(evt) {
-        evt.preventDefault();
         setEditedRows({});
         setEditRowsModel({});
       }
