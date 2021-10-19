@@ -22364,7 +22364,6 @@ var isCellEdited = function isCellEdited(params, rows) {
   var cellId = params.id;
   var cellField = params.field;
   var cellValue = params.value;
-  console.log(rows[cellId][cellField]);
   return cellValue !== rows[cellId][cellField];
 };
 
@@ -22475,6 +22474,7 @@ function DataSheet() {
 
   var saveEditState = function saveEditState(model) {
     var currentEditedRows = editedRows;
+    console.log(model);
     if (!isCellEdited(model, rows)) return;
 
     if (!currentEditedRows[model.id]) {
