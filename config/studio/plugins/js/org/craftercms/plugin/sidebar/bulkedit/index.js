@@ -22465,12 +22465,14 @@ function DataSheet() {
       }, _callee2);
     }))();
   }, []);
-  var handleEditRowsModelChange = e__default.useCallback(function (model) {
+
+  var handleEditRowsModelChange = function handleEditRowsModelChange(model) {
     setEditRowsModel(model);
-  }, []);
-  var handleOnCellEditCommit = e__default.useCallback(function (model, event) {
+  };
+
+  var handleOnCellEditCommit = function handleOnCellEditCommit(model, event) {
     saveEditState(model);
-  }, []);
+  };
 
   var saveEditState = function saveEditState(model) {
     var currentEditedRows = editedRows;
