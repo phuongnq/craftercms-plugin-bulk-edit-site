@@ -22554,36 +22554,34 @@ function DataSheet() {
 var drawerWidth = 240;
 
 var updateContent = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data) {
-    var path, fields, content, xml, keys, i, fieldName, value, node, res;
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(path, fields) {
+    var content, xml, keys, i, fieldName, value, node, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            path = Object.keys(data)[0];
-            fields = data[path];
-            _context.next = 4;
+            _context.next = 2;
             return StudioAPI.getContent(path);
 
-          case 4:
+          case 2:
             content = _context.sent;
             console.log(content);
 
             if (content) {
-              _context.next = 8;
+              _context.next = 6;
               break;
             }
 
             return _context.abrupt("return");
 
-          case 8:
+          case 6:
             xml = new DOMParser().parseFromString(content, 'text/xml');
             keys = Object.keys(fields);
             console.log(keys);
 
             for (i = 0; i < keys.length; i++) {
               fieldName = fields[keys[i]];
-              value = data[fieldName];
+              value = fields[fieldName];
               node = xml.getElementsByTagName(fieldName)[0];
 
               if (node) {
@@ -22592,14 +22590,14 @@ var updateContent = /*#__PURE__*/function () {
             }
 
             console.log(new XMLSerializer().serializeToString(xml));
-            _context.next = 15;
+            _context.next = 13;
             return StudioAPI.writeContent(path, new XMLSerializer().serializeToString(xml));
 
-          case 15:
+          case 13:
             res = _context.sent;
             console.log(res);
 
-          case 17:
+          case 15:
           case "end":
             return _context.stop();
         }
@@ -22607,7 +22605,7 @@ var updateContent = /*#__PURE__*/function () {
     }, _callee);
   }));
 
-  return function updateContent(_x) {
+  return function updateContent(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -22656,29 +22654,26 @@ function Editor(props) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              console.log(editedRows);
               keys = Object.keys(editedRows);
 
               if (!(keys.length === 0)) {
-                _context3.next = 4;
+                _context3.next = 3;
                 break;
               }
 
               return _context3.abrupt("return");
 
-            case 4:
+            case 3:
               keys.forEach( /*#__PURE__*/function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(key) {
-                  var data;
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path) {
                   return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                       switch (_context2.prev = _context2.next) {
                         case 0:
-                          data = editedRows[key];
-                          _context2.next = 3;
-                          return updateContent(data);
+                          _context2.next = 2;
+                          return updateContent(path, editedRows[path]);
 
-                        case 3:
+                        case 2:
                         case "end":
                           return _context2.stop();
                       }
@@ -22686,13 +22681,13 @@ function Editor(props) {
                   }, _callee2);
                 }));
 
-                return function (_x2) {
+                return function (_x3) {
                   return _ref3.apply(this, arguments);
                 };
               }());
               setOpenAlert(true);
 
-            case 6:
+            case 5:
             case "end":
               return _context3.stop();
           }
