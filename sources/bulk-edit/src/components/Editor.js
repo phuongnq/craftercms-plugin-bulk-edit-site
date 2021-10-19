@@ -37,13 +37,51 @@ import ContentTypeSelect from './ContentTypeSelect';
 import FindAndReplace from './FindAndReplace';
 import DataSheet from './DataSheet';
 
+import { editContentSub } from '../services/subscribe';
+import StudioAPI from '../api/studio';
+
 const drawerWidth = 240;
+
+const updateContent = async (data) => {
+  const path = Object.keys(data)[0];
+  const fields = data[path];
+
+  const content = await StudioAPI.getContent(path);
+  console.log(content);
+  if (!content) {
+    return;
+  }
+
+  const xml = (new DOMParser()).parseFromString(content, 'text/xml');
+
+  const keys = Object.keys(fields);
+  console.log(keys);
+  for (let i = 0; i < keys.length; i++) {
+    const fieldName = fields[keys[i]];
+    const value = data[fieldName];
+      const node = xml.getElementsByTagName(fieldName)[0];
+      if (node) {
+        node.textContent = value;
+      }
+  }
+
+  console.log((new XMLSerializer()).serializeToString(xml));
+  const res = await StudioAPI.writeContent(path, (new XMLSerializer()).serializeToString(xml));
+  console.log(res);
+};
 
 export default function Editor(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
+  const [editedRows, setEditedRows] = React.useState({});
+
+  React.useEffect(() => {
+    editContentSub.subscribe((value) => {
+      setEditedRows(value);
+    });
+  }, []);
 
   const handleFindReplaceDialogClose = () => {
     setFindReplaceDialogOpen(false);
@@ -53,7 +91,18 @@ export default function Editor(props) {
     setOpenAlert(false);
   };
 
-  const handleSaveChangeClick = () => {
+  const handleSaveChangeClick = async () => {
+    console.log(editedRows);
+    const keys = Object.keys(editedRows);
+    if (keys.length === 0) {
+      return;
+    }
+
+    keys.forEach(async (key) => {
+      const data = editedRows[key];
+      await updateContent(data);
+    });
+
     setOpenAlert(true);
   };
 

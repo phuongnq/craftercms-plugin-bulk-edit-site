@@ -17,7 +17,9 @@
 import { Subject } from 'rxjs';
 
 const contentTypeSub = new Subject('');
+const editContentSub = new Subject({});
 
 export {
   contentTypeSub,
+  editContentSub,
 };

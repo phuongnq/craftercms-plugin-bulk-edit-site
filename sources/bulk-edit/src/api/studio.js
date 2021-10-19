@@ -21,6 +21,7 @@ const API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-t
 const API_GET_CONFIGURATION = '/studio/api/2/configuration/get_configuration';
 const API_SEARCH = '/studio/api/2/search/search.json';
 const API_GET_CONTENT = '/studio/api/1/services/api/1/content/get-content.json';
+const API_WRITE_CONTENT = '/studio/api/1/services/api/1/content/write-content.json';
 
 const StudioAPI = {
   origin() {
@@ -94,7 +95,20 @@ const StudioAPI = {
     }
 
     return null;
-  }
+  },
+  async writeContent(path, content) {
+    const contentType = '/page/entry';
+    const user = 'admin';
+    const fileName = path.split('/').pop();
+    const url = `${StudioAPI.origin()}${API_WRITE_CONTENT}?site=${StudioAPI.siteId()}&phase=onSave&path=${path}&&fileName=${fileName}&user=${user}&contentType=${contentType}&unlock=true`;
+    const res = await HttpHelper.post(url, content);
+
+    if (res.status === 200) {
+      return res.response;
+    }
+
+    return null;
+  },
 };
 
 export default StudioAPI;

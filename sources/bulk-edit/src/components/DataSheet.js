@@ -17,7 +17,7 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
 
-import { contentTypeSub } from '../services/subscribe';
+import { contentTypeSub, editContentSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
 
 const useStyles = makeStyles({
@@ -151,7 +151,7 @@ export default function DataSheet() {
     }
     currentEditedRows[key][model.field] = model.value;
     setEditedRows(currentEditedRows);
-    console.log(currentEditedRows);
+    editContentSub.next(currentEditedRows);
   };
 
   return (
