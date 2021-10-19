@@ -22560,11 +22560,12 @@ var updateContent = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            console.log(data);
             path = data.path;
-            _context.next = 3;
+            _context.next = 4;
             return StudioAPI.getContent(path);
 
-          case 3:
+          case 4:
             content = _context.sent;
             xml = new DOMParser().parseFromString(content, 'text/xml');
             keys = Object.keys(data);
@@ -22583,14 +22584,14 @@ var updateContent = /*#__PURE__*/function () {
             }
 
             console.log(new XMLSerializer().serializeToString(xml));
-            _context.next = 10;
+            _context.next = 11;
             return StudioAPI.writeContent(path, new XMLSerializer().serializeToString(xml));
 
-          case 10:
+          case 11:
             res = _context.sent;
             console.log(res);
 
-          case 12:
+          case 13:
           case "end":
             return _context.stop();
         }
