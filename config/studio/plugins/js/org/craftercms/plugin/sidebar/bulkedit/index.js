@@ -22433,6 +22433,9 @@ function DataSheet() {
       }, _callee2);
     }))();
   }, []);
+  var handleEditRowsModelChange = e__default.useCallback(function (model) {
+    console.log(model);
+  }, []);
   return /*#__PURE__*/e__default.createElement("div", {
     style: {
       height: 400,
@@ -22444,7 +22447,8 @@ function DataSheet() {
     pageSize: 5,
     rowsPerPageOptions: [5],
     checkboxSelection: true,
-    disableSelectionOnClick: true
+    disableSelectionOnClick: true,
+    onEditRowsModelChange: handleEditRowsModelChange
   }));
 }
 
