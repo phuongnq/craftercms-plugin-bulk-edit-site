@@ -22326,7 +22326,8 @@ var getColumns = function getColumns(fields) {
     description: 'ID',
     sortable: false,
     width: 90,
-    editable: false
+    editable: false,
+    hide: true
   }];
 
   for (var i = 0; i < fields.length; i += 1) {
