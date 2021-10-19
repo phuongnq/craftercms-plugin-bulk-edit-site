@@ -22263,18 +22263,21 @@ PERFORMANCE OF THIS SOFTWARE.
 var rows = [{
   id: 1,
   'internal-name': 'Test 1',
-  'title_t': 'Test 1'
+  'title_t': 'Test 1',
+  'body_html': 'aaaa'
 }, {
   id: 2,
   'internal-name': 'Test 2',
-  'title_t': 'Test 2'
+  'title_t': 'Test 2',
+  'body_html': 'aaaa'
 }, {
   id: 3,
   'internal-name': 'Test 3',
-  'title_t': 'Test 3'
+  'title_t': 'Test 3',
+  'body_html': 'aaaa'
 }];
 
-var getColumns = function getColumns(data) {
+var getFieldsFromConfig = function getFieldsFromConfig(data) {
   var xml = new DOMParser().parseFromString(data, 'text/xml');
   var fields = xml.getElementsByTagName('field');
   var columns = [];
@@ -22282,7 +22285,7 @@ var getColumns = function getColumns(data) {
   for (var i = 0; i < fields.length; i += 1) {
     var field = fields[i];
     var fieldType = field.getElementsByTagName('type')[0].textContent;
-    if (fieldType !== 'input') continue;
+    if (fieldType !== 'input' && fieldType !== 'rte') continue;
     var fieldId = field.getElementsByTagName('id')[0].textContent;
     columns.push(fieldId);
   }
@@ -22349,7 +22352,7 @@ function DataSheet() {
 
                         case 2:
                           config = _context.sent;
-                          ctColumns = getColumns(config);
+                          ctColumns = getFieldsFromConfig(config);
                           setColumns(getSheetColumns(ctColumns));
                           _context.next = 7;
                           return StudioAPI.searchByContentType(value);
