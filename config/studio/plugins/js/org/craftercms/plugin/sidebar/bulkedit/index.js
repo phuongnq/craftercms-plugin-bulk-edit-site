@@ -22459,6 +22459,14 @@ function DataSheet() {
     console.log(model);
     console.log(event);
   }, []);
+
+  var isCellEdited = function isCellEdited(params) {
+    var cellId = params.id;
+    var cellField = params.field;
+    var cellValue = params.formattedValue;
+    return cellValue !== rows[cellId][cellField];
+  };
+
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root
   }, /*#__PURE__*/e__default.createElement(ds, {
@@ -22470,8 +22478,7 @@ function DataSheet() {
     disableSelectionOnClick: true,
     editRowsModel: editRowsModel,
     getCellClassName: function getCellClassName(params) {
-      console.log(params);
-      return 'edited';
+      return isCellEdited(params) ? 'edited' : '';
     },
     onEditRowsModelChange: handleEditRowsModelChange,
     onCellEditCommit: handleOnCellEditCommit
