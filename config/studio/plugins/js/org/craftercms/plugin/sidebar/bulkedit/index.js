@@ -22462,7 +22462,7 @@ function DataSheet() {
 
   var isCellEdited = function isCellEdited(params) {
     console.log(params);
-    if (!params) return false;
+    if (!params || !params.isEditable) return false;
     var cellId = params.id;
     var cellField = params.field;
     var cellValue = params.formattedValue;
