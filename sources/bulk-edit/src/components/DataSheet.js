@@ -110,17 +110,20 @@ export default function DataSheet({ cancelBtnRef }) {
   const [editedRows, setEditedRows] = React.useState({});
   const [editRowsModel, setEditRowsModel] = React.useState({});
 
-  React.useEffect(() => {
-    const clicky = fromEvent(cancelBtnRef.current, 'click').subscribe(clickety =>
-      console.log({ clickety })
-    );
+  const forceUpdate = React.useReducer(bool => !bool)[1];
 
-    return () => clicky.unsubscribe();
+  React.useEffect(() => {
+    const subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(clickEvt => {
+      forceUpdate();
+    });
+
+    return () => subscriber.unsubscribe();
   }, []);
 
   React.useEffect(() => {
+    let subscriber;
     (async () => {
-      const sub = contentTypeSub.subscribe(async (value) => {
+      subscriber = contentTypeSub.subscribe(async (value) => {
         const config = await StudioAPI.getContentTypeConfig(value);
         const headerList = getHeadersFromConfig(config);
         setColumns(getColumns(headerList));
@@ -139,9 +142,11 @@ export default function DataSheet({ cancelBtnRef }) {
 
         setRows(dtRows);
       });
-
-      return sub.unsubscribe();
     })();
+
+    return (() => {
+      subscriber.unsubscribe();
+    })
   }, []);
 
   const handleEditRowsModelChange = (model) => {

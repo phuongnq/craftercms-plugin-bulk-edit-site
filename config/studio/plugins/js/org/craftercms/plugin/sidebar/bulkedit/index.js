@@ -22416,10 +22416,6 @@ function DataSheet(_ref) {
   var cancelBtnRef = _ref.cancelBtnRef;
   var classes = useStyles();
 
-  var _useState = useState(),
-      _useState2 = _slicedToArray(_useState, 2),
-      forceUpdate = _useState2[1];
-
   var _React$useState = e__default.useState([]),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       columns = _React$useState2[0],
@@ -22440,6 +22436,9 @@ function DataSheet(_ref) {
       editRowsModel = _React$useState8[0],
       setEditRowsModel = _React$useState8[1];
 
+  var forceUpdate = e__default.useReducer(function (bool) {
+    return !bool;
+  })[1];
   e__default.useEffect(function () {
     var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(function (clickEvt) {
       forceUpdate();
