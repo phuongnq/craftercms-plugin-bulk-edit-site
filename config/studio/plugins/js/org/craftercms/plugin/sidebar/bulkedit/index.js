@@ -22364,72 +22364,67 @@ function DataSheet() {
       setRows = _React$useState4[1];
 
   e__default.useEffect(function () {
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               contentTypeSub.subscribe( /*#__PURE__*/function () {
-                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(value) {
-                  var config, ctColumns, items, paths, dtRows;
-                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
+                  var config, ctColumns, items, paths, dtRows, i, path, content, row;
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
-                      switch (_context2.prev = _context2.next) {
+                      switch (_context.prev = _context.next) {
                         case 0:
-                          _context2.next = 2;
+                          _context.next = 2;
                           return StudioAPI.getContentTypeConfig(value);
 
                         case 2:
-                          config = _context2.sent;
+                          config = _context.sent;
                           ctColumns = getFieldsFromConfig(config);
                           setColumns(getSheetColumns(ctColumns));
-                          _context2.next = 7;
+                          _context.next = 7;
                           return StudioAPI.searchByContentType(value);
 
                         case 7:
-                          items = _context2.sent;
+                          items = _context.sent;
                           paths = items.map(function (item) {
                             return item.path;
                           });
                           dtRows = [];
-                          paths.forEach( /*#__PURE__*/function () {
-                            var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(path, index) {
-                              var content, row;
-                              return regeneratorRuntime.wrap(function _callee$(_context) {
-                                while (1) {
-                                  switch (_context.prev = _context.next) {
-                                    case 0:
-                                      console.log(path);
-                                      _context.next = 3;
-                                      return StudioAPI.getContent(path);
+                          i = 0;
 
-                                    case 3:
-                                      content = _context.sent;
-                                      console.log(content);
-                                      row = getRowFromContent(index, content, ctColumns);
-                                      dtRows.push(row);
+                        case 11:
+                          if (!(i < paths.length)) {
+                            _context.next = 22;
+                            break;
+                          }
 
-                                    case 7:
-                                    case "end":
-                                      return _context.stop();
-                                  }
-                                }
-                              }, _callee);
-                            }));
+                          path = paths[i];
+                          _context.next = 15;
+                          return StudioAPI.getContent(path);
 
-                            return function (_x2, _x3) {
-                              return _ref3.apply(this, arguments);
-                            };
-                          }());
+                        case 15:
+                          content = _context.sent;
+                          console.log(content);
+                          row = getRowFromContent(i, content, ctColumns);
+                          dtRows.push(row);
+
+                        case 19:
+                          i += 1;
+                          _context.next = 11;
+                          break;
+
+                        case 22:
                           console.log(dtRows);
                           setRows(dtRows);
 
-                        case 13:
+                        case 24:
                         case "end":
-                          return _context2.stop();
+                          return _context.stop();
                       }
                     }
-                  }, _callee2);
+                  }, _callee);
                 }));
 
                 return function (_x) {
@@ -22439,10 +22434,10 @@ function DataSheet() {
 
             case 1:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3);
+      }, _callee2);
     }))();
   }, []);
   return /*#__PURE__*/e__default.createElement("div", {
