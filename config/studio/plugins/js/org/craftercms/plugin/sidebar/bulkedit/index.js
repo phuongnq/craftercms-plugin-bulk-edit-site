@@ -22338,7 +22338,7 @@ var getRowFromContent = function getRowFromContent(index, content, columns) {
   var xml = new DOMParser().parseFromString(content, 'text/xml');
   console.log(xml);
   var row = {
-    id: index
+    id: index + 1
   };
 
   for (var i = 0; i < columns.length; i += 1) {
@@ -22421,9 +22421,10 @@ function DataSheet() {
                               return _ref3.apply(this, arguments);
                             };
                           }());
+                          console.log(dtRows);
                           setRows(dtRows);
 
-                        case 12:
+                        case 13:
                         case "end":
                           return _context2.stop();
                       }
