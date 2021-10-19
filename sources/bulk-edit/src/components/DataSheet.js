@@ -56,6 +56,13 @@ const getColumns = (fields) => {
     width: 90,
     editable: false,
     hide: true,
+  }, {
+    field: 'path',
+    headerName: 'Path',
+    description: 'Path',
+    sortable: false,
+    width: 160,
+    editable: false,
   }];
 
   for (let i = 0; i < fields.length; i +=1 ) {
@@ -73,9 +80,9 @@ const getColumns = (fields) => {
   return columns;
 };
 
-const getRowFromContent = (index, content, headers) => {
+const getRowFromContent = (index, path, content, headers) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
-  const row = { id: index };
+  const row = { id: index, path };
   for (let i = 0; i < headers.length; i += 1) {
     const column = headers[i];
     const field = xml.getElementsByTagName(column)[0];
@@ -91,7 +98,6 @@ const isCellEdited = (params, rows) => {
   const cellId = params.id;
   const cellField = params.field;
   const cellValue = params.value;
-  console.log(rows[cellId][cellField]);
   return cellValue !== rows[cellId][cellField];
 };
 
@@ -118,7 +124,7 @@ export default function DataSheet() {
           const path = paths[i];
 
           const content = await StudioAPI.getContent(path);
-          const row = getRowFromContent(i, content, headerList);
+          const row = getRowFromContent(i, path, content, headerList);
           dtRows.push(row);
         }
 
@@ -127,22 +133,23 @@ export default function DataSheet() {
     })();
   }, []);
 
-  const handleEditRowsModelChange = React.useCallback((model) => {
+  const handleEditRowsModelChange = (model) => {
     setEditRowsModel(model);
-  }, []);
+  };
 
-  const handleOnCellEditCommit = React.useCallback((model, event) => {
+  const handleOnCellEditCommit = (model, event) => {
     saveEditState(model);
-  }, []);
+  };
 
   const saveEditState = (model) => {
     const currentEditedRows = editedRows;
     if (!isCellEdited(model, rows)) return;
 
-    if (!currentEditedRows[model.id]) {
-      currentEditedRows[model.id] = {};
+    const key = rows[model.id].path;
+    if (!currentEditedRows[key]) {
+      currentEditedRows[key] = {};
     }
-    currentEditedRows[model.id][model.field] = model.value;
+    currentEditedRows[key][model.field] = model.value;
     setEditedRows(currentEditedRows);
     console.log(currentEditedRows);
   };
