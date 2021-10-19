@@ -22360,8 +22360,7 @@ var getRowFromContent = function getRowFromContent(index, content, headers) {
 };
 
 var isCellEdited = function isCellEdited(params, rows) {
-  console.log(params);
-  if (!params || !params.isEditable || rows.length === 0) return false;
+  if (!params || rows.length === 0) return false;
   var cellId = params.id;
   var cellField = params.field;
   var cellValue = params.value;
@@ -22481,7 +22480,7 @@ function DataSheet() {
       currentEditedRows[model.id] = {};
     }
 
-    currentEditedRows[model.id][model.field] = model.formattedValue;
+    currentEditedRows[model.id][model.field] = model.value;
     setEditedRows(currentEditedRows);
     console.log(currentEditedRows);
   };
@@ -22496,6 +22495,7 @@ function DataSheet() {
     disableSelectionOnClick: true,
     editRowsModel: editRowsModel,
     getCellClassName: function getCellClassName(params) {
+      if (!params.isEditable) return '';
       return isCellEdited(params, rows) ? 'edited' : '';
     },
     onEditRowsModelChange: handleEditRowsModelChange,

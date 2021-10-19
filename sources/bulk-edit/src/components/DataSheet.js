@@ -86,12 +86,11 @@ const getRowFromContent = (index, content, headers) => {
 };
 
 const isCellEdited = (params, rows) => {
-  console.log(params);
-  if (!params || !params.isEditable || rows.length === 0) return false;
+  if (!params || rows.length === 0) return false;
 
   const cellId = params.id;
   const cellField = params.field;
-  const cellValue = params.formattedValue;
+  const cellValue = params.value;
   return cellValue !== rows[cellId][cellField];
 };
 
@@ -142,7 +141,7 @@ export default function DataSheet() {
     if (!currentEditedRows[model.id]) {
       currentEditedRows[model.id] = {};
     }
-    currentEditedRows[model.id][model.field] = model.formattedValue;
+    currentEditedRows[model.id][model.field] = model.value;
     setEditedRows(currentEditedRows);
     console.log(currentEditedRows);
   };
@@ -157,6 +156,8 @@ export default function DataSheet() {
         disableSelectionOnClick
         editRowsModel={editRowsModel}
         getCellClassName={(params) => {
+          if (!params.isEditable) return '';
+
           return isCellEdited(params, rows) ? 'edited' : '';
         }}
         onEditRowsModelChange={handleEditRowsModelChange}
