@@ -22439,8 +22439,9 @@ function DataSheet(_ref) {
       setEditRowsModel = _React$useState8[1];
 
   e__default.useEffect(function () {
-    var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(function (clickety) {
-      _this.forceUpdate();
+    var self = _this;
+    var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(function (clickEvt) {
+      self.forceUpdate();
     });
     return function () {
       return subscriber.unsubscribe();
