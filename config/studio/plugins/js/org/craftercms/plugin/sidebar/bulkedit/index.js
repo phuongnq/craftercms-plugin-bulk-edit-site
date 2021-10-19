@@ -22436,12 +22436,13 @@ function DataSheet(_ref) {
       editRowsModel = _React$useState8[0],
       setEditRowsModel = _React$useState8[1];
 
-  e__default.useReducer(function (bool) {
+  var forceUpdate = e__default.useReducer(function (bool) {
     return !bool;
   })[1];
   e__default.useEffect(function () {
     var subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(function (clickEvt) {
       setEditedRows({});
+      forceUpdate();
     });
     return function () {
       return subscriber.unsubscribe();
