@@ -31,7 +31,7 @@ import {
 import FindReplaceIcon from '@mui/icons-material/FindReplace';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import SaveIcon from '@mui/icons-material/Save';
-import UndoIcon from '@mui/icons-material/Undo';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
 
 import ContentTypeSelect from './ContentTypeSelect';
 import FindAndReplace from './FindAndReplace';
@@ -70,6 +70,8 @@ export default function Editor(props) {
   const [openAlert, setOpenAlert] = React.useState(false);
   const [editedRows, setEditedRows] = React.useState({});
 
+  const cancelBtnRef = React.useRef(null);
+
   React.useEffect(() => {
     editContentSub.subscribe((value) => {
       setEditedRows(value);
@@ -98,6 +100,10 @@ export default function Editor(props) {
     });
 
     setOpenAlert(true);
+  };
+
+  const handleCancelAllChangeClick = () => {
+
   };
 
   const handleDrawerToggle = () => {
@@ -136,11 +142,11 @@ export default function Editor(props) {
           </ListItemIcon>
           <ListItemText primary="Save Change" />
         </ListItem>
-        <ListItem button key="Undo">
+        <ListItem button key="Cancel All Change" onClick={handleCancelAllChangeClick} ref={cancelBtnRef}>
           <ListItemIcon>
-            <UndoIcon />
+            <ClearAllIcon />
           </ListItemIcon>
-          <ListItemText primary="Undo" />
+          <ListItemText primary="Cancel All Change" />
         </ListItem>
       </List>
       <Divider />
@@ -184,7 +190,7 @@ export default function Editor(props) {
         </Drawer>
       </Box>
       <Box component="main" sx={{ flexGrow: 1 }}>
-        <DataSheet />
+        <DataSheet cancelBtnRef={cancelBtnRef} />
         <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
       </Box>
       <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>

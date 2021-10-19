@@ -16,6 +16,7 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
+import { fromEvent } from 'rxjs';
 
 import { contentTypeSub, editContentSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
@@ -101,7 +102,7 @@ const isCellEdited = (params, rows) => {
   return cellValue !== rows[cellId][cellField];
 };
 
-export default function DataSheet() {
+export default function DataSheet({ cancelBtnRef }) {
   const classes = useStyles();
 
   const [columns, setColumns] = React.useState([]);
@@ -110,8 +111,16 @@ export default function DataSheet() {
   const [editRowsModel, setEditRowsModel] = React.useState({});
 
   React.useEffect(() => {
+    const clicky = fromEvent(cancelBtnRef.current, 'click').subscribe(clickety =>
+      console.log({ clickety })
+    );
+
+    return () => clicky.unsubscribe();
+  }, []);
+
+  React.useEffect(() => {
     (async () => {
-      contentTypeSub.subscribe(async (value) => {
+      const sub = contentTypeSub.subscribe(async (value) => {
         const config = await StudioAPI.getContentTypeConfig(value);
         const headerList = getHeadersFromConfig(config);
         setColumns(getColumns(headerList));
@@ -130,6 +139,8 @@ export default function DataSheet() {
 
         setRows(dtRows);
       });
+
+      return sub.unsubscribe();
     })();
   }, []);
 
