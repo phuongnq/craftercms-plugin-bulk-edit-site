@@ -20,6 +20,7 @@ import HttpHelper from '../helpers/http';
 const API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-types.json';
 const API_GET_CONFIGURATION = '/studio/api/2/configuration/get_configuration';
 const API_SEARCH = '/studio/api/2/search/search.json';
+const API_GET_CONTENT = '/studio/api/1/services/api/1/content/get-content.json';
 
 const StudioAPI = {
   origin() {
@@ -78,12 +79,22 @@ const StudioAPI = {
     };
     const res = await HttpHelper.post(url, body);
 
-    console.log(res);
     if (res.status === 200) {
-      return res.response;
+      return res.response.result.items;
     }
 
     return [];
+  },
+  async getContent(path) {
+    const url = `${StudioAPI.origin()}${API_GET_CONTENT}?edit=false&site_id=${StudioAPI.siteId()}&path=${path}`;
+    const res = await HttpHelper.get(url);
+
+    console.log(res.response);
+    if (res.status === 200) {
+      return res.response.content;
+    }
+
+    return null;
   }
 };
 

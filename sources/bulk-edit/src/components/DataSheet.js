@@ -19,20 +19,14 @@ import { DataGrid } from '@mui/x-data-grid';
 import { contentTypeSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
 
-const rows = [
-  { id: 1, 'internal-name': 'Test 1', 'title_t': 'Test 1' },
-  { id: 2, 'internal-name': 'Test 2', 'title_t': 'Test 2' },
-  { id: 3, 'internal-name': 'Test 3', 'title_t': 'Test 3' },
-];
-
-const getColumns = (data) => {
+const getFieldsFromConfig = (data) => {
   const xml = (new DOMParser()).parseFromString(data, 'text/xml');
   const fields = xml.getElementsByTagName('field');
   const columns = [];
   for (let i = 0; i < fields.length; i += 1) {
     const field = fields[i];
     const fieldType = field.getElementsByTagName('type')[0].textContent;
-    if (fieldType !== 'input') continue;
+    if (fieldType !== 'input' && fieldType !== 'rte') continue;
 
     const fieldId = field.getElementsByTagName('id')[0].textContent;
     columns.push(fieldId);
@@ -51,7 +45,7 @@ const getSheetColumns = (fields) => {
     editable: false,
   }];
 
-  for (let i = 0; i <fields.length; i +=1 ) {
+  for (let i = 0; i < fields.length; i +=1 ) {
     const field = fields[i];
     columns.push({
       field: field,
@@ -66,22 +60,47 @@ const getSheetColumns = (fields) => {
   return columns;
 };
 
+const getRowFromContent = (index, content, columns) => {
+  const xml = (new DOMParser()).parseFromString(content, 'text/xml');
+  console.log(xml);
+  const row = { id: index };
+  for (let i = 0; i < columns.length; i += 1) {
+    const column = columns[i];
+    const field = xml.getElementsByTagName(column.field)[0];
+    console.log(field);
+    row[column.field] = field ? field.textContent : '';
+  };
+
+  return row;
+};
+
 export default function DataSheet() {
-  const [descriptor, setDescriptor] = React.useState('');
   const [columns, setColumns] = React.useState([]);
-  const [contentType, setContentType] = React.useState('');
+  const [rows, setRows] = React.useState([]);
+
   React.useEffect(() => {
     (async () => {
       contentTypeSub.subscribe(async (value) => {
         const config = await StudioAPI.getContentTypeConfig(value);
-        const ctColumns = getColumns(config);
+        const ctColumns = getFieldsFromConfig(config);
         setColumns(getSheetColumns(ctColumns));
 
-        const data = await StudioAPI.searchByContentType(value);
-        console.log(data);
+        const items = await StudioAPI.searchByContentType(value);
+        const paths = items.map(item => item.path);
+
+        const dtRows = [];
+        paths.forEach(async (path, index) => {
+          console.log(path);
+          const content = await StudioAPI.getContent(path);
+          console.log(content);
+          const row = getRowFromContent(index, content, ctColumns);
+          dtRows.push(row);
+        });
+        setRows(dtRows);
       });
     })();
   }, []);
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid
