@@ -672,18 +672,19 @@ var StudioAPI = {
 
             case 3:
               res = _context4.sent;
+              console.log(res.response);
 
               if (!(res.status === 200)) {
-                _context4.next = 6;
+                _context4.next = 7;
                 break;
               }
 
               return _context4.abrupt("return", res.response.content);
 
-            case 6:
+            case 7:
               return _context4.abrupt("return", null);
 
-            case 7:
+            case 8:
             case "end":
               return _context4.stop();
           }
@@ -22412,19 +22413,21 @@ function DataSheet() {
                                 while (1) {
                                   switch (_context2.prev = _context2.next) {
                                     case 0:
-                                      _context2.next = 2;
+                                      console.log(path);
+                                      _context2.next = 3;
                                       return StudioAPI.getContent(path);
 
-                                    case 2:
+                                    case 3:
                                       content = _context2.sent;
-                                      _context2.next = 5;
+                                      console.log(content);
+                                      _context2.next = 7;
                                       return getRowFromContent(index, content, ctColumns);
 
-                                    case 5:
+                                    case 7:
                                       row = _context2.sent;
                                       dtRows.push(row);
 
-                                    case 7:
+                                    case 9:
                                     case "end":
                                       return _context2.stop();
                                   }
