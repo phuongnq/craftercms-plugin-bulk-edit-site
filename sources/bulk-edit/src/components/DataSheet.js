@@ -19,23 +19,23 @@ import { DataGrid } from '@mui/x-data-grid';
 import { contentTypeSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
 
-const getFieldsFromConfig = (data) => {
+const getHeadersFromConfig = (data) => {
   const xml = (new DOMParser()).parseFromString(data, 'text/xml');
   const fields = xml.getElementsByTagName('field');
-  const columns = [];
+  const headers = [];
   for (let i = 0; i < fields.length; i += 1) {
     const field = fields[i];
     const fieldType = field.getElementsByTagName('type')[0].textContent;
     if (fieldType !== 'input' && fieldType !== 'rte') continue;
 
     const fieldId = field.getElementsByTagName('id')[0].textContent;
-    columns.push(fieldId);
+    headers.push(fieldId);
   }
 
-  return columns;
+  return headers;
 };
 
-const getSheetColumns = (fields) => {
+const getColumns = (fields) => {
   const columns = [{
     field: 'id',
     headerName: 'ID',
@@ -60,15 +60,13 @@ const getSheetColumns = (fields) => {
   return columns;
 };
 
-const getRowFromContent = (index, content, columns) => {
+const getRowFromContent = (index, content, headers) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
-  console.log(xml);
-  const row = { id: index };
-  for (let i = 0; i < columns.length; i += 1) {
-    const column = columns[i];
-    const field = xml.getElementsByTagName(column.field)[0];
-    console.log(field);
-    row[column.field] = field ? field.textContent : '';
+  const row = { id: (index + 1) };
+  for (let i = 0; i < headers.length; i += 1) {
+    const column = headers[i];
+    const field = xml.getElementsByTagName(column)[0];
+    row[column] = field ? field.textContent : '';
   };
 
   return row;
@@ -82,20 +80,21 @@ export default function DataSheet() {
     (async () => {
       contentTypeSub.subscribe(async (value) => {
         const config = await StudioAPI.getContentTypeConfig(value);
-        const ctColumns = getFieldsFromConfig(config);
-        setColumns(getSheetColumns(ctColumns));
+        const headerList = getHeadersFromConfig(config);
+        setColumns(getColumns(headerList));
 
         const items = await StudioAPI.searchByContentType(value);
         const paths = items.map(item => item.path);
 
         const dtRows = [];
-        paths.forEach(async (path, index) => {
-          console.log(path);
+        for (let i = 0; i < paths.length; i += 1) {
+          const path = paths[i];
+
           const content = await StudioAPI.getContent(path);
-          console.log(content);
-          const row = getRowFromContent(index, content, ctColumns);
+          const row = getRowFromContent(i, content, headerList);
           dtRows.push(row);
-        });
+        }
+
         setRows(dtRows);
       });
     })();

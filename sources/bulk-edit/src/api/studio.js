@@ -89,7 +89,6 @@ const StudioAPI = {
     const url = `${StudioAPI.origin()}${API_GET_CONTENT}?edit=false&site_id=${StudioAPI.siteId()}&path=${path}`;
     const res = await HttpHelper.get(url);
 
-    console.log(res.response);
     if (res.status === 200) {
       return res.response.content;
     }
