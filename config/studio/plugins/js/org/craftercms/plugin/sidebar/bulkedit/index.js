@@ -22440,7 +22440,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       editRowsModel = _React$useState10[0],
       setEditRowsModel = _React$useState10[1];
 
-  e__default.useReducer(function (bool) {
+  var forceUpdate = e__default.useReducer(function (bool) {
     return !bool;
   })[1];
 
@@ -22449,6 +22449,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       cancelAllChanges: function cancelAllChanges(evt) {
         setEditedRows({});
         setEditRowsModel({});
+        forceUpdate();
       }
     };
   });
