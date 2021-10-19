@@ -709,6 +709,7 @@ var StudioAPI = {
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var contentTypeSub = new Subject('');
+var editContentSub = new Subject({});
 
 function ContentTypeSelect() {
   var _React$useState = e__default.useState(''),
@@ -22493,7 +22494,7 @@ function DataSheet() {
 
     currentEditedRows[key][model.field] = model.value;
     setEditedRows(currentEditedRows);
-    console.log(currentEditedRows);
+    editContentSub.next(currentEditedRows);
   };
 
   return /*#__PURE__*/e__default.createElement("div", {
@@ -22533,6 +22534,17 @@ function Editor(props) {
       openAlert = _React$useState6[0],
       setOpenAlert = _React$useState6[1];
 
+  var _React$useState7 = e__default.useState({}),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      editedRows = _React$useState8[0],
+      setEditedRows = _React$useState8[1];
+
+  e__default.useEffect(function () {
+    editContentSub.subscribe(function (value) {
+      setEditedRows(value);
+    });
+  }, []);
+
   var handleFindReplaceDialogClose = function handleFindReplaceDialogClose() {
     setFindReplaceDialogOpen(false);
   };
@@ -22542,6 +22554,7 @@ function Editor(props) {
   };
 
   var handleSaveChangeClick = function handleSaveChangeClick() {
+    console.log(editedRows);
     setOpenAlert(true);
   };
 
