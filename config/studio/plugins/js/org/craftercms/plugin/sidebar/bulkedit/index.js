@@ -22475,6 +22475,7 @@ function DataSheet() {
   var saveEditState = function saveEditState(model) {
     var currentEditedRows = editedRows;
     console.log(model);
+    console.log(rows);
     if (!isCellEdited(model, rows)) return;
 
     if (!currentEditedRows[model.id]) {
