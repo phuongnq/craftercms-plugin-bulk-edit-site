@@ -22461,12 +22461,10 @@ function DataSheet() {
   }, []);
 
   var isCellEdited = function isCellEdited(params) {
-    console.log(params);
     if (!params || !params.isEditable || rows.length === 0) return false;
     var cellId = params.id;
     var cellField = params.field;
     var cellValue = params.formattedValue;
-    console.log(rows);
     return cellValue !== rows[cellId][cellField];
   };
 
@@ -22477,7 +22475,6 @@ function DataSheet() {
     columns: columns,
     pageSize: 5,
     rowsPerPageOptions: [5],
-    checkboxSelection: true,
     disableSelectionOnClick: true,
     editRowsModel: editRowsModel,
     getCellClassName: function getCellClassName(params) {
