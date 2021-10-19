@@ -71,6 +71,7 @@ export default function Editor(props) {
   const [editedRows, setEditedRows] = React.useState({});
 
   const cancelBtnRef = React.useRef(null);
+  const dataSheetRef = React.useRef(null);
 
   React.useEffect(() => {
     editContentSub.subscribe((value) => {
@@ -103,7 +104,7 @@ export default function Editor(props) {
   };
 
   const handleCancelAllChangeClick = () => {
-
+    dataSheetRef.current.cancelAllChanges();
   };
 
   const handleDrawerToggle = () => {
@@ -142,7 +143,7 @@ export default function Editor(props) {
           </ListItemIcon>
           <ListItemText primary="Save Change" />
         </ListItem>
-        <ListItem button key="Cancel All Change" onClick={handleCancelAllChangeClick} ref={cancelBtnRef}>
+        <ListItem button key="Cancel All Change" onClick={handleCancelAllChangeClick}>
           <ListItemIcon>
             <ClearAllIcon />
           </ListItemIcon>
@@ -190,7 +191,7 @@ export default function Editor(props) {
         </Drawer>
       </Box>
       <Box component="main" sx={{ flexGrow: 1 }}>
-        <DataSheet cancelBtnRef={cancelBtnRef} />
+        <DataSheet ref={dataSheetRef} />
         <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
       </Box>
       <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>

@@ -102,28 +102,56 @@ const isCellEdited = (params, rows) => {
   return cellValue !== rows[cellId][cellField];
 };
 
-export default function DataSheet({ cancelBtnRef }) {
+const DataSheet = React.forwardRef((props, ref) => {
   const classes = useStyles();
 
   const [columns, setColumns] = React.useState([]);
+  const [selectedContentType, setSelectedContentType] = React.useState('');
   const [rows, setRows] = React.useState([]);
   const [editedRows, setEditedRows] = React.useState({});
   const [editRowsModel, setEditRowsModel] = React.useState({});
+  const [isCancelling, setIsCancelling] = React.useState(false);
 
   const forceUpdate = React.useReducer(bool => !bool)[1];
 
-  React.useEffect(() => {
-    const subscriber = fromEvent(cancelBtnRef.current, 'click').subscribe(clickEvt => {
-      forceUpdate();
-    });
+  const updateData = async () => {
+    console.log(rows);
+    const config = await StudioAPI.getContentTypeConfig(selectedContentType);
+    const headerList = getHeadersFromConfig(config);
+    setColumns(getColumns(headerList));
 
-    return () => subscriber.unsubscribe();
-  }, []);
+    const items = await StudioAPI.searchByContentType(selectedContentType);
+    const paths = items.map(item => item.path);
+
+    const dtRows = [];
+    for (let i = 0; i < paths.length; i += 1) {
+      const path = paths[i];
+
+      const content = await StudioAPI.getContent(path);
+      const row = getRowFromContent(i, path, content, headerList);
+      dtRows.push(row);
+    }
+
+    setRows(dtRows);
+  };
+
+  React.useImperativeHandle(ref, () => ({
+    cancelAllChanges: (evt) => {
+      setEditedRows({});
+      setEditRowsModel({});
+      forceUpdate();
+    },
+ }));
+
+ React.useEffect(() => {
+    console.log(rows);
+ }, [rows]);
 
   React.useEffect(() => {
     let subscriber;
     (async () => {
       subscriber = contentTypeSub.subscribe(async (value) => {
+        setSelectedContentType(value);
         const config = await StudioAPI.getContentTypeConfig(value);
         const headerList = getHeadersFromConfig(config);
         setColumns(getColumns(headerList));
@@ -181,7 +209,6 @@ export default function DataSheet({ cancelBtnRef }) {
         editRowsModel={editRowsModel}
         getCellClassName={(params) => {
           if (!params.isEditable) return '';
-
           return isCellEdited(params, rows) ? 'edited' : '';
         }}
         onEditRowsModelChange={handleEditRowsModelChange}
@@ -189,4 +216,6 @@ export default function DataSheet({ cancelBtnRef }) {
       />
     </div>
   );
-}
+});
+
+export default DataSheet;
