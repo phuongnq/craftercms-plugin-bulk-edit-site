@@ -22531,7 +22531,7 @@ function DataSheet(_ref) {
     return function () {
       return subscriber.unsubscribe();
     };
-  }, []);
+  }, [selectedContentType]);
   e__default.useEffect(function () {
     var subscriber;
 
