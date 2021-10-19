@@ -15,9 +15,21 @@
  */
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { makeStyles } from '@mui/styles';
 
 import { contentTypeSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
+
+const useStyles = makeStyles({
+  root: {
+    height: 400,
+    width: '100%',
+    '& .edited': {
+      backgroundColor: '#b9d5ff91',
+      color: '#1a3e72',
+    },
+  },
+});
 
 const getHeadersFromConfig = (data) => {
   const xml = (new DOMParser()).parseFromString(data, 'text/xml');
@@ -43,6 +55,7 @@ const getColumns = (fields) => {
     sortable: false,
     width: 90,
     editable: false,
+    hide: true,
   }];
 
   for (let i = 0; i < fields.length; i +=1 ) {
@@ -62,7 +75,7 @@ const getColumns = (fields) => {
 
 const getRowFromContent = (index, content, headers) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
-  const row = { id: (index + 1) };
+  const row = { id: index };
   for (let i = 0; i < headers.length; i += 1) {
     const column = headers[i];
     const field = xml.getElementsByTagName(column)[0];
@@ -72,9 +85,23 @@ const getRowFromContent = (index, content, headers) => {
   return row;
 };
 
+const isCellEdited = (params, rows) => {
+  console.log(params);
+  if (!params || !params.isEditable || rows.length === 0) return false;
+
+  const cellId = params.id;
+  const cellField = params.field;
+  const cellValue = params.formattedValue;
+  return cellValue !== rows[cellId][cellField];
+};
+
 export default function DataSheet() {
+  const classes = useStyles();
+
   const [columns, setColumns] = React.useState([]);
   const [rows, setRows] = React.useState([]);
+  const [editedRows, setEditedRows] = React.useState({});
+  const [editRowsModel, setEditRowsModel] = React.useState({});
 
   React.useEffect(() => {
     (async () => {
@@ -100,15 +127,40 @@ export default function DataSheet() {
     })();
   }, []);
 
+  const handleEditRowsModelChange = React.useCallback((model) => {
+    setEditRowsModel(model);
+  }, []);
+
+  const handleOnCellEditCommit = React.useCallback((model, event) => {
+    saveEditState(model);
+  }, []);
+
+  const saveEditState = (model) => {
+    const currentEditedRows = editedRows;
+    if (!isCellEdited(model, rows)) return;
+
+    if (!currentEditedRows[model.id]) {
+      currentEditedRows[model.id] = {};
+    }
+    currentEditedRows[model.id][model.field] = model.formattedValue;
+    setEditedRows(currentEditedRows);
+    console.log(currentEditedRows);
+  };
+
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div className={classes.root}>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
         disableSelectionOnClick
+        editRowsModel={editRowsModel}
+        getCellClassName={(params) => {
+          return isCellEdited(params, rows) ? 'edited' : '';
+        }}
+        onEditRowsModelChange={handleEditRowsModelChange}
+        onCellEditCommit={handleOnCellEditCommit}
       />
     </div>
   );

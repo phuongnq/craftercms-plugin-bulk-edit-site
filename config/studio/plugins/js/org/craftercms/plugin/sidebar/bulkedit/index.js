@@ -22360,6 +22360,7 @@ var getRowFromContent = function getRowFromContent(index, content, headers) {
 };
 
 var isCellEdited = function isCellEdited(params, rows) {
+  console.log(params);
   if (!params || !params.isEditable || rows.length === 0) return false;
   var cellId = params.id;
   var cellField = params.field;
@@ -22469,9 +22470,7 @@ function DataSheet() {
     setEditRowsModel(model);
   }, []);
   var handleOnCellEditCommit = e__default.useCallback(function (model, event) {
-    console.log(model);
     saveEditState(model);
-    console.log(event);
   }, []);
 
   var saveEditState = function saveEditState(model) {
