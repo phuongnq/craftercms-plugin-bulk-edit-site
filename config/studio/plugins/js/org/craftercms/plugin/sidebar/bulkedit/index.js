@@ -43,6 +43,21 @@ function _asyncToGenerator(fn) {
   };
 }
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
 function _extends$1() {
   _extends$1 = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -500,11 +515,19 @@ var HttpHelper = {
         resolve(response);
       });
     });
+  },
+  post: function post(url, body, headers) {
+    return new Promise(function (resolve, reject) {
+      CrafterCMSNext.util.ajax.post(url, body, headers).subscribe(function (response) {
+        resolve(response);
+      });
+    });
   }
 };
 
 var API_GET_CONTENT_TYPE = '/studio/api/1/services/api/1/content/get-content-types.json';
 var API_GET_CONFIGURATION = '/studio/api/2/configuration/get_configuration';
+var API_SEARCH = '/studio/api/2/search/search.json';
 var StudioAPI = {
   origin: function origin() {
     return window.location.origin;
@@ -590,6 +613,50 @@ var StudioAPI = {
           }
         }
       }, _callee2);
+    }))();
+  },
+  searchByContentType: function searchByContentType(ct) {
+    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      var _body;
+
+      var url, body, res;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              url = "".concat(StudioAPI.origin()).concat(API_SEARCH, "?siteId=").concat(StudioAPI.siteId());
+              body = (_body = {
+                query: '',
+                keywords: '',
+                offset: 0,
+                limit: 100,
+                sortBy: ''
+              }, _defineProperty(_body, "sortBy", '_score'), _defineProperty(_body, "sortOrder", 'desc'), _defineProperty(_body, "filters", {
+                'content-type': ct
+              }), _body);
+              _context3.next = 4;
+              return HttpHelper.post(url, body);
+
+            case 4:
+              res = _context3.sent;
+              console.log(res);
+
+              if (!(res.status === 200)) {
+                _context3.next = 8;
+                break;
+              }
+
+              return _context3.abrupt("return", res.response);
+
+            case 8:
+              return _context3.abrupt("return", []);
+
+            case 9:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
     }))();
   }
 };
@@ -22268,11 +22335,53 @@ function DataSheet() {
       columns = _React$useState4[0],
       setColumns = _React$useState4[1];
 
+  var _React$useState5 = e__default.useState(''),
+      _React$useState6 = _slicedToArray(_React$useState5, 2);
+      _React$useState6[0];
+      _React$useState6[1];
+
   e__default.useEffect(function () {
-    contentTypeSub.subscribe(function (value) {
-      var ctColumns = getColumns(value);
-      setColumns(getSheetColumns(ctColumns));
-    });
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              contentTypeSub.subscribe( /*#__PURE__*/function () {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
+                  var ctColumns, data;
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          ctColumns = getColumns(value);
+                          setColumns(getSheetColumns(ctColumns));
+                          _context.next = 4;
+                          return StudioAPI.searchByContentType(value);
+
+                        case 4:
+                          data = _context.sent;
+                          console.log(data);
+
+                        case 6:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+
+                return function (_x) {
+                  return _ref2.apply(this, arguments);
+                };
+              }());
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   }, []);
   return /*#__PURE__*/e__default.createElement("div", {
     style: {
