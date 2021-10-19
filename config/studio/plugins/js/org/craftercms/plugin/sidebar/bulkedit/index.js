@@ -672,19 +672,18 @@ var StudioAPI = {
 
             case 3:
               res = _context4.sent;
-              console.log(res.response);
 
               if (!(res.status === 200)) {
-                _context4.next = 7;
+                _context4.next = 6;
                 break;
               }
 
               return _context4.abrupt("return", res.response.content);
 
-            case 7:
+            case 6:
               return _context4.abrupt("return", null);
 
-            case 8:
+            case 7:
             case "end":
               return _context4.stop();
           }
