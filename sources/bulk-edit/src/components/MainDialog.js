@@ -28,6 +28,7 @@ import {
   ListItemText,
   Button,
 } from '@mui/material';
+import Draggable from 'react-draggable';
 import CloseIcon from '@mui/icons-material/Close';
 import AutoAwesomeMotionOutlinedIcon from '@mui/icons-material/AutoAwesomeMotionOutlined';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -67,6 +68,17 @@ const BootstrapDialogTitle = (props) => {
   );
 };
 
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#customized-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
+
 export default function MainDialog() {
   const [open, setOpen] = React.useState(false);
 
@@ -100,6 +112,7 @@ export default function MainDialog() {
         open={open}
         fullWidth={true}
         maxWidth={false}
+        PaperComponent={PaperComponent}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           Bulk Edit

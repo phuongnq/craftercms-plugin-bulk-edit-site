@@ -23,6 +23,7 @@ import {
   DialogContent,
   DialogTitle,
   Box,
+  Paper,
   styled
 } from '@mui/material';
 import Draggable from 'react-draggable';
@@ -83,7 +84,12 @@ export default function FindAndReplaceDialog({ isOpen, handleClose }) {
         open={isOpen}
         onClose={handleClose}
       >
-        <DialogTitle>Find and replace</DialogTitle>
+        <DialogTitle
+          style={{ cursor: 'move' }}
+          id="draggable-dialog-title"
+        >
+          Find and replace
+        </DialogTitle>
         <DialogContent>
         <Box
           component="form"
