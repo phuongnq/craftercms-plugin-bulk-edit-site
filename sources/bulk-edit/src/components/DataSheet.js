@@ -21,6 +21,9 @@ import { fromEvent } from 'rxjs';
 import { contentTypeSub, editContentSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
 
+const PAGE_SIZE = 100;
+const ROWS_PER_PAGE_OPTIONS = [100];
+
 const useStyles = makeStyles({
   root: {
     height: 400,
@@ -136,8 +139,7 @@ const DataSheet = React.forwardRef((props, ref) => {
   };
 
   React.useImperativeHandle(ref, () => ({
-    cancelAllChanges: (evt) => {
-      console.log(evt);
+    cancelAllChanges: () => {
       setEditedRows({});
       setEditRowsModel({});
       forceUpdate();
@@ -195,19 +197,24 @@ const DataSheet = React.forwardRef((props, ref) => {
     editContentSub.next(currentEditedRows);
   };
 
+  const onDataGridStateChange = (state) => {
+    console.log(state);
+  };
+
   return (
     <div className={classes.root}>
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={PAGE_SIZE}
+        rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
         disableSelectionOnClick
         editRowsModel={editRowsModel}
         getCellClassName={(params) => {
           if (!params.isEditable) return '';
           return isCellEdited(params, rows) ? 'edited' : '';
         }}
+        stateChange={onDataGridStateChange}
         onEditRowsModelChange={handleEditRowsModelChange}
         onCellEditCommit={handleOnCellEditCommit}
       />
