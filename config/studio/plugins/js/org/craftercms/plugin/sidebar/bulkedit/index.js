@@ -22442,13 +22442,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       editRowsModel = _React$useState10[0],
       setEditRowsModel = _React$useState10[1];
 
-  var apiRef = qa();
-  e__default.useEffect(function () {
-    console.log(apiRef);
-    return apiRef.current.subscribeEvent('stateChange', function (params) {
-      console.log(params);
-    });
-  }, [apiRef]);
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
@@ -22576,7 +22569,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       return isCellEdited(params, rows) ? 'edited' : '';
     },
     onEditRowsModelChange: handleEditRowsModelChange,
-    onCellEditCommit: handleOnCellEditCommit
+    onCellEditCommit: handleOnCellEditCommit,
+    onStateChange: function onStateChange(state) {
+      console.log(state);
+    }
   }));
 });
 
