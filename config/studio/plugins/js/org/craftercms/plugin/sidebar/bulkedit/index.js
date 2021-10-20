@@ -22569,8 +22569,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       setRefresh(1 - refresh);
     }
   }, "Click to refresh"), /*#__PURE__*/e__default.createElement(ds, {
-    refresh: refresh,
-    ref: dataGridRef,
+    key: refresh,
     rows: rows,
     columns: columns,
     pageSize: PAGE_SIZE,
