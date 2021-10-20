@@ -22562,12 +22562,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   };
 
   return /*#__PURE__*/e__default.createElement("div", {
-    className: classes.root
-  }, /*#__PURE__*/e__default.createElement("span", {
-    sx: {
-      display: 'hidden'
-    }
-  }, refresh), /*#__PURE__*/e__default.createElement(ds, {
+    className: classes.root,
+    refresh: refresh
+  }, /*#__PURE__*/e__default.createElement(ds, {
     ref: dataGridRef,
     rows: rows,
     columns: columns,
