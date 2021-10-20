@@ -162,6 +162,7 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const [columns, setColumns] = React.useState([]);
   const [rows, setRows] = React.useState([]);
+  const [sessionRows, setSessionRows] = React.useState([]);
   const [editedRows, setEditedRows] = React.useState({});
   const [editRowsModel, setEditRowsModel] = React.useState({});
   const [refresh, setRefresh] = React.useState(0);
@@ -194,7 +195,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       } = value;
       if (action === 'replace') {
         const newRows = updateAllRows(findText, replaceText, rows, columns);
-        setRows(newRows);
+        setSessionRows(newRows);
       }
     });
 
@@ -224,6 +225,7 @@ const DataSheet = React.forwardRef((props, ref) => {
         }
 
         setRows(dtRows);
+        setSessionRows(dtRows);
       });
     })();
 
@@ -256,7 +258,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     <div className={classes.root}>
       <DataGrid
         key={refresh}
-        rows={rows}
+        rows={sessionRows}
         columns={columns}
         pageSize={PAGE_SIZE}
         rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
