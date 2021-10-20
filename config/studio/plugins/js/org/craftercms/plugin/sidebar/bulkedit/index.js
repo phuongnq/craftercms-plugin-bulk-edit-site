@@ -745,6 +745,11 @@ var StudioAPI = {
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var contentTypeSub = new Subject('');
+var findReplaceSub = new Subject({
+  findText: '',
+  replaceText: '',
+  action: ''
+});
 
 function ContentTypeSelect() {
   var _React$useState = e__default.useState(''),
@@ -849,16 +854,29 @@ function FindAndReplaceDialog(_ref3) {
       replaceText = _React$useState4[0],
       setReplaceText = _React$useState4[1];
 
+  var _React$useState5 = e__default.useState(''),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      action = _React$useState6[0],
+      setAction = _React$useState6[1];
+
+  e__default.useEffect(function () {
+    findReplaceSub.next({
+      findText: findText,
+      replaceText: replaceText,
+      action: action
+    });
+  }, [findText, replaceText, action]);
+
   var isButtonsDisable = function isButtonsDisable(text) {
     return !text;
   };
 
   var handleFindClick = function handleFindClick() {
-    console.log('find');
+    setAction('find');
   };
 
   var handleReplaceAllClick = function handleReplaceAllClick() {
-    console.log('replace all');
+    setAction('replace');
   };
 
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
@@ -22474,30 +22492,25 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       columns = _React$useState2[0],
       setColumns = _React$useState2[1];
 
-  var _React$useState3 = e__default.useState(''),
-      _React$useState4 = _slicedToArray(_React$useState3, 2);
-      _React$useState4[0];
-      var setSelectedContentType = _React$useState4[1];
+  var _React$useState3 = e__default.useState([]),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      rows = _React$useState4[0],
+      setRows = _React$useState4[1];
 
-  var _React$useState5 = e__default.useState([]),
+  var _React$useState5 = e__default.useState({}),
       _React$useState6 = _slicedToArray(_React$useState5, 2),
-      rows = _React$useState6[0],
-      setRows = _React$useState6[1];
+      editedRows = _React$useState6[0],
+      setEditedRows = _React$useState6[1];
 
   var _React$useState7 = e__default.useState({}),
       _React$useState8 = _slicedToArray(_React$useState7, 2),
-      editedRows = _React$useState8[0],
-      setEditedRows = _React$useState8[1];
+      editRowsModel = _React$useState8[0],
+      setEditRowsModel = _React$useState8[1];
 
-  var _React$useState9 = e__default.useState({}),
+  var _React$useState9 = e__default.useState(0),
       _React$useState10 = _slicedToArray(_React$useState9, 2),
-      editRowsModel = _React$useState10[0],
-      setEditRowsModel = _React$useState10[1];
-
-  var _React$useState11 = e__default.useState(0),
-      _React$useState12 = _slicedToArray(_React$useState11, 2),
-      refresh = _React$useState12[0],
-      setRefresh = _React$useState12[1];
+      refresh = _React$useState10[0],
+      setRefresh = _React$useState10[1];
 
   e__default.useImperativeHandle(ref, function () {
     return {
@@ -22544,6 +22557,12 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     };
   });
   e__default.useEffect(function () {
+    var subscriber = findReplaceSub.subscribe(function (value) {
+      console.log(value);
+    });
+    return subscriber.unsubscribe();
+  }, []);
+  e__default.useEffect(function () {
     var subscriber;
 
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
@@ -22558,18 +22577,17 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                     while (1) {
                       switch (_context3.prev = _context3.next) {
                         case 0:
-                          setSelectedContentType(value);
-                          _context3.next = 3;
+                          _context3.next = 2;
                           return StudioAPI.getContentTypeConfig(value);
 
-                        case 3:
+                        case 2:
                           config = _context3.sent;
                           headerList = getHeadersFromConfig(config);
                           setColumns(getColumns(headerList));
-                          _context3.next = 8;
+                          _context3.next = 7;
                           return StudioAPI.searchByContentType(value);
 
-                        case 8:
+                        case 7:
                           items = _context3.sent;
                           paths = items.map(function (item) {
                             return item.path;
@@ -22577,30 +22595,30 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                           dtRows = [];
                           i = 0;
 
-                        case 12:
+                        case 11:
                           if (!(i < paths.length)) {
-                            _context3.next = 22;
+                            _context3.next = 21;
                             break;
                           }
 
                           path = paths[i];
-                          _context3.next = 16;
+                          _context3.next = 15;
                           return StudioAPI.getContent(path);
 
-                        case 16:
+                        case 15:
                           content = _context3.sent;
                           row = getRowFromContent(i, path, content, headerList);
                           dtRows.push(row);
 
-                        case 19:
+                        case 18:
                           i += 1;
-                          _context3.next = 12;
+                          _context3.next = 11;
                           break;
 
-                        case 22:
+                        case 21:
                           setRows(dtRows);
 
-                        case 23:
+                        case 22:
                         case "end":
                           return _context3.stop();
                       }
