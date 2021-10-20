@@ -103,7 +103,7 @@ const GridCellExpand = React.memo(function GridCellExpand(props) {
             elevation={1}
             style={{ minHeight: wrapper.current.offsetHeight - 3 }}
           >
-            <Typography variant="body2" style={{ padding: 8 }}>
+            <Typography variant="body2" style={{ padding: 16 }}>
               {value}
             </Typography>
           </Paper>

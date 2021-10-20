@@ -70,7 +70,7 @@ const getColumns = (fields) => {
     headerName: 'Path',
     description: 'Path',
     sortable: false,
-    width: 200,
+    width: 250,
     editable: false,
     renderCell: CellExpand,
   }];
@@ -83,7 +83,7 @@ const getColumns = (fields) => {
       headerName: fieldId,
       description: fieldId,
       sortable: false,
-      width: 200,
+      width: 250,
       editable: true,
       renderCell: CellExpand,
     };
