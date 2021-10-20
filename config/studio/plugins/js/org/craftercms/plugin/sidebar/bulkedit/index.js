@@ -22664,7 +22664,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       return isCellEdited(params, rows) ? 'edited' : '';
     },
     onEditRowsModelChange: handleEditRowsModelChange,
-    onCellEditCommit: handleOnCellEditCommit
+    onCellEditCommit: handleOnCellEditCommit,
+    onStateChange: function onStateChange(state) {
+      console.log(state.editRows);
+    }
   }));
 });
 
