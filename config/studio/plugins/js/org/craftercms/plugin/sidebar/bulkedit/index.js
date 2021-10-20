@@ -24225,36 +24225,6 @@ var getRowFromContent = function getRowFromContent(index, path, content, headers
   return row;
 };
 
-var updateAllRows = function updateAllRows(text, replaceText, rows, columns) {
-  var newRows = [];
-
-  for (var i = 0; i < rows.length; i += 1) {
-    var newRow = updateRow(text, replaceText, rows[i], columns);
-    newRows.push(newRow);
-  }
-
-  return newRows;
-};
-
-var updateRow = function updateRow(text, replaceText, currentRow, columns) {
-  var newRow = {};
-  var keys = Object.keys(currentRow);
-
-  for (var i = 0; i < keys.length; i += 1) {
-    var fieldName = keys[i];
-    var fieldValue = currentRow[fieldName];
-    var column = getColumn(fieldName, columns);
-
-    if (column.editable) {
-      fieldValue = fieldValue.replaceAll(text, replaceText);
-    }
-
-    newRow[fieldName] = fieldValue;
-  }
-
-  return newRow;
-};
-
 var isCellEdited = function isCellEdited(params, rows) {
   if (!params || rows.length === 0) return false;
   var cellId = params.id;
@@ -24393,6 +24363,47 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       }
     };
   });
+
+  var updateAllRows = function updateAllRows(text, replaceText, rows, columns) {
+    var newRows = [];
+
+    for (var i = 0; i < rows.length; i += 1) {
+      var newRow = updateRow(text, replaceText, rows[i], columns);
+      newRows.push(newRow);
+    }
+
+    return newRows;
+  };
+
+  var updateRow = function updateRow(text, replaceText, currentRow, columns) {
+    var newRow = {};
+    var keys = Object.keys(currentRow);
+
+    for (var i = 0; i < keys.length; i += 1) {
+      var fieldName = keys[i];
+      var fieldValue = currentRow[fieldName];
+      var newFieldValue = fieldValue;
+      var column = getColumn(fieldName, columns);
+
+      if (column.editable) {
+        newFieldValue = fieldValue.replaceAll(text, replaceText);
+      }
+
+      if (newFieldValue !== fieldValue) {
+        var model = {
+          id: currentRow.id,
+          field: fieldName,
+          value: newFieldValue
+        };
+        saveEditState(model);
+      }
+
+      newRow[fieldName] = newFieldValue;
+    }
+
+    return newRow;
+  };
+
   e__default.useEffect(function () {
     var subscriber = findReplaceSub.subscribe(function (value) {
       var findText = value.findText,
