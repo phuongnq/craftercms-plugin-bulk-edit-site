@@ -27,6 +27,8 @@ import {
   styled
 } from '@mui/material';
 
+import { findReplaceSub } from '../services/subscribe';
+
 const StyledTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
@@ -39,17 +41,26 @@ const StyledButton = styled(Button)(({ theme }) => ({
 export default function FindAndReplaceDialog({ isOpen, handleClose }) {
   const [findText, setFindText] = React.useState('');
   const [replaceText, setReplaceText] = React.useState('');
+  const [action, setAction] = React.useState('');
+
+  React.useEffect(() => {
+    findReplaceSub.next({
+      findText,
+      replaceText,
+      action,
+    })
+  }, [findText, replaceText, action]);
 
   const isButtonsDisable = (text) => {
     return !text;
   };
 
   const handleFindClick = () => {
-    console.log('find');
+    setAction('find');
   };
 
   const handleReplaceAllClick = () => {
-    console.log('replace all');
+    setAction('replace');
   };
 
   return (

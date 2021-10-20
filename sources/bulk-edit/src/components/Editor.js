@@ -37,9 +37,6 @@ import ContentTypeSelect from './ContentTypeSelect';
 import FindAndReplace from './FindAndReplace';
 import DataSheet from './DataSheet';
 
-import { editContentSub } from '../services/subscribe';
-import StudioAPI from '../api/studio';
-
 const drawerWidth = 240;
 
 export default function Editor(props) {

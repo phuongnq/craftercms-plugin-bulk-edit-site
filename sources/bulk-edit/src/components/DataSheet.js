@@ -14,11 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import * as React from 'react';
-import { Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
 
-import { contentTypeSub, editContentSub } from '../services/subscribe';
+import { contentTypeSub, findReplaceSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
 
 const PAGE_SIZE = 100;
@@ -130,7 +129,6 @@ const DataSheet = React.forwardRef((props, ref) => {
   const classes = useStyles();
 
   const [columns, setColumns] = React.useState([]);
-  const [selectedContentType, setSelectedContentType] = React.useState('');
   const [rows, setRows] = React.useState([]);
   const [editedRows, setEditedRows] = React.useState({});
   const [editRowsModel, setEditRowsModel] = React.useState({});
@@ -153,13 +151,20 @@ const DataSheet = React.forwardRef((props, ref) => {
         }
       });
     },
- }));
+  }));
+
+  React.useEffect(() => {
+    const subscriber = findReplaceSub.subscribe((value) => {
+      console.log(value);
+    });
+
+    return subscriber.unsubscribe();
+  }, []);
 
   React.useEffect(() => {
     let subscriber;
     (async () => {
       subscriber = contentTypeSub.subscribe(async (value) => {
-        setSelectedContentType(value);
         const config = await StudioAPI.getContentTypeConfig(value);
         const headerList = getHeadersFromConfig(config);
         setColumns(getColumns(headerList));
@@ -203,7 +208,6 @@ const DataSheet = React.forwardRef((props, ref) => {
     }
     currentEditedRows[key][model.field] = model.value;
     setEditedRows(currentEditedRows);
-    editContentSub.next(currentEditedRows);
   };
 
   return (

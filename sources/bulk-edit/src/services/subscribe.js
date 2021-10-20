@@ -17,9 +17,13 @@
 import { Subject } from 'rxjs';
 
 const contentTypeSub = new Subject('');
-const editContentSub = new Subject({});
+const findReplaceSub = new Subject({
+  findText: '',
+  replaceText: '',
+  action: '',
+});
 
 export {
   contentTypeSub,
-  editContentSub,
+  findReplaceSub,
 };
