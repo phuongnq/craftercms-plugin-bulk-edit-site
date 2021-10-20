@@ -22442,11 +22442,16 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       editRowsModel = _React$useState10[0],
       setEditRowsModel = _React$useState10[1];
 
+  var _React$useState11 = e__default.useState(0),
+      _React$useState12 = _slicedToArray(_React$useState11, 2),
+      refresh = _React$useState12[0],
+      setRefresh = _React$useState12[1];
+
   var dataGridRef = /*#__PURE__*/e__default.createRef();
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
-        console.log(dataGridRef.current.state);
+        setRefresh(1 - refresh);
       }
     };
   });
@@ -22558,7 +22563,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root
-  }, /*#__PURE__*/e__default.createElement(ds, {
+  }, /*#__PURE__*/e__default.createElement("span", {
+    sx: {
+      display: 'hidden'
+    }
+  }, refresh), /*#__PURE__*/e__default.createElement(ds, {
     ref: dataGridRef,
     rows: rows,
     columns: columns,
