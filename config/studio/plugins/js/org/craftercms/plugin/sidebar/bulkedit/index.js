@@ -24291,7 +24291,10 @@ var getHeadersFromConfig = function getHeadersFromConfig(data) {
     var fieldType = field.getElementsByTagName('type')[0].textContent;
     if (fieldType !== 'input' && fieldType !== 'rte') continue;
     var fieldId = field.getElementsByTagName('id')[0].textContent;
-    headers.push(fieldId);
+    headers.push({
+      fieldId: fieldId,
+      fieldType: fieldType
+    });
   }
 
   return headers;
@@ -24303,7 +24306,7 @@ var getColumns = function getColumns(fields) {
     headerName: 'ID',
     description: 'ID',
     sortable: false,
-    width: 90,
+    width: 0,
     editable: false,
     hide: true
   }, {
@@ -24311,22 +24314,30 @@ var getColumns = function getColumns(fields) {
     headerName: 'Path',
     description: 'Path',
     sortable: false,
-    width: 160,
+    width: 200,
     editable: false,
     renderCell: renderCellExpand
   }];
 
   for (var i = 0; i < fields.length; i += 1) {
     var field = fields[i];
-    columns.push({
-      field: field,
-      headerName: field,
-      description: field,
+    var fieldId = field.fieldId,
+        fieldType = field.fieldType;
+    var column = {
+      field: fieldId,
+      headerName: fieldId,
+      description: fieldId,
       sortable: false,
-      width: 160,
+      width: 200,
       editable: true,
       renderCell: renderCellExpand
-    });
+    };
+
+    if (fieldType === 'rte') {
+      column.renderCell = renderCellExpand;
+    }
+
+    columns.push(column);
   }
 
   return columns;
