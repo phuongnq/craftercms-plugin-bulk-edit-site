@@ -113,7 +113,7 @@ const isCellEdited = (params, rows) => {
 };
 
 const isCellFound = (text, params) => {
-  if (!params || rows.length === 0) return false;
+  if (!text || !params) return false;
 
   const cellValue = params.value;
   return cellValue.indexOf(text) >= 0;
