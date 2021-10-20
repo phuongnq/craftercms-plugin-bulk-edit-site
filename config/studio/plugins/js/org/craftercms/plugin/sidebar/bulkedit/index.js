@@ -22560,7 +22560,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     var subscriber = findReplaceSub.subscribe(function (value) {
       console.log(value);
     });
-    return subscriber.unsubscribe();
+    return function () {
+      subscriber.unsubscribe();
+    };
   }, []);
   e__default.useEffect(function () {
     var subscriber;
