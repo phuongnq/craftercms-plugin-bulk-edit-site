@@ -14,9 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import * as React from 'react';
+import { Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
-import { fromEvent } from 'rxjs';
 
 import { contentTypeSub, editContentSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
@@ -113,37 +113,14 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [rows, setRows] = React.useState([]);
   const [editedRows, setEditedRows] = React.useState({});
   const [editRowsModel, setEditRowsModel] = React.useState({});
-  const [isCancelling, setIsCancelling] = React.useState(false);
+  const [refresh, setRefresh] = React.useState(0);
 
-  const forceUpdate = React.useReducer(bool => !bool)[1];
-
-  const updateData = async () => {
-    console.log(rows);
-    const config = await StudioAPI.getContentTypeConfig(selectedContentType);
-    const headerList = getHeadersFromConfig(config);
-    setColumns(getColumns(headerList));
-
-    const items = await StudioAPI.searchByContentType(selectedContentType);
-    const paths = items.map(item => item.path);
-
-    const dtRows = [];
-    for (let i = 0; i < paths.length; i += 1) {
-      const path = paths[i];
-
-      const content = await StudioAPI.getContent(path);
-      const row = getRowFromContent(i, path, content, headerList);
-      dtRows.push(row);
-    }
-
-    setRows(dtRows);
-  };
+  const dataGridRef = React.createRef();
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
-      setEditedRows({});
-      setEditRowsModel({});
-      forceUpdate();
-    },
+      setRefresh(1 - refresh);
+    }
  }));
 
   React.useEffect(() => {
@@ -182,6 +159,7 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleOnCellEditCommit = (model, event) => {
     saveEditState(model);
+    console.log(dataGridRef.current.state);
   };
 
   const saveEditState = (model) => {
@@ -197,13 +175,11 @@ const DataSheet = React.forwardRef((props, ref) => {
     editContentSub.next(currentEditedRows);
   };
 
-  const onDataGridStateChange = (state) => {
-    console.log(state);
-  };
-
   return (
-    <div className={classes.root}>
+    <div className={classes.root} refresh={refresh}>
+      <Button onClick={() => { setRefresh(1 - refresh) }} />
       <DataGrid
+        ref={dataGridRef}
         rows={rows}
         columns={columns}
         pageSize={PAGE_SIZE}
@@ -214,7 +190,6 @@ const DataSheet = React.forwardRef((props, ref) => {
           if (!params.isEditable) return '';
           return isCellEdited(params, rows) ? 'edited' : '';
         }}
-        stateChange={onDataGridStateChange}
         onEditRowsModelChange={handleEditRowsModelChange}
         onCellEditCommit={handleOnCellEditCommit}
       />
