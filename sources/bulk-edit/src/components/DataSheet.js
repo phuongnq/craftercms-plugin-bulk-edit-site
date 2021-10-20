@@ -83,6 +83,10 @@ const getColumns = (fields) => {
   return columns;
 };
 
+const getColumn = (fieldName, columns) => {
+  return columns.find((cl) => cl.field === fieldName);
+};
+
 const getRowFromContent = (index, path, content, headers) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
   const row = { id: index, path };
@@ -93,6 +97,34 @@ const getRowFromContent = (index, path, content, headers) => {
   };
 
   return row;
+};
+
+const updateAllRows = (text, replaceText, rows, columns) => {
+  const newRows = [];
+  for (let i = 0; i < rows.length; i +=1 ) {
+    const newRow = updateRow(text, replaceText, currentRow, columns);
+    newRows.push(newRow);
+  }
+
+  return newRows;
+};
+
+const updateRow = (text, replaceText, currentRow, columns) => {
+  const newRow = {};
+  const keys = Object.keys(currentRow);
+
+  for (let i = 0; i < keys; i +=1 ) {
+    const fieldName = keys[i];
+    let fieldValue = currentRow[fieldName];
+    const column = getColumn(fieldName, columns);
+    if (column.editable) {
+      fieldValue = fieldValue.replaceAll(text, replaceText);
+    }
+
+    newRow[fieldName] = fieldValue;
+  }
+
+  return newRow;
 };
 
 const isCellEdited = (params, rows) => {
@@ -156,9 +188,21 @@ const DataSheet = React.forwardRef((props, ref) => {
   React.useEffect(() => {
     const subscriber = findReplaceSub.subscribe((value) => {
       console.log(value);
+      const {
+        findText,
+        replaceText,
+        action
+      } = value;
+      if (action === 'replace') {
+        const newRows = updateAllRows(findText, replaceText, rows, columns);
+        console.log(newRows);
+        setRows(newRows);
+      }
     });
 
-    return subscriber.unsubscribe();
+    return (() => {
+      subscriber.unsubscribe();
+    });
   }, []);
 
   React.useEffect(() => {
