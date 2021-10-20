@@ -42,7 +42,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 function PaperComponent(props) {
   return (
     <Draggable
-      handle="#draggable-dialog-title"
+      handle="#draggable-findnreplace-dialog-title"
       cancel={'[class*="MuiDialogContent-root"]'}
     >
       <Paper {...props} />
@@ -80,14 +80,14 @@ export default function FindAndReplaceDialog({ isOpen, handleClose }) {
     <div>
       <Dialog
         maxWidth="md"
-        aria-labelledby="draggable-dialog-title"
+        aria-labelledby="draggable-findnreplace-dialog-title"
         PaperComponent={PaperComponent}
         open={isOpen}
         onClose={handleClose}
       >
         <DialogTitle
           style={{ cursor: 'move' }}
-          id="draggable-dialog-title"
+          id="draggable-findnreplace-dialog-title"
         >
           Find and replace
         </DialogTitle>
