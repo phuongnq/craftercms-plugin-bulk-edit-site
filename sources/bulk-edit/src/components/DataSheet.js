@@ -102,7 +102,7 @@ const getRowFromContent = (index, path, content, headers) => {
 const updateAllRows = (text, replaceText, rows, columns) => {
   const newRows = [];
   for (let i = 0; i < rows.length; i +=1 ) {
-    const newRow = updateRow(text, replaceText, currentRow, columns);
+    const newRow = updateRow(text, replaceText, rows[i], columns);
     newRows.push(newRow);
   }
 
@@ -113,7 +113,7 @@ const updateRow = (text, replaceText, currentRow, columns) => {
   const newRow = {};
   const keys = Object.keys(currentRow);
 
-  for (let i = 0; i < keys; i +=1 ) {
+  for (let i = 0; i < keys.length; i +=1 ) {
     const fieldName = keys[i];
     let fieldValue = currentRow[fieldName];
     const column = getColumn(fieldName, columns);
@@ -187,7 +187,6 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   React.useEffect(() => {
     const subscriber = findReplaceSub.subscribe((value) => {
-      console.log(value);
       const {
         findText,
         replaceText,
@@ -195,7 +194,6 @@ const DataSheet = React.forwardRef((props, ref) => {
       } = value;
       if (action === 'replace') {
         const newRows = updateAllRows(findText, replaceText, rows, columns);
-        console.log(newRows);
         setRows(newRows);
       }
     });
@@ -203,7 +201,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     return (() => {
       subscriber.unsubscribe();
     });
-  }, []);
+  }, [rows]);
 
   React.useEffect(() => {
     let subscriber;

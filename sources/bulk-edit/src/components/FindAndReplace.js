@@ -21,11 +21,11 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Box,
   styled
 } from '@mui/material';
+import Draggable from 'react-draggable';
 
 import { findReplaceSub } from '../services/subscribe';
 
@@ -37,6 +37,17 @@ const StyledButton = styled(Button)(({ theme }) => ({
   margin: '5px',
   float: 'right'
 }));
+
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
 
 export default function FindAndReplaceDialog({ isOpen, handleClose }) {
   const [findText, setFindText] = React.useState('');
@@ -61,11 +72,17 @@ export default function FindAndReplaceDialog({ isOpen, handleClose }) {
 
   const handleReplaceAllClick = () => {
     setAction('replace');
+    handleClose();
   };
 
   return (
     <div>
-      <Dialog maxWidth="md" open={isOpen} onClose={handleClose}>
+      <Dialog
+        maxWidth="md"
+        PaperComponent={PaperComponent}
+        open={isOpen}
+        onClose={handleClose}
+      >
         <DialogTitle>Find and replace</DialogTitle>
         <DialogContent>
         <Box
