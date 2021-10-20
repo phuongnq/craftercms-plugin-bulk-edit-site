@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+	<content-type>/page/entry</content-type>
+	<display-template>/templates/web/entry.ftl</display-template>
+	<no-template-required/>
+	<merge-strategy>inherit-levels</merge-strategy>
+	<objectGroupId>7d59</objectGroupId>
+	<objectId>7d5988d9-f678-cd5c-5580-d69293972987</objectId>
+	<internal-name>Test 1 file</internal-name>
+	<title_t>Test 1 Title</title_t>
+	<file-name>index.xml</file-name>
+	<folder-name>test1</folder-name>
+	<placeInNav>false</placeInNav>
+	<orderDefault_f>-1</orderDefault_f>
+	<disabled>false</disabled>
+	<body_html>&lt;p&gt;Body here&lt;/p&gt;</body_html>
+	<createdDate>2021-10-20T02:42:08.575Z</createdDate>
+	<createdDate_dt>2021-10-20T02:42:08.575Z</createdDate_dt>
+	<lastModifiedDate>2021-10-20T02:42:08.575Z</lastModifiedDate>
+	<lastModifiedDate_dt>2021-10-20T02:42:08.575Z</lastModifiedDate_dt>
+</page>
