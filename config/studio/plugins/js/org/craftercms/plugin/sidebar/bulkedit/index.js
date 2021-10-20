@@ -22447,7 +22447,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       refresh = _React$useState12[0],
       setRefresh = _React$useState12[1];
 
-  var dataGridRef = /*#__PURE__*/e__default.createRef();
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
@@ -22544,7 +22543,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
   var handleOnCellEditCommit = function handleOnCellEditCommit(model, event) {
     saveEditState(model);
-    console.log(dataGridRef.current.state);
   };
 
   var saveEditState = function saveEditState(model) {
