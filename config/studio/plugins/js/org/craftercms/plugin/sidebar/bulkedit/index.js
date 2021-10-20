@@ -22451,7 +22451,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     return {
       cancelAllChanges: function cancelAllChanges() {
         setRefresh(1 - refresh);
-      }
+      },
+      saveAllChanges: function saveAllChanges() {}
     };
   });
   e__default.useEffect(function () {
@@ -22560,13 +22561,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   };
 
   return /*#__PURE__*/e__default.createElement("div", {
-    className: classes.root,
-    refresh: refresh
-  }, /*#__PURE__*/e__default.createElement("span", null, refresh), /*#__PURE__*/e__default.createElement(Button$1, {
-    onClick: function onClick() {
-      setRefresh(1 - refresh);
-    }
-  }, "Click to refresh"), /*#__PURE__*/e__default.createElement(ds, {
+    className: classes.root
+  }, /*#__PURE__*/e__default.createElement(ds, {
     key: refresh,
     rows: rows,
     columns: columns,
