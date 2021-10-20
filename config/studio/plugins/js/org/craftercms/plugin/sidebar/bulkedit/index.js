@@ -22446,7 +22446,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
-        console.log(dataGridRef.current);
+        console.log(dataGridRef.current.state);
       }
     };
   });
@@ -22559,7 +22559,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     className: classes.root
   }, /*#__PURE__*/e__default.createElement(ds, {
     ref: dataGridRef,
-    loading: true,
     rows: rows,
     columns: columns,
     pageSize: PAGE_SIZE,
