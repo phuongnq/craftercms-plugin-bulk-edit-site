@@ -50,7 +50,7 @@ const getHeadersFromConfig = (data) => {
     if (fieldType !== 'input' && fieldType !== 'rte') continue;
 
     const fieldId = field.getElementsByTagName('id')[0].textContent;
-    headers.push(fieldId);
+    headers.push({ fieldId, fieldType });
   }
 
   return headers;
@@ -62,7 +62,7 @@ const getColumns = (fields) => {
     headerName: 'ID',
     description: 'ID',
     sortable: false,
-    width: 90,
+    width: 0,
     editable: false,
     hide: true,
   }, {
@@ -70,22 +70,27 @@ const getColumns = (fields) => {
     headerName: 'Path',
     description: 'Path',
     sortable: false,
-    width: 160,
+    width: 200,
     editable: false,
     renderCell: CellExpand,
   }];
 
   for (let i = 0; i < fields.length; i +=1 ) {
     const field = fields[i];
-    columns.push({
-      field: field,
-      headerName: field,
-      description: field,
+    const { fieldId, fieldType } = field;
+    const column = {
+      field: fieldId,
+      headerName: fieldId,
+      description: fieldId,
       sortable: false,
-      width: 160,
+      width: 200,
       editable: true,
       renderCell: CellExpand,
-    });
+    };
+    if (fieldType === 'rte') {
+      column.renderCell = CellExpand;
+    }
+    columns.push(column);
   }
 
   return columns;
@@ -100,8 +105,9 @@ const getRowFromContent = (index, path, content, headers) => {
   const row = { id: index, path };
   for (let i = 0; i < headers.length; i += 1) {
     const column = headers[i];
-    const field = xml.getElementsByTagName(column)[0];
-    row[column] = field ? field.textContent : '';
+    const { fieldId } = column;
+    const field = xml.getElementsByTagName(fieldId)[0];
+    row[fieldId] = field ? field.textContent : '';
   };
 
   return row;
