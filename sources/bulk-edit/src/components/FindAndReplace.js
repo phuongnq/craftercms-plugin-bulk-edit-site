@@ -80,6 +80,7 @@ export default function FindAndReplaceDialog({ isOpen, handleClose }) {
     <div>
       <Dialog
         maxWidth="md"
+        aria-labelledby="draggable-dialog-title"
         PaperComponent={PaperComponent}
         open={isOpen}
         onClose={handleClose}
