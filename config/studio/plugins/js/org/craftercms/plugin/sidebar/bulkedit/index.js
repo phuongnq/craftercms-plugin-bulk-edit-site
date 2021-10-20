@@ -22610,7 +22610,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     return function () {
       subscriber.unsubscribe();
     };
-  }, []);
+  }, [rows]);
   e__default.useEffect(function () {
     var subscriber;
 
