@@ -28,6 +28,10 @@ const useStyles = makeStyles({
     height: 400,
     width: '100%',
     '& .edited': {
+      backgroundColor: '#2e7d32',
+      color: '#1b5e20',
+    },
+    '& .found': {
       backgroundColor: '#b9d5ff91',
       color: '#1a3e72',
     },
@@ -99,34 +103,6 @@ const getRowFromContent = (index, path, content, headers) => {
   return row;
 };
 
-const updateAllRows = (text, replaceText, rows, columns) => {
-  const newRows = [];
-  for (let i = 0; i < rows.length; i +=1 ) {
-    const newRow = updateRow(text, replaceText, rows[i], columns);
-    newRows.push(newRow);
-  }
-
-  return newRows;
-};
-
-const updateRow = (text, replaceText, currentRow, columns) => {
-  const newRow = {};
-  const keys = Object.keys(currentRow);
-
-  for (let i = 0; i < keys.length; i +=1 ) {
-    const fieldName = keys[i];
-    let fieldValue = currentRow[fieldName];
-    const column = getColumn(fieldName, columns);
-    if (column.editable) {
-      fieldValue = fieldValue.replaceAll(text, replaceText);
-    }
-
-    newRow[fieldName] = fieldValue;
-  }
-
-  return newRow;
-};
-
 const isCellEdited = (params, rows) => {
   if (!params || rows.length === 0) return false;
 
@@ -134,6 +110,13 @@ const isCellEdited = (params, rows) => {
   const cellField = params.field;
   const cellValue = params.value;
   return cellValue !== rows[cellId][cellField];
+};
+
+const isCellFound = (text, params) => {
+  if (!params || rows.length === 0) return false;
+
+  const cellValue = params.value;
+  return cellValue.indexOf(text) >= 0;
 };
 
 const updateContent = async (path, fields) => {
@@ -166,6 +149,7 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [editedRows, setEditedRows] = React.useState({});
   const [editRowsModel, setEditRowsModel] = React.useState({});
   const [refresh, setRefresh] = React.useState(0);
+  const [findText, setFindText] = React.useState('');
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
@@ -186,6 +170,40 @@ const DataSheet = React.forwardRef((props, ref) => {
     },
   }));
 
+  const updateAllRows = (text, replaceText, rows, columns) => {
+    const newRows = [];
+    for (let i = 0; i < rows.length; i +=1 ) {
+      const newRow = updateRow(text, replaceText, rows[i], columns);
+      newRows.push(newRow);
+    }
+
+    return newRows;
+  };
+
+  const updateRow = (text, replaceText, currentRow, columns) => {
+    const newRow = {};
+    const keys = Object.keys(currentRow);
+
+    for (let i = 0; i < keys.length; i +=1 ) {
+      const fieldName = keys[i];
+      const fieldValue = currentRow[fieldName];
+      let newFieldValue = fieldValue;
+      const column = getColumn(fieldName, columns);
+      if (column.editable) {
+        newFieldValue = fieldValue.replaceAll(text, replaceText);
+      }
+
+      if (newFieldValue !== fieldValue) {
+        const model = { id: currentRow.id, field: fieldName, value: newFieldValue };
+        saveEditState(model);
+      }
+
+      newRow[fieldName] = newFieldValue;
+    }
+
+    return newRow;
+  };
+
   React.useEffect(() => {
     const subscriber = findReplaceSub.subscribe((value) => {
       const {
@@ -193,6 +211,10 @@ const DataSheet = React.forwardRef((props, ref) => {
         replaceText,
         action
       } = value;
+      if (action === 'find') {
+        setFindText(findText);
+      }
+
       if (action === 'replace') {
         const newRows = updateAllRows(findText, replaceText, rows, columns);
         setSessionRows(newRows);
@@ -240,6 +262,8 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleOnCellEditCommit = (model, event) => {
     saveEditState(model);
+    const newSessionRows = sessionRows;
+    newSessionRows
   };
 
   const saveEditState = (model) => {
@@ -266,7 +290,16 @@ const DataSheet = React.forwardRef((props, ref) => {
         editRowsModel={editRowsModel}
         getCellClassName={(params) => {
           if (!params.isEditable) return '';
-          return isCellEdited(params, rows) ? 'edited' : '';
+
+          if (isCellEdited(params, rows)) {
+            return 'edited';
+          }
+
+          if (findText && isCellFound(findText, params)) {
+            return 'found';
+          }
+
+          return '';
         }}
         onEditRowsModelChange={handleEditRowsModelChange}
         onCellEditCommit={handleOnCellEditCommit}
