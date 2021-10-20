@@ -22442,6 +22442,12 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       editRowsModel = _React$useState10[0],
       setEditRowsModel = _React$useState10[1];
 
+  var apiRef = qa();
+  e__default.useEffect(function () {
+    apiRef.current.subscribeEvent("stateChange", function (params) {
+      console.log(params);
+    });
+  }, [apiRef]);
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
@@ -22558,6 +22564,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root
   }, /*#__PURE__*/e__default.createElement(ds, {
+    apiRef: apiRef,
     rows: rows,
     columns: columns,
     pageSize: PAGE_SIZE,
