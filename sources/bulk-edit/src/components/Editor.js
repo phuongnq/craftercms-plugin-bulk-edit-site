@@ -147,9 +147,9 @@ export default function Editor(props) {
           {drawer}
         </Drawer>
       </Box>
+      <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
       <Box component="main" sx={{ flexGrow: 1 }}>
         <DataSheet ref={dataSheetRef} />
-        <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
       </Box>
       <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
         <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
