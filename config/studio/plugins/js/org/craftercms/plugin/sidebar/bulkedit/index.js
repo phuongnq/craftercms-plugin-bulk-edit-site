@@ -745,7 +745,6 @@ var StudioAPI = {
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var contentTypeSub = new Subject('');
-var editContentSub = new Subject({});
 
 function ContentTypeSelect() {
   var _React$useState = e__default.useState(''),
@@ -22646,7 +22645,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
     currentEditedRows[key][model.field] = model.value;
     setEditedRows(currentEditedRows);
-    editContentSub.next(currentEditedRows);
   };
 
   return /*#__PURE__*/e__default.createElement("div", {
@@ -22664,10 +22662,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       return isCellEdited(params, rows) ? 'edited' : '';
     },
     onEditRowsModelChange: handleEditRowsModelChange,
-    onCellEditCommit: handleOnCellEditCommit,
-    onStateChange: function onStateChange(state) {
-      console.log(state.editRows);
-    }
+    onCellEditCommit: handleOnCellEditCommit
   }));
 });
 
