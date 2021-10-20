@@ -22431,6 +22431,8 @@ var getRowFromContent = function getRowFromContent(index, path, content, headers
 
 var updateAllRows = function updateAllRows(text, replaceText, rows, columns) {
   var newRows = [];
+  console.log(rows);
+  console.log(columns);
 
   for (var i = 0; i < rows.length; i += 1) {
     var newRow = updateRow(text, replaceText, currentRow, columns);
