@@ -22452,37 +22452,39 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       cancelAllChanges: function cancelAllChanges() {
         setRefresh(1 - refresh);
       },
-      saveAllChanges: function saveAllChanges() {}
+      saveAllChanges: function saveAllChanges() {
+        console.log(editedRows);
+      }
     };
   });
   e__default.useEffect(function () {
     var subscriber;
 
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               subscriber = contentTypeSub.subscribe( /*#__PURE__*/function () {
-                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(value) {
                   var config, headerList, items, paths, dtRows, i, path, content, row;
-                  return regeneratorRuntime.wrap(function _callee$(_context) {
+                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
-                      switch (_context.prev = _context.next) {
+                      switch (_context2.prev = _context2.next) {
                         case 0:
                           setSelectedContentType(value);
-                          _context.next = 3;
+                          _context2.next = 3;
                           return StudioAPI.getContentTypeConfig(value);
 
                         case 3:
-                          config = _context.sent;
+                          config = _context2.sent;
                           headerList = getHeadersFromConfig(config);
                           setColumns(getColumns(headerList));
-                          _context.next = 8;
+                          _context2.next = 8;
                           return StudioAPI.searchByContentType(value);
 
                         case 8:
-                          items = _context.sent;
+                          items = _context2.sent;
                           paths = items.map(function (item) {
                             return item.path;
                           });
@@ -22491,22 +22493,22 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
                         case 12:
                           if (!(i < paths.length)) {
-                            _context.next = 22;
+                            _context2.next = 22;
                             break;
                           }
 
                           path = paths[i];
-                          _context.next = 16;
+                          _context2.next = 16;
                           return StudioAPI.getContent(path);
 
                         case 16:
-                          content = _context.sent;
+                          content = _context2.sent;
                           row = getRowFromContent(i, path, content, headerList);
                           dtRows.push(row);
 
                         case 19:
                           i += 1;
-                          _context.next = 12;
+                          _context2.next = 12;
                           break;
 
                         case 22:
@@ -22514,23 +22516,23 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
                         case 23:
                         case "end":
-                          return _context.stop();
+                          return _context2.stop();
                       }
                     }
-                  }, _callee);
+                  }, _callee2);
                 }));
 
-                return function (_x) {
-                  return _ref2.apply(this, arguments);
+                return function (_x3) {
+                  return _ref3.apply(this, arguments);
                 };
               }());
 
             case 1:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }))();
 
     return function () {
@@ -22657,7 +22659,6 @@ function Editor(props) {
       editedRows = _React$useState8[0],
       setEditedRows = _React$useState8[1];
 
-  e__default.useRef(null);
   var dataSheetRef = e__default.useRef(null);
   e__default.useEffect(function () {
     editContentSub.subscribe(function (value) {
@@ -22680,16 +22681,10 @@ function Editor(props) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              keys = Object.keys(editedRows);
-
-              if (!(keys.length === 0)) {
-                _context3.next = 3;
-                break;
-              }
-
+              dataSheetRef.current.saveAllChanges();
               return _context3.abrupt("return");
 
-            case 3:
+            case 5:
               keys.forEach( /*#__PURE__*/function () {
                 var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path) {
                   var res;
@@ -22721,7 +22716,7 @@ function Editor(props) {
               }());
               setOpenAlert(true);
 
-            case 5:
+            case 7:
             case "end":
               return _context3.stop();
           }
