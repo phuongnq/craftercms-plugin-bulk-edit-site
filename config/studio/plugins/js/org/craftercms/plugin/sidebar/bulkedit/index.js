@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, CssBaseline, Drawer, Snackbar, Alert, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, CssBaseline, Drawer, Snackbar, Alert, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -2744,7 +2744,7 @@ function PaperComponent(props) {
   return /*#__PURE__*/e__default.createElement(cjs, {
     handle: "#draggable-dialog-title",
     cancel: '[class*="MuiDialogContent-root"]'
-  }, /*#__PURE__*/e__default.createElement(Paper, props));
+  }, /*#__PURE__*/e__default.createElement(Paper$1, props));
 }
 
 function FindAndReplaceDialog(_ref3) {
@@ -16431,7 +16431,7 @@ const PaperRoot = styled$1('div', {
 }, theme.palette.mode === 'dark' && {
   backgroundImage: `linear-gradient(${alpha('#fff', getOverlayAlpha(ownerState.elevation))}, ${alpha('#fff', getOverlayAlpha(ownerState.elevation))})`
 })));
-const Paper$1 = /*#__PURE__*/e__default.forwardRef(function Paper(inProps, ref) {
+const Paper = /*#__PURE__*/e__default.forwardRef(function Paper(inProps, ref) {
   const props = useThemeProps({
     props: inProps,
     name: 'MuiPaper'
@@ -16462,7 +16462,7 @@ const Paper$1 = /*#__PURE__*/e__default.forwardRef(function Paper(inProps, ref) 
     ref: ref
   }, other));
 });
-var k = Paper$1;
+var k = Paper;
 
 function formControlState({
   props,
