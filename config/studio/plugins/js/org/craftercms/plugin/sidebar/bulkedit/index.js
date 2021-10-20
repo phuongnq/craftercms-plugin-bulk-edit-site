@@ -22414,175 +22414,6 @@ var isCellEdited = function isCellEdited(params, rows) {
   return cellValue !== rows[cellId][cellField];
 };
 
-var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
-  var classes = useStyles();
-
-  var _React$useState = e__default.useState([]),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      columns = _React$useState2[0],
-      setColumns = _React$useState2[1];
-
-  var _React$useState3 = e__default.useState(''),
-      _React$useState4 = _slicedToArray(_React$useState3, 2);
-      _React$useState4[0];
-      var setSelectedContentType = _React$useState4[1];
-
-  var _React$useState5 = e__default.useState([]),
-      _React$useState6 = _slicedToArray(_React$useState5, 2),
-      rows = _React$useState6[0],
-      setRows = _React$useState6[1];
-
-  var _React$useState7 = e__default.useState({}),
-      _React$useState8 = _slicedToArray(_React$useState7, 2),
-      editedRows = _React$useState8[0],
-      setEditedRows = _React$useState8[1];
-
-  var _React$useState9 = e__default.useState({}),
-      _React$useState10 = _slicedToArray(_React$useState9, 2),
-      editRowsModel = _React$useState10[0],
-      setEditRowsModel = _React$useState10[1];
-
-  var _React$useState11 = e__default.useState(0),
-      _React$useState12 = _slicedToArray(_React$useState11, 2),
-      refresh = _React$useState12[0],
-      setRefresh = _React$useState12[1];
-
-  e__default.useImperativeHandle(ref, function () {
-    return {
-      cancelAllChanges: function cancelAllChanges() {
-        setRefresh(1 - refresh);
-      },
-      saveAllChanges: function saveAllChanges() {
-        console.log(editedRows);
-      }
-    };
-  });
-  e__default.useEffect(function () {
-    var subscriber;
-
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              subscriber = contentTypeSub.subscribe( /*#__PURE__*/function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(value) {
-                  var config, headerList, items, paths, dtRows, i, path, content, row;
-                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                      switch (_context2.prev = _context2.next) {
-                        case 0:
-                          setSelectedContentType(value);
-                          _context2.next = 3;
-                          return StudioAPI.getContentTypeConfig(value);
-
-                        case 3:
-                          config = _context2.sent;
-                          headerList = getHeadersFromConfig(config);
-                          setColumns(getColumns(headerList));
-                          _context2.next = 8;
-                          return StudioAPI.searchByContentType(value);
-
-                        case 8:
-                          items = _context2.sent;
-                          paths = items.map(function (item) {
-                            return item.path;
-                          });
-                          dtRows = [];
-                          i = 0;
-
-                        case 12:
-                          if (!(i < paths.length)) {
-                            _context2.next = 22;
-                            break;
-                          }
-
-                          path = paths[i];
-                          _context2.next = 16;
-                          return StudioAPI.getContent(path);
-
-                        case 16:
-                          content = _context2.sent;
-                          row = getRowFromContent(i, path, content, headerList);
-                          dtRows.push(row);
-
-                        case 19:
-                          i += 1;
-                          _context2.next = 12;
-                          break;
-
-                        case 22:
-                          setRows(dtRows);
-
-                        case 23:
-                        case "end":
-                          return _context2.stop();
-                      }
-                    }
-                  }, _callee2);
-                }));
-
-                return function (_x3) {
-                  return _ref3.apply(this, arguments);
-                };
-              }());
-
-            case 1:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }))();
-
-    return function () {
-      subscriber.unsubscribe();
-    };
-  }, []);
-
-  var handleEditRowsModelChange = function handleEditRowsModelChange(model) {
-    setEditRowsModel(model);
-  };
-
-  var handleOnCellEditCommit = function handleOnCellEditCommit(model, event) {
-    saveEditState(model);
-  };
-
-  var saveEditState = function saveEditState(model) {
-    var currentEditedRows = editedRows;
-    if (!isCellEdited(model, rows)) return;
-    var key = rows[model.id].path;
-
-    if (!currentEditedRows[key]) {
-      currentEditedRows[key] = {};
-    }
-
-    currentEditedRows[key][model.field] = model.value;
-    setEditedRows(currentEditedRows);
-    editContentSub.next(currentEditedRows);
-  };
-
-  return /*#__PURE__*/e__default.createElement("div", {
-    className: classes.root
-  }, /*#__PURE__*/e__default.createElement(ds, {
-    key: refresh,
-    rows: rows,
-    columns: columns,
-    pageSize: PAGE_SIZE,
-    rowsPerPageOptions: ROWS_PER_PAGE_OPTIONS,
-    disableSelectionOnClick: true,
-    editRowsModel: editRowsModel,
-    getCellClassName: function getCellClassName(params) {
-      if (!params.isEditable) return '';
-      return isCellEdited(params, rows) ? 'edited' : '';
-    },
-    onEditRowsModelChange: handleEditRowsModelChange,
-    onCellEditCommit: handleOnCellEditCommit
-  }));
-});
-
-var drawerWidth = 240;
-
 var updateContent = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(path, fields) {
     var content, xml, keys, i, fieldName, value, node;
@@ -22636,6 +22467,208 @@ var updateContent = /*#__PURE__*/function () {
   };
 }();
 
+var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
+  var classes = useStyles();
+
+  var _React$useState = e__default.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      columns = _React$useState2[0],
+      setColumns = _React$useState2[1];
+
+  var _React$useState3 = e__default.useState(''),
+      _React$useState4 = _slicedToArray(_React$useState3, 2);
+      _React$useState4[0];
+      var setSelectedContentType = _React$useState4[1];
+
+  var _React$useState5 = e__default.useState([]),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      rows = _React$useState6[0],
+      setRows = _React$useState6[1];
+
+  var _React$useState7 = e__default.useState({}),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      editedRows = _React$useState8[0],
+      setEditedRows = _React$useState8[1];
+
+  var _React$useState9 = e__default.useState({}),
+      _React$useState10 = _slicedToArray(_React$useState9, 2),
+      editRowsModel = _React$useState10[0],
+      setEditRowsModel = _React$useState10[1];
+
+  var _React$useState11 = e__default.useState(0),
+      _React$useState12 = _slicedToArray(_React$useState11, 2),
+      refresh = _React$useState12[0],
+      setRefresh = _React$useState12[1];
+
+  e__default.useImperativeHandle(ref, function () {
+    return {
+      cancelAllChanges: function cancelAllChanges() {
+        setRefresh(1 - refresh);
+      },
+      saveAllChanges: function saveAllChanges() {
+        var keys = Object.keys(editedRows);
+
+        if (keys.length === 0) {
+          return;
+        }
+
+        keys.forEach( /*#__PURE__*/function () {
+          var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path) {
+            var res;
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return updateContent(path, editedRows[path]);
+
+                  case 2:
+                    res = _context2.sent;
+
+                    if (!res) {
+                      console.log("Error while saving path ".concat(path));
+                    }
+
+                  case 4:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2);
+          }));
+
+          return function (_x3) {
+            return _ref2.apply(this, arguments);
+          };
+        }());
+      }
+    };
+  });
+  e__default.useEffect(function () {
+    var subscriber;
+
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              subscriber = contentTypeSub.subscribe( /*#__PURE__*/function () {
+                var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(value) {
+                  var config, headerList, items, paths, dtRows, i, path, content, row;
+                  return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                    while (1) {
+                      switch (_context3.prev = _context3.next) {
+                        case 0:
+                          setSelectedContentType(value);
+                          _context3.next = 3;
+                          return StudioAPI.getContentTypeConfig(value);
+
+                        case 3:
+                          config = _context3.sent;
+                          headerList = getHeadersFromConfig(config);
+                          setColumns(getColumns(headerList));
+                          _context3.next = 8;
+                          return StudioAPI.searchByContentType(value);
+
+                        case 8:
+                          items = _context3.sent;
+                          paths = items.map(function (item) {
+                            return item.path;
+                          });
+                          dtRows = [];
+                          i = 0;
+
+                        case 12:
+                          if (!(i < paths.length)) {
+                            _context3.next = 22;
+                            break;
+                          }
+
+                          path = paths[i];
+                          _context3.next = 16;
+                          return StudioAPI.getContent(path);
+
+                        case 16:
+                          content = _context3.sent;
+                          row = getRowFromContent(i, path, content, headerList);
+                          dtRows.push(row);
+
+                        case 19:
+                          i += 1;
+                          _context3.next = 12;
+                          break;
+
+                        case 22:
+                          setRows(dtRows);
+
+                        case 23:
+                        case "end":
+                          return _context3.stop();
+                      }
+                    }
+                  }, _callee3);
+                }));
+
+                return function (_x4) {
+                  return _ref4.apply(this, arguments);
+                };
+              }());
+
+            case 1:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
+
+    return function () {
+      subscriber.unsubscribe();
+    };
+  }, []);
+
+  var handleEditRowsModelChange = function handleEditRowsModelChange(model) {
+    setEditRowsModel(model);
+  };
+
+  var handleOnCellEditCommit = function handleOnCellEditCommit(model, event) {
+    saveEditState(model);
+  };
+
+  var saveEditState = function saveEditState(model) {
+    var currentEditedRows = editedRows;
+    if (!isCellEdited(model, rows)) return;
+    var key = rows[model.id].path;
+
+    if (!currentEditedRows[key]) {
+      currentEditedRows[key] = {};
+    }
+
+    currentEditedRows[key][model.field] = model.value;
+    setEditedRows(currentEditedRows);
+    editContentSub.next(currentEditedRows);
+  };
+
+  return /*#__PURE__*/e__default.createElement("div", {
+    className: classes.root
+  }, /*#__PURE__*/e__default.createElement(ds, {
+    key: refresh,
+    rows: rows,
+    columns: columns,
+    pageSize: PAGE_SIZE,
+    rowsPerPageOptions: ROWS_PER_PAGE_OPTIONS,
+    disableSelectionOnClick: true,
+    editRowsModel: editRowsModel,
+    getCellClassName: function getCellClassName(params) {
+      if (!params.isEditable) return '';
+      return isCellEdited(params, rows) ? 'edited' : '';
+    },
+    onEditRowsModelChange: handleEditRowsModelChange,
+    onCellEditCommit: handleOnCellEditCommit
+  }));
+});
+
+var drawerWidth = 240;
 function Editor(props) {
   var window = props.window;
 
@@ -22654,17 +22687,7 @@ function Editor(props) {
       openAlert = _React$useState6[0],
       setOpenAlert = _React$useState6[1];
 
-  var _React$useState7 = e__default.useState({}),
-      _React$useState8 = _slicedToArray(_React$useState7, 2),
-      editedRows = _React$useState8[0],
-      setEditedRows = _React$useState8[1];
-
   var dataSheetRef = e__default.useRef(null);
-  e__default.useEffect(function () {
-    editContentSub.subscribe(function (value) {
-      setEditedRows(value);
-    });
-  }, []);
 
   var handleFindReplaceDialogClose = function handleFindReplaceDialogClose() {
     setFindReplaceDialogOpen(false);
@@ -22675,57 +22698,24 @@ function Editor(props) {
   };
 
   var handleSaveChangeClick = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var keys;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context.prev = _context.next) {
             case 0:
               dataSheetRef.current.saveAllChanges();
-              return _context3.abrupt("return");
-
-            case 5:
-              keys.forEach( /*#__PURE__*/function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path) {
-                  var res;
-                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                      switch (_context2.prev = _context2.next) {
-                        case 0:
-                          _context2.next = 2;
-                          return updateContent(path, editedRows[path]);
-
-                        case 2:
-                          res = _context2.sent;
-
-                          if (!res) {
-                            console.log("Error while saving path ".concat(path));
-                          }
-
-                        case 4:
-                        case "end":
-                          return _context2.stop();
-                      }
-                    }
-                  }, _callee2);
-                }));
-
-                return function (_x3) {
-                  return _ref3.apply(this, arguments);
-                };
-              }());
               setOpenAlert(true);
 
-            case 7:
+            case 2:
             case "end":
-              return _context3.stop();
+              return _context.stop();
           }
         }
-      }, _callee3);
+      }, _callee);
     }));
 
     return function handleSaveChangeClick() {
-      return _ref2.apply(this, arguments);
+      return _ref.apply(this, arguments);
     };
   }();
 
