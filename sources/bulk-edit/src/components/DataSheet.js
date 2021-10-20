@@ -137,15 +137,12 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: (evt) => {
+      console.log(evt);
       setEditedRows({});
       setEditRowsModel({});
       forceUpdate();
     },
  }));
-
- React.useEffect(() => {
-    console.log(rows);
- }, [rows]);
 
   React.useEffect(() => {
     let subscriber;
