@@ -24,6 +24,7 @@ import StudioAPI from '../api/studio';
 
 const PAGE_SIZE = 100;
 const ROWS_PER_PAGE_OPTIONS = [100];
+const DEFAULT_COLUMN_WIDTH = 220;
 
 const useStyles = makeStyles({
   root: {
@@ -70,7 +71,7 @@ const getColumns = (fields) => {
     headerName: 'Path',
     description: 'Path',
     sortable: false,
-    width: 250,
+    width: DEFAULT_COLUMN_WIDTH,
     editable: false,
     renderCell: CellExpand,
   }];
@@ -83,7 +84,7 @@ const getColumns = (fields) => {
       headerName: fieldId,
       description: fieldId,
       sortable: false,
-      width: 250,
+      width: DEFAULT_COLUMN_WIDTH,
       editable: true,
       renderCell: CellExpand,
     };
