@@ -22447,47 +22447,48 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       _React$useState12[0];
       _React$useState12[1];
 
-  var forceUpdate = e__default.useReducer(function (bool) {
-    return !bool;
-  })[1];
-
+  var apiRef = qa();
+  e__default.useEffect(function () {
+    return apiRef.current.subscribeEvent('stateChange', function (params) {
+      console.log(params);
+    });
+  }, [apiRef]);
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
         setEditedRows({});
         setEditRowsModel({});
-        forceUpdate();
       }
     };
   });
   e__default.useEffect(function () {
     var subscriber;
 
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               subscriber = contentTypeSub.subscribe( /*#__PURE__*/function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(value) {
+                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(value) {
                   var config, headerList, items, paths, dtRows, i, path, content, row;
-                  return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                  return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
-                      switch (_context2.prev = _context2.next) {
+                      switch (_context.prev = _context.next) {
                         case 0:
                           setSelectedContentType(value);
-                          _context2.next = 3;
+                          _context.next = 3;
                           return StudioAPI.getContentTypeConfig(value);
 
                         case 3:
-                          config = _context2.sent;
+                          config = _context.sent;
                           headerList = getHeadersFromConfig(config);
                           setColumns(getColumns(headerList));
-                          _context2.next = 8;
+                          _context.next = 8;
                           return StudioAPI.searchByContentType(value);
 
                         case 8:
-                          items = _context2.sent;
+                          items = _context.sent;
                           paths = items.map(function (item) {
                             return item.path;
                           });
@@ -22496,22 +22497,22 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
                         case 12:
                           if (!(i < paths.length)) {
-                            _context2.next = 22;
+                            _context.next = 22;
                             break;
                           }
 
                           path = paths[i];
-                          _context2.next = 16;
+                          _context.next = 16;
                           return StudioAPI.getContent(path);
 
                         case 16:
-                          content = _context2.sent;
+                          content = _context.sent;
                           row = getRowFromContent(i, path, content, headerList);
                           dtRows.push(row);
 
                         case 19:
                           i += 1;
-                          _context2.next = 12;
+                          _context.next = 12;
                           break;
 
                         case 22:
@@ -22519,23 +22520,23 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
                         case 23:
                         case "end":
-                          return _context2.stop();
+                          return _context.stop();
                       }
                     }
-                  }, _callee2);
+                  }, _callee);
                 }));
 
                 return function (_x) {
-                  return _ref3.apply(this, arguments);
+                  return _ref2.apply(this, arguments);
                 };
               }());
 
             case 1:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3);
+      }, _callee2);
     }))();
 
     return function () {
@@ -22565,10 +22566,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     editContentSub.next(currentEditedRows);
   };
 
-  var onDataGridStateChange = function onDataGridStateChange(state) {
-    console.log(state);
-  };
-
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root
   }, /*#__PURE__*/e__default.createElement(ds, {
@@ -22582,7 +22579,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       if (!params.isEditable) return '';
       return isCellEdited(params, rows) ? 'edited' : '';
     },
-    stateChange: onDataGridStateChange,
     onEditRowsModelChange: handleEditRowsModelChange,
     onCellEditCommit: handleOnCellEditCommit
   }));
