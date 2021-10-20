@@ -22442,13 +22442,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       editRowsModel = _React$useState10[0],
       setEditRowsModel = _React$useState10[1];
 
-  var _React$useState11 = e__default.useState(false),
-      _React$useState12 = _slicedToArray(_React$useState11, 2);
-      _React$useState12[0];
-      _React$useState12[1];
-
   var apiRef = qa();
   e__default.useEffect(function () {
+    console.log(apiRef);
     return apiRef.current.subscribeEvent('stateChange', function (params) {
       console.log(params);
     });
