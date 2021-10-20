@@ -24253,7 +24253,7 @@ var GridCellExpand = /*#__PURE__*/e__default.memo(function GridCellExpand(props)
   }, /*#__PURE__*/e__default.createElement(Typography$2, {
     variant: "body2",
     style: {
-      padding: 8
+      padding: 16
     }
   }, value))));
 });
@@ -24316,7 +24316,9 @@ var getColumns = function getColumns(fields) {
     sortable: false,
     width: 200,
     editable: false,
-    renderCell: renderCellExpand
+    renderCell: /*#__PURE__*/e__default.createElement(renderCellExpand, {
+      width: 200
+    })
   }];
 
   for (var i = 0; i < fields.length; i += 1) {
@@ -24334,7 +24336,9 @@ var getColumns = function getColumns(fields) {
     };
 
     if (fieldType === 'rte') {
-      column.renderCell = renderCellExpand;
+      column.renderCell = /*#__PURE__*/e__default.createElement(renderCellExpand, {
+        width: 400
+      });
     }
 
     columns.push(column);
