@@ -22446,7 +22446,7 @@ var updateRow = function updateRow(text, replaceText, currentRow, columns) {
   var newRow = {};
   var keys = Object.keys(currentRow);
 
-  for (var i = 0; i < keys; i += 1) {
+  for (var i = 0; i < keys.length; i += 1) {
     var fieldName = keys[i];
     var fieldValue = currentRow[fieldName];
     var column = getColumn(fieldName, columns);
