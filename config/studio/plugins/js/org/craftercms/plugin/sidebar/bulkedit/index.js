@@ -22442,17 +22442,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       editRowsModel = _React$useState10[0],
       setEditRowsModel = _React$useState10[1];
 
-  var apiRef = qa();
-  e__default.useEffect(function () {
-    apiRef.current.subscribeEvent("stateChange", function (params) {
-      console.log(params);
-    });
-  }, [apiRef]);
+  var dataGridRef = /*#__PURE__*/e__default.createRef();
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
-        setEditedRows({});
-        setEditRowsModel({});
+        console.log(dataGridRef.current);
       }
     };
   });
@@ -22564,7 +22558,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root
   }, /*#__PURE__*/e__default.createElement(ds, {
-    apiRef: apiRef,
+    ref: dataGridRef,
+    loading: true,
     rows: rows,
     columns: columns,
     pageSize: PAGE_SIZE,
@@ -22576,10 +22571,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       return isCellEdited(params, rows) ? 'edited' : '';
     },
     onEditRowsModelChange: handleEditRowsModelChange,
-    onCellEditCommit: handleOnCellEditCommit,
-    onStateChange: function onStateChange(state) {
-      console.log(state);
-    }
+    onCellEditCommit: handleOnCellEditCommit
   }));
 });
 
