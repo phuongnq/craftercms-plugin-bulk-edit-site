@@ -105,6 +105,27 @@ const isCellEdited = (params, rows) => {
   return cellValue !== rows[cellId][cellField];
 };
 
+const updateContent = async (path, fields) => {
+  const content = await StudioAPI.getContent(path);
+  if (!content) {
+    return;
+  }
+
+  const xml = (new DOMParser()).parseFromString(content, 'text/xml');
+
+  const keys = Object.keys(fields);
+  for (let i = 0; i < keys.length; i++) {
+    const fieldName = keys[i];
+    const value = fields[fieldName];
+      const node = xml.getElementsByTagName(fieldName)[0];
+      if (node) {
+        node.textContent = value;
+      }
+  }
+
+  return await StudioAPI.writeContent(path, (new XMLSerializer()).serializeToString(xml));
+};
+
 const DataSheet = React.forwardRef((props, ref) => {
   const classes = useStyles();
 
@@ -115,12 +136,23 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [editRowsModel, setEditRowsModel] = React.useState({});
   const [refresh, setRefresh] = React.useState(0);
 
-  const dataGridRef = React.createRef();
-
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
       setRefresh(1 - refresh);
-    }
+    },
+    saveAllChanges: () => {
+      const keys = Object.keys(editedRows);
+      if (keys.length === 0) {
+        return;
+      }
+
+      keys.forEach(async (path) => {
+        const res = await updateContent(path, editedRows[path]);
+        if (!res) {
+          console.log(`Error while saving path ${path}`);
+        }
+      });
+    },
  }));
 
   React.useEffect(() => {
@@ -159,7 +191,6 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleOnCellEditCommit = (model, event) => {
     saveEditState(model);
-    console.log(dataGridRef.current.state);
   };
 
   const saveEditState = (model) => {
@@ -176,10 +207,9 @@ const DataSheet = React.forwardRef((props, ref) => {
   };
 
   return (
-    <div className={classes.root} refresh={refresh}>
-      <Button onClick={() => { setRefresh(1 - refresh) }} />
+    <div className={classes.root}>
       <DataGrid
-        ref={dataGridRef}
+        key={refresh}
         rows={rows}
         columns={columns}
         pageSize={PAGE_SIZE}

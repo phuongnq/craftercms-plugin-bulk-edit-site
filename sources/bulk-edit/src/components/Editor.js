@@ -42,42 +42,13 @@ import StudioAPI from '../api/studio';
 
 const drawerWidth = 240;
 
-const updateContent = async (path, fields) => {
-  const content = await StudioAPI.getContent(path);
-  if (!content) {
-    return;
-  }
-
-  const xml = (new DOMParser()).parseFromString(content, 'text/xml');
-
-  const keys = Object.keys(fields);
-  for (let i = 0; i < keys.length; i++) {
-    const fieldName = keys[i];
-    const value = fields[fieldName];
-      const node = xml.getElementsByTagName(fieldName)[0];
-      if (node) {
-        node.textContent = value;
-      }
-  }
-
-  return await StudioAPI.writeContent(path, (new XMLSerializer()).serializeToString(xml));
-};
-
 export default function Editor(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
-  const [editedRows, setEditedRows] = React.useState({});
 
-  const cancelBtnRef = React.useRef(null);
   const dataSheetRef = React.useRef(null);
-
-  React.useEffect(() => {
-    editContentSub.subscribe((value) => {
-      setEditedRows(value);
-    });
-  }, []);
 
   const handleFindReplaceDialogClose = () => {
     setFindReplaceDialogOpen(false);
@@ -88,18 +59,7 @@ export default function Editor(props) {
   };
 
   const handleSaveChangeClick = async () => {
-    const keys = Object.keys(editedRows);
-    if (keys.length === 0) {
-      return;
-    }
-
-    keys.forEach(async (path) => {
-      const res = await updateContent(path, editedRows[path]);
-      if (!res) {
-        console.log(`Error while saving path ${path}`);
-      }
-    });
-
+    dataSheetRef.current.saveAllChanges();
     setOpenAlert(true);
   };
 
