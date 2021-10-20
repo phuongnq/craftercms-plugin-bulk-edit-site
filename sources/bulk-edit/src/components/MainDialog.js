@@ -26,6 +26,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Paper,
   Button,
 } from '@mui/material';
 import Draggable from 'react-draggable';
