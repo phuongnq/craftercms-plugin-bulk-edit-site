@@ -22408,6 +22408,12 @@ var getColumns = function getColumns(fields) {
   return columns;
 };
 
+var getColumn = function getColumn(fieldName, columns) {
+  return columns.find(function (cl) {
+    return cl.field === fieldName;
+  });
+};
+
 var getRowFromContent = function getRowFromContent(index, path, content, headers) {
   var xml = new DOMParser().parseFromString(content, 'text/xml');
   var row = {
@@ -22421,6 +22427,36 @@ var getRowFromContent = function getRowFromContent(index, path, content, headers
     row[column] = field ? field.textContent : '';
   }
   return row;
+};
+
+var updateAllRows = function updateAllRows(text, replaceText, rows, columns) {
+  var newRows = [];
+
+  for (var i = 0; i < rows.length; i += 1) {
+    var newRow = updateRow(text, replaceText, currentRow, columns);
+    newRows.push(newRow);
+  }
+
+  return newRows;
+};
+
+var updateRow = function updateRow(text, replaceText, currentRow, columns) {
+  var newRow = {};
+  var keys = Object.keys(currentRow);
+
+  for (var i = 0; i < keys; i += 1) {
+    var fieldName = keys[i];
+    var fieldValue = currentRow[fieldName];
+    var column = getColumn(fieldName, columns);
+
+    if (column.editable) {
+      fieldValue = fieldValue.replaceAll(text, replaceText);
+    }
+
+    newRow[fieldName] = fieldValue;
+  }
+
+  return newRow;
 };
 
 var isCellEdited = function isCellEdited(params, rows) {
@@ -22559,6 +22595,13 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   e__default.useEffect(function () {
     var subscriber = findReplaceSub.subscribe(function (value) {
       console.log(value);
+      var findText = value.findText,
+          replaceText = value.replaceText,
+          action = value.action;
+
+      if (action === 'replace') {
+        updateAllRows(findText, replaceText, rows, columns);
+      }
     });
     return function () {
       subscriber.unsubscribe();
