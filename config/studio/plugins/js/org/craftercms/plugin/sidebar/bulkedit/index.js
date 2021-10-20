@@ -22564,11 +22564,12 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root,
     refresh: refresh
-  }, /*#__PURE__*/e__default.createElement(Button$1, {
+  }, /*#__PURE__*/e__default.createElement("span", null, refresh), /*#__PURE__*/e__default.createElement(Button$1, {
     onClick: function onClick() {
       setRefresh(1 - refresh);
     }
-  }), /*#__PURE__*/e__default.createElement(ds, {
+  }, "Click to refresh"), /*#__PURE__*/e__default.createElement(ds, {
+    refresh: refresh,
     ref: dataGridRef,
     rows: rows,
     columns: columns,
