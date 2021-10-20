@@ -22435,7 +22435,7 @@ var updateAllRows = function updateAllRows(text, replaceText, rows, columns) {
   console.log(columns);
 
   for (var i = 0; i < rows.length; i += 1) {
-    var newRow = updateRow(text, replaceText, currentRow, columns);
+    var newRow = updateRow(text, replaceText, rows[i], columns);
     newRows.push(newRow);
   }
 
