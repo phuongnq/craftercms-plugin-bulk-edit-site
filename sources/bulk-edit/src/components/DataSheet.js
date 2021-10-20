@@ -17,6 +17,8 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
 
+import CellExpand from './CellExpand';
+
 import { contentTypeSub, findReplaceSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
 
@@ -28,7 +30,7 @@ const useStyles = makeStyles({
     height: 400,
     width: '100%',
     '& .edited': {
-      backgroundColor: '#2e7d32',
+      backgroundColor: '#a5d6a7',
       color: '#1b5e20',
     },
     '& .found': {
@@ -70,6 +72,7 @@ const getColumns = (fields) => {
     sortable: false,
     width: 160,
     editable: false,
+    renderCell: CellExpand,
   }];
 
   for (let i = 0; i < fields.length; i +=1 ) {
@@ -81,6 +84,7 @@ const getColumns = (fields) => {
       sortable: false,
       width: 160,
       editable: true,
+      renderCell: CellExpand,
     });
   }
 
