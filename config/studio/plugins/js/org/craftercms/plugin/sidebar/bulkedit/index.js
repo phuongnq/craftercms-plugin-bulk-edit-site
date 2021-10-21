@@ -2591,34 +2591,33 @@ var StudioAPI = {
       }, _callee4);
     }))();
   },
-  writeContent: function writeContent(path, content) {
+  writeContent: function writeContent(path, content, contentType) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-      var contentType, user, fileName, url, res;
+      var user, fileName, url, res;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              contentType = '/page/entry';
               user = 'admin';
               fileName = path.split('/').pop();
               url = "".concat(StudioAPI.origin()).concat(API_WRITE_CONTENT, "?site=").concat(StudioAPI.siteId(), "&phase=onSave&path=").concat(path, "&&fileName=").concat(fileName, "&user=").concat(user, "&contentType=").concat(contentType, "&unlock=true");
-              _context5.next = 6;
+              _context5.next = 5;
               return HttpHelper.post(url, content);
 
-            case 6:
+            case 5:
               res = _context5.sent;
 
               if (!(res.status === 200)) {
-                _context5.next = 9;
+                _context5.next = 8;
                 break;
               }
 
               return _context5.abrupt("return", res.response);
 
-            case 9:
+            case 8:
               return _context5.abrupt("return", null);
 
-            case 10:
+            case 9:
             case "end":
               return _context5.stop();
           }
@@ -24522,6 +24521,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       findText = _React$useState14[0],
       setFindText = _React$useState14[1];
 
+  var _React$useState15 = e__default.useState(''),
+      _React$useState16 = _slicedToArray(_React$useState15, 2),
+      contentType = _React$useState16[0],
+      setContentType = _React$useState16[1];
+
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
@@ -24542,7 +24546,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
                     _context2.next = 2;
-                    return writeContent(path, editedRows[path]);
+                    return writeContent(path, editedRows[path], contentType);
 
                   case 2:
                     res = _context2.sent;
@@ -24642,17 +24646,18 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                     while (1) {
                       switch (_context3.prev = _context3.next) {
                         case 0:
-                          _context3.next = 2;
+                          setContentType(value);
+                          _context3.next = 3;
                           return StudioAPI.getContentTypeConfig(value);
 
-                        case 2:
+                        case 3:
                           config = _context3.sent;
                           headerList = getDataSheetHeadersFromConfig(config);
                           setColumns(getColumnsFromHeader(headerList));
-                          _context3.next = 7;
+                          _context3.next = 8;
                           return StudioAPI.searchByContentType(value);
 
-                        case 7:
+                        case 8:
                           items = _context3.sent;
                           paths = items.map(function (item) {
                             return item.path;
@@ -24660,31 +24665,31 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                           dtRows = [];
                           i = 0;
 
-                        case 11:
+                        case 12:
                           if (!(i < paths.length)) {
-                            _context3.next = 21;
+                            _context3.next = 22;
                             break;
                           }
 
                           path = paths[i];
-                          _context3.next = 15;
+                          _context3.next = 16;
                           return StudioAPI.getContent(path);
 
-                        case 15:
+                        case 16:
                           content = _context3.sent;
                           row = rowFromApiContent(i, path, content, headerList);
                           dtRows.push(row);
 
-                        case 18:
+                        case 19:
                           i += 1;
-                          _context3.next = 11;
+                          _context3.next = 12;
                           break;
 
-                        case 21:
+                        case 22:
                           setRows(dtRows);
                           setSessionRows(dtRows);
 
-                        case 23:
+                        case 24:
                         case "end":
                           return _context3.stop();
                       }
