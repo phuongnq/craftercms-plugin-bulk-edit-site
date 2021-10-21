@@ -96,8 +96,7 @@ const StudioAPI = {
 
     return null;
   },
-  async writeContent(path, content) {
-    const contentType = '/page/entry';
+  async writeContent(path, content, contentType) {
     const user = 'admin';
     const fileName = path.split('/').pop();
     const url = `${StudioAPI.origin()}${API_WRITE_CONTENT}?site=${StudioAPI.siteId()}&phase=onSave&path=${path}&&fileName=${fileName}&user=${user}&contentType=${contentType}&unlock=true`;

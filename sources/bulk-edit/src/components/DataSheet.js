@@ -168,6 +168,7 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [editRowsModel, setEditRowsModel] = React.useState({});
   const [refresh, setRefresh] = React.useState(0);
   const [findText, setFindText] = React.useState('');
+  const [contentType, setContentType] = React.useState('');
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
@@ -180,7 +181,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       }
 
       keys.forEach(async (path) => {
-        const res = await writeContent(path, editedRows[path]);
+        const res = await writeContent(path, editedRows[path], contentType);
         if (!res) {
           console.log(`Error while saving path ${path}`);
         }
@@ -248,6 +249,8 @@ const DataSheet = React.forwardRef((props, ref) => {
     let subscriber;
     (async () => {
       subscriber = contentTypeSub.subscribe(async (value) => {
+        setContentType(value);
+
         const config = await StudioAPI.getContentTypeConfig(value);
         const headerList = getDataSheetHeadersFromConfig(config);
         setColumns(getColumnsFromHeader(headerList));
