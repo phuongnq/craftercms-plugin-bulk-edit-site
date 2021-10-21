@@ -2726,6 +2726,11 @@ function ContentTypeSelect() {
   })));
 }
 
+var ActionHelper = {
+  FIND: 'find',
+  REPLACE: 'replace'
+};
+
 var StyledTextField = styled$3(TextField$1)(function (_ref) {
   var theme = _ref.theme;
   return {
@@ -2779,11 +2784,11 @@ function FindAndReplaceDialog(_ref3) {
   };
 
   var handleFindClick = function handleFindClick() {
-    setAction('find');
+    setAction(ActionHelper.FIND);
   };
 
   var handleReplaceAllClick = function handleReplaceAllClick() {
-    setAction('replace');
+    setAction(ActionHelper.REPLACE);
     handleClose();
   };
 
@@ -24562,11 +24567,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
           replaceText = value.replaceText,
           action = value.action;
 
-      if (action === 'find') {
+      if (action === ActionHelper.FIND) {
         setFindText(findText);
       }
 
-      if (action === 'replace') {
+      if (action === ActionHelper.REPLACE) {
         var newRows = updateAllRows(findText, replaceText, rows, columns);
         setSessionRows(newRows);
       }
