@@ -24266,6 +24266,7 @@ function renderCellExpand(params) {
 
 var PAGE_SIZE = 100;
 var ROWS_PER_PAGE_OPTIONS = [100];
+var DEFAULT_COLUMN_WIDTH = 220;
 var useStyles = makeStyles({
   root: {
     height: 400,
@@ -24314,7 +24315,7 @@ var getColumns = function getColumns(fields) {
     headerName: 'Path',
     description: 'Path',
     sortable: false,
-    width: 250,
+    width: DEFAULT_COLUMN_WIDTH,
     editable: false,
     renderCell: renderCellExpand
   }];
@@ -24328,7 +24329,7 @@ var getColumns = function getColumns(fields) {
       headerName: fieldId,
       description: fieldId,
       sortable: false,
-      width: 250,
+      width: DEFAULT_COLUMN_WIDTH,
       editable: true,
       renderCell: renderCellExpand
     };
@@ -24706,7 +24707,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   }));
 });
 
-var drawerWidth = 240;
+var DRAWER_WIDTH = 240;
 function Editor(props) {
   var window = props.window;
 
@@ -24802,7 +24803,7 @@ function Editor(props) {
     component: "nav",
     sx: {
       width: {
-        sm: drawerWidth
+        sm: DRAWER_WIDTH
       },
       flexShrink: {
         sm: 0
@@ -24824,7 +24825,7 @@ function Editor(props) {
       },
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
-        width: drawerWidth,
+        width: DRAWER_WIDTH,
         position: 'absolute'
       }
     }
@@ -24837,7 +24838,7 @@ function Editor(props) {
       },
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
-        width: drawerWidth,
+        width: DRAWER_WIDTH,
         position: 'absolute'
       }
     },
