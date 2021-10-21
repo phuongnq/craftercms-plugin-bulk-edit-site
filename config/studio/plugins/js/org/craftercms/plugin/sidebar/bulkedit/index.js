@@ -2429,6 +2429,7 @@ var API_GET_CONFIGURATION = '/studio/api/2/configuration/get_configuration';
 var API_SEARCH = '/studio/api/2/search/search.json';
 var API_GET_CONTENT = '/studio/api/1/services/api/1/content/get-content.json';
 var API_WRITE_CONTENT = '/studio/api/1/services/api/1/content/write-content.json';
+var API_ME = '/studio/api/2/users/me.json';
 var StudioAPI = {
   origin: function origin() {
     return window.location.origin;
@@ -2593,36 +2594,82 @@ var StudioAPI = {
   },
   writeContent: function writeContent(path, content, contentType) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-      var user, fileName, url, res;
+      var user, username, fileName, url, res;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              user = 'admin';
-              fileName = path.split('/').pop();
-              url = "".concat(StudioAPI.origin()).concat(API_WRITE_CONTENT, "?site=").concat(StudioAPI.siteId(), "&phase=onSave&path=").concat(path, "&&fileName=").concat(fileName, "&user=").concat(user, "&contentType=").concat(contentType, "&unlock=true");
-              _context5.next = 5;
-              return HttpHelper.post(url, content);
+              _context5.next = 2;
+              return StudioAPI.getMe();
+
+            case 2:
+              user = _context5.sent;
+
+              if (user) {
+                _context5.next = 5;
+                break;
+              }
+
+              return _context5.abrupt("return", null);
 
             case 5:
+              username = user.authenticatedUser.username;
+              fileName = path.split('/').pop();
+              url = "".concat(StudioAPI.origin()).concat(API_WRITE_CONTENT, "?site=").concat(StudioAPI.siteId(), "&phase=onSave&path=").concat(path, "&&fileName=").concat(fileName, "&user=").concat(username, "&contentType=").concat(contentType, "&unlock=true");
+              _context5.next = 10;
+              return HttpHelper.post(url, content);
+
+            case 10:
               res = _context5.sent;
 
               if (!(res.status === 200)) {
-                _context5.next = 8;
+                _context5.next = 13;
                 break;
               }
 
               return _context5.abrupt("return", res.response);
 
-            case 8:
+            case 13:
               return _context5.abrupt("return", null);
 
-            case 9:
+            case 14:
             case "end":
               return _context5.stop();
           }
         }
       }, _callee5);
+    }))();
+  },
+  getMe: function getMe() {
+    return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+      var url, res;
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              url = "".concat(StudioAPI.origin()).concat(API_ME);
+              _context6.next = 3;
+              return HttpHelper.get(url);
+
+            case 3:
+              res = _context6.sent;
+
+              if (!(res.status === 200)) {
+                _context6.next = 6;
+                break;
+              }
+
+              return _context6.abrupt("return", res.response);
+
+            case 6:
+              return _context6.abrupt("return", null);
+
+            case 7:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
     }))();
   }
 };
