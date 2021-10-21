@@ -16,7 +16,9 @@
 const ContentTypeHelper = {
   FIELD_TYPE_INPUT: 'input',
   FIELD_TYPE_RTE: 'rte',
-  supportedFieldTypes: [ContentTypeHelper.FIELD_TYPE_INPUT, ContentTypeHelper.FIELD_TYPE_RTE],
+  supportedFieldTypes() {
+    return [ContentTypeHelper.FIELD_TYPE_INPUT, ContentTypeHelper.FIELD_TYPE_RTE]
+  },
   isFieldTypeSupported(fieldType) {
     return ContentTypeHelper.supportedFieldTypes.includes(fieldType);
   },
