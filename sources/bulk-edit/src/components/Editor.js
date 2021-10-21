@@ -28,6 +28,7 @@ import {
   Snackbar,
   Alert,
 } from '@mui/material';
+
 import FindReplaceIcon from '@mui/icons-material/FindReplace';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import SaveIcon from '@mui/icons-material/Save';
@@ -37,7 +38,7 @@ import ContentTypeSelect from './ContentTypeSelect';
 import FindAndReplace from './FindAndReplace';
 import DataSheet from './DataSheet';
 
-const drawerWidth = 240;
+const DRAWER_WIDTH = 240;
 
 export default function Editor(props) {
   const { window } = props;
@@ -118,7 +119,7 @@ export default function Editor(props) {
       <CssBaseline />
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
         <Drawer
@@ -131,7 +132,7 @@ export default function Editor(props) {
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, position: 'absolute' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
           }}
         >
           {drawer}
@@ -140,7 +141,7 @@ export default function Editor(props) {
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, position: 'absolute' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
           }}
           open
         >

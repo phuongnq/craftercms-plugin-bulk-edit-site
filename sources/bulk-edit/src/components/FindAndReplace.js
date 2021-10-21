@@ -28,6 +28,8 @@ import {
 } from '@mui/material';
 import Draggable from 'react-draggable';
 
+import ActionHelper from '../helpers/action';
+
 import { findReplaceSub } from '../services/subscribe';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -68,11 +70,11 @@ export default function FindAndReplaceDialog({ isOpen, handleClose }) {
   };
 
   const handleFindClick = () => {
-    setAction('find');
+    setAction(ActionHelper.FIND);
   };
 
   const handleReplaceAllClick = () => {
-    setAction('replace');
+    setAction(ActionHelper.REPLACE);
     handleClose();
   };
 

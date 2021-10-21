@@ -21,6 +21,8 @@ import CellExpand from './CellExpand';
 
 import { contentTypeSub, findReplaceSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
+import ActionHelper from '../helpers/action';
+import ContentTypeHelper from '../helpers/content_type';
 
 const PAGE_SIZE = 100;
 const ROWS_PER_PAGE_OPTIONS = [100];
@@ -41,14 +43,18 @@ const useStyles = makeStyles({
   },
 });
 
-const getHeadersFromConfig = (data) => {
-  const xml = (new DOMParser()).parseFromString(data, 'text/xml');
+/**
+ * @param {*} config - form-definition.xml
+ * @returns
+ */
+const getDataSheetHeadersFromConfig = (config) => {
+  const xml = (new DOMParser()).parseFromString(config, 'text/xml');
   const fields = xml.getElementsByTagName('field');
   const headers = [];
   for (let i = 0; i < fields.length; i += 1) {
     const field = fields[i];
     const fieldType = field.getElementsByTagName('type')[0].textContent;
-    if (fieldType !== 'input' && fieldType !== 'rte') continue;
+    if (!ContentTypeHelper.isFieldTypeSupported(fieldType)) continue;
 
     const fieldId = field.getElementsByTagName('id')[0].textContent;
     headers.push({ fieldId, fieldType });
@@ -123,7 +129,7 @@ const isCellEdited = (params, rows) => {
   return cellValue !== rows[cellId][cellField];
 };
 
-const isCellFound = (text, params) => {
+const isCellContainText = (text, params) => {
   if (!text || !params) return false;
 
   const cellValue = params.value;
@@ -222,11 +228,11 @@ const DataSheet = React.forwardRef((props, ref) => {
         replaceText,
         action
       } = value;
-      if (action === 'find') {
+      if (action === ActionHelper.FIND) {
         setFindText(findText);
       }
 
-      if (action === 'replace') {
+      if (action === ActionHelper.REPLACE) {
         const newRows = updateAllRows(findText, replaceText, rows, columns);
         setSessionRows(newRows);
       }
@@ -242,7 +248,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     (async () => {
       subscriber = contentTypeSub.subscribe(async (value) => {
         const config = await StudioAPI.getContentTypeConfig(value);
-        const headerList = getHeadersFromConfig(config);
+        const headerList = getDataSheetHeadersFromConfig(config);
         setColumns(getColumns(headerList));
 
         const items = await StudioAPI.searchByContentType(value);
@@ -306,7 +312,7 @@ const DataSheet = React.forwardRef((props, ref) => {
             return 'edited';
           }
 
-          if (findText && isCellFound(findText, params)) {
+          if (findText && isCellContainText(findText, params)) {
             return 'found';
           }
 
