@@ -22,6 +22,7 @@ const API_GET_CONFIGURATION = '/studio/api/2/configuration/get_configuration';
 const API_SEARCH = '/studio/api/2/search/search.json';
 const API_GET_CONTENT = '/studio/api/1/services/api/1/content/get-content.json';
 const API_WRITE_CONTENT = '/studio/api/1/services/api/1/content/write-content.json';
+const API_ME = '/studio/api/2/users/me.json';
 
 const StudioAPI = {
   origin() {
@@ -97,10 +98,24 @@ const StudioAPI = {
     return null;
   },
   async writeContent(path, content, contentType) {
-    const user = 'admin';
+    const user = await StudioAPI.getMe();
+    if (!user) {
+      return null;
+    }
+    const username = user.authenticatedUser.username;
     const fileName = path.split('/').pop();
-    const url = `${StudioAPI.origin()}${API_WRITE_CONTENT}?site=${StudioAPI.siteId()}&phase=onSave&path=${path}&&fileName=${fileName}&user=${user}&contentType=${contentType}&unlock=true`;
+    const url = `${StudioAPI.origin()}${API_WRITE_CONTENT}?site=${StudioAPI.siteId()}&phase=onSave&path=${path}&&fileName=${fileName}&user=${username}&contentType=${contentType}&unlock=true`;
     const res = await HttpHelper.post(url, content);
+
+    if (res.status === 200) {
+      return res.response;
+    }
+
+    return null;
+  },
+  async getMe() {
+    const url = `${StudioAPI.origin()}${API_ME}`;
+    const res = await HttpHelper.get(url);
 
     if (res.status === 200) {
       return res.response;
