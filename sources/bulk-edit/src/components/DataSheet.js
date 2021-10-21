@@ -63,7 +63,8 @@ const getDataSheetHeadersFromConfig = (config) => {
   return headers;
 };
 
-const getColumns = (fields) => {
+const getColumnsFromHeader = (fields) => {
+  // default to have `id` and `path`
   const columns = [{
     field: 'id',
     headerName: 'ID',
@@ -94,7 +95,7 @@ const getColumns = (fields) => {
       editable: true,
       renderCell: CellExpand,
     };
-    if (fieldType === 'rte') {
+    if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
       column.renderCell = CellExpand;
     }
     columns.push(column);
@@ -103,11 +104,11 @@ const getColumns = (fields) => {
   return columns;
 };
 
-const getColumn = (fieldName, columns) => {
+const getColumnProperties = (fieldName, columns) => {
   return columns.find((cl) => cl.field === fieldName);
 };
 
-const getRowFromContent = (index, path, content, headers) => {
+const rowFromApiContent = (index, path, content, headers) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
   const row = { id: index, path };
   for (let i = 0; i < headers.length; i += 1) {
@@ -136,7 +137,7 @@ const isCellContainText = (text, params) => {
   return cellValue.indexOf(text) >= 0;
 };
 
-const updateContent = async (path, fields) => {
+const writeContent = async (path, editedObj) => {
   const content = await StudioAPI.getContent(path);
   if (!content) {
     return;
@@ -144,10 +145,10 @@ const updateContent = async (path, fields) => {
 
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
 
-  const keys = Object.keys(fields);
+  const keys = Object.keys(editedObj);
   for (let i = 0; i < keys.length; i++) {
     const fieldName = keys[i];
-    const value = fields[fieldName];
+    const value = editedObj[fieldName];
       const node = xml.getElementsByTagName(fieldName)[0];
       if (node) {
         node.textContent = value;
@@ -179,7 +180,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       }
 
       keys.forEach(async (path) => {
-        const res = await updateContent(path, editedRows[path]);
+        const res = await writeContent(path, editedRows[path]);
         if (!res) {
           console.log(`Error while saving path ${path}`);
         }
@@ -187,31 +188,31 @@ const DataSheet = React.forwardRef((props, ref) => {
     },
   }));
 
-  const updateAllRows = (text, replaceText, rows, columns) => {
+  const replaceTextInAllRows = (text, replaceText, rows, columns) => {
     const newRows = [];
     for (let i = 0; i < rows.length; i +=1 ) {
-      const newRow = updateRow(text, replaceText, rows[i], columns);
+      const newRow = replaceTextInRow(text, replaceText, rows[i], columns);
       newRows.push(newRow);
     }
 
     return newRows;
   };
 
-  const updateRow = (text, replaceText, currentRow, columns) => {
+  const replaceTextInRow = (text, replaceText, row, columns) => {
     const newRow = {};
-    const keys = Object.keys(currentRow);
+    const keys = Object.keys(row);
 
     for (let i = 0; i < keys.length; i +=1 ) {
       const fieldName = keys[i];
-      const fieldValue = currentRow[fieldName];
+      const fieldValue = row[fieldName];
       let newFieldValue = fieldValue;
-      const column = getColumn(fieldName, columns);
-      if (column.editable) {
+      const props = getColumnProperties(fieldName, columns);
+      if (props.editable) {
         newFieldValue = fieldValue.replaceAll(text, replaceText);
       }
 
       if (newFieldValue !== fieldValue) {
-        const model = { id: currentRow.id, field: fieldName, value: newFieldValue };
+        const model = { id: row.id, field: fieldName, value: newFieldValue };
         saveEditState(model);
       }
 
@@ -233,7 +234,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       }
 
       if (action === ActionHelper.REPLACE) {
-        const newRows = updateAllRows(findText, replaceText, rows, columns);
+        const newRows = replaceTextInAllRows(findText, replaceText, rows, columns);
         setSessionRows(newRows);
       }
     });
@@ -249,7 +250,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       subscriber = contentTypeSub.subscribe(async (value) => {
         const config = await StudioAPI.getContentTypeConfig(value);
         const headerList = getDataSheetHeadersFromConfig(config);
-        setColumns(getColumns(headerList));
+        setColumns(getColumnsFromHeader(headerList));
 
         const items = await StudioAPI.searchByContentType(value);
         const paths = items.map(item => item.path);
@@ -259,7 +260,7 @@ const DataSheet = React.forwardRef((props, ref) => {
           const path = paths[i];
 
           const content = await StudioAPI.getContent(path);
-          const row = getRowFromContent(i, path, content, headerList);
+          const row = rowFromApiContent(i, path, content, headerList);
           dtRows.push(row);
         }
 
