@@ -24373,9 +24373,11 @@ var getDataSheetHeadersFromConfig = function getDataSheetHeadersFromConfig(confi
     var fieldType = field.getElementsByTagName('type')[0].textContent;
     if (!ContentTypeHelper.isFieldTypeSupported(fieldType)) continue;
     var fieldId = field.getElementsByTagName('id')[0].textContent;
+    var title = field.getElementsByTagName('title')[0].textContent;
     headers.push({
       fieldId: fieldId,
-      fieldType: fieldType
+      fieldType: fieldType,
+      title: title
     });
   }
 
@@ -24405,11 +24407,12 @@ var getColumnsFromHeader = function getColumnsFromHeader(fields) {
   for (var i = 0; i < fields.length; i += 1) {
     var field = fields[i];
     var fieldId = field.fieldId,
-        fieldType = field.fieldType;
+        fieldType = field.fieldType,
+        title = field.title;
     var column = {
       field: fieldId,
-      headerName: fieldId,
-      description: fieldId,
+      headerName: title,
+      description: title,
       sortable: false,
       width: DEFAULT_COLUMN_WIDTH,
       editable: true,
