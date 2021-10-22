@@ -57,7 +57,8 @@ const getDataSheetHeadersFromConfig = (config) => {
     if (!ContentTypeHelper.isFieldTypeSupported(fieldType)) continue;
 
     const fieldId = field.getElementsByTagName('id')[0].textContent;
-    headers.push({ fieldId, fieldType });
+    const title = field.getElementsByTagName('title')[0].textContent;
+    headers.push({ fieldId, fieldType, title });
   }
 
   return headers;
@@ -85,11 +86,11 @@ const getColumnsFromHeader = (fields) => {
 
   for (let i = 0; i < fields.length; i +=1 ) {
     const field = fields[i];
-    const { fieldId, fieldType } = field;
+    const { fieldId, fieldType, title } = field;
     const column = {
       field: fieldId,
-      headerName: fieldId,
-      description: fieldId,
+      headerName: title,
+      description: title,
       sortable: false,
       width: DEFAULT_COLUMN_WIDTH,
       editable: true,
