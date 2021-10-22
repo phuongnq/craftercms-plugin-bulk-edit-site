@@ -98,13 +98,8 @@ const StudioAPI = {
     return null;
   },
   async writeContent(path, content, contentType) {
-    const user = await StudioAPI.getMe();
-    if (!user) {
-      return null;
-    }
-    const username = user.authenticatedUser.username;
     const fileName = path.split('/').pop();
-    const url = `${StudioAPI.origin()}${API_WRITE_CONTENT}?site=${StudioAPI.siteId()}&phase=onSave&path=${path}&&fileName=${fileName}&user=${username}&contentType=${contentType}&unlock=true`;
+    const url = `${StudioAPI.origin()}${API_WRITE_CONTENT}?site=${StudioAPI.siteId()}&phase=onSave&path=${path}&fileName=${fileName}&contentType=${contentType}&unlock=true`;
     const res = await HttpHelper.post(url, content);
 
     if (res.status === 200) {
