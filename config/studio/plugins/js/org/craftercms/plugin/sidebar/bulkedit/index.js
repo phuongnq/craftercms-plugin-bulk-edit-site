@@ -24978,8 +24978,7 @@ var BootstrapDialogTitle = function BootstrapDialogTitle(props) {
     sx: {
       m: 0,
       p: 2,
-      textAlign: 'center',
-      cursor: 'move'
+      textAlign: 'center'
     }
   }, other), children, onClose ? /*#__PURE__*/e__default.createElement(IconButton$1, {
     "aria-label": "close",
