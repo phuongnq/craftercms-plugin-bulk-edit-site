@@ -125,7 +125,7 @@ export default function Editor(props) {
         <Drawer
           container={container}
           variant="temporary"
-          open={mobileOpen}
+          open={true}
           onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true,
