@@ -29,7 +29,6 @@ import {
   Paper,
   Button,
 } from '@mui/material';
-import Draggable from 'react-draggable';
 import CloseIcon from '@mui/icons-material/Close';
 import AutoAwesomeMotionOutlinedIcon from '@mui/icons-material/AutoAwesomeMotionOutlined';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -38,6 +37,7 @@ import Editor from './Editor';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
+    height: '100%',
     padding: theme.spacing(2),
   },
   '& .MuiDialogActions-root': {
@@ -49,7 +49,7 @@ const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
 
   return (
-    <DialogTitle sx={{ m: 0, p: 2, textAlign: 'center', cursor: 'move' }} {...other}>
+    <DialogTitle sx={{ m: 0, p: 2, textAlign: 'center' }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -68,17 +68,6 @@ const BootstrapDialogTitle = (props) => {
     </DialogTitle>
   );
 };
-
-function PaperComponent(props) {
-  return (
-    <Draggable
-      handle="#customized-dialog-title"
-      cancel={'[class*="MuiDialogContent-root"]'}
-    >
-      <Paper {...props} />
-    </Draggable>
-  );
-}
 
 export default function MainDialog() {
   const [open, setOpen] = React.useState(false);
@@ -112,8 +101,7 @@ export default function MainDialog() {
         aria-labelledby="customized-dialog-title"
         open={open}
         fullWidth={true}
-        maxWidth={false}
-        PaperComponent={PaperComponent}
+        maxWidth={true}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           Bulk Edit

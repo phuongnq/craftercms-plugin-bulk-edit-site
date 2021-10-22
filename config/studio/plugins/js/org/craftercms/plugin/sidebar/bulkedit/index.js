@@ -24959,8 +24959,8 @@ var _excluded = ["children", "onClose"];
 var BootstrapDialog = styled$3(Dialog)(function (_ref) {
   var theme = _ref.theme;
   return {
-    height: '100%',
     '& .MuiDialogContent-root': {
+      height: '100%',
       padding: theme.spacing(2)
     },
     '& .MuiDialogActions-root': {
