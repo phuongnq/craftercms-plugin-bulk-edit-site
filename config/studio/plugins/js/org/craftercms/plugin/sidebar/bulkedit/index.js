@@ -2594,45 +2594,30 @@ var StudioAPI = {
   },
   writeContent: function writeContent(path, content, contentType) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-      var user, username, fileName, url, res;
+      var fileName, url, res;
       return regeneratorRuntime.wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              _context5.next = 2;
-              return StudioAPI.getMe();
-
-            case 2:
-              user = _context5.sent;
-
-              if (user) {
-                _context5.next = 5;
-                break;
-              }
-
-              return _context5.abrupt("return", null);
-
-            case 5:
-              username = user.authenticatedUser.username;
               fileName = path.split('/').pop();
-              url = "".concat(StudioAPI.origin()).concat(API_WRITE_CONTENT, "?site=").concat(StudioAPI.siteId(), "&phase=onSave&path=").concat(path, "&&fileName=").concat(fileName, "&user=").concat(username, "&contentType=").concat(contentType, "&unlock=true");
-              _context5.next = 10;
+              url = "".concat(StudioAPI.origin()).concat(API_WRITE_CONTENT, "?site=").concat(StudioAPI.siteId(), "&phase=onSave&path=").concat(path, "&fileName=").concat(fileName, "&contentType=").concat(contentType, "&unlock=true");
+              _context5.next = 4;
               return HttpHelper.post(url, content);
 
-            case 10:
+            case 4:
               res = _context5.sent;
 
               if (!(res.status === 200)) {
-                _context5.next = 13;
+                _context5.next = 7;
                 break;
               }
 
               return _context5.abrupt("return", res.response);
 
-            case 13:
+            case 7:
               return _context5.abrupt("return", null);
 
-            case 14:
+            case 8:
             case "end":
               return _context5.stop();
           }
