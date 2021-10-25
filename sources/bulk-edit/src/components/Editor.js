@@ -117,9 +117,9 @@ export default function Editor() {
   );
 
   return (
-    <Box sx={{ display: 'flex' }} ref={rootRef}>
+    <div ref={rootRef}>
       <CssBaseline />
-        <AppBar position="relative" open={open}>
+        <AppBar open={open}>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -143,7 +143,7 @@ export default function Editor() {
             container: () => rootRef.current,
           }}
           sx={{
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'relative' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH },
           }}
         >
           {drawer}
@@ -157,6 +157,6 @@ export default function Editor() {
             Change has been saved.
           </Alert>
         </Snackbar>
-    </Box>
+    </div>
   );
 };
