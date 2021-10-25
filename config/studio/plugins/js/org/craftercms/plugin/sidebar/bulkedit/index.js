@@ -24905,7 +24905,17 @@ function Editor() {
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Cancel All Change"
   }))), /*#__PURE__*/e__default.createElement(Divider, null));
-  return /*#__PURE__*/e__default.createElement("div", {
+  return /*#__PURE__*/e__default.createElement(Box, {
+    width: "100%",
+    height: "100%",
+    id: "drawer-container",
+    position: "relative",
+    bgcolor: "white",
+    component: "div",
+    style: {
+      overflowY: "scroll",
+      overflowX: "hidden"
+    },
     ref: rootRef
   }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(AppBar, {
     position: "relative",
@@ -24927,6 +24937,9 @@ function Editor() {
       keepMounted: true,
       container: function container() {
         return rootRef.current;
+      },
+      style: {
+        position: "absolute"
       }
     },
     sx: {
