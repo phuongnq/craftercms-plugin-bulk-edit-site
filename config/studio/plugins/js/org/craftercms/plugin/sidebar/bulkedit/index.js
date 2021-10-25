@@ -24941,7 +24941,7 @@ function Editor(props) {
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
         width: DRAWER_WIDTH,
-        position: 'relative'
+        position: 'absolute'
       }
     }
   }, drawer)), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
