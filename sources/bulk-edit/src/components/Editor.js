@@ -27,12 +27,14 @@ import {
   Drawer,
   Snackbar,
   Alert,
+  IconButton,
 } from '@mui/material';
 
 import FindReplaceIcon from '@mui/icons-material/FindReplace';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import ContentTypeSelect from './ContentTypeSelect';
 import FindAndReplace from './FindAndReplace';
@@ -42,7 +44,7 @@ const DRAWER_WIDTH = 240;
 
 export default function Editor(props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
 
@@ -66,7 +68,7 @@ export default function Editor(props) {
   };
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    setDrawerOpen(!drawerOpen);
   };
 
   const drawer = (
@@ -122,6 +124,14 @@ export default function Editor(props) {
         sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerToggle}
+          edge="start"
+        >
+          <MenuIcon />
+        </IconButton>
         <Drawer
           container={container}
           variant="temporary"
