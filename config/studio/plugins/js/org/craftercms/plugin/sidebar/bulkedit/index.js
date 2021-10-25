@@ -24822,9 +24822,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 });
 
 var DRAWER_WIDTH = 240;
-function Editor(props) {
-  props.window;
-
+function Editor() {
   var _React$useState = e__default.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       drawerOpen = _React$useState2[0],
@@ -24913,7 +24911,7 @@ function Editor(props) {
       display: 'flex'
     }
   }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(AppBar, {
-    position: "fixed",
+    position: "relative",
     open: open
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",

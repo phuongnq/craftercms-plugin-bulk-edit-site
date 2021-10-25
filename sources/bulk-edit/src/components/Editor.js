@@ -28,6 +28,8 @@ import {
   Snackbar,
   Alert,
   IconButton,
+  AppBar,
+  Typography
 } from '@mui/material';
 
 import FindReplaceIcon from '@mui/icons-material/FindReplace';
@@ -42,8 +44,7 @@ import DataSheet from './DataSheet';
 
 const DRAWER_WIDTH = 240;
 
-export default function Editor(props) {
-  const { window } = props;
+export default function Editor() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
@@ -117,7 +118,7 @@ export default function Editor(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-        <AppBar position="fixed" open={open}>
+        <AppBar position="relative" open={open}>
           <Toolbar>
             <IconButton
               color="inherit"
