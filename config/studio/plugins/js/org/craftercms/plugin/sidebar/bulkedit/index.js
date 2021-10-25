@@ -24933,7 +24933,7 @@ function Editor() {
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
         width: DRAWER_WIDTH,
-        position: 'absolute'
+        position: 'relative'
       }
     }
   }, drawer), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
