@@ -20,14 +20,11 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions,
   IconButton,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Paper,
-  Button,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import AutoAwesomeMotionOutlinedIcon from '@mui/icons-material/AutoAwesomeMotionOutlined';
@@ -111,11 +108,6 @@ export default function MainDialog() {
         <DialogContent dividers>
           <Editor />
         </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Close
-          </Button>
-        </DialogActions>
       </BootstrapDialog>
     </div>
   );
