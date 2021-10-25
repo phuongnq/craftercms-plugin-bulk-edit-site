@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$3, CssBaseline, AppBar, Toolbar: Toolbar$2, IconButton: IconButton$1, Drawer, Snackbar, Alert, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, CssBaseline, AppBar, Toolbar: Toolbar$2, IconButton: IconButton$1, Drawer, Snackbar, Alert, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -21007,7 +21007,7 @@ const transformDeprecatedColors = color => {
   return colorTransformations[color] || color;
 };
 
-const Typography$1 = /*#__PURE__*/e__default.forwardRef(function Typography(inProps, ref) {
+const Typography = /*#__PURE__*/e__default.forwardRef(function Typography(inProps, ref) {
   const themeProps = useThemeProps({
     props: inProps,
     name: 'MuiTypography'
@@ -21050,7 +21050,7 @@ const Typography$1 = /*#__PURE__*/e__default.forwardRef(function Typography(inPr
     className: l$2(classes.root, className)
   }, other));
 });
-var Typography$2 = Typography$1;
+var Typography$1 = Typography;
 
 const listItemTextClasses = generateUtilityClasses('MuiListItemText', ['root', 'multiline', 'dense', 'inset', 'primary', 'secondary']);
 var listItemTextClasses$1 = listItemTextClasses;
@@ -21839,7 +21839,7 @@ const FormControlLabel = /*#__PURE__*/e__default.forwardRef(function FormControl
     ownerState: ownerState,
     ref: ref
   }, other, {
-    children: [/*#__PURE__*/e__default.cloneElement(control, controlProps), label.type === Typography$2 || disableTypography ? label : /*#__PURE__*/jsxRuntime.jsx(Typography$2, _extends({
+    children: [/*#__PURE__*/e__default.cloneElement(control, controlProps), label.type === Typography$1 || disableTypography ? label : /*#__PURE__*/jsxRuntime.jsx(Typography$1, _extends({
       component: "span",
       className: classes.label
     }, componentsProps.typography, {
@@ -24323,7 +24323,7 @@ var GridCellExpand = /*#__PURE__*/e__default.memo(function GridCellExpand(props)
     style: {
       minHeight: wrapper.current.offsetHeight - 3
     }
-  }, /*#__PURE__*/e__default.createElement(Typography$3, {
+  }, /*#__PURE__*/e__default.createElement(Typography$2, {
     variant: "body2",
     style: {
       padding: 16
@@ -24920,7 +24920,7 @@ function Editor(props) {
     "aria-label": "open drawer",
     onClick: handleDrawerToggle,
     edge: "start"
-  }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography, {
+  }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography$2, {
     variant: "h6",
     noWrap: true,
     component: "div"
