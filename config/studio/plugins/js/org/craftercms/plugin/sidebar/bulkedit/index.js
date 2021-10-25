@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, CssBaseline, IconButton: IconButton$1, Drawer, Snackbar, Alert, Toolbar: Toolbar$2, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$3, CssBaseline, Toolbar: Toolbar$2, IconButton: IconButton$1, Drawer, Snackbar, Alert, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -21007,7 +21007,7 @@ const transformDeprecatedColors = color => {
   return colorTransformations[color] || color;
 };
 
-const Typography = /*#__PURE__*/e__default.forwardRef(function Typography(inProps, ref) {
+const Typography$1 = /*#__PURE__*/e__default.forwardRef(function Typography(inProps, ref) {
   const themeProps = useThemeProps({
     props: inProps,
     name: 'MuiTypography'
@@ -21050,7 +21050,7 @@ const Typography = /*#__PURE__*/e__default.forwardRef(function Typography(inProp
     className: l$2(classes.root, className)
   }, other));
 });
-var Typography$1 = Typography;
+var Typography$2 = Typography$1;
 
 const listItemTextClasses = generateUtilityClasses('MuiListItemText', ['root', 'multiline', 'dense', 'inset', 'primary', 'secondary']);
 var listItemTextClasses$1 = listItemTextClasses;
@@ -21839,7 +21839,7 @@ const FormControlLabel = /*#__PURE__*/e__default.forwardRef(function FormControl
     ownerState: ownerState,
     ref: ref
   }, other, {
-    children: [/*#__PURE__*/e__default.cloneElement(control, controlProps), label.type === Typography$1 || disableTypography ? label : /*#__PURE__*/jsxRuntime.jsx(Typography$1, _extends({
+    children: [/*#__PURE__*/e__default.cloneElement(control, controlProps), label.type === Typography$2 || disableTypography ? label : /*#__PURE__*/jsxRuntime.jsx(Typography$2, _extends({
       component: "span",
       className: classes.label
     }, componentsProps.typography, {
@@ -24323,7 +24323,7 @@ var GridCellExpand = /*#__PURE__*/e__default.memo(function GridCellExpand(props)
     style: {
       minHeight: wrapper.current.offsetHeight - 3
     }
-  }, /*#__PURE__*/e__default.createElement(Typography$2, {
+  }, /*#__PURE__*/e__default.createElement(Typography$3, {
     variant: "body2",
     style: {
       padding: 16
@@ -24823,7 +24823,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
 var DRAWER_WIDTH = 240;
 function Editor(props) {
-  var window = props.window;
+  props.window;
 
   var _React$useState = e__default.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -24908,31 +24908,23 @@ function Editor(props) {
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Cancel All Change"
   }))), /*#__PURE__*/e__default.createElement(Divider, null));
-  var container = window !== undefined ? function () {
-    return window().document.getElementById('main-editor-container');
-  } : undefined;
   return /*#__PURE__*/e__default.createElement(Box, {
     sx: {
       display: 'flex'
     }
-  }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(Box, {
-    component: "nav",
-    sx: {
-      width: {
-        sm: DRAWER_WIDTH
-      },
-      flexShrink: {
-        sm: 0
-      }
-    },
-    "aria-label": "mailbox folders"
-  }, /*#__PURE__*/e__default.createElement(IconButton$1, {
+  }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(AppBar, {
+    position: "fixed",
+    open: open
+  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
     "aria-label": "open drawer",
     onClick: handleDrawerToggle,
     edge: "start"
-  }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Drawer, {
-    container: container,
+  }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography, {
+    variant: "h6",
+    noWrap: true,
+    component: "div"
+  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Drawer, {
     variant: "temporary",
     open: drawerOpen,
     onClose: handleDrawerToggle,
@@ -24946,7 +24938,7 @@ function Editor(props) {
         position: 'absolute'
       }
     }
-  }, drawer)), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
+  }, drawer), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
     handleClose: handleFindReplaceDialogClose
   }), /*#__PURE__*/e__default.createElement(Box, {

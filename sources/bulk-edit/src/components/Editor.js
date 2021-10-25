@@ -72,7 +72,7 @@ export default function Editor(props) {
   };
 
   const drawer = (
-    <div>
+    <div id="main-editor-container">
       <Toolbar />
       <Divider />
       <List>
@@ -114,24 +114,24 @@ export default function Editor(props) {
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
-
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Box
-        component="nav"
-        sx={{ width: { sm: DRAWER_WIDTH }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerToggle}
-          edge="start"
-        >
-          <MenuIcon />
-        </IconButton>
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+              edge="start"
+            >
+            <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              Bulk Edit
+            </Typography>
+          </Toolbar>
+        </AppBar>
         <Drawer
           variant="temporary"
           open={drawerOpen}
@@ -140,21 +140,20 @@ export default function Editor(props) {
             keepMounted: true,
           }}
           sx={{
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'relative' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
           }}
         >
           {drawer}
         </Drawer>
-      </Box>
-      <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
-      <Box component="main" sx={{ flexGrow: 1 }}>
-        <DataSheet ref={dataSheetRef} />
-      </Box>
-      <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
-        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
-          Change has been saved.
-        </Alert>
-      </Snackbar>
+        <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
+        <Box component="main" sx={{ flexGrow: 1 }}>
+          <DataSheet ref={dataSheetRef} />
+        </Box>
+        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+          <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+            Change has been saved.
+          </Alert>
+        </Snackbar>
     </Box>
   );
 };
