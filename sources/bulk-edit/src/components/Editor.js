@@ -117,9 +117,16 @@ export default function Editor() {
   );
 
   return (
-    <div ref={rootRef}>
+    <Box
+      id="drawer-container"
+      position="relative"
+      bgcolor="white"
+      component="div"
+      style={{ overflowY: "scroll", overflowX: "hidden" }}
+      ref={rootRef}
+    >
       <CssBaseline />
-        <AppBar open={open}>
+        <AppBar position="relative" open={open}>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -141,9 +148,10 @@ export default function Editor() {
           ModalProps={{
             keepMounted: true,
             container: () => rootRef.current,
+            style: { position: "absolute" },
           }}
           sx={{
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
           }}
         >
           {drawer}
@@ -157,6 +165,6 @@ export default function Editor() {
             Change has been saved.
           </Alert>
         </Snackbar>
-    </div>
+    </Box>
   );
 };

@@ -24906,8 +24906,6 @@ function Editor() {
     primary: "Cancel All Change"
   }))), /*#__PURE__*/e__default.createElement(Divider, null));
   return /*#__PURE__*/e__default.createElement(Box, {
-    width: "100%",
-    height: "100%",
     id: "drawer-container",
     position: "relative",
     bgcolor: "white",
@@ -24946,7 +24944,7 @@ function Editor() {
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
         width: DRAWER_WIDTH,
-        position: 'relative'
+        position: 'absolute'
       }
     }
   }, drawer), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
