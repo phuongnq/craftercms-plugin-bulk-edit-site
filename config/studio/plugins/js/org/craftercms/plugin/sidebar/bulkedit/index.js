@@ -24932,7 +24932,7 @@ function Editor(props) {
   }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Drawer, {
     container: container,
     variant: "temporary",
-    open: true,
+    open: drawerOpen,
     onClose: handleDrawerToggle,
     ModalProps: {
       keepMounted: true
@@ -24945,7 +24945,7 @@ function Editor(props) {
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
         width: DRAWER_WIDTH,
-        position: 'absolute'
+        position: 'relative'
       }
     }
   }, drawer), /*#__PURE__*/e__default.createElement(Drawer, {
@@ -24958,7 +24958,7 @@ function Editor(props) {
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
         width: DRAWER_WIDTH,
-        position: 'absolute'
+        position: 'relative'
       }
     },
     open: true
