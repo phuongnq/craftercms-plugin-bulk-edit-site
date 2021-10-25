@@ -24908,6 +24908,7 @@ function Editor() {
   return /*#__PURE__*/e__default.createElement("div", {
     ref: rootRef
   }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(AppBar, {
+    position: "relative",
     open: open
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
@@ -24931,7 +24932,8 @@ function Editor() {
     sx: {
       '& .MuiDrawer-paper': {
         boxSizing: 'border-box',
-        width: DRAWER_WIDTH
+        width: DRAWER_WIDTH,
+        position: 'relative'
       }
     }
   }, drawer), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
