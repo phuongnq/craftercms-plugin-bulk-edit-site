@@ -24823,7 +24823,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
 var DRAWER_WIDTH = 240;
 function Editor(props) {
-  props.window;
+  var window = props.window;
 
   var _React$useState = e__default.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -24906,6 +24906,9 @@ function Editor(props) {
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Cancel All Change"
   }))), /*#__PURE__*/e__default.createElement(Divider, null));
+  var container = window !== undefined ? function () {
+    return window().document.body;
+  } : undefined;
   return /*#__PURE__*/e__default.createElement(Box, {
     sx: {
       display: 'flex'
@@ -24927,6 +24930,7 @@ function Editor(props) {
     onClick: handleDrawerToggle,
     edge: "start"
   }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Drawer, {
+    container: container,
     variant: "temporary",
     open: drawerOpen,
     onClose: handleDrawerToggle,
