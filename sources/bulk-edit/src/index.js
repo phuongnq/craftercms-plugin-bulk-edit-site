@@ -16,19 +16,13 @@
 
 import BulkEditApp from './BulkEditApp';
 
-import en from './i18n/translations/en.json';
-import es from './i18n/translations/es.json';
-
 const plugin = {
   id: 'org.craftercms.bulkEditPlugin',
   name: 'Bulk Edit Plugin',
   description: 'A plugin to do bulk edit',
   author: 'Crafter CMS',
   logo: null,
-  locales: {
-    en,
-    es
-  },
+  locales: {},
   apps: [
     {
       route: '/yada-yada',
