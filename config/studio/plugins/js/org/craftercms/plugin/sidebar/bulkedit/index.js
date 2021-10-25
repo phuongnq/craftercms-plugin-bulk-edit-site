@@ -24880,7 +24880,9 @@ function Editor(props) {
     setDrawerOpen(!drawerOpen);
   };
 
-  var drawer = /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
+  var drawer = /*#__PURE__*/e__default.createElement("div", {
+    id: "main-editor-container"
+  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
     key: "Find and Replace",
     onClick: function onClick() {
@@ -24907,7 +24909,7 @@ function Editor(props) {
     primary: "Cancel All Change"
   }))), /*#__PURE__*/e__default.createElement(Divider, null));
   var container = window !== undefined ? function () {
-    return window().document.body;
+    return window().document.getElementById('main-editor-container');
   } : undefined;
   return /*#__PURE__*/e__default.createElement(Box, {
     sx: {
