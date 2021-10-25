@@ -24879,10 +24879,7 @@ function Editor() {
     setDrawerOpen(!drawerOpen);
   };
 
-  var drawer = /*#__PURE__*/e__default.createElement("div", {
-    id: "main-editor-container",
-    ref: rootRef
-  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
+  var drawer = /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
     key: "Find and Replace",
     onClick: function onClick() {
@@ -24911,7 +24908,8 @@ function Editor() {
   return /*#__PURE__*/e__default.createElement(Box, {
     sx: {
       display: 'flex'
-    }
+    },
+    ref: rootRef
   }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(AppBar, {
     position: "relative",
     open: open
@@ -24930,7 +24928,9 @@ function Editor() {
     onClose: handleDrawerToggle,
     ModalProps: {
       keepMounted: true,
-      container: rootRef.current
+      container: function container() {
+        return rootRef.current;
+      }
     },
     sx: {
       '& .MuiDrawer-paper': {

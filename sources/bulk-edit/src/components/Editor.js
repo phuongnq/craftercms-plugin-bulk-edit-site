@@ -74,7 +74,7 @@ export default function Editor() {
   };
 
   const drawer = (
-    <div id="main-editor-container" ref={rootRef}>
+    <div>
       <Toolbar />
       <Divider />
       <List>
@@ -117,7 +117,7 @@ export default function Editor() {
   );
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} ref={rootRef}>
       <CssBaseline />
         <AppBar position="relative" open={open}>
           <Toolbar>
@@ -140,7 +140,7 @@ export default function Editor() {
           onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true,
-            container: rootRef.current,
+            container: () => rootRef.current,
           }}
           sx={{
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'relative' },
