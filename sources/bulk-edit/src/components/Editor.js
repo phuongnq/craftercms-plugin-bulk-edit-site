@@ -135,14 +135,14 @@ export default function Editor(props) {
         <Drawer
           container={container}
           variant="temporary"
-          open={true}
+          open={drawerOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'relative' },
           }}
         >
           {drawer}
@@ -151,7 +151,7 @@ export default function Editor(props) {
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'relative' },
           }}
           open
         >
