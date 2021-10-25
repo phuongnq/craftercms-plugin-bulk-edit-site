@@ -133,7 +133,6 @@ export default function Editor(props) {
           <MenuIcon />
         </IconButton>
         <Drawer
-          container={container}
           variant="temporary"
           open={drawerOpen}
           onClose={handleDrawerToggle}
@@ -141,19 +140,8 @@ export default function Editor(props) {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'relative' },
           }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'relative' },
-          }}
-          open
         >
           {drawer}
         </Drawer>
