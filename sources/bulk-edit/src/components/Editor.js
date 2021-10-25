@@ -49,6 +49,7 @@ export default function Editor() {
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
 
+  const rootRef = React.useRef(null);
   const dataSheetRef = React.useRef(null);
 
   const handleFindReplaceDialogClose = () => {
@@ -73,7 +74,7 @@ export default function Editor() {
   };
 
   const drawer = (
-    <div id="main-editor-container">
+    <div id="main-editor-container" ref={rootRef}>
       <Toolbar />
       <Divider />
       <List>
@@ -139,6 +140,7 @@ export default function Editor() {
           onClose={handleDrawerToggle}
           ModalProps={{
             keepMounted: true,
+            container: rootRef.current,
           }}
           sx={{
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'relative' },

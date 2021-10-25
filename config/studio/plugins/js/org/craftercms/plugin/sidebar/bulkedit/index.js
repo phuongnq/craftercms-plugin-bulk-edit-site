@@ -24838,6 +24838,7 @@ function Editor() {
       openAlert = _React$useState6[0],
       setOpenAlert = _React$useState6[1];
 
+  var rootRef = e__default.useRef(null);
   var dataSheetRef = e__default.useRef(null);
 
   var handleFindReplaceDialogClose = function handleFindReplaceDialogClose() {
@@ -24879,7 +24880,8 @@ function Editor() {
   };
 
   var drawer = /*#__PURE__*/e__default.createElement("div", {
-    id: "main-editor-container"
+    id: "main-editor-container",
+    ref: rootRef
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
     key: "Find and Replace",
@@ -24927,7 +24929,8 @@ function Editor() {
     open: drawerOpen,
     onClose: handleDrawerToggle,
     ModalProps: {
-      keepMounted: true
+      keepMounted: true,
+      container: rootRef.current
     },
     sx: {
       '& .MuiDrawer-paper': {
