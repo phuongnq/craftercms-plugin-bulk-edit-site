@@ -25039,10 +25039,7 @@ function MainDialog() {
     onClose: handleClose
   }, "Bulk Edit"), /*#__PURE__*/e__default.createElement(DialogContent, {
     dividers: true
-  }, /*#__PURE__*/e__default.createElement(Editor, null)), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Button$1, {
-    autoFocus: true,
-    onClick: handleClose
-  }, "Close"))));
+  }, /*#__PURE__*/e__default.createElement(Editor, null))));
 }
 
 /*
