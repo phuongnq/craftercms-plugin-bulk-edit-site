@@ -25022,7 +25022,7 @@ function Editor() {
   };
 
   var appbar = /*#__PURE__*/e__default.createElement(StyledAppBar, {
-    position: "absolute",
+    position: "relative",
     open: drawerOpen
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
@@ -25051,20 +25051,20 @@ function Editor() {
     },
     PaperProps: {
       style: {
-        position: "absolute",
+        position: "relative",
         width: DRAWER_WIDTH
       }
     },
     BackdropProps: {
       style: {
-        position: "absolute"
+        position: "relative"
       }
     },
     open: drawerOpen,
     ModalProps: {
       container: document.getElementById("drawer-container"),
       style: {
-        position: 'absolute'
+        position: 'relative'
       },
       disableEnforceFocus: true,
       keepMounted: true

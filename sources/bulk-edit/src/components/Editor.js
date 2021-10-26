@@ -128,7 +128,7 @@ export default function Editor() {
   };
 
   const appbar = (
-    <StyledAppBar position="absolute" open={drawerOpen}>
+    <StyledAppBar position="relative" open={drawerOpen}>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -157,12 +157,12 @@ export default function Editor() {
           boxSizing: 'border-box',
         },
       }}
-      PaperProps={{ style: { position: "absolute", width: DRAWER_WIDTH } }}
-      BackdropProps={{ style: { position: "absolute" } }}
+      PaperProps={{ style: { position: "relative", width: DRAWER_WIDTH } }}
+      BackdropProps={{ style: { position: "relative" } }}
       open={drawerOpen}
       ModalProps={{
         container: document.getElementById("drawer-container"),
-        style: { position: 'absolute' },
+        style: { position: 'relative' },
         disableEnforceFocus: true,
         keepMounted: true,
       }}
