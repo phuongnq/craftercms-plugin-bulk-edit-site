@@ -9,7 +9,7 @@
 	<internal-name>Entertainment </internal-name>
 	<orderDefault_f>-1</orderDefault_f>
 	<body_html>&lt;h1&gt;Welcome to Your Crafter CMS Site.&lt;/h1&gt;
-&lt;p&gt;This site blueprint is the equivalent of a Hi World. It's a blank slate on which you can build your own digital experience.&lt;/p&gt;
+&lt;p&gt;This site blueprint is the equivalent of a Hello World. It's a blank slate on which you can build your own digital experience.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;To create new content types use the Site Tools &amp;gt; Content Types menu on the left Sidebar&lt;/li&gt;
 &lt;li&gt;To update markup, edit this template by clicking the item menu on the top toolbar and select "Edit Template"&lt;/li&gt;
@@ -27,6 +27,6 @@
 	<createdDate_dt>2017-1-31T16:18:14.000Z</createdDate_dt>
 	<lastModifiedDate>2021-10-19T07:30:32.580Z</lastModifiedDate>
 	<lastModifiedDate_dt>2021-10-19T07:30:32.580Z</lastModifiedDate_dt>
-	<title_t>Hi! World edit</title_t>
+	<title_t>Hello! World edit</title_t>
 	<disabled>false</disabled>
 </page>
