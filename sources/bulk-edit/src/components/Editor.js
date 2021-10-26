@@ -147,7 +147,7 @@ export default function Editor() {
     >
       <CssBaseline />
         <Box component="main" sx={{ flexGrow: 1 }} ref={rootRef}>
-          <AppBar position="fixed" open={open}>
+          <AppBar position="relative" open={open}>
             <Toolbar>
               <IconButton
                 color="inherit"

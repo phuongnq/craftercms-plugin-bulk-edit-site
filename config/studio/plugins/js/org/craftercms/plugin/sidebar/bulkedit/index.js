@@ -24982,7 +24982,7 @@ function Editor() {
     },
     ref: rootRef
   }, /*#__PURE__*/e__default.createElement(AppBar, {
-    position: "fixed",
+    position: "relative",
     open: open
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
