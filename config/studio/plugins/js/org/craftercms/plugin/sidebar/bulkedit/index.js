@@ -24991,7 +24991,8 @@ function Editor() {
       flexShrink: 0,
       '& .MuiDrawer-paper': {
         width: DRAWER_WIDTH,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        hegiht: 'auto'
       }
     },
     PaperProps: {
