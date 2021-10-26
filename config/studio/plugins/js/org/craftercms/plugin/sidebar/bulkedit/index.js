@@ -24927,7 +24927,7 @@ var Main = styled$3('main', {
     marginLeft: 0
   });
 });
-var StyledAppBar = styled$3(AppBar, {
+styled$3(AppBar, {
   shouldForwardProp: function shouldForwardProp(prop) {
     return prop !== 'open';
   }
@@ -25021,9 +25021,8 @@ function Editor() {
     setDrawerOpen(false);
   };
 
-  var appbar = /*#__PURE__*/e__default.createElement(StyledAppBar, {
-    position: "relative",
-    open: drawerOpen
+  var appbar = /*#__PURE__*/e__default.createElement(Box, {
+    position: "relative"
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
     "aria-label": "open drawer",

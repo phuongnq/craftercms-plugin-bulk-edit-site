@@ -128,7 +128,7 @@ export default function Editor() {
   };
 
   const appbar = (
-    <StyledAppBar position="relative" open={drawerOpen}>
+    <Box position="relative">
       <Toolbar>
         <IconButton
           color="inherit"
@@ -143,7 +143,7 @@ export default function Editor() {
           Bulk Edit
         </Typography>
       </Toolbar>
-    </StyledAppBar>
+    </Box>
   );
 
   const drawer = (
