@@ -3080,8 +3080,10 @@ var LastEditDateComponent = function LastEditDateComponent() {
         {
           var yesterday = today;
           yesterday.setDate(yesterday.getDate() - 1);
+          console.log(yesterday);
           var tomorrow = today;
           tomorrow.setDate(tomorrow.getDate() + 1);
+          console.log(tomorrow);
           dateFilter.min = DateHelper.getFormatDate(yesterday);
           dateFilter.max = DateHelper.getFormatDate(tomorrow);
         }
