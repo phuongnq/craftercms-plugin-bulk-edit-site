@@ -49,6 +49,7 @@ import DataSheet from './DataSheet';
 const DRAWER_WIDTH = 240;
 
 export default function Editor() {
+  const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);

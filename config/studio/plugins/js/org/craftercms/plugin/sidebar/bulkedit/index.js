@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, AppBar, CssBaseline, Toolbar: Toolbar$2, IconButton: IconButton$1, Drawer, Divider, Snackbar, Alert, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, useTheme: useTheme$4, AppBar, CssBaseline, Toolbar: Toolbar$2, IconButton: IconButton$1, Drawer, Divider, Snackbar, Alert, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -24905,6 +24905,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
 var DRAWER_WIDTH = 240;
 function Editor() {
+  var theme = useTheme$4();
+
   var _React$useState = e__default.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       drawerOpen = _React$useState2[0],
