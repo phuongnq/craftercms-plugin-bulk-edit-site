@@ -25052,7 +25052,8 @@ function Editor() {
     PaperProps: {
       style: {
         position: "absolute",
-        width: DRAWER_WIDTH
+        width: DRAWER_WIDTH,
+        top: "65px"
       }
     },
     BackdropProps: {

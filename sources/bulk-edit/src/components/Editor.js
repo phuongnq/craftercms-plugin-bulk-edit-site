@@ -157,7 +157,7 @@ export default function Editor() {
           boxSizing: 'border-box',
         },
       }}
-      PaperProps={{ style: { position: "absolute", width: DRAWER_WIDTH } }}
+      PaperProps={{ style: { position: "absolute", width: DRAWER_WIDTH, top: "65px" } }}
       BackdropProps={{ style: { position: "absolute" } }}
       open={drawerOpen}
       ModalProps={{
