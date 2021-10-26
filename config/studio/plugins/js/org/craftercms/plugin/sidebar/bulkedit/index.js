@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, AppBar, useTheme: useTheme$4, Toolbar: Toolbar$2, IconButton: IconButton$1, Drawer, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, CssBaseline, Snackbar, Alert, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, AppBar, useTheme: useTheme$4, Drawer, IconButton: IconButton$1, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, CssBaseline, Snackbar, Alert, Toolbar: Toolbar$2, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -25028,11 +25028,9 @@ function Editor() {
     "aria-label": "open drawer",
     onClick: handleDrawerOpen,
     edge: "start",
-    sx: _objectSpread2({
+    sx: {
       mr: 2
-    }, drawerOpen && {
-      display: 'none'
-    })
+    }
   }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography$2, {
     variant: "h6",
     noWrap: true,
@@ -25052,7 +25050,7 @@ function Editor() {
       style: {
         position: "absolute",
         width: DRAWER_WIDTH,
-        top: "65px"
+        top: "145px"
       }
     },
     BackdropProps: {
@@ -25112,7 +25110,8 @@ function Editor() {
     style: {
       overflowY: "scroll",
       overflowX: "hidden",
-      display: "flex"
+      display: "flex",
+      border: "1px solid #e0e0e0"
     },
     ref: rootRef
   }, drawer, /*#__PURE__*/e__default.createElement(Main, {

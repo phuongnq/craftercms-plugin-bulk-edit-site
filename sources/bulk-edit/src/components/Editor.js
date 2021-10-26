@@ -135,7 +135,7 @@ export default function Editor() {
           aria-label="open drawer"
           onClick={handleDrawerOpen}
           edge="start"
-          sx={{ mr: 2, ...(drawerOpen && { display: 'none' }) }}
+          sx={{ mr: 2 }}
         >
           <MenuIcon />
         </IconButton>
@@ -157,7 +157,7 @@ export default function Editor() {
           boxSizing: 'border-box',
         },
       }}
-      PaperProps={{ style: { position: "absolute", width: DRAWER_WIDTH, top: "65px" } }}
+      PaperProps={{ style: { position: "absolute", width: DRAWER_WIDTH, top: "145px" } }}
       BackdropProps={{ style: { position: "absolute" } }}
       open={drawerOpen}
       ModalProps={{
@@ -232,6 +232,7 @@ export default function Editor() {
           overflowY: "scroll",
           overflowX: "hidden",
           display: "flex",
+          border: "1px solid #e0e0e0",
         }}
         ref={rootRef}
       >
