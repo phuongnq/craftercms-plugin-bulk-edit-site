@@ -228,8 +228,11 @@ export default function Editor() {
         position="relative"
         bgcolor="white"
         component="div"
-        display="flex"
-        style={{ overflowY: "scroll", overflowX: "hidden" }}
+        style={{
+          overflowY: "scroll",
+          overflowX: "hidden",
+          display: "flex",
+        }}
         ref={rootRef}
       >
         {drawer}

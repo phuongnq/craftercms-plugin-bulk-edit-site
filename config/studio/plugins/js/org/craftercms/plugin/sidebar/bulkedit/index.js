@@ -25109,10 +25109,10 @@ function Editor() {
     position: "relative",
     bgcolor: "white",
     component: "div",
-    display: "flex",
     style: {
       overflowY: "scroll",
-      overflowX: "hidden"
+      overflowX: "hidden",
+      display: "flex"
     },
     ref: rootRef
   }, drawer, /*#__PURE__*/e__default.createElement(Main, {
