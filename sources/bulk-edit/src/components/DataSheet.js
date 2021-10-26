@@ -128,6 +128,10 @@ const isCellEdited = (params, rows) => {
   const cellId = params.id;
   const cellField = params.field;
   const cellValue = params.value;
+  console.log(cellValue);
+  console.log(cellField);
+  console.log(rows[cellId]);
+  console.log('-------------------');
   return cellValue !== rows[cellId][cellField];
 };
 
@@ -325,7 +329,6 @@ const DataSheet = React.forwardRef((props, ref) => {
           if (!params.isEditable) return '';
 
           if (isCellEdited(params, rows)) {
-            console.log(params, rows);
             return 'edited';
           }
 

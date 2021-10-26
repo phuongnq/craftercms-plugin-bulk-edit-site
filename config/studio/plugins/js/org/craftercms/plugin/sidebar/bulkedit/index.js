@@ -24587,6 +24587,10 @@ var isCellEdited = function isCellEdited(params, rows) {
   var cellId = params.id;
   var cellField = params.field;
   var cellValue = params.value;
+  console.log(cellValue);
+  console.log(cellField);
+  console.log(rows[cellId]);
+  console.log('-------------------');
   return cellValue !== rows[cellId][cellField];
 };
 
@@ -24915,7 +24919,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       if (!params.isEditable) return '';
 
       if (isCellEdited(params, rows)) {
-        console.log(params, rows);
         return 'edited';
       }
 
