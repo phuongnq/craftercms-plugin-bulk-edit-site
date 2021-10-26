@@ -25086,13 +25086,10 @@ function Editor() {
 
 var _excluded = ["children", "onClose"];
 var BootstrapDialog = styled$3(Dialog)(function (_ref) {
-  var theme = _ref.theme;
+  _ref.theme;
   return {
     '& .MuiDialogContent-root': {
-      padding: theme.spacing(2)
-    },
-    '& .MuiDialogActions-root': {
-      padding: theme.spacing(1)
+      padding: 0
     }
   };
 });
