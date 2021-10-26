@@ -25051,13 +25051,13 @@ function Editor() {
     },
     PaperProps: {
       style: {
-        position: "relative",
+        position: "absolute",
         width: DRAWER_WIDTH
       }
     },
     BackdropProps: {
       style: {
-        position: "relative"
+        position: "absolute"
       }
     },
     open: drawerOpen,
