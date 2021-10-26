@@ -132,7 +132,7 @@ const isCellEdited = (params, rows) => {
   console.log(cellField);
   console.log(rows[cellId]);
   console.log('-------------------');
-  return cellValue !== rows[cellId][cellField];
+  return rows[cellId] && cellValue !== rows[cellId][cellField];
 };
 
 const isCellContainText = (text, params) => {
