@@ -129,12 +129,10 @@ export default function Editor() {
 
   return (
     <Box
-      id="drawer-container"
       position="relative"
       bgcolor="white"
       component="div"
       style={{ overflowY: "scroll", overflowX: "hidden" }}
-      ref={rootRef}
     >
       <CssBaseline />
       <StyledAppBar position="relative" open={drawerOpen}>
@@ -144,7 +142,7 @@ export default function Editor() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            sx={{ mr: 2, ...(drawerOpen && { display: 'none' }) }}
           >
             <MenuIcon />
           </IconButton>
@@ -153,69 +151,71 @@ export default function Editor() {
           </Typography>
       </Toolbar>
       </StyledAppBar>
-      <Drawer
-        sx={{
-          width: DRAWER_WIDTH,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+      <Box component="section" position="relative" ref={rootRef}>
+        <Drawer
+          sx={{
             width: DRAWER_WIDTH,
-            boxSizing: 'border-box',
-          },
-        }}
-        open={drawerOpen}
-        ModalProps={{
-          keepMounted: true,
-          container: () => rootRef.current,
-          style: { position: "absolute" },
-        }}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <ListItem>
-            <ContentTypeSelect />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button key="Find and Replace" onClick={() => setFindReplaceDialogOpen(true)}>
-                <ListItemIcon>
-                  <FindReplaceIcon />
-                </ListItemIcon>
-                <ListItemText primary="Find and Replace" />
-          </ListItem>
-          <ListItem button key="Apply Filters">
-            <ListItemIcon>
-              <FilterListIcon />
-            </ListItemIcon>
-            <ListItemText primary="Apply Filters" />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button key="Save Change" onClick={handleSaveChangeClick}>
-            <ListItemIcon>
-              <SaveIcon />
-            </ListItemIcon>
-            <ListItemText primary="Save Change" />
-          </ListItem>
-          <ListItem button key="Cancel All Change" onClick={handleCancelAllChangeClick}>
-            <ListItemIcon>
-              <ClearAllIcon />
-            </ListItemIcon>
-            <ListItemText primary="Cancel All Change" />
-          </ListItem>
-        </List>
-        <Divider />
-      </Drawer>
-      <Main open={drawerOpen}>
-        <DrawerHeader />
-        <DataSheet ref={dataSheetRef} />
-      </Main>
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: DRAWER_WIDTH,
+              boxSizing: 'border-box',
+            },
+          }}
+          open={drawerOpen}
+          ModalProps={{
+            keepMounted: true,
+            container: () => rootRef.current,
+            style: { position: "absolute" },
+          }}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            <ListItem>
+              <ContentTypeSelect />
+            </ListItem>
+          </List>
+          <Divider />
+          <List>
+            <ListItem button key="Find and Replace" onClick={() => setFindReplaceDialogOpen(true)}>
+                  <ListItemIcon>
+                    <FindReplaceIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Find and Replace" />
+            </ListItem>
+            <ListItem button key="Apply Filters">
+              <ListItemIcon>
+                <FilterListIcon />
+              </ListItemIcon>
+              <ListItemText primary="Apply Filters" />
+            </ListItem>
+          </List>
+          <Divider />
+          <List>
+            <ListItem button key="Save Change" onClick={handleSaveChangeClick}>
+              <ListItemIcon>
+                <SaveIcon />
+              </ListItemIcon>
+              <ListItemText primary="Save Change" />
+            </ListItem>
+            <ListItem button key="Cancel All Change" onClick={handleCancelAllChangeClick}>
+              <ListItemIcon>
+                <ClearAllIcon />
+              </ListItemIcon>
+              <ListItemText primary="Cancel All Change" />
+            </ListItem>
+          </List>
+          <Divider />
+        </Drawer>
+        <Main open={drawerOpen}>
+          <DrawerHeader />
+          <DataSheet ref={dataSheetRef} />
+        </Main>
+      </Box>
       <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
       <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
         <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
