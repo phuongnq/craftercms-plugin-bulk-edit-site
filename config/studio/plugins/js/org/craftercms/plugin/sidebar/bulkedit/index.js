@@ -24837,17 +24837,18 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               return _context3.abrupt("return");
 
             case 2:
-              _context3.next = 4;
+              setRefresh(1 - refresh);
+              _context3.next = 5;
               return StudioAPI.getContentTypeConfig(contentType);
 
-            case 4:
+            case 5:
               config = _context3.sent;
               headerList = getDataSheetHeadersFromConfig(config);
               setColumns(getColumnsFromHeader(headerList));
-              _context3.next = 9;
+              _context3.next = 10;
               return StudioAPI.searchByContentType(contentType, keyword);
 
-            case 9:
+            case 10:
               items = _context3.sent;
               paths = items.map(function (item) {
                 return item.path;
@@ -24855,31 +24856,31 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               dtRows = [];
               i = 0;
 
-            case 13:
+            case 14:
               if (!(i < paths.length)) {
-                _context3.next = 23;
+                _context3.next = 24;
                 break;
               }
 
               path = paths[i];
-              _context3.next = 17;
+              _context3.next = 18;
               return StudioAPI.getContent(path);
 
-            case 17:
+            case 18:
               content = _context3.sent;
               row = rowFromApiContent(i, path, content, headerList);
               dtRows.push(row);
 
-            case 20:
+            case 21:
               i += 1;
-              _context3.next = 13;
+              _context3.next = 14;
               break;
 
-            case 23:
+            case 24:
               setRows(dtRows);
               setSessionRows(dtRows);
 
-            case 25:
+            case 26:
             case "end":
               return _context3.stop();
           }

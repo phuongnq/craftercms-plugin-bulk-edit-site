@@ -268,6 +268,8 @@ const DataSheet = React.forwardRef((props, ref) => {
         return;
       }
 
+      setRefresh(1 - refresh);
+
       const config = await StudioAPI.getContentTypeConfig(contentType);
       const headerList = getDataSheetHeadersFromConfig(config);
       setColumns(getColumnsFromHeader(headerList));
