@@ -2979,8 +2979,12 @@ function FilterDialog(_ref3) {
       keyword = _React$useState2[0],
       setKeyword = _React$useState2[1];
 
-  var handleApplyFilter = function handleApplyFilter() {
+  var handleApplyFilters = function handleApplyFilters() {
     keywordSub.next(keyword);
+  };
+
+  var handleResetFilters = function handleResetFilters() {
+    keywordSub.next('');
   };
 
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
@@ -3013,10 +3017,13 @@ function FilterDialog(_ref3) {
   }))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined",
     onClick: handleClose
-  }, "Cancel"), /*#__PURE__*/e__default.createElement(StyledButton, {
+  }, "Done"), /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined",
-    onClick: handleApplyFilter
-  }, "Apply Filter")))));
+    onClick: handleResetFilters
+  }, "Reset Filters"), /*#__PURE__*/e__default.createElement(StyledButton, {
+    variant: "outlined",
+    onClick: handleApplyFilters
+  }, "Apply Filters")))));
 }
 
 function defaultEqualityCheck(a, b) {
@@ -24587,10 +24594,6 @@ var isCellEdited = function isCellEdited(params, rows) {
   var cellId = params.id;
   var cellField = params.field;
   var cellValue = params.value;
-  console.log(cellValue);
-  console.log(cellField);
-  console.log(rows[cellId]);
-  console.log('-------------------');
   return rows[cellId] && cellValue !== rows[cellId][cellField];
 };
 

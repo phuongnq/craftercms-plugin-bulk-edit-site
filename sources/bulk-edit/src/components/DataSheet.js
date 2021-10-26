@@ -128,10 +128,6 @@ const isCellEdited = (params, rows) => {
   const cellId = params.id;
   const cellField = params.field;
   const cellValue = params.value;
-  console.log(cellValue);
-  console.log(cellField);
-  console.log(rows[cellId]);
-  console.log('-------------------');
   return rows[cellId] && cellValue !== rows[cellId][cellField];
 };
 

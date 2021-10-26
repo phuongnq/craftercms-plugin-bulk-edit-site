@@ -53,8 +53,12 @@ function PaperComponent(props) {
 export default function FilterDialog({ isOpen, handleClose }) {
   const [keyword, setKeyword] = React.useState('');
 
-  const handleApplyFilter = () => {
+  const handleApplyFilters = () => {
     keywordSub.next(keyword);
+  };
+
+  const handleResetFilters = () => {
+    keywordSub.next('');
   };
 
   return (
@@ -91,12 +95,18 @@ export default function FilterDialog({ isOpen, handleClose }) {
         </DialogContent>
         <DialogActions>
           <Box>
-            <StyledButton variant="outlined" onClick={handleClose}>Cancel</StyledButton>
+            <StyledButton variant="outlined" onClick={handleClose}>Done</StyledButton>
             <StyledButton
               variant="outlined"
-              onClick={handleApplyFilter}
+              onClick={handleResetFilters}
             >
-              Apply Filter
+              Reset Filters
+            </StyledButton>
+            <StyledButton
+              variant="outlined"
+              onClick={handleApplyFilters}
+            >
+              Apply Filters
             </StyledButton>
           </Box>
         </DialogActions>
