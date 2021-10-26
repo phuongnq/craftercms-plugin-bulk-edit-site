@@ -24692,6 +24692,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       contentType = _React$useState16[0],
       setContentType = _React$useState16[1];
 
+  var _React$useState17 = e__default.useState(''),
+      _React$useState18 = _slicedToArray(_React$useState17, 2),
+      keyword = _React$useState18[0],
+      setKeyword = _React$useState18[1];
+
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
@@ -24798,178 +24803,82 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     };
   }, [rows]);
   e__default.useEffect(function () {
-    var subscriber;
-
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              subscriber = contentTypeSub.subscribe( /*#__PURE__*/function () {
-                var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(value) {
-                  var config, headerList, items, paths, dtRows, i, path, content, row;
-                  return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                    while (1) {
-                      switch (_context3.prev = _context3.next) {
-                        case 0:
-                          setContentType(value);
-                          _context3.next = 3;
-                          return StudioAPI.getContentTypeConfig(value);
-
-                        case 3:
-                          config = _context3.sent;
-                          headerList = getDataSheetHeadersFromConfig(config);
-                          setColumns(getColumnsFromHeader(headerList));
-                          _context3.next = 8;
-                          return StudioAPI.searchByContentType(value);
-
-                        case 8:
-                          items = _context3.sent;
-                          paths = items.map(function (item) {
-                            return item.path;
-                          });
-                          dtRows = [];
-                          i = 0;
-
-                        case 12:
-                          if (!(i < paths.length)) {
-                            _context3.next = 22;
-                            break;
-                          }
-
-                          path = paths[i];
-                          _context3.next = 16;
-                          return StudioAPI.getContent(path);
-
-                        case 16:
-                          content = _context3.sent;
-                          row = rowFromApiContent(i, path, content, headerList);
-                          dtRows.push(row);
-
-                        case 19:
-                          i += 1;
-                          _context3.next = 12;
-                          break;
-
-                        case 22:
-                          setRows(dtRows);
-                          setSessionRows(dtRows);
-
-                        case 24:
-                        case "end":
-                          return _context3.stop();
-                      }
-                    }
-                  }, _callee3);
-                }));
-
-                return function (_x4) {
-                  return _ref4.apply(this, arguments);
-                };
-              }());
-
-            case 1:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }))();
-
+    var subscriberContentType = contentTypeSub.subscribe(function (nextContentType) {
+      setContentType(nextContentType);
+    });
+    var subscriberKeyword = keywordSub.subscribe(function (keyword) {
+      setKeyword(keyword);
+    });
     return function () {
-      subscriber.unsubscribe();
+      subscriberContentType.unsubscribe();
+      subscriberKeyword.unsubscribe();
     };
   }, []);
   e__default.useEffect(function () {
-    var subscriber;
-
-    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      var config, headerList, items, paths, dtRows, i, path, content, row;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              subscriber = keywordSub.subscribe( /*#__PURE__*/function () {
-                var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(keyword) {
-                  var config, headerList, items, paths, dtRows, i, path, content, row;
-                  return regeneratorRuntime.wrap(function _callee5$(_context5) {
-                    while (1) {
-                      switch (_context5.prev = _context5.next) {
-                        case 0:
-                          if (contentType) {
-                            _context5.next = 2;
-                            break;
-                          }
+              if (contentType) {
+                _context3.next = 2;
+                break;
+              }
 
-                          return _context5.abrupt("return");
+              return _context3.abrupt("return");
 
-                        case 2:
-                          _context5.next = 4;
-                          return StudioAPI.getContentTypeConfig(contentType);
+            case 2:
+              _context3.next = 4;
+              return StudioAPI.getContentTypeConfig(contentType);
 
-                        case 4:
-                          config = _context5.sent;
-                          headerList = getDataSheetHeadersFromConfig(config);
-                          setColumns(getColumnsFromHeader(headerList));
-                          _context5.next = 9;
-                          return StudioAPI.searchByContentType(contentType, keyword);
+            case 4:
+              config = _context3.sent;
+              headerList = getDataSheetHeadersFromConfig(config);
+              setColumns(getColumnsFromHeader(headerList));
+              _context3.next = 9;
+              return StudioAPI.searchByContentType(contentType, keyword);
 
-                        case 9:
-                          items = _context5.sent;
-                          paths = items.map(function (item) {
-                            return item.path;
-                          });
-                          dtRows = [];
-                          i = 0;
+            case 9:
+              items = _context3.sent;
+              paths = items.map(function (item) {
+                return item.path;
+              });
+              dtRows = [];
+              i = 0;
 
-                        case 13:
-                          if (!(i < paths.length)) {
-                            _context5.next = 23;
-                            break;
-                          }
+            case 13:
+              if (!(i < paths.length)) {
+                _context3.next = 23;
+                break;
+              }
 
-                          path = paths[i];
-                          _context5.next = 17;
-                          return StudioAPI.getContent(path);
+              path = paths[i];
+              _context3.next = 17;
+              return StudioAPI.getContent(path);
 
-                        case 17:
-                          content = _context5.sent;
-                          row = rowFromApiContent(i, path, content, headerList);
-                          dtRows.push(row);
+            case 17:
+              content = _context3.sent;
+              row = rowFromApiContent(i, path, content, headerList);
+              dtRows.push(row);
 
-                        case 20:
-                          i += 1;
-                          _context5.next = 13;
-                          break;
+            case 20:
+              i += 1;
+              _context3.next = 13;
+              break;
 
-                        case 23:
-                          setRows(dtRows);
-                          setSessionRows(dtRows);
+            case 23:
+              setRows(dtRows);
+              setSessionRows(dtRows);
 
-                        case 25:
-                        case "end":
-                          return _context5.stop();
-                      }
-                    }
-                  }, _callee5);
-                }));
-
-                return function (_x5) {
-                  return _ref6.apply(this, arguments);
-                };
-              }());
-
-            case 1:
+            case 25:
             case "end":
-              return _context6.stop();
+              return _context3.stop();
           }
         }
-      }, _callee6);
+      }, _callee3);
     }))();
-
-    return function () {
-      subscriber.unsubscribe();
-    };
-  }, [contentType]);
+  }, [contentType, keyword]);
 
   var handleEditRowsModelChange = function handleEditRowsModelChange(model) {
     setEditRowsModel(model);

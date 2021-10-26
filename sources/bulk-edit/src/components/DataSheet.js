@@ -170,6 +170,7 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [refresh, setRefresh] = React.useState(0);
   const [findText, setFindText] = React.useState('');
   const [contentType, setContentType] = React.useState('');
+  const [keyword, setKeyword] = React.useState('');
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
@@ -247,68 +248,46 @@ const DataSheet = React.forwardRef((props, ref) => {
   }, [rows]);
 
   React.useEffect(() => {
-    let subscriber;
-    (async () => {
-      subscriber = contentTypeSub.subscribe(async (value) => {
-        setContentType(value);
+    const subscriberContentType = contentTypeSub.subscribe((nextContentType) => {
+      setContentType(nextContentType);
+    });
 
-        const config = await StudioAPI.getContentTypeConfig(value);
-        const headerList = getDataSheetHeadersFromConfig(config);
-        setColumns(getColumnsFromHeader(headerList));
-
-        const items = await StudioAPI.searchByContentType(value);
-        const paths = items.map(item => item.path);
-
-        const dtRows = [];
-        for (let i = 0; i < paths.length; i += 1) {
-          const path = paths[i];
-
-          const content = await StudioAPI.getContent(path);
-          const row = rowFromApiContent(i, path, content, headerList);
-          dtRows.push(row);
-        }
-
-        setRows(dtRows);
-        setSessionRows(dtRows);
-      });
-    })();
+    const subscriberKeyword = keywordSub.subscribe((keyword) => {
+      setKeyword(keyword);
+    });
 
     return (() => {
-      subscriber.unsubscribe();
+      subscriberContentType.unsubscribe();
+      subscriberKeyword.unsubscribe();
     });
   }, []);
 
   React.useEffect(() => {
-    let subscriber;
     (async () => {
-      subscriber = keywordSub.subscribe(async (keyword) => {
-        if (!contentType) return;
+      if (!contentType) {
+        return;
+      }
 
-        const config = await StudioAPI.getContentTypeConfig(contentType);
-        const headerList = getDataSheetHeadersFromConfig(config);
-        setColumns(getColumnsFromHeader(headerList));
+      const config = await StudioAPI.getContentTypeConfig(contentType);
+      const headerList = getDataSheetHeadersFromConfig(config);
+      setColumns(getColumnsFromHeader(headerList));
 
-        const items = await StudioAPI.searchByContentType(contentType, keyword);
-        const paths = items.map(item => item.path);
+      const items = await StudioAPI.searchByContentType(contentType, keyword);
+      const paths = items.map(item => item.path);
 
-        const dtRows = [];
-        for (let i = 0; i < paths.length; i += 1) {
-          const path = paths[i];
+      const dtRows = [];
+      for (let i = 0; i < paths.length; i += 1) {
+        const path = paths[i];
 
-          const content = await StudioAPI.getContent(path);
-          const row = rowFromApiContent(i, path, content, headerList);
-          dtRows.push(row);
-        }
+        const content = await StudioAPI.getContent(path);
+        const row = rowFromApiContent(i, path, content, headerList);
+        dtRows.push(row);
+      }
 
-        setRows(dtRows);
-        setSessionRows(dtRows);
-      });
+      setRows(dtRows);
+      setSessionRows(dtRows);
     })();
-
-    return (() => {
-      subscriber.unsubscribe();
-    });
-  }, [contentType]);
+  }, [contentType, keyword]);
 
   const handleEditRowsModelChange = (model) => {
     setEditRowsModel(model);
