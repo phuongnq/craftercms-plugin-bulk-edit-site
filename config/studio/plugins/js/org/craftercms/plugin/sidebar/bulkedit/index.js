@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, AppBar, useTheme: useTheme$4, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$1, ListItemText, CssBaseline, Snackbar, Alert, Toolbar: Toolbar$2, IconButton: IconButton$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$1, ListItemText, CssBaseline, Snackbar, Alert, Toolbar: Toolbar$2, IconButton: IconButton$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -24883,40 +24883,7 @@ var Main = styled$3('main', {
     marginLeft: 0
   });
 });
-styled$3(AppBar, {
-  shouldForwardProp: function shouldForwardProp(prop) {
-    return prop !== 'open';
-  }
-})(function (_ref2) {
-  var theme = _ref2.theme,
-      open = _ref2.open;
-  return _objectSpread2({
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  }, open && {
-    width: "calc(100% - ".concat(DRAWER_WIDTH, "px)"),
-    marginLeft: "".concat(DRAWER_WIDTH, "px"),
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  });
-});
-styled$3('div')(function (_ref3) {
-  var theme = _ref3.theme;
-  return _objectSpread2(_objectSpread2({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1)
-  }, theme.mixins.toolbar), {}, {
-    justifyContent: 'flex-end'
-  });
-});
 function Editor() {
-  useTheme$4();
-
   var _React$useState = e__default.useState(true),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       drawerOpen = _React$useState2[0],
@@ -24944,7 +24911,7 @@ function Editor() {
   };
 
   var handleSaveChangeClick = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -24961,7 +24928,7 @@ function Editor() {
     }));
 
     return function handleSaveChangeClick() {
-      return _ref4.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
