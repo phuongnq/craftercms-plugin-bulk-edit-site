@@ -24957,7 +24957,7 @@ function Editor() {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       }),
-      marginLeft: "-".concat(drawerWidth, "px")
+      marginLeft: "-".concat(DRAWER_WIDTH, "px")
     }, open && {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
