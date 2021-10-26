@@ -48,9 +48,54 @@ import DataSheet from './DataSheet';
 
 const DRAWER_WIDTH = 240;
 
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: `-${DRAWER_WIDTH}px`,
+    ...(open && {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    }),
+  }),
+);
+
+const StyledAppBar = styled(AppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100% - ${DRAWER_WIDTH}px)`,
+    marginLeft: `${DRAWER_WIDTH}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
+
 export default function Editor() {
   const theme = useTheme();
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
 
@@ -82,95 +127,6 @@ export default function Editor() {
     setDrawerOpen(false);
   };
 
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        <ListItem>
-          <ContentTypeSelect />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem button key="Find and Replace" onClick={() => setFindReplaceDialogOpen(true)}>
-              <ListItemIcon>
-                <FindReplaceIcon />
-              </ListItemIcon>
-              <ListItemText primary="Find and Replace" />
-        </ListItem>
-        <ListItem button key="Apply Filters">
-          <ListItemIcon>
-            <FilterListIcon />
-          </ListItemIcon>
-          <ListItemText primary="Apply Filters" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem button key="Save Change" onClick={handleSaveChangeClick}>
-          <ListItemIcon>
-            <SaveIcon />
-          </ListItemIcon>
-          <ListItemText primary="Save Change" />
-        </ListItem>
-        <ListItem button key="Cancel All Change" onClick={handleCancelAllChangeClick}>
-          <ListItemIcon>
-            <ClearAllIcon />
-          </ListItemIcon>
-          <ListItemText primary="Cancel All Change" />
-        </ListItem>
-      </List>
-      <Divider />
-    </div>
-  );
-
-  const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-      flexGrow: 1,
-      padding: theme.spacing(3),
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      marginLeft: `-${DRAWER_WIDTH}px`,
-      ...(open && {
-        transition: theme.transitions.create('margin', {
-          easing: theme.transitions.easing.easeOut,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-        marginLeft: 0,
-      }),
-    }),
-  );
-
-  const StyledAppBar = styled(AppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-  })(({ theme, open }) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-      width: `calc(100% - ${DRAWER_WIDTH}px)`,
-      marginLeft: `${DRAWER_WIDTH}px`,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    }),
-  }));
-
-  const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  }));
-
-
   return (
     <Box
       id="drawer-container"
@@ -178,60 +134,94 @@ export default function Editor() {
       bgcolor="white"
       component="div"
       style={{ overflowY: "scroll", overflowX: "hidden" }}
+      ref={rootRef}
     >
       <CssBaseline />
-        <Box component="main" sx={{ flexGrow: 1 }} ref={rootRef}>
-          <StyledAppBar position="relative" open={drawerOpen}>
-            <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{ mr: 2, ...(open && { display: 'none' }) }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" noWrap component="div">
-                Bulk Edit
-              </Typography>
-          </Toolbar>
-          </StyledAppBar>
-          <Drawer
-            sx={{
-              width: DRAWER_WIDTH,
-              flexShrink: 0,
-              '& .MuiDrawer-paper': {
-                width: DRAWER_WIDTH,
-                boxSizing: 'border-box',
-              },
-            }}
-            open={drawerOpen}
-            ModalProps={{
-              keepMounted: true,
-              container: () => rootRef.current,
-              style: { position: "absolute" },
-            }}
+      <StyledAppBar position="relative" open={drawerOpen}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            <DrawerHeader>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-              </IconButton>
-            </DrawerHeader>
-            <Divider />
-            {drawer}
-          </Drawer>
-          <Main open={drawerOpen}>
-            <DrawerHeader />
-            <DataSheet ref={dataSheetRef} />
-          </Main>
-        </Box>
-        <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
-        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
-          <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
-            Change has been saved.
-          </Alert>
-        </Snackbar>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Bulk Edit
+          </Typography>
+      </Toolbar>
+      </StyledAppBar>
+      <Drawer
+        sx={{
+          width: DRAWER_WIDTH,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: DRAWER_WIDTH,
+            boxSizing: 'border-box',
+          },
+        }}
+        open={drawerOpen}
+        ModalProps={{
+          keepMounted: true,
+          container: () => rootRef.current,
+          style: { position: "absolute" },
+        }}
+      >
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          <ListItem>
+            <ContentTypeSelect />
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem button key="Find and Replace" onClick={() => setFindReplaceDialogOpen(true)}>
+                <ListItemIcon>
+                  <FindReplaceIcon />
+                </ListItemIcon>
+                <ListItemText primary="Find and Replace" />
+          </ListItem>
+          <ListItem button key="Apply Filters">
+            <ListItemIcon>
+              <FilterListIcon />
+            </ListItemIcon>
+            <ListItemText primary="Apply Filters" />
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem button key="Save Change" onClick={handleSaveChangeClick}>
+            <ListItemIcon>
+              <SaveIcon />
+            </ListItemIcon>
+            <ListItemText primary="Save Change" />
+          </ListItem>
+          <ListItem button key="Cancel All Change" onClick={handleCancelAllChangeClick}>
+            <ListItemIcon>
+              <ClearAllIcon />
+            </ListItemIcon>
+            <ListItemText primary="Cancel All Change" />
+          </ListItem>
+        </List>
+        <Divider />
+      </Drawer>
+      <Main open={drawerOpen}>
+        <DrawerHeader />
+        <DataSheet ref={dataSheetRef} />
+      </Main>
+      <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
+      <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+          Change has been saved.
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
