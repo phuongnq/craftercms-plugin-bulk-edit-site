@@ -178,12 +178,6 @@ export default function Editor() {
         },
       }}
     >
-      <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-        </IconButton>
-      </DrawerHeader>
-      <Divider />
       <List>
         <ListItem>
           <ContentTypeSelect />

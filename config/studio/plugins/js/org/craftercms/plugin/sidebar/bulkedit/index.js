@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, AppBar, useTheme: useTheme$4, Drawer, IconButton: IconButton$1, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, CssBaseline, Snackbar, Alert, Toolbar: Toolbar$2, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, AppBar, useTheme: useTheme$4, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$1, ListItemText, CssBaseline, Snackbar, Alert, Toolbar: Toolbar$2, IconButton: IconButton$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -544,50 +544,6 @@ exports.default = _default;
 });
 
 var MenuIcon = /*@__PURE__*/getDefaultExportFromCjs(Menu$2);
-
-var ChevronLeft = createCommonjsModule(function (module, exports) {
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _createSvgIcon = interopRequireDefault(require$$0);
-
-
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-}), 'ChevronLeft');
-
-exports.default = _default;
-});
-
-var ChevronLeftIcon = /*@__PURE__*/getDefaultExportFromCjs(ChevronLeft);
-
-var ChevronRight = createCommonjsModule(function (module, exports) {
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _createSvgIcon = interopRequireDefault(require$$0);
-
-
-
-var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
-  d: "M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-}), 'ChevronRight');
-
-exports.default = _default;
-});
-
-var ChevronRightIcon = /*@__PURE__*/getDefaultExportFromCjs(ChevronRight);
 
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
@@ -24948,7 +24904,7 @@ styled$3(AppBar, {
     })
   });
 });
-var DrawerHeader = styled$3('div')(function (_ref3) {
+styled$3('div')(function (_ref3) {
   var theme = _ref3.theme;
   return _objectSpread2(_objectSpread2({
     display: 'flex',
@@ -24959,7 +24915,7 @@ var DrawerHeader = styled$3('div')(function (_ref3) {
   });
 });
 function Editor() {
-  var theme = useTheme$4();
+  useTheme$4();
 
   var _React$useState = e__default.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -25011,10 +24967,6 @@ function Editor() {
 
   var handleCancelAllChangeClick = function handleCancelAllChangeClick() {
     dataSheetRef.current.cancelAllChanges();
-  };
-
-  var handleDrawerClose = function handleDrawerClose() {
-    setDrawerOpen(false);
   };
 
   var toggleDrawer = function toggleDrawer() {
@@ -25074,9 +25026,7 @@ function Editor() {
         node.style.transformOrigin = "top left ";
       }
     }
-  }, /*#__PURE__*/e__default.createElement(DrawerHeader, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
-    onClick: handleDrawerClose
-  }, theme.direction === 'ltr' ? /*#__PURE__*/e__default.createElement(ChevronLeftIcon, null) : /*#__PURE__*/e__default.createElement(ChevronRightIcon, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
+  }, /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
     key: "Find and Replace",
     onClick: function onClick() {
