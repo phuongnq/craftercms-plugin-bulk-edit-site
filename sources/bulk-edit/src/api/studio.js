@@ -72,7 +72,6 @@ const StudioAPI = {
       'content-type': ct,
     };
     if (filterDate) {
-      console.log(filterDate);
       filters['last-edit-date'] = {
         date: true,
         id: filterDate.id,

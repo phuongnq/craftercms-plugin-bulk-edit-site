@@ -85,7 +85,6 @@ const LastEditDateComponent = () => {
 
     switch (option) {
       case 'today': {
-        console.log(today);
         dateFilter.min = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -1));
         dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, 1));
         break;
@@ -136,8 +135,6 @@ const LastEditDateComponent = () => {
 
   React.useEffect(() => {
     const filter = getDateFromOption(lastEditOption);
-    console.log(lastEditOption);
-    console.log(filter);
     filterEditDateSub.next(filter);
   }, [lastEditOption]);
 

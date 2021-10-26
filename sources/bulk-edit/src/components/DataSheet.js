@@ -263,7 +263,6 @@ const DataSheet = React.forwardRef((props, ref) => {
     });
 
     const subscriberEditDate = filterEditDateSub.subscribe((filterDate) => {
-      console.log(filterDate);
       setEditDate(filterDate);
     })
 

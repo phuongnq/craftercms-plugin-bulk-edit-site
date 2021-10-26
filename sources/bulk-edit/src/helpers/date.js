@@ -15,21 +15,17 @@
  */
 const DateHelper = {
   getFormatDate(date) {
-    console.log(date);
     const year = date.getUTCFullYear();
     const month = date.getUTCMonth() + 1;
     const day = date.getUTCDate();
 
     const monthStr = month < 10 ? `0${month}` : `${month}`;
     const dayStr = day < 10 ? `0${day}` : `${day}`;
-    console.log(`${year}-${monthStr}-${dayStr}`);
     return `${year}-${monthStr}-${dayStr}`;
   },
   getShiftDate(date, shiftByDays) {
     const shiftDate = new Date(date.getTime());
     shiftDate.setDate(shiftDate.getDate() + shiftByDays);
-
-    console.log(shiftDate);
 
     return shiftDate;
   }
