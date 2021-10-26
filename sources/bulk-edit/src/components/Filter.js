@@ -24,8 +24,18 @@ import {
   DialogTitle,
   Box,
   Paper,
-  styled
+  styled,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
 } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Draggable from 'react-draggable';
 
 import { keywordSub } from '../services/subscribe';
@@ -49,6 +59,56 @@ function PaperComponent(props) {
     </Draggable>
   );
 }
+
+const LastEditDateComponent = () => {
+  const [lastEditOption, setLastEditOption] = React.useState('');
+  const lastEditDateOptions = {
+    today: 'Today',
+    'in-last-week': 'In last week',
+    'over-a-week-ago': 'Over a week ago',
+    'over-a-month-ago': 'Over a month ago',
+    'over-six-months-ago': 'Over six months ago',
+    'over-a-year-ago': 'Over a year ago',
+  };
+
+  const keys = Object.keys(lastEditDateOptions);
+  const options = [];
+  for (let i = 0; i < keys.length; i += 1) {
+    const key = keys[i];
+    const value = lastEditDateOptions[key];
+    options.push((
+      <FormControlLabel value={key} control={<Radio />} label={value} />
+    ));
+  }
+
+  return (
+    <div>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Last Edit Date</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <StyledButton variant="outlined" onClick={() => setLastEditOption('')}>Clear</StyledButton>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Last Edit Date</FormLabel>
+            <RadioGroup
+              aria-label="last-edit-date"
+              value={lastEditOption}
+              onChange={(event) => setLastEditOption(event.target.value)}
+              name="radio-buttons-group"
+            >
+              {options}
+            </RadioGroup>
+          </FormControl>
+        </AccordionDetails>
+      </Accordion>
+    </div>
+  );
+};
 
 export default function FilterDialog({ isOpen, handleClose }) {
   const [keyword, setKeyword] = React.useState('');
@@ -92,6 +152,9 @@ export default function FilterDialog({ isOpen, handleClose }) {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />
+        </Box>
+        <Box>
+          <LastEditDateComponent />
         </Box>
         </DialogContent>
         <DialogActions>

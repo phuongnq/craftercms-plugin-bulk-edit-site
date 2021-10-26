@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$1, ListItemText, CssBaseline, Snackbar, Alert, Toolbar: Toolbar$2, IconButton: IconButton$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, Popper: Popper$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$1, ListItemText, CssBaseline, Snackbar, Alert, Toolbar: Toolbar$2, IconButton: IconButton$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -2949,6 +2949,28 @@ function FindAndReplaceDialog(_ref3) {
   }, "Find")))));
 }
 
+var ExpandMore = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+}), 'ExpandMore');
+
+exports.default = _default;
+});
+
+var ExpandMoreIcon = /*@__PURE__*/getDefaultExportFromCjs(ExpandMore);
+
 var StyledTextField = styled$3(TextField$1)(function (_ref) {
   var theme = _ref.theme;
   return {
@@ -2970,14 +2992,64 @@ function PaperComponent(props) {
   }, /*#__PURE__*/e__default.createElement(Paper$1, props));
 }
 
+var LastEditDateComponent = function LastEditDateComponent() {
+  var _React$useState = e__default.useState(''),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      lastEditOption = _React$useState2[0],
+      setLastEditOption = _React$useState2[1];
+
+  var lastEditDateOptions = {
+    today: 'Today',
+    'in-last-week': 'In last week',
+    'over-a-week-ago': 'Over a week ago',
+    'over-a-month-ago': 'Over a month ago',
+    'over-six-months-ago': 'Over six months ago',
+    'over-a-year-ago': 'Over a year ago'
+  };
+  var keys = Object.keys(lastEditDateOptions);
+  var options = [];
+
+  for (var i = 0; i < keys.length; i += 1) {
+    var key = keys[i];
+    var value = lastEditDateOptions[key];
+    options.push( /*#__PURE__*/e__default.createElement(FormControlLabel$1, {
+      value: key,
+      control: /*#__PURE__*/e__default.createElement(Radio, null),
+      label: value
+    }));
+  }
+
+  return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Accordion, null, /*#__PURE__*/e__default.createElement(AccordionSummary, {
+    expandIcon: /*#__PURE__*/e__default.createElement(ExpandMoreIcon, null),
+    "aria-controls": "panel1a-content",
+    id: "panel1a-header"
+  }, /*#__PURE__*/e__default.createElement(Typography$2, null, "Last Edit Date")), /*#__PURE__*/e__default.createElement(AccordionDetails, null, /*#__PURE__*/e__default.createElement(StyledButton, {
+    variant: "outlined",
+    onClick: function onClick() {
+      return setLastEditOption('');
+    }
+  }, "Clear"), /*#__PURE__*/e__default.createElement(FormControl$1, {
+    component: "fieldset"
+  }, /*#__PURE__*/e__default.createElement(FormLabel$2, {
+    component: "legend"
+  }, "Last Edit Date"), /*#__PURE__*/e__default.createElement(RadioGroup, {
+    "aria-label": "last-edit-date",
+    value: lastEditOption,
+    onChange: function onChange(event) {
+      return setLastEditOption(event.target.value);
+    },
+    name: "radio-buttons-group"
+  }, options)))));
+};
+
 function FilterDialog(_ref3) {
   var isOpen = _ref3.isOpen,
       handleClose = _ref3.handleClose;
 
-  var _React$useState = e__default.useState(''),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      keyword = _React$useState2[0],
-      setKeyword = _React$useState2[1];
+  var _React$useState3 = e__default.useState(''),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      keyword = _React$useState4[0],
+      setKeyword = _React$useState4[1];
 
   var handleApplyFilters = function handleApplyFilters() {
     keywordSub.next(keyword);
@@ -3015,7 +3087,7 @@ function FilterDialog(_ref3) {
     onChange: function onChange(e) {
       return setKeyword(e.target.value);
     }
-  }))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
+  })), /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(LastEditDateComponent, null))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined",
     onClick: handleClose
   }, "Done"), /*#__PURE__*/e__default.createElement(StyledButton, {
