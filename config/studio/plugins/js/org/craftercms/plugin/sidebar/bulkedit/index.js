@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, AppBar, useTheme: useTheme$4, CssBaseline, Toolbar: Toolbar$2, IconButton: IconButton$1, Drawer, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, Snackbar, Alert, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, AppBar, useTheme: useTheme$4, Drawer, IconButton: IconButton$1, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, CssBaseline, Toolbar: Toolbar$2, Snackbar, Alert, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -25021,36 +25021,7 @@ function Editor() {
     setDrawerOpen(false);
   };
 
-  return /*#__PURE__*/e__default.createElement(Box, {
-    width: "100%",
-    height: "100%",
-    id: "drawer-container",
-    position: "relative",
-    bgcolor: "white",
-    component: "div",
-    style: {
-      overflowY: "scroll",
-      overflowX: "hidden"
-    },
-    ref: rootRef
-  }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(StyledAppBar, {
-    position: "absolute",
-    open: drawerOpen
-  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
-    color: "inherit",
-    "aria-label": "open drawer",
-    onClick: handleDrawerOpen,
-    edge: "start",
-    sx: _objectSpread2({
-      mr: 2
-    }, drawerOpen && {
-      display: 'none'
-    })
-  }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography$2, {
-    variant: "h6",
-    noWrap: true,
-    component: "div"
-  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Drawer, {
+  var drawer = /*#__PURE__*/e__default.createElement(Drawer, {
     variant: "persistent",
     sx: {
       width: DRAWER_WIDTH,
@@ -25063,7 +25034,7 @@ function Editor() {
     PaperProps: {
       style: {
         position: "absolute",
-        width: "486px"
+        width: DRAWER_WIDTH
       }
     },
     BackdropProps: {
@@ -25114,11 +25085,39 @@ function Editor() {
     onClick: handleCancelAllChangeClick
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Cancel All Change"
-  }))), /*#__PURE__*/e__default.createElement(Divider, null)), /*#__PURE__*/e__default.createElement(Main, {
+  }))), /*#__PURE__*/e__default.createElement(Divider, null));
+  return /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(StyledAppBar, {
+    position: "absolute",
     open: drawerOpen
-  }, /*#__PURE__*/e__default.createElement(DataSheet, {
+  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
+    color: "inherit",
+    "aria-label": "open drawer",
+    onClick: handleDrawerOpen,
+    edge: "start",
+    sx: _objectSpread2({
+      mr: 2
+    }, drawerOpen && {
+      display: 'none'
+    })
+  }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography$2, {
+    variant: "h6",
+    noWrap: true,
+    component: "div"
+  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement("section", {
+    width: "100%",
+    height: "100%",
+    id: "drawer-container",
+    position: "relative",
+    bgcolor: "white",
+    component: "div",
+    style: {
+      overflowY: "scroll",
+      overflowX: "hidden"
+    },
+    ref: rootRef
+  }, drawer, /*#__PURE__*/e__default.createElement(Main, null, /*#__PURE__*/e__default.createElement(DataSheet, {
     ref: dataSheetRef
-  })), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
+  }))), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
     handleClose: handleFindReplaceDialogClose
   }), /*#__PURE__*/e__default.createElement(Snackbar, {
