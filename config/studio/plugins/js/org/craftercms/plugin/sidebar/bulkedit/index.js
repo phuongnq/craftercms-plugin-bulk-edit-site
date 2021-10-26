@@ -7,6 +7,44 @@ var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(
 var { Subject } = CrafterCMSNext.rxjs;
 var ReactDOM = craftercms.libs.ReactDOM && Object.prototype.hasOwnProperty.call(craftercms.libs.ReactDOM, 'default') ? craftercms.libs.ReactDOM['default'] : craftercms.libs.ReactDOM;
 
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+
+    if (enumerableOnly) {
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+    }
+
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -24905,6 +24943,29 @@ function Editor() {
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Cancel All Change"
   }))), /*#__PURE__*/e__default.createElement(Divider, null));
+  var Main = styled$3('main', {
+    shouldForwardProp: function shouldForwardProp(prop) {
+      return prop !== 'open';
+    }
+  })(function (_ref2) {
+    var theme = _ref2.theme,
+        open = _ref2.open;
+    return _objectSpread2({
+      flexGrow: 1,
+      padding: theme.spacing(3),
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      }),
+      marginLeft: "-".concat(drawerWidth, "px")
+    }, open && {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen
+      }),
+      marginLeft: 0
+    });
+  });
   return /*#__PURE__*/e__default.createElement(Box, {
     id: "drawer-container",
     position: "relative",
@@ -24921,7 +24982,7 @@ function Editor() {
     },
     ref: rootRef
   }, /*#__PURE__*/e__default.createElement(AppBar, {
-    position: "relative",
+    position: "fixed",
     open: open
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
@@ -24952,9 +25013,11 @@ function Editor() {
         position: 'absolute'
       }
     }
-  }, drawer), /*#__PURE__*/e__default.createElement(DataSheet, {
+  }, drawer), /*#__PURE__*/e__default.createElement(Main, {
+    open: drawerOpen
+  }, /*#__PURE__*/e__default.createElement(DataSheet, {
     ref: dataSheetRef
-  })), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
+  }))), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
     handleClose: handleFindReplaceDialogClose
   }), /*#__PURE__*/e__default.createElement(Snackbar, {
