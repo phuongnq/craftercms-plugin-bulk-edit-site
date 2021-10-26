@@ -25022,7 +25022,11 @@ function Editor() {
   };
 
   return /*#__PURE__*/e__default.createElement(Box, {
+    width: "100%",
+    height: "100%",
+    id: "drawer-container",
     position: "relative",
+    bgcolor: "white",
     component: "div",
     style: {
       overflowY: "scroll",
@@ -25046,7 +25050,7 @@ function Editor() {
     variant: "h6",
     noWrap: true,
     component: "div"
-  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(Drawer, {
+  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Drawer, {
     variant: "persistent",
     sx: {
       width: DRAWER_WIDTH,
@@ -25098,7 +25102,7 @@ function Editor() {
     open: drawerOpen
   }, /*#__PURE__*/e__default.createElement(DataSheet, {
     ref: dataSheetRef
-  }))), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
+  })), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
     handleClose: handleFindReplaceDialogClose
   }), /*#__PURE__*/e__default.createElement(Snackbar, {
