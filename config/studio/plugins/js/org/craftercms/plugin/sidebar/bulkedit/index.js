@@ -24991,15 +24991,15 @@ function Editor() {
       flexShrink: 0,
       '& .MuiDrawer-paper': {
         width: DRAWER_WIDTH,
-        boxSizing: 'border-box',
-        hegiht: 'auto'
+        boxSizing: 'border-box'
       }
     },
     PaperProps: {
       style: {
         position: "absolute",
         width: DRAWER_WIDTH,
-        top: "130px"
+        top: "130px",
+        height: "auto"
       }
     },
     BackdropProps: {
