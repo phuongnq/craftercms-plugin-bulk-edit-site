@@ -95,6 +95,9 @@ export default function MainDialog() {
         open={open}
         fullWidth={true}
         maxWidth={true}
+        style={{
+          height: "100%",
+        }}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           Bulk Edit

@@ -25150,7 +25150,10 @@ function MainDialog() {
     "aria-labelledby": "customized-dialog-title",
     open: open,
     fullWidth: true,
-    maxWidth: true
+    maxWidth: true,
+    style: {
+      height: "100%"
+    }
   }, /*#__PURE__*/e__default.createElement(BootstrapDialogTitle, {
     id: "customized-dialog-title",
     onClose: handleClose
