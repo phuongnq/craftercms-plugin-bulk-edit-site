@@ -95,7 +95,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function Editor() {
   const theme = useTheme();
-  const [drawerOpen, setDrawerOpen] = React.useState(true);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
 
@@ -128,12 +128,7 @@ export default function Editor() {
   };
 
   return (
-    <Box
-      position="relative"
-      bgcolor="white"
-      component="div"
-      style={{ overflowY: "scroll", overflowX: "hidden" }}
-    >
+    <Box>
       <CssBaseline />
       <StyledAppBar position="relative" open={drawerOpen}>
         <Toolbar>
@@ -151,7 +146,12 @@ export default function Editor() {
           </Typography>
       </Toolbar>
       </StyledAppBar>
-      <Box component="section" position="relative" ref={rootRef}>
+      <Box
+        position="relative"
+        component="div"
+        style={{ overflowY: "scroll", overflowX: "hidden" }}
+        ref={rootRef}
+      >
         <Drawer
           sx={{
             width: DRAWER_WIDTH,
@@ -165,7 +165,6 @@ export default function Editor() {
           ModalProps={{
             keepMounted: true,
             container: () => rootRef.current,
-            style: { position: "absolute" },
           }}
         >
           <DrawerHeader>
