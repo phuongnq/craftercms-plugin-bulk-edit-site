@@ -123,43 +123,42 @@ export default function Editor() {
       bgcolor="white"
       component="div"
       style={{ overflowY: "scroll", overflowX: "hidden" }}
-      ref={rootRef}
     >
       <CssBaseline />
-        <AppBar position="relative" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerToggle}
-              edge="start"
-            >
-            <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Bulk Edit
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          variant="temporary"
-          open={drawerOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-            container: () => rootRef.current,
-            style: { position: "absolute" },
-          }}
-          sx={{
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
-        <Box component="main" sx={{ flexGrow: 1 }}>
+        <Box component="main" sx={{ flexGrow: 1 }} ref={rootRef}>
+          <AppBar position="relative" open={open}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerToggle}
+                edge="start"
+              >
+              <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap component="div">
+                Bulk Edit
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="temporary"
+            open={drawerOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true,
+              container: () => rootRef.current,
+              style: { position: "absolute" },
+            }}
+            sx={{
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
+            }}
+          >
+            {drawer}
+          </Drawer>
           <DataSheet ref={dataSheetRef} />
         </Box>
+        <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
         <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
           <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
             Change has been saved.
