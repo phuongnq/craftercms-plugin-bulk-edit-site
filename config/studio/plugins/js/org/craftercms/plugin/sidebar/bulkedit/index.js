@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, CssBaseline, AppBar, Toolbar: Toolbar$2, IconButton: IconButton$1, Drawer, Snackbar, Alert, Divider, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$1, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box, DialogActions, Paper: Paper$1, Popper: Popper$1, Typography: Typography$2, AppBar, CssBaseline, Toolbar: Toolbar$2, IconButton: IconButton$1, Drawer, Divider, Snackbar, Alert, List: List$2, ListItem, ListItemIcon: ListItemIcon$1, ListItemText, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -544,6 +544,50 @@ exports.default = _default;
 });
 
 var MenuIcon = /*@__PURE__*/getDefaultExportFromCjs(Menu$2);
+
+var ChevronLeft = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+}), 'ChevronLeft');
+
+exports.default = _default;
+});
+
+var ChevronLeftIcon = /*@__PURE__*/getDefaultExportFromCjs(ChevronLeft);
+
+var ChevronRight = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+}), 'ChevronRight');
+
+exports.default = _default;
+});
+
+var ChevronRightIcon = /*@__PURE__*/getDefaultExportFromCjs(ChevronRight);
 
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
@@ -24966,6 +25010,37 @@ function Editor() {
       marginLeft: 0
     });
   });
+  var StyledAppBar = styled$3(AppBar, {
+    shouldForwardProp: function shouldForwardProp(prop) {
+      return prop !== 'open';
+    }
+  })(function (_ref3) {
+    var theme = _ref3.theme,
+        open = _ref3.open;
+    return _objectSpread2({
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      })
+    }, open && {
+      width: "calc(100% - ".concat(drawerWidth, "px)"),
+      marginLeft: "".concat(drawerWidth, "px"),
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen
+      })
+    });
+  });
+  var DrawerHeader = styled$3('div')(function (_ref4) {
+    var theme = _ref4.theme;
+    return _objectSpread2(_objectSpread2({
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1)
+    }, theme.mixins.toolbar), {}, {
+      justifyContent: 'flex-end'
+    });
+  });
   return /*#__PURE__*/e__default.createElement(Box, {
     id: "drawer-container",
     position: "relative",
@@ -24981,9 +25056,9 @@ function Editor() {
       flexGrow: 1
     },
     ref: rootRef
-  }, /*#__PURE__*/e__default.createElement(AppBar, {
+  }, /*#__PURE__*/e__default.createElement(StyledAppBar, {
     position: "relative",
-    open: open
+    open: drawerOpen
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
     "aria-label": "open drawer",
@@ -25013,7 +25088,9 @@ function Editor() {
         position: 'absolute'
       }
     }
-  }, drawer), /*#__PURE__*/e__default.createElement(Main, {
+  }, /*#__PURE__*/e__default.createElement(DrawerHeader, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
+    onClick: handleDrawerToggle
+  }, theme.direction === 'ltr' ? /*#__PURE__*/e__default.createElement(ChevronLeftIcon, null) : /*#__PURE__*/e__default.createElement(ChevronRightIcon, null))), /*#__PURE__*/e__default.createElement(Divider, null), drawer), /*#__PURE__*/e__default.createElement(Main, {
     open: drawerOpen
   }, /*#__PURE__*/e__default.createElement(DataSheet, {
     ref: dataSheetRef

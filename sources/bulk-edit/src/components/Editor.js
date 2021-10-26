@@ -39,6 +39,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import ContentTypeSelect from './ContentTypeSelect';
 import FindAndReplace from './FindAndReplace';
@@ -137,6 +139,33 @@ export default function Editor() {
     }),
   );
 
+  const StyledAppBar = styled(AppBar, {
+    shouldForwardProp: (prop) => prop !== 'open',
+  })(({ theme, open }) => ({
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: `${drawerWidth}px`,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    }),
+  }));
+
+  const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  }));
+
+
   return (
     <Box
       id="drawer-container"
@@ -147,7 +176,7 @@ export default function Editor() {
     >
       <CssBaseline />
         <Box component="main" sx={{ flexGrow: 1 }} ref={rootRef}>
-          <AppBar position="relative" open={open}>
+          <StyledAppBar position="relative" open={drawerOpen}>
             <Toolbar>
               <IconButton
                 color="inherit"
@@ -161,7 +190,7 @@ export default function Editor() {
                 Bulk Edit
               </Typography>
             </Toolbar>
-          </AppBar>
+          </StyledAppBar>
           <Drawer
             variant="temporary"
             open={drawerOpen}
@@ -175,6 +204,12 @@ export default function Editor() {
               '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
             }}
           >
+            <DrawerHeader>
+              <IconButton onClick={handleDrawerToggle}>
+                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              </IconButton>
+            </DrawerHeader>
+            <Divider />
             {drawer}
           </Drawer>
           <Main open={drawerOpen}>
