@@ -95,7 +95,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function Editor() {
   const theme = useTheme();
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
 
@@ -143,9 +143,6 @@ export default function Editor() {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap component="div">
-          Bulk Edit
-        </Typography>
       </Toolbar>
     </Box>
   );
