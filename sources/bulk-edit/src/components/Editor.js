@@ -127,6 +127,25 @@ export default function Editor() {
     setDrawerOpen(false);
   };
 
+  const appbar = (
+    <StyledAppBar position="absolute" open={drawerOpen}>
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+          sx={{ mr: 2, ...(drawerOpen && { display: 'none' }) }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" noWrap component="div">
+          Bulk Edit
+        </Typography>
+      </Toolbar>
+    </StyledAppBar>
+  );
+
   const drawer = (
     <Drawer
       variant="persistent"
@@ -203,25 +222,8 @@ export default function Editor() {
   return (
     <Box>
       <CssBaseline />
-      <StyledAppBar position="absolute" open={drawerOpen}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(drawerOpen && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Bulk Edit
-          </Typography>
-        </Toolbar>
-      </StyledAppBar>
+      {appbar}
       <section
-        width="100%"
-        height="100%"
         id="drawer-container"
         position="relative"
         bgcolor="white"
@@ -230,7 +232,7 @@ export default function Editor() {
         ref={rootRef}
       >
         {drawer}
-        <Main>
+        <Main open={drawerOpen}>
           <DataSheet ref={dataSheetRef} />
         </Main>
       </section>
