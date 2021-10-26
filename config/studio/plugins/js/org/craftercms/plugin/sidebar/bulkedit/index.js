@@ -24915,6 +24915,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       if (!params.isEditable) return '';
 
       if (isCellEdited(params, rows)) {
+        console.log(params, rows);
         return 'edited';
       }
 

@@ -325,6 +325,7 @@ const DataSheet = React.forwardRef((props, ref) => {
           if (!params.isEditable) return '';
 
           if (isCellEdited(params, rows)) {
+            console.log(params, rows);
             return 'edited';
           }
 
