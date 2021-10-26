@@ -24959,8 +24959,12 @@ function Editor() {
     dataSheetRef.current.cancelAllChanges();
   };
 
-  var handleDrawerToggle = function handleDrawerToggle() {
-    setDrawerOpen(!drawerOpen);
+  var handleDrawerOpen = function handleDrawerOpen() {
+    setDrawerOpen(true);
+  };
+
+  var handleDrawerClose = function handleDrawerClose() {
+    setDrawerOpen(false);
   };
 
   var drawer = /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Toolbar$2, null), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
@@ -25064,16 +25068,27 @@ function Editor() {
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
     "aria-label": "open drawer",
-    onClick: handleDrawerToggle,
-    edge: "start"
+    onClick: handleDrawerOpen,
+    edge: "start",
+    sx: _objectSpread2({
+      mr: 2
+    }, open && {
+      display: 'none'
+    })
   }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography$2, {
     variant: "h6",
     noWrap: true,
     component: "div"
   }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Drawer, {
-    variant: "temporary",
+    sx: {
+      width: DRWAER_WIDTH,
+      flexShrink: 0,
+      '& .MuiDrawer-paper': {
+        width: DRWAER_WIDTH,
+        boxSizing: 'border-box'
+      }
+    },
     open: drawerOpen,
-    onClose: handleDrawerToggle,
     ModalProps: {
       keepMounted: true,
       container: function container() {
@@ -25082,19 +25097,12 @@ function Editor() {
       style: {
         position: "absolute"
       }
-    },
-    sx: {
-      '& .MuiDrawer-paper': {
-        boxSizing: 'border-box',
-        width: DRAWER_WIDTH,
-        position: 'absolute'
-      }
     }
   }, /*#__PURE__*/e__default.createElement(DrawerHeader, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
-    onClick: handleDrawerToggle
+    onClick: handleDrawerClose
   }, theme.direction === 'ltr' ? /*#__PURE__*/e__default.createElement(ChevronLeftIcon, null) : /*#__PURE__*/e__default.createElement(ChevronRightIcon, null))), /*#__PURE__*/e__default.createElement(Divider, null), drawer), /*#__PURE__*/e__default.createElement(Main, {
     open: drawerOpen
-  }, /*#__PURE__*/e__default.createElement(DataSheet, {
+  }, /*#__PURE__*/e__default.createElement(DrawerHeader, null), /*#__PURE__*/e__default.createElement(DataSheet, {
     ref: dataSheetRef
   }))), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
