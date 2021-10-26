@@ -25085,6 +25085,7 @@ var _excluded = ["children", "onClose"];
 var BootstrapDialog = styled$3(Dialog)(function (_ref) {
   _ref.theme;
   return {
+    height: '100%',
     '& .MuiDialogContent-root': {
       padding: 0
     }
@@ -25150,10 +25151,7 @@ function MainDialog() {
     "aria-labelledby": "customized-dialog-title",
     open: open,
     fullWidth: true,
-    maxWidth: true,
-    sx: {
-      height: "100%"
-    }
+    maxWidth: true
   }, /*#__PURE__*/e__default.createElement(BootstrapDialogTitle, {
     id: "customized-dialog-title",
     onClose: handleClose

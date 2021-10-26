@@ -33,6 +33,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Editor from './Editor';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  height: '100%',
   '& .MuiDialogContent-root': {
     padding: 0,
   },
@@ -95,9 +96,6 @@ export default function MainDialog() {
         open={open}
         fullWidth={true}
         maxWidth={true}
-        sx={{
-          height: "100%",
-        }}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           Bulk Edit
