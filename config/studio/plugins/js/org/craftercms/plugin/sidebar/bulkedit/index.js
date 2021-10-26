@@ -3028,6 +3028,11 @@ var DateHelper = {
     var monthStr = month < 10 ? "0".concat(month) : "".concat(month);
     var dayStr = day < 10 ? "0".concat(day) : "".concat(day);
     return "".concat(year, "-").concat(monthStr, "-").concat(dayStr);
+  },
+  getShiftDate: function getShiftDate(date, shiftByDays) {
+    var shiftDate = new Date(date.getTime());
+    shiftDate.setDate(shiftDate.getDate() + shiftByDays);
+    return shiftDate;
   }
 };
 
@@ -3078,56 +3083,34 @@ var LastEditDateComponent = function LastEditDateComponent() {
     switch (option) {
       case 'today':
         {
-          var yesterday = today;
-          yesterday.setDate(yesterday.getDate() - 1);
-          console.log(yesterday);
-          var tomorrow = today;
-          tomorrow.setDate(tomorrow.getDate() + 1);
-          console.log(tomorrow);
-          dateFilter.min = DateHelper.getFormatDate(yesterday);
-          dateFilter.max = DateHelper.getFormatDate(tomorrow);
+          dateFilter.min = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -1));
+          dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, 1));
         }
 
       case 'in-last-week':
         {
-          var _yesterday = today;
-
-          _yesterday.setDate(_yesterday.getDate() - 1);
-
-          var lastweek = today;
-          lastweek.setDate(lastweek.getDate() - 7);
-          dateFilter.min = DateHelper.getFormatDate(lastweek);
-          dateFilter.max = DateHelper.getFormatDate(_yesterday);
+          dateFilter.min = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -7));
+          dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -1));
         }
 
       case 'over-a-week-ago':
         {
-          var _lastweek = today;
-
-          _lastweek.setDate(_lastweek.getDate() - 8);
-
-          dateFilter.max = DateHelper.getFormatDate(_lastweek);
+          dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -8));
         }
 
       case 'over-a-month-ago':
         {
-          var lastmonth = today;
-          lastmonth.setDate(lastmonth.getDate() - 30);
-          dateFilter.max = DateHelper.getFormatDate(lastmonth);
+          dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -30));
         }
 
       case 'over-six-months-ago':
         {
-          var sixMonthAgo = today;
-          sixMonthAgo.setDate(sixMonthAgo.getDate() - 30 * 6);
-          dateFilter.max = DateHelper.getFormatDate(sixMonthAgo);
+          dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -30 * 6));
         }
 
       case 'over-a-year-ago':
         {
-          var yearAgo = today;
-          yearAgo.setDate(yearAgo.getDate() - 365);
-          dateFilter.max = DateHelper.getFormatDate(yearAgo);
+          dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -365));
         }
     }
 
