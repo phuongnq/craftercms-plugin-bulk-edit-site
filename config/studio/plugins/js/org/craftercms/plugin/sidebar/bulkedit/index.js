@@ -2985,6 +2985,7 @@ function FilterDialog(_ref3) {
 
   var handleResetFilters = function handleResetFilters() {
     keywordSub.next('');
+    handleClose();
   };
 
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {

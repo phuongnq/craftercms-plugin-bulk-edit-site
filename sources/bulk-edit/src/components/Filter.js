@@ -59,6 +59,7 @@ export default function FilterDialog({ isOpen, handleClose }) {
 
   const handleResetFilters = () => {
     keywordSub.next('');
+    handleClose();
   };
 
   return (
