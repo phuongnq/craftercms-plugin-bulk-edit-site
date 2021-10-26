@@ -25023,6 +25023,7 @@ function Editor() {
 
   return /*#__PURE__*/e__default.createElement(Box, {
     width: "100%",
+    height: "100%",
     id: "drawer-container",
     position: "relative",
     bgcolor: "white",
@@ -25061,9 +25062,7 @@ function Editor() {
     },
     open: drawerOpen,
     ModalProps: {
-      container: function container() {
-        return rootRef.current;
-      },
+      container: document.getElementById("drawer-container"),
       style: {
         position: 'absolute'
       },

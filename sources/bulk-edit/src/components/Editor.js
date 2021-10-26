@@ -130,6 +130,7 @@ export default function Editor() {
   return (
     <Box
       width="100%"
+      height="100%"
       id="drawer-container"
       position="relative"
       bgcolor="white"
@@ -166,7 +167,7 @@ export default function Editor() {
         }}
         open={drawerOpen}
         ModalProps={{
-          container: () => rootRef.current,
+          container: document.getElementById("drawer-container"),
           style: { position: 'absolute' },
           disableEnforceFocus: true,
           keepMounted: true,
