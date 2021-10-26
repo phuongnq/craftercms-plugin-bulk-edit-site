@@ -130,7 +130,6 @@ export default function Editor() {
   return (
     <Box
       width="100%"
-      height="100%"
       id="drawer-container"
       position="relative"
       bgcolor="white"
@@ -139,7 +138,7 @@ export default function Editor() {
       ref={rootRef}
     >
       <CssBaseline />
-      <StyledAppBar position="relative" open={drawerOpen}>
+      <StyledAppBar position="absolute" open={drawerOpen}>
         <Toolbar>
           <IconButton
             color="inherit"
