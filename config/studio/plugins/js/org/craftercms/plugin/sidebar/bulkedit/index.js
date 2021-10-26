@@ -24917,7 +24917,7 @@ styled$3('div')(function (_ref3) {
 function Editor() {
   useTheme$4();
 
-  var _React$useState = e__default.useState(false),
+  var _React$useState = e__default.useState(true),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       drawerOpen = _React$useState2[0],
       setDrawerOpen = _React$useState2[1];
@@ -24983,11 +24983,7 @@ function Editor() {
     sx: {
       mr: 2
     }
-  }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography$2, {
-    variant: "h6",
-    noWrap: true,
-    component: "div"
-  }, "Bulk Edit")));
+  }, /*#__PURE__*/e__default.createElement(MenuIcon, null))));
   var drawer = /*#__PURE__*/e__default.createElement(Drawer, {
     variant: "persistent",
     sx: {
