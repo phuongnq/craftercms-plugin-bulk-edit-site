@@ -285,7 +285,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       const headerList = getDataSheetHeadersFromConfig(config);
       setColumns(getColumnsFromHeader(headerList));
 
-      const items = await StudioAPI.searchByContentType(contentType, keyword, filterDate);
+      const items = await StudioAPI.searchByContentType(contentType, keyword, editDate);
       const paths = items.map(item => item.path);
 
       const dtRows = [];

@@ -25058,7 +25058,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               headerList = getDataSheetHeadersFromConfig(config);
               setColumns(getColumnsFromHeader(headerList));
               _context3.next = 10;
-              return StudioAPI.searchByContentType(contentType, keyword, filterDate);
+              return StudioAPI.searchByContentType(contentType, keyword, editDate);
 
             case 10:
               items = _context3.sent;
