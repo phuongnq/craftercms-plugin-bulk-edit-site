@@ -74,8 +74,12 @@ export default function Editor() {
     dataSheetRef.current.cancelAllChanges();
   };
 
-  const handleDrawerToggle = () => {
-    setDrawerOpen(!drawerOpen);
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
   };
 
   const drawer = (
@@ -182,31 +186,35 @@ export default function Editor() {
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
-                onClick={handleDrawerToggle}
+                onClick={handleDrawerOpen}
                 edge="start"
+                sx={{ mr: 2, ...(open && { display: 'none' }) }}
               >
-              <MenuIcon />
+                <MenuIcon />
               </IconButton>
               <Typography variant="h6" noWrap component="div">
                 Bulk Edit
               </Typography>
-            </Toolbar>
+          </Toolbar>
           </StyledAppBar>
           <Drawer
-            variant="temporary"
+            sx={{
+              width: DRAWER_WIDTH,
+              flexShrink: 0,
+              '& .MuiDrawer-paper': {
+                width: DRAWER_WIDTH,
+                boxSizing: 'border-box',
+              },
+            }}
             open={drawerOpen}
-            onClose={handleDrawerToggle}
             ModalProps={{
               keepMounted: true,
               container: () => rootRef.current,
               style: { position: "absolute" },
             }}
-            sx={{
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: DRAWER_WIDTH, position: 'absolute' },
-            }}
           >
             <DrawerHeader>
-              <IconButton onClick={handleDrawerToggle}>
+              <IconButton onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
               </IconButton>
             </DrawerHeader>
@@ -214,6 +222,7 @@ export default function Editor() {
             {drawer}
           </Drawer>
           <Main open={drawerOpen}>
+            <DrawerHeader />
             <DataSheet ref={dataSheetRef} />
           </Main>
         </Box>
