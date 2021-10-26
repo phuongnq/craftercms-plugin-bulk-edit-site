@@ -162,7 +162,7 @@ export default function Editor() {
       open={drawerOpen}
       ModalProps={{
         container: document.getElementById("drawer-container"),
-        style: { position: 'relative' },
+        style: { position: 'absolute' },
         disableEnforceFocus: true,
         keepMounted: true,
       }}
@@ -228,6 +228,7 @@ export default function Editor() {
         position="relative"
         bgcolor="white"
         component="div"
+        display="flex"
         style={{ overflowY: "scroll", overflowX: "hidden" }}
         ref={rootRef}
       >
