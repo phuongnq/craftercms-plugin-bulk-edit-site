@@ -25002,7 +25002,7 @@ function Editor() {
       style: {
         position: "absolute",
         width: DRAWER_WIDTH,
-        top: "145px"
+        top: "130px"
       }
     },
     BackdropProps: {
