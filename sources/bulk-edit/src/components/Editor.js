@@ -161,7 +161,7 @@ export default function Editor() {
               </ListItemIcon>
               <ListItemText primary="Find and Replace" />
         </ListItem>
-        <ListItem button key="Apply Filters">
+        <ListItem button key="Apply Filters" onClick={() => setFilterDialogOpen(true)}>
           <ListItemIcon>
             <FilterListIcon />
           </ListItemIcon>

@@ -25079,7 +25079,10 @@ function Editor() {
     primary: "Find and Replace"
   })), /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
-    key: "Apply Filters"
+    key: "Apply Filters",
+    onClick: function onClick() {
+      return setFilterDialogOpen(true);
+    }
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(FilterListIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText, {
     primary: "Apply Filters"
   }))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
