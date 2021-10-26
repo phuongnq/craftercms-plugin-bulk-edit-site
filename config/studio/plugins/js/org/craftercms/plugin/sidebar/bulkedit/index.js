@@ -25060,6 +25060,17 @@ function Editor() {
         boxSizing: 'border-box'
       }
     },
+    PaperProps: {
+      style: {
+        position: "absolute",
+        width: "486px"
+      }
+    },
+    BackdropProps: {
+      style: {
+        position: "absolute"
+      }
+    },
     open: drawerOpen,
     ModalProps: {
       container: document.getElementById("drawer-container"),
@@ -25068,6 +25079,13 @@ function Editor() {
       },
       disableEnforceFocus: true,
       keepMounted: true
+    },
+    SlideProps: {
+      onExiting: function onExiting(node) {
+        node.style.webkitTransform = "scaleX(0)";
+        node.style.transform = "scaleX(0)";
+        node.style.transformOrigin = "top left ";
+      }
     }
   }, /*#__PURE__*/e__default.createElement(DrawerHeader, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     onClick: handleDrawerClose
