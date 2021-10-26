@@ -24895,17 +24895,25 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                     while (1) {
                       switch (_context5.prev = _context5.next) {
                         case 0:
-                          _context5.next = 2;
-                          return StudioAPI.getContentTypeConfig(contentType);
+                          if (contentType) {
+                            _context5.next = 2;
+                            break;
+                          }
+
+                          return _context5.abrupt("return");
 
                         case 2:
+                          _context5.next = 4;
+                          return StudioAPI.getContentTypeConfig(contentType);
+
+                        case 4:
                           config = _context5.sent;
                           headerList = getDataSheetHeadersFromConfig(config);
                           setColumns(getColumnsFromHeader(headerList));
-                          _context5.next = 7;
+                          _context5.next = 9;
                           return StudioAPI.searchByContentType(contentType, keyword);
 
-                        case 7:
+                        case 9:
                           items = _context5.sent;
                           paths = items.map(function (item) {
                             return item.path;
@@ -24913,31 +24921,31 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                           dtRows = [];
                           i = 0;
 
-                        case 11:
+                        case 13:
                           if (!(i < paths.length)) {
-                            _context5.next = 21;
+                            _context5.next = 23;
                             break;
                           }
 
                           path = paths[i];
-                          _context5.next = 15;
+                          _context5.next = 17;
                           return StudioAPI.getContent(path);
 
-                        case 15:
+                        case 17:
                           content = _context5.sent;
                           row = rowFromApiContent(i, path, content, headerList);
                           dtRows.push(row);
 
-                        case 18:
+                        case 20:
                           i += 1;
-                          _context5.next = 11;
+                          _context5.next = 13;
                           break;
 
-                        case 21:
+                        case 23:
                           setRows(dtRows);
                           setSessionRows(dtRows);
 
-                        case 23:
+                        case 25:
                         case "end":
                           return _context5.stop();
                       }

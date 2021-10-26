@@ -282,6 +282,8 @@ const DataSheet = React.forwardRef((props, ref) => {
     let subscriber;
     (async () => {
       subscriber = keywordSub.subscribe(async (keyword) => {
+        if (!contentType) return;
+
         const config = await StudioAPI.getContentTypeConfig(contentType);
         const headerList = getDataSheetHeadersFromConfig(config);
         setColumns(getColumnsFromHeader(headerList));
