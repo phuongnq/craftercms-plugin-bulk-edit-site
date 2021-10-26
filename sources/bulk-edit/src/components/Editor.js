@@ -128,7 +128,12 @@ export default function Editor() {
   };
 
   return (
-    <Box>
+    <Box
+      position="relative"
+      component="div"
+      style={{ overflowY: "scroll", overflowX: "hidden" }}
+      ref={rootRef}
+    >
       <CssBaseline />
       <StyledAppBar position="relative" open={drawerOpen}>
         <Toolbar>
@@ -144,15 +149,11 @@ export default function Editor() {
           <Typography variant="h6" noWrap component="div">
             Bulk Edit
           </Typography>
-      </Toolbar>
+        </Toolbar>
       </StyledAppBar>
-      <Box
-        position="relative"
-        component="div"
-        style={{ overflowY: "scroll", overflowX: "hidden" }}
-        ref={rootRef}
-      >
+      <Box>
         <Drawer
+         variant="persistent"
           sx={{
             width: DRAWER_WIDTH,
             flexShrink: 0,
@@ -163,8 +164,10 @@ export default function Editor() {
           }}
           open={drawerOpen}
           ModalProps={{
-            keepMounted: true,
             container: () => rootRef.current,
+            style: { position: 'absolute' },
+            disableEnforceFocus: true,
+            keepMounted: true,
           }}
         >
           <DrawerHeader>
@@ -211,7 +214,6 @@ export default function Editor() {
           <Divider />
         </Drawer>
         <Main open={drawerOpen}>
-          <DrawerHeader />
           <DataSheet ref={dataSheetRef} />
         </Main>
       </Box>

@@ -25021,7 +25021,15 @@ function Editor() {
     setDrawerOpen(false);
   };
 
-  return /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(StyledAppBar, {
+  return /*#__PURE__*/e__default.createElement(Box, {
+    position: "relative",
+    component: "div",
+    style: {
+      overflowY: "scroll",
+      overflowX: "hidden"
+    },
+    ref: rootRef
+  }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(StyledAppBar, {
     position: "relative",
     open: drawerOpen
   }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
@@ -25038,15 +25046,7 @@ function Editor() {
     variant: "h6",
     noWrap: true,
     component: "div"
-  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Box, {
-    position: "relative",
-    component: "div",
-    style: {
-      overflowY: "scroll",
-      overflowX: "hidden"
-    },
-    ref: rootRef
-  }, /*#__PURE__*/e__default.createElement(Drawer, {
+  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(Drawer, {
     variant: "persistent",
     sx: {
       width: DRAWER_WIDTH,
@@ -25058,13 +25058,14 @@ function Editor() {
     },
     open: drawerOpen,
     ModalProps: {
-      keepMounted: true,
       container: function container() {
         return rootRef.current;
       },
       style: {
         position: 'absolute'
-      }
+      },
+      disableEnforceFocus: true,
+      keepMounted: true
     }
   }, /*#__PURE__*/e__default.createElement(DrawerHeader, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
     onClick: handleDrawerClose
