@@ -25151,7 +25151,7 @@ function MainDialog() {
     open: open,
     fullWidth: true,
     maxWidth: true,
-    style: {
+    sx: {
       height: "100%"
     }
   }, /*#__PURE__*/e__default.createElement(BootstrapDialogTitle, {

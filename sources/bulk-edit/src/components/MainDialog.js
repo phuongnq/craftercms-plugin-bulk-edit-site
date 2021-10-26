@@ -95,7 +95,7 @@ export default function MainDialog() {
         open={open}
         fullWidth={true}
         maxWidth={true}
-        style={{
+        sx={{
           height: "100%",
         }}
       >
