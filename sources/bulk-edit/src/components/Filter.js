@@ -85,29 +85,36 @@ const LastEditDateComponent = () => {
 
     switch (option) {
       case 'today': {
+        console.log(today);
         dateFilter.min = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -1));
         dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, 1));
+        break;
       }
 
       case 'in-last-week': {
         dateFilter.min = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -7));
         dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -1));
+        break;
       }
 
       case 'over-a-week-ago': {
         dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -8));
+        break;
       }
 
       case 'over-a-month-ago': {
         dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -30));
+        break;
       }
 
       case 'over-six-months-ago': {
         dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -30*6));
+        break;
       }
 
       case 'over-a-year-ago': {
         dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -365));
+        break;
       }
 
       default:
