@@ -25047,6 +25047,7 @@ function Editor() {
     },
     ref: rootRef
   }, /*#__PURE__*/e__default.createElement(Drawer, {
+    variant: "persistent",
     sx: {
       width: DRAWER_WIDTH,
       flexShrink: 0,
@@ -25094,7 +25095,7 @@ function Editor() {
     primary: "Cancel All Change"
   }))), /*#__PURE__*/e__default.createElement(Divider, null)), /*#__PURE__*/e__default.createElement(Main, {
     open: drawerOpen
-  }, /*#__PURE__*/e__default.createElement(DrawerHeader, null), /*#__PURE__*/e__default.createElement(DataSheet, {
+  }, /*#__PURE__*/e__default.createElement(DataSheet, {
     ref: dataSheetRef
   }))), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
