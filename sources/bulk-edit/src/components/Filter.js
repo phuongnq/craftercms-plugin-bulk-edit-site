@@ -85,45 +85,29 @@ const LastEditDateComponent = () => {
 
     switch (option) {
       case 'today': {
-        const yesterday = today;
-        yesterday.setDate(yesterday.getDate() - 1);
-        const tomorrow = today;
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        dateFilter.min = DateHelper.getFormatDate(yesterday);
-        dateFilter.max = DateHelper.getFormatDate(tomorrow);
+        dateFilter.min = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -1));
+        dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, 1));
       }
 
       case 'in-last-week': {
-        const yesterday = today;
-        yesterday.setDate(yesterday.getDate() - 1);
-        const lastweek = today;
-        lastweek.setDate(lastweek.getDate() - 7);
-        dateFilter.min = DateHelper.getFormatDate(lastweek);
-        dateFilter.max = DateHelper.getFormatDate(yesterday);
+        dateFilter.min = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -7));
+        dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -1));
       }
 
       case 'over-a-week-ago': {
-        const lastweek = today;
-        lastweek.setDate(lastweek.getDate() - 8);
-        dateFilter.max = DateHelper.getFormatDate(lastweek);
+        dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -8));
       }
 
       case 'over-a-month-ago': {
-        const lastmonth = today;
-        lastmonth.setDate(lastmonth.getDate() - 30);
-        dateFilter.max = DateHelper.getFormatDate(lastmonth);
+        dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -30));
       }
 
       case 'over-six-months-ago': {
-        const sixMonthAgo = today;
-        sixMonthAgo.setDate(sixMonthAgo.getDate() - 30 * 6);
-        dateFilter.max = DateHelper.getFormatDate(sixMonthAgo);
+        dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -30*6));
       }
 
       case 'over-a-year-ago': {
-        const yearAgo = today;
-        yearAgo.setDate(yearAgo.getDate() - 365);
-        dateFilter.max = DateHelper.getFormatDate(yearAgo);
+        dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -365));
       }
 
       default:
@@ -145,6 +129,8 @@ const LastEditDateComponent = () => {
 
   React.useEffect(() => {
     const filter = getDateFromOption(lastEditOption);
+    console.log(lastEditOption);
+    console.log(filter);
     filterEditDateSub.next(filter);
   }, [lastEditOption]);
 

@@ -22,6 +22,12 @@ const DateHelper = {
     const monthStr = month < 10 ? `0${month}` : `${month}`;
     const dayStr = day < 10 ? `0${day}` : `${day}`;
     return `${year}-${monthStr}-${dayStr}`;
+  },
+  getShiftDate(date, shiftByDays) {
+    const shiftDate = new Date(date.getTime());
+    shiftDate.setDate(shiftDate.getDate() + shiftByDays);
+
+    return shiftDate;
   }
 };
 
