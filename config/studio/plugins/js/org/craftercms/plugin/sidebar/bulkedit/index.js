@@ -708,7 +708,6 @@ var StudioAPI = {
               };
 
               if (filterDate) {
-                console.log(filterDate);
                 filters['last-edit-date'] = {
                   date: true,
                   id: filterDate.id,
@@ -3023,19 +3022,16 @@ var CheckIcon = /*@__PURE__*/getDefaultExportFromCjs(Check);
  */
 var DateHelper = {
   getFormatDate: function getFormatDate(date) {
-    console.log(date);
     var year = date.getUTCFullYear();
     var month = date.getUTCMonth() + 1;
     var day = date.getUTCDate();
     var monthStr = month < 10 ? "0".concat(month) : "".concat(month);
     var dayStr = day < 10 ? "0".concat(day) : "".concat(day);
-    console.log("".concat(year, "-").concat(monthStr, "-").concat(dayStr));
     return "".concat(year, "-").concat(monthStr, "-").concat(dayStr);
   },
   getShiftDate: function getShiftDate(date, shiftByDays) {
     var shiftDate = new Date(date.getTime());
     shiftDate.setDate(shiftDate.getDate() + shiftByDays);
-    console.log(shiftDate);
     return shiftDate;
   }
 };
@@ -3087,7 +3083,6 @@ var LastEditDateComponent = function LastEditDateComponent() {
     switch (option) {
       case 'today':
         {
-          console.log(today);
           dateFilter.min = DateHelper.getFormatDate(DateHelper.getShiftDate(today, -1));
           dateFilter.max = DateHelper.getFormatDate(DateHelper.getShiftDate(today, 1));
           break;
@@ -3143,8 +3138,6 @@ var LastEditDateComponent = function LastEditDateComponent() {
 
   e__default.useEffect(function () {
     var filter = getDateFromOption(lastEditOption);
-    console.log(lastEditOption);
-    console.log(filter);
     filterEditDateSub.next(filter);
   }, [lastEditOption]);
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Accordion, null, /*#__PURE__*/e__default.createElement(AccordionSummary, {
@@ -25024,7 +25017,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       setKeyword(keyword);
     });
     var subscriberEditDate = filterEditDateSub.subscribe(function (filterDate) {
-      console.log(filterDate);
       setEditDate(filterDate);
     });
     return function () {
