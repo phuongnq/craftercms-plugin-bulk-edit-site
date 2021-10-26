@@ -25025,8 +25025,8 @@ function Editor() {
         duration: theme.transitions.duration.leavingScreen
       })
     }, open && {
-      width: "calc(100% - ".concat(drawerWidth, "px)"),
-      marginLeft: "".concat(drawerWidth, "px"),
+      width: "calc(100% - ".concat(DRAWER_WIDTH, "px)"),
+      marginLeft: "".concat(DRAWER_WIDTH, "px"),
       transition: theme.transitions.create(['margin', 'width'], {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen
