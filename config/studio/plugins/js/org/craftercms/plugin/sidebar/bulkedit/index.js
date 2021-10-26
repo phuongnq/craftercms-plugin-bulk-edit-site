@@ -25022,15 +25022,13 @@ function Editor() {
   };
 
   return /*#__PURE__*/e__default.createElement(Box, {
-    id: "drawer-container",
     position: "relative",
     bgcolor: "white",
     component: "div",
     style: {
       overflowY: "scroll",
       overflowX: "hidden"
-    },
-    ref: rootRef
+    }
   }, /*#__PURE__*/e__default.createElement(CssBaseline, null), /*#__PURE__*/e__default.createElement(StyledAppBar, {
     position: "relative",
     open: drawerOpen
@@ -25041,14 +25039,18 @@ function Editor() {
     edge: "start",
     sx: _objectSpread2({
       mr: 2
-    }, open && {
+    }, drawerOpen && {
       display: 'none'
     })
   }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), /*#__PURE__*/e__default.createElement(Typography$2, {
     variant: "h6",
     noWrap: true,
     component: "div"
-  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Drawer, {
+  }, "Bulk Edit"))), /*#__PURE__*/e__default.createElement(Box, {
+    component: "section",
+    position: "relative",
+    ref: rootRef
+  }, /*#__PURE__*/e__default.createElement(Drawer, {
     sx: {
       width: DRAWER_WIDTH,
       flexShrink: 0,
@@ -25098,7 +25100,7 @@ function Editor() {
     open: drawerOpen
   }, /*#__PURE__*/e__default.createElement(DrawerHeader, null), /*#__PURE__*/e__default.createElement(DataSheet, {
     ref: dataSheetRef
-  })), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
+  }))), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
     handleClose: handleFindReplaceDialogClose
   }), /*#__PURE__*/e__default.createElement(Snackbar, {
