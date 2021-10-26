@@ -127,13 +127,17 @@ export default function Editor() {
     setDrawerOpen(false);
   };
 
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
   const appbar = (
     <Box position="relative">
       <Toolbar>
         <IconButton
           color="inherit"
           aria-label="open drawer"
-          onClick={handleDrawerOpen}
+          onClick={toggleDrawer}
           edge="start"
           sx={{ mr: 2 }}
         >
