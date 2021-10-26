@@ -28,6 +28,8 @@ import {
 } from '@mui/material';
 import Draggable from 'react-draggable';
 
+import { keywordSub } from '../services/subscribe';
+
 const StyledTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
@@ -52,7 +54,7 @@ export default function FilterDialog({ isOpen, handleClose }) {
   const [keyword, setKeyword] = React.useState('');
 
   const handleApplyFilter = () => {
-    console.log('apply filter');
+    keywordSub.next(keyword);
   };
 
   return (
@@ -80,8 +82,8 @@ export default function FilterDialog({ isOpen, handleClose }) {
           <StyledTextField
             fullWidth
             id="search"
-            label="keyword"
-            placeholder="Search with keyword"
+            label="Keyword"
+            placeholder="Filter by a keyword"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
           />

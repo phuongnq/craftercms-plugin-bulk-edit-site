@@ -17,6 +17,7 @@
 import { Subject } from 'rxjs';
 
 const contentTypeSub = new Subject('');
+const keywordSub = new Subject('');
 const findReplaceSub = new Subject({
   findText: '',
   replaceText: '',
@@ -25,5 +26,6 @@ const findReplaceSub = new Subject({
 
 export {
   contentTypeSub,
+  keywordSub,
   findReplaceSub,
 };

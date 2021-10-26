@@ -693,7 +693,7 @@ var StudioAPI = {
       }, _callee2);
     }))();
   },
-  searchByContentType: function searchByContentType(ct) {
+  searchByContentType: function searchByContentType(ct, keywords) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
       var _body;
 
@@ -705,7 +705,7 @@ var StudioAPI = {
               url = "".concat(StudioAPI.origin()).concat(API_SEARCH, "?siteId=").concat(StudioAPI.siteId());
               body = (_body = {
                 query: '',
-                keywords: '',
+                keywords: keywords || '',
                 offset: 0,
                 limit: 100,
                 sortBy: ''
@@ -851,6 +851,7 @@ var StudioAPI = {
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var contentTypeSub = new Subject('');
+var keywordSub = new Subject('');
 var findReplaceSub = new Subject({
   findText: '',
   replaceText: '',
@@ -2979,7 +2980,7 @@ function FilterDialog(_ref3) {
       setKeyword = _React$useState2[1];
 
   var handleApplyFilter = function handleApplyFilter() {
-    console.log('apply filter');
+    keywordSub.next(keyword);
   };
 
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
@@ -3003,8 +3004,8 @@ function FilterDialog(_ref3) {
   }, /*#__PURE__*/e__default.createElement(StyledTextField, {
     fullWidth: true,
     id: "search",
-    label: "keyword",
-    placeholder: "Search with keyword",
+    label: "Keyword",
+    placeholder: "Filter by a keyword",
     value: keyword,
     onChange: function onChange(e) {
       return setKeyword(e.target.value);
@@ -24879,6 +24880,88 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       subscriber.unsubscribe();
     };
   }, []);
+  e__default.useEffect(function () {
+    var subscriber;
+
+    _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+      return regeneratorRuntime.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              subscriber = keywordSub.subscribe( /*#__PURE__*/function () {
+                var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(keyword) {
+                  var config, headerList, items, paths, dtRows, i, path, content, row;
+                  return regeneratorRuntime.wrap(function _callee5$(_context5) {
+                    while (1) {
+                      switch (_context5.prev = _context5.next) {
+                        case 0:
+                          _context5.next = 2;
+                          return StudioAPI.getContentTypeConfig(contentType);
+
+                        case 2:
+                          config = _context5.sent;
+                          headerList = getDataSheetHeadersFromConfig(config);
+                          setColumns(getColumnsFromHeader(headerList));
+                          _context5.next = 7;
+                          return StudioAPI.searchByContentType(contentType, keyword);
+
+                        case 7:
+                          items = _context5.sent;
+                          paths = items.map(function (item) {
+                            return item.path;
+                          });
+                          dtRows = [];
+                          i = 0;
+
+                        case 11:
+                          if (!(i < paths.length)) {
+                            _context5.next = 21;
+                            break;
+                          }
+
+                          path = paths[i];
+                          _context5.next = 15;
+                          return StudioAPI.getContent(path);
+
+                        case 15:
+                          content = _context5.sent;
+                          row = rowFromApiContent(i, path, content, headerList);
+                          dtRows.push(row);
+
+                        case 18:
+                          i += 1;
+                          _context5.next = 11;
+                          break;
+
+                        case 21:
+                          setRows(dtRows);
+                          setSessionRows(dtRows);
+
+                        case 23:
+                        case "end":
+                          return _context5.stop();
+                      }
+                    }
+                  }, _callee5);
+                }));
+
+                return function (_x5) {
+                  return _ref6.apply(this, arguments);
+                };
+              }());
+
+            case 1:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }))();
+
+    return function () {
+      subscriber.unsubscribe();
+    };
+  }, [contentType]);
 
   var handleEditRowsModelChange = function handleEditRowsModelChange(model) {
     setEditRowsModel(model);

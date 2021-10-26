@@ -19,7 +19,7 @@ import { makeStyles } from '@mui/styles';
 
 import CellExpand from './CellExpand';
 
-import { contentTypeSub, findReplaceSub } from '../services/subscribe';
+import { contentTypeSub, findReplaceSub, keywordSub } from '../services/subscribe';
 import StudioAPI from '../api/studio';
 import ActionHelper from '../helpers/action';
 import ContentTypeHelper from '../helpers/content_type';
@@ -275,8 +275,38 @@ const DataSheet = React.forwardRef((props, ref) => {
 
     return (() => {
       subscriber.unsubscribe();
-    })
+    });
   }, []);
+
+  React.useEffect(() => {
+    let subscriber;
+    (async () => {
+      subscriber = keywordSub.subscribe(async (keyword) => {
+        const config = await StudioAPI.getContentTypeConfig(contentType);
+        const headerList = getDataSheetHeadersFromConfig(config);
+        setColumns(getColumnsFromHeader(headerList));
+
+        const items = await StudioAPI.searchByContentType(contentType, keyword);
+        const paths = items.map(item => item.path);
+
+        const dtRows = [];
+        for (let i = 0; i < paths.length; i += 1) {
+          const path = paths[i];
+
+          const content = await StudioAPI.getContent(path);
+          const row = rowFromApiContent(i, path, content, headerList);
+          dtRows.push(row);
+        }
+
+        setRows(dtRows);
+        setSessionRows(dtRows);
+      });
+    })();
+
+    return (() => {
+      subscriber.unsubscribe();
+    });
+  }, [contentType]);
 
   const handleEditRowsModelChange = (model) => {
     setEditRowsModel(model);

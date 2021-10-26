@@ -65,11 +65,11 @@ const StudioAPI = {
 
     return '';
   },
-  async searchByContentType(ct) {
+  async searchByContentType(ct, keywords) {
     const url = `${StudioAPI.origin()}${API_SEARCH}?siteId=${StudioAPI.siteId()}`;
     const body = {
       query: '',
-      keywords: '',
+      keywords: keywords || '',
       offset: 0,
       limit: 100,
       sortBy: '',
