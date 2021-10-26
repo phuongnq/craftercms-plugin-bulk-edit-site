@@ -39,6 +39,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import ContentTypeSelect from './ContentTypeSelect';
 import FindAndReplace from './FindAndReplace';
+import FilterDialog from './Filter';
 import DataSheet from './DataSheet';
 
 const DRAWER_WIDTH = 240;
@@ -65,6 +66,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 export default function Editor() {
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
+  const [filterDialogOpen, setFilterDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
 
   const rootRef = React.useRef(null);
@@ -72,6 +74,10 @@ export default function Editor() {
 
   const handleFindReplaceDialogClose = () => {
     setFindReplaceDialogOpen(false);
+  };
+
+  const handleFilterDialogClose = () => {
+    setFilterDialogOpen(false);
   };
 
   const handleCloseAlert = () => {
@@ -205,6 +211,7 @@ export default function Editor() {
         </Main>
       </section>
       <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
+      <FilterDialog isOpen={filterDialogOpen} handleClose={handleFilterDialogClose} />
       <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
         <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
           Change has been saved.

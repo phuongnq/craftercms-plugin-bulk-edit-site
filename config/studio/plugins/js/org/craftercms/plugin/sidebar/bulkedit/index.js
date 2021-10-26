@@ -2837,13 +2837,13 @@ var ActionHelper = {
   REPLACE: 'replace'
 };
 
-var StyledTextField = styled$3(TextField$1)(function (_ref) {
+var StyledTextField$1 = styled$3(TextField$1)(function (_ref) {
   var theme = _ref.theme;
   return {
     marginBottom: theme.spacing(2)
   };
 });
-var StyledButton = styled$3(Button$1)(function (_ref2) {
+var StyledButton$1 = styled$3(Button$1)(function (_ref2) {
   _ref2.theme;
   return {
     margin: '5px',
@@ -2851,7 +2851,7 @@ var StyledButton = styled$3(Button$1)(function (_ref2) {
   };
 });
 
-function PaperComponent(props) {
+function PaperComponent$1(props) {
   return /*#__PURE__*/e__default.createElement(cjs, {
     handle: "#draggable-findnreplace-dialog-title",
     cancel: '[class*="MuiDialogContent-root"]'
@@ -2901,7 +2901,7 @@ function FindAndReplaceDialog(_ref3) {
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
     maxWidth: "md",
     "aria-labelledby": "draggable-findnreplace-dialog-title",
-    PaperComponent: PaperComponent,
+    PaperComponent: PaperComponent$1,
     open: isOpen,
     onClose: handleClose
   }, /*#__PURE__*/e__default.createElement(DialogTitle, {
@@ -2916,7 +2916,7 @@ function FindAndReplaceDialog(_ref3) {
     sx: {
       padding: '16px'
     }
-  }, /*#__PURE__*/e__default.createElement(StyledTextField, {
+  }, /*#__PURE__*/e__default.createElement(StyledTextField$1, {
     fullWidth: true,
     id: "find",
     label: "Find",
@@ -2925,7 +2925,7 @@ function FindAndReplaceDialog(_ref3) {
     onChange: function onChange(e) {
       return setFindText(e.target.value);
     }
-  }), /*#__PURE__*/e__default.createElement(StyledTextField, {
+  }), /*#__PURE__*/e__default.createElement(StyledTextField$1, {
     fullWidth: true,
     id: "replace",
     label: "Replace with",
@@ -2934,18 +2934,84 @@ function FindAndReplaceDialog(_ref3) {
     onChange: function onChange(e) {
       return setReplaceText(e.target.value);
     }
-  }))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
+  }))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton$1, {
     variant: "outlined",
     onClick: handleClose
-  }, "Done"), /*#__PURE__*/e__default.createElement(StyledButton, {
+  }, "Done"), /*#__PURE__*/e__default.createElement(StyledButton$1, {
     variant: "outlined",
     disabled: isButtonsDisable(findText),
     onClick: handleReplaceAllClick
-  }, "Replace All"), /*#__PURE__*/e__default.createElement(StyledButton, {
+  }, "Replace All"), /*#__PURE__*/e__default.createElement(StyledButton$1, {
     variant: "outlined",
     disabled: isButtonsDisable(findText),
     onClick: handleFindClick
   }, "Find")))));
+}
+
+var StyledTextField = styled$3(TextField$1)(function (_ref) {
+  var theme = _ref.theme;
+  return {
+    marginBottom: theme.spacing(2)
+  };
+});
+var StyledButton = styled$3(Button$1)(function (_ref2) {
+  _ref2.theme;
+  return {
+    margin: '5px',
+    "float": 'right'
+  };
+});
+
+function PaperComponent(props) {
+  return /*#__PURE__*/e__default.createElement(cjs, {
+    handle: "#draggable-filter-dialog-title",
+    cancel: '[class*="MuiDialogContent-root"]'
+  }, /*#__PURE__*/e__default.createElement(Paper$1, props));
+}
+
+function FilterDialog(_ref3) {
+  var isOpen = _ref3.isOpen,
+      handleClose = _ref3.handleClose;
+
+  var _React$useState = e__default.useState(''),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      keyword = _React$useState2[0],
+      setKeyword = _React$useState2[1];
+
+  return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
+    maxWidth: "md",
+    "aria-labelledby": "draggable-filter-dialog-title",
+    PaperComponent: PaperComponent,
+    open: isOpen,
+    onClose: handleClose
+  }, /*#__PURE__*/e__default.createElement(DialogTitle, {
+    style: {
+      cursor: 'move'
+    },
+    id: "draggable-filter-dialog-title"
+  }, "Apply Filter"), /*#__PURE__*/e__default.createElement(DialogContent, null, /*#__PURE__*/e__default.createElement(Box, {
+    component: "form",
+    noValidate: true,
+    autoComplete: "off",
+    sx: {
+      padding: '16px'
+    }
+  }, /*#__PURE__*/e__default.createElement(StyledTextField, {
+    fullWidth: true,
+    id: "search",
+    label: "keyword",
+    placeholder: "Search with keyword",
+    value: keyword,
+    onChange: function onChange(e) {
+      return setKeyword(e.target.value);
+    }
+  }))), /*#__PURE__*/e__default.createElement(DialogActions, null, /*#__PURE__*/e__default.createElement(Box, null, /*#__PURE__*/e__default.createElement(StyledButton, {
+    variant: "outlined",
+    onClick: handleClose
+  }, "Cancel"), /*#__PURE__*/e__default.createElement(StyledButton, {
+    variant: "outlined",
+    onClick: handleApplyFilter
+  }, "Apply Filter")))));
 }
 
 function defaultEqualityCheck(a, b) {
@@ -24896,14 +24962,23 @@ function Editor() {
 
   var _React$useState5 = e__default.useState(false),
       _React$useState6 = _slicedToArray(_React$useState5, 2),
-      openAlert = _React$useState6[0],
-      setOpenAlert = _React$useState6[1];
+      filterDialogOpen = _React$useState6[0],
+      setFilterDialogOpen = _React$useState6[1];
+
+  var _React$useState7 = e__default.useState(false),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      openAlert = _React$useState8[0],
+      setOpenAlert = _React$useState8[1];
 
   var rootRef = e__default.useRef(null);
   var dataSheetRef = e__default.useRef(null);
 
   var handleFindReplaceDialogClose = function handleFindReplaceDialogClose() {
     setFindReplaceDialogOpen(false);
+  };
+
+  var handleFilterDialogClose = function handleFilterDialogClose() {
+    setFilterDialogOpen(false);
   };
 
   var handleCloseAlert = function handleCloseAlert() {
@@ -25036,6 +25111,9 @@ function Editor() {
   }))), /*#__PURE__*/e__default.createElement(FindAndReplaceDialog, {
     isOpen: findReplaceDialogOpen,
     handleClose: handleFindReplaceDialogClose
+  }), /*#__PURE__*/e__default.createElement(FilterDialog, {
+    isOpen: filterDialogOpen,
+    handleClose: handleFilterDialogClose
   }), /*#__PURE__*/e__default.createElement(Snackbar, {
     open: openAlert,
     autoHideDuration: 6000,
