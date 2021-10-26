@@ -28,10 +28,7 @@ import {
   Snackbar,
   Alert,
   IconButton,
-  AppBar,
-  Typography,
   styled,
-  useTheme
 } from '@mui/material';
 
 import FindReplaceIcon from '@mui/icons-material/FindReplace';
@@ -39,8 +36,6 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import ContentTypeSelect from './ContentTypeSelect';
 import FindAndReplace from './FindAndReplace';
@@ -67,34 +62,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   }),
 );
 
-const StyledAppBar = styled(AppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${DRAWER_WIDTH}px)`,
-    marginLeft: `${DRAWER_WIDTH}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-}));
-
 export default function Editor() {
-  const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
@@ -117,14 +85,6 @@ export default function Editor() {
 
   const handleCancelAllChangeClick = () => {
     dataSheetRef.current.cancelAllChanges();
-  };
-
-  const handleDrawerOpen = () => {
-    setDrawerOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setDrawerOpen(false);
   };
 
   const toggleDrawer = () => {
