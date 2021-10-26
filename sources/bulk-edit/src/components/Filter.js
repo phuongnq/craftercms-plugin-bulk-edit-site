@@ -39,7 +39,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckIcon from '@mui/icons-material/Check';
 import Draggable from 'react-draggable';
 
-import { keywordSub } from '../services/subscribe';
+import { keywordSub, filterEditDateSub } from '../services/subscribe';
+
+import DateHelper from '../helpers/date';
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   marginBottom: theme.spacing(2),
@@ -72,6 +74,65 @@ const LastEditDateComponent = () => {
     'over-a-year-ago': 'Over a year ago',
   };
 
+  const getDateFromOption = (option) => {
+    const today = new Date();
+
+    const dateFilter = {
+      id: `last-edit-date${option}`,
+      min: null,
+      max: null,
+    };
+
+    switch (option) {
+      case 'today': {
+        const yesterday = today;
+        yesterday.setDate(yesterday.getDate() - 1);
+        const tomorrow = today;
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateFilter.min = DateHelper.getFormatDate(yesterday);
+        dateFilter.max = DateHelper.getFormatDate(tomorrow);
+      }
+
+      case 'in-last-week': {
+        const yesterday = today;
+        yesterday.setDate(yesterday.getDate() - 1);
+        const lastweek = today;
+        lastweek.setDate(lastweek.getDate() - 7);
+        dateFilter.min = DateHelper.getFormatDate(lastweek);
+        dateFilter.max = DateHelper.getFormatDate(yesterday);
+      }
+
+      case 'over-a-week-ago': {
+        const lastweek = today;
+        lastweek.setDate(lastweek.getDate() - 8);
+        dateFilter.max = DateHelper.getFormatDate(lastweek);
+      }
+
+      case 'over-a-month-ago': {
+        const lastmonth = today;
+        lastmonth.setDate(lastmonth.getDate() - 30);
+        dateFilter.max = DateHelper.getFormatDate(lastmonth);
+      }
+
+      case 'over-six-months-ago': {
+        const sixMonthAgo = today;
+        sixMonthAgo.setDate(sixMonthAgo.getDate() - 30 * 6);
+        dateFilter.max = DateHelper.getFormatDate(sixMonthAgo);
+      }
+
+      case 'over-a-year-ago': {
+        const yearAgo = today;
+        yearAgo.setDate(yearAgo.getDate() - 365);
+        dateFilter.max = DateHelper.getFormatDate(yearAgo);
+      }
+
+      default:
+        break;
+    }
+
+    return dateFilter;
+  };
+
   const keys = Object.keys(lastEditDateOptions);
   const options = [];
   for (let i = 0; i < keys.length; i += 1) {
@@ -81,6 +142,11 @@ const LastEditDateComponent = () => {
       <FormControlLabel value={key} control={<Radio />} label={value} />
     ));
   }
+
+  React.useEffect(() => {
+    const filter = getDateFromOption(lastEditOption);
+    filterEditDateSub.next(filter);
+  }, [lastEditOption]);
 
   return (
     <div>
@@ -121,6 +187,7 @@ export default function FilterDialog({ isOpen, handleClose }) {
 
   const handleResetFilters = () => {
     keywordSub.next('');
+    filterEditDateSub.next(null);
     handleClose();
   };
 

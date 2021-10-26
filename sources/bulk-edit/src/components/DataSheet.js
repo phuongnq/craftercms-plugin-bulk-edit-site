@@ -19,7 +19,12 @@ import { makeStyles } from '@mui/styles';
 
 import CellExpand from './CellExpand';
 
-import { contentTypeSub, findReplaceSub, keywordSub } from '../services/subscribe';
+import {
+  contentTypeSub,
+  findReplaceSub,
+  keywordSub,
+  filterEditDateSub
+} from '../services/subscribe';
 import StudioAPI from '../api/studio';
 import ActionHelper from '../helpers/action';
 import ContentTypeHelper from '../helpers/content_type';
@@ -171,6 +176,7 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [findText, setFindText] = React.useState('');
   const [contentType, setContentType] = React.useState('');
   const [keyword, setKeyword] = React.useState('');
+  const [editDate, setEditDate] = React.useState(null);
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
@@ -256,9 +262,14 @@ const DataSheet = React.forwardRef((props, ref) => {
       setKeyword(keyword);
     });
 
+    const subscriberEditDate = filterEditDateSub.subscribe((filterDate) => {
+      setEditDate(filterDate);
+    })
+
     return (() => {
       subscriberContentType.unsubscribe();
       subscriberKeyword.unsubscribe();
+      subscriberEditDate.unsubscribe();
     });
   }, []);
 
@@ -274,7 +285,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       const headerList = getDataSheetHeadersFromConfig(config);
       setColumns(getColumnsFromHeader(headerList));
 
-      const items = await StudioAPI.searchByContentType(contentType, keyword);
+      const items = await StudioAPI.searchByContentType(contentType, keyword, filterDate);
       const paths = items.map(item => item.path);
 
       const dtRows = [];
@@ -289,7 +300,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       setRows(dtRows);
       setSessionRows(dtRows);
     })();
-  }, [contentType, keyword]);
+  }, [contentType, keyword, editDate]);
 
   const handleEditRowsModelChange = (model) => {
     setEditRowsModel(model);

@@ -693,42 +693,53 @@ var StudioAPI = {
       }, _callee2);
     }))();
   },
-  searchByContentType: function searchByContentType(ct, keywords) {
+  searchByContentType: function searchByContentType(ct, keywords, filterDate) {
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
       var _body;
 
-      var url, body, res;
+      var url, filters, body, res;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
               url = "".concat(StudioAPI.origin()).concat(API_SEARCH, "?siteId=").concat(StudioAPI.siteId());
+              filters = {
+                'content-type': ct
+              };
+
+              if (filterDate) {
+                filters['last-edit-date'] = {
+                  date: true,
+                  id: filterDate.id,
+                  max: filterDate.max,
+                  min: filterDate.min
+                };
+              }
+
               body = (_body = {
                 query: '',
                 keywords: keywords || '',
                 offset: 0,
                 limit: 100,
                 sortBy: ''
-              }, _defineProperty(_body, "sortBy", '_score'), _defineProperty(_body, "sortOrder", 'desc'), _defineProperty(_body, "filters", {
-                'content-type': ct
-              }), _body);
-              _context3.next = 4;
+              }, _defineProperty(_body, "sortBy", '_score'), _defineProperty(_body, "sortOrder", 'desc'), _defineProperty(_body, "filters", filters), _body);
+              _context3.next = 6;
               return HttpHelper.post(url, body);
 
-            case 4:
+            case 6:
               res = _context3.sent;
 
               if (!(res.status === 200)) {
-                _context3.next = 7;
+                _context3.next = 9;
                 break;
               }
 
               return _context3.abrupt("return", res.response.result.items);
 
-            case 7:
+            case 9:
               return _context3.abrupt("return", []);
 
-            case 8:
+            case 10:
             case "end":
               return _context3.stop();
           }
@@ -857,6 +868,7 @@ var findReplaceSub = new Subject({
   replaceText: '',
   action: ''
 });
+var filterEditDateSub = new Subject(null);
 
 function ContentTypeSelect() {
   var _React$useState = e__default.useState(''),
@@ -2993,6 +3005,32 @@ exports.default = _default;
 
 var CheckIcon = /*@__PURE__*/getDefaultExportFromCjs(Check);
 
+/*
+ * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+var DateHelper = {
+  getFormatDate: function getFormatDate(date) {
+    var year = date.getUTCFullYear();
+    var month = date.getUTCMonth() + 1;
+    var day = date.getUTCDate();
+    var monthStr = month < 10 ? "0".concat(month) : "".concat(month);
+    var dayStr = day < 10 ? "0".concat(day) : "".concat(day);
+    return "".concat(year, "-").concat(monthStr, "-").concat(dayStr);
+  }
+};
+
 var StyledTextField = styled$3(TextField$1)(function (_ref) {
   var theme = _ref.theme;
   return {
@@ -3028,6 +3066,72 @@ var LastEditDateComponent = function LastEditDateComponent() {
     'over-six-months-ago': 'Over six months ago',
     'over-a-year-ago': 'Over a year ago'
   };
+
+  var getDateFromOption = function getDateFromOption(option) {
+    var today = new Date();
+    var dateFilter = {
+      id: "last-edit-date".concat(option),
+      min: null,
+      max: null
+    };
+
+    switch (option) {
+      case 'today':
+        {
+          var yesterday = today;
+          yesterday.setDate(yesterday.getDate() - 1);
+          var tomorrow = today;
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          dateFilter.min = DateHelper.getFormatDate(yesterday);
+          dateFilter.max = DateHelper.getFormatDate(tomorrow);
+        }
+
+      case 'in-last-week':
+        {
+          var _yesterday = today;
+
+          _yesterday.setDate(_yesterday.getDate() - 1);
+
+          var lastweek = today;
+          lastweek.setDate(lastweek.getDate() - 7);
+          dateFilter.min = DateHelper.getFormatDate(lastweek);
+          dateFilter.max = DateHelper.getFormatDate(_yesterday);
+        }
+
+      case 'over-a-week-ago':
+        {
+          var _lastweek = today;
+
+          _lastweek.setDate(_lastweek.getDate() - 8);
+
+          dateFilter.max = DateHelper.getFormatDate(_lastweek);
+        }
+
+      case 'over-a-month-ago':
+        {
+          var lastmonth = today;
+          lastmonth.setDate(lastmonth.getDate() - 30);
+          dateFilter.max = DateHelper.getFormatDate(lastmonth);
+        }
+
+      case 'over-six-months-ago':
+        {
+          var sixMonthAgo = today;
+          sixMonthAgo.setDate(sixMonthAgo.getDate() - 30 * 6);
+          dateFilter.max = DateHelper.getFormatDate(sixMonthAgo);
+        }
+
+      case 'over-a-year-ago':
+        {
+          var yearAgo = today;
+          yearAgo.setDate(yearAgo.getDate() - 365);
+          dateFilter.max = DateHelper.getFormatDate(yearAgo);
+        }
+    }
+
+    return dateFilter;
+  };
+
   var keys = Object.keys(lastEditDateOptions);
   var options = [];
 
@@ -3041,6 +3145,10 @@ var LastEditDateComponent = function LastEditDateComponent() {
     }));
   }
 
+  e__default.useEffect(function () {
+    var filter = getDateFromOption(lastEditOption);
+    filterEditDateSub.next(filter);
+  }, [lastEditOption]);
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Accordion, null, /*#__PURE__*/e__default.createElement(AccordionSummary, {
     expandIcon: /*#__PURE__*/e__default.createElement(ExpandMoreIcon, null),
     "aria-controls": "panel1a-content",
@@ -3079,6 +3187,7 @@ function FilterDialog(_ref3) {
 
   var handleResetFilters = function handleResetFilters() {
     keywordSub.next('');
+    filterEditDateSub.next(null);
     handleClose();
   };
 
@@ -24799,6 +24908,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       keyword = _React$useState18[0],
       setKeyword = _React$useState18[1];
 
+  var _React$useState19 = e__default.useState(null),
+      _React$useState20 = _slicedToArray(_React$useState19, 2),
+      editDate = _React$useState20[0],
+      setEditDate = _React$useState20[1];
+
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
@@ -24911,9 +25025,13 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     var subscriberKeyword = keywordSub.subscribe(function (keyword) {
       setKeyword(keyword);
     });
+    var subscriberEditDate = filterEditDateSub.subscribe(function (filterDate) {
+      setEditDate(filterDate);
+    });
     return function () {
       subscriberContentType.unsubscribe();
       subscriberKeyword.unsubscribe();
+      subscriberEditDate.unsubscribe();
     };
   }, []);
   e__default.useEffect(function () {
@@ -24940,7 +25058,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               headerList = getDataSheetHeadersFromConfig(config);
               setColumns(getColumnsFromHeader(headerList));
               _context3.next = 10;
-              return StudioAPI.searchByContentType(contentType, keyword);
+              return StudioAPI.searchByContentType(contentType, keyword, filterDate);
 
             case 10:
               items = _context3.sent;
@@ -24981,7 +25099,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
         }
       }, _callee3);
     }))();
-  }, [contentType, keyword]);
+  }, [contentType, keyword, editDate]);
 
   var handleEditRowsModelChange = function handleEditRowsModelChange(model) {
     setEditRowsModel(model);

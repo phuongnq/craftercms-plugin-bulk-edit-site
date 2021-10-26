@@ -13,21 +13,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+const DateHelper = {
+  getFormatDate(date) {
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth() + 1;
+    const day = date.getUTCDate();
 
-import { Subject } from 'rxjs';
-
-const contentTypeSub = new Subject('');
-const keywordSub = new Subject('');
-const findReplaceSub = new Subject({
-  findText: '',
-  replaceText: '',
-  action: '',
-});
-const filterEditDateSub = new Subject(null);
-
-export {
-  contentTypeSub,
-  keywordSub,
-  findReplaceSub,
-  filterEditDateSub,
+    const monthStr = month < 10 ? `0${month}` : `${month}`;
+    const dayStr = day < 10 ? `0${day}` : `${day}`;
+    return `${year}-${monthStr}-${dayStr}`;
+  }
 };
+
+export default DateHelper;

@@ -65,8 +65,20 @@ const StudioAPI = {
 
     return '';
   },
-  async searchByContentType(ct, keywords) {
+  async searchByContentType(ct, keywords, filterDate) {
     const url = `${StudioAPI.origin()}${API_SEARCH}?siteId=${StudioAPI.siteId()}`;
+
+    const filters = {
+      'content-type': ct,
+    };
+    if (filterDate) {
+      filters['last-edit-date'] = {
+        date: true,
+        id: filterDate.id,
+        max: filterDate.max,
+        min: filterDate.min,
+      };
+    }
     const body = {
       query: '',
       keywords: keywords || '',
@@ -75,9 +87,7 @@ const StudioAPI = {
       sortBy: '',
       sortBy: '_score',
       sortOrder: 'desc',
-      filters: {
-        'content-type': ct,
-      },
+      filters
     };
     const res = await HttpHelper.post(url, body);
 
