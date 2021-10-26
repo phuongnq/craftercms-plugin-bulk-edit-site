@@ -2978,6 +2978,10 @@ function FilterDialog(_ref3) {
       keyword = _React$useState2[0],
       setKeyword = _React$useState2[1];
 
+  var handleApplyFilter = function handleApplyFilter() {
+    console.log('apply filter');
+  };
+
   return /*#__PURE__*/e__default.createElement("div", null, /*#__PURE__*/e__default.createElement(Dialog, {
     maxWidth: "md",
     "aria-labelledby": "draggable-filter-dialog-title",

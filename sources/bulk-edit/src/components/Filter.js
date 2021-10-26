@@ -51,6 +51,10 @@ function PaperComponent(props) {
 export default function FilterDialog({ isOpen, handleClose }) {
   const [keyword, setKeyword] = React.useState('');
 
+  const handleApplyFilter = () => {
+    console.log('apply filter');
+  };
+
   return (
     <div>
       <Dialog
