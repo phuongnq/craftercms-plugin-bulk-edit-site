@@ -25058,7 +25058,8 @@ function Editor() {
       overflowY: "scroll",
       overflowX: "hidden",
       display: "flex",
-      border: "1px solid #e0e0e0"
+      border: "1px solid #e0e0e0",
+      height: "calc(100vh - 194px)"
     },
     ref: rootRef
   }, drawer, /*#__PURE__*/e__default.createElement(Main, {

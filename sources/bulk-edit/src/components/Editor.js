@@ -235,6 +235,7 @@ export default function Editor() {
           overflowX: "hidden",
           display: "flex",
           border: "1px solid #e0e0e0",
+          height: "calc(100vh - 194px)",
         }}
         ref={rootRef}
       >
