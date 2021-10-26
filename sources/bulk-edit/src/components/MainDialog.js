@@ -33,9 +33,6 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Editor from './Editor';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiPaper-root': {
-    height: '100%',
-  },
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
   },
