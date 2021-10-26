@@ -25060,6 +25060,9 @@ function Editor() {
       keepMounted: true,
       container: function container() {
         return rootRef.current;
+      },
+      style: {
+        position: 'absolute'
       }
     }
   }, /*#__PURE__*/e__default.createElement(DrawerHeader, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
