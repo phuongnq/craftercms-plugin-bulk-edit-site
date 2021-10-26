@@ -2971,6 +2971,28 @@ exports.default = _default;
 
 var ExpandMoreIcon = /*@__PURE__*/getDefaultExportFromCjs(ExpandMore);
 
+var Check = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+}), 'Check');
+
+exports.default = _default;
+});
+
+var CheckIcon = /*@__PURE__*/getDefaultExportFromCjs(Check);
+
 var StyledTextField = styled$3(TextField$1)(function (_ref) {
   var theme = _ref.theme;
   return {
@@ -3023,7 +3045,7 @@ var LastEditDateComponent = function LastEditDateComponent() {
     expandIcon: /*#__PURE__*/e__default.createElement(ExpandMoreIcon, null),
     "aria-controls": "panel1a-content",
     id: "panel1a-header"
-  }, /*#__PURE__*/e__default.createElement(Typography$2, null, "Last Edit Date")), /*#__PURE__*/e__default.createElement(AccordionDetails, null, /*#__PURE__*/e__default.createElement(StyledButton, {
+  }, /*#__PURE__*/e__default.createElement(Typography$2, null, "Last Edit Date"), lastEditOption && /*#__PURE__*/e__default.createElement(CheckIcon, null)), /*#__PURE__*/e__default.createElement(AccordionDetails, null, /*#__PURE__*/e__default.createElement(StyledButton, {
     variant: "outlined",
     onClick: function onClick() {
       return setLastEditOption('');

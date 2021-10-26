@@ -36,6 +36,7 @@ import {
   Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CheckIcon from '@mui/icons-material/Check';
 import Draggable from 'react-draggable';
 
 import { keywordSub } from '../services/subscribe';
@@ -90,6 +91,7 @@ const LastEditDateComponent = () => {
           id="panel1a-header"
         >
           <Typography>Last Edit Date</Typography>
+          {lastEditOption && <CheckIcon />}
         </AccordionSummary>
         <AccordionDetails>
           <StyledButton variant="outlined" onClick={() => setLastEditOption('')}>Clear</StyledButton>
