@@ -24663,6 +24663,29 @@ function renderCellExpand(params) {
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+function ImageCell(props) {
+  var value = props.value;
+  console.log(props);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "bulk-edit-image-cell"
+  }, value);
+}
+
+/*
+ * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 var ContentTypeHelper = {
   FIELD_TYPE_INPUT: 'input',
   FIELD_TYPE_RTE: 'rte',
@@ -24750,12 +24773,15 @@ var getColumnsFromHeader = function getColumnsFromHeader(fields) {
       description: title,
       sortable: false,
       width: DEFAULT_COLUMN_WIDTH,
-      editable: true,
-      renderCell: renderCellExpand
+      editable: true
     };
 
     if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
       column.renderCell = renderCellExpand;
+    }
+
+    if (fieldType === ContentTypeHelper.FIELD_TYPE_IMAGE) {
+      column.renderCell = ImageCell;
     }
 
     columns.push(column);
