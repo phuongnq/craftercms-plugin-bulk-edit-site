@@ -24666,8 +24666,10 @@ function renderCellExpand(params) {
 var ContentTypeHelper = {
   FIELD_TYPE_INPUT: 'input',
   FIELD_TYPE_RTE: 'rte',
+  FIELD_TYPE_VIDEO_PICKER: 'video-picker',
+  FIELD_TYPE_IMAGE_PICKER: 'image-picker',
   supportedFieldTypes: function supportedFieldTypes() {
-    return [ContentTypeHelper.FIELD_TYPE_INPUT, ContentTypeHelper.FIELD_TYPE_RTE];
+    return [ContentTypeHelper.FIELD_TYPE_INPUT, ContentTypeHelper.FIELD_TYPE_RTE, ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER, ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER];
   },
   isFieldTypeSupported: function isFieldTypeSupported(fieldType) {
     return ContentTypeHelper.supportedFieldTypes().includes(fieldType);
