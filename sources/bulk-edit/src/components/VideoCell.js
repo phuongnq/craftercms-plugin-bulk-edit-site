@@ -15,13 +15,39 @@
  */
 
 import React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 
 export default function VideoCell(props) {
   const { value } = props;
   console.log(props);
+
+  const onCardClick = (event) => {
+    console.log(event);
+  };
+
   return (
-    <div className="bulk-edit-video-cell">
-      {value}
-    </div>
-  )
+    <Card sx={{ maxWidth: 345, minHeight: 140 }}>
+      <CardActionArea onClick={onCardClick}>
+        <CardMedia
+          component="video"
+          height="140"
+          image={value}
+          alt={value}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Video
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Lizards are a widespread group of squamate reptiles, with over 6,000
+            species, ranging across all continents except Antarctica
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
 };

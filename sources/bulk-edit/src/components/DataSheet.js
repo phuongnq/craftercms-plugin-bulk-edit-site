@@ -101,6 +101,7 @@ const getColumnsFromHeader = (fields) => {
       sortable: false,
       width: DEFAULT_COLUMN_WIDTH,
       editable: true,
+
     };
 
     if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
