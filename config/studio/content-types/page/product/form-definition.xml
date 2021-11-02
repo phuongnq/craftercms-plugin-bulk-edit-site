@@ -268,7 +268,7 @@
 					<properties>
 						<property>
 							<name>repoPath</name>
-							<value></value>
+							<value>/static-assets/</value>
 								<type>string</type>
 						</property>
 						<property>
