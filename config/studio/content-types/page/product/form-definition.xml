@@ -261,7 +261,7 @@
 					</properties>
 				</datasource>
 				<datasource>
-					<type>video-cmis-repo</type>
+					<type>video-browse-repo</type>
 					<id>videoBrowse</id>
 					<title>Video Browse</title>
 					<interface>video</interface>
@@ -270,21 +270,6 @@
 							<name>repoPath</name>
 							<value>/static-assets/</value>
 								<type>string</type>
-						</property>
-						<property>
-							<name>repoId</name>
-							<value></value>
-								<type>string</type>
-						</property>
-						<property>
-							<name>studioPath</name>
-							<value></value>
-								<type>string</type>
-						</property>
-						<property>
-							<name>allowedOperations</name>
-							<value>[{&quot;value&quot;:&quot;value_both&quot;,&quot;label&quot;:&quot;Clone and Link&quot;,&quot;selected&quot;:true},{&quot;value&quot;:&quot;value_clone&quot;,&quot;label&quot;:&quot;Clone&quot;,&quot;selected&quot;:false},{&quot;value&quot;:&quot;value_link&quot;,&quot;label&quot;:&quot;Link&quot;,&quot;selected&quot;:false}]</value>
-								<type>dropdown</type>
 						</property>
 					</properties>
 				</datasource>
