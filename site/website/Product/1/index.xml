@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+	<content-type>/page/product</content-type>
+	<display-template/>
+	<no-template-required/>
+	<merge-strategy>inherit-levels</merge-strategy>
+	<objectGroupId>7ad4</objectGroupId>
+	<objectId>7ad4811d-de5c-38cc-667c-d6ff13b15c99</objectId>
+	<file-name>index.xml</file-name>
+	<folder-name>1</folder-name>
+	<internal-name>Product 1</internal-name>
+	<navLabel>Product 1</navLabel>
+	<placeInNav>false</placeInNav>
+	<orderDefault_f>-1</orderDefault_f>
+	<video_s/>
+	<image_s>/static-assets/photo-1579353977828-2a4eab540b9a.jpeg</image_s>
+	<createdDate>2021-11-02T04:01:02.977Z</createdDate>
+	<createdDate_dt>2021-11-02T04:01:02.977Z</createdDate_dt>
+	<lastModifiedDate>2021-11-02T04:01:02.977Z</lastModifiedDate>
+	<lastModifiedDate_dt>2021-11-02T04:01:02.977Z</lastModifiedDate_dt>
+</page>
