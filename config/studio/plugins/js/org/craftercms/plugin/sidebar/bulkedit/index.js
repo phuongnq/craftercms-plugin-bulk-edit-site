@@ -25387,6 +25387,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root
   }, /*#__PURE__*/e__default.createElement(ds, {
+    autoHeight: true,
     key: refresh,
     rows: sessionRows,
     columns: columns,
