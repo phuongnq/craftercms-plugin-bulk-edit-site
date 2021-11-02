@@ -24781,7 +24781,7 @@ var getColumnsFromHeader = function getColumnsFromHeader(fields) {
       column.renderCell = renderCellExpand;
     }
 
-    if (fieldType === ContentTypeHelper.FIELD_TYPE_IMAGE) {
+    if (fieldType === ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER) {
       column.renderCell = ImageCell;
     }
 
