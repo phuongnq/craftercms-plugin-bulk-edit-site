@@ -24666,7 +24666,7 @@ function renderCellExpand(params) {
 function ImageCell(props) {
   var value = props.value;
   console.log(props);
-  return /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/e__default.createElement("div", {
     className: "bulk-edit-image-cell"
   }, value);
 }
