@@ -13,22 +13,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-const ContentTypeHelper = {
-  FIELD_TYPE_INPUT: 'input',
-  FIELD_TYPE_RTE: 'rte',
-  FIELD_TYPE_VIDEO_PICKER: 'video-picker',
-  FIELD_TYPE_IMAGE_PICKER: 'image-picker',
-  supportedFieldTypes() {
-    return [
-      ContentTypeHelper.FIELD_TYPE_INPUT,
-      ContentTypeHelper.FIELD_TYPE_RTE,
-      ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER,
-      ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER,
-    ]
-  },
-  isFieldTypeSupported(fieldType) {
-    return ContentTypeHelper.supportedFieldTypes().includes(fieldType);
-  },
-};
 
-export default ContentTypeHelper;
+import React from 'react';
+
+export default function ImageCell(props) {
+  const { value } = props;
+  console.log(props);
+  return (
+    <div className="bulk-edit-image-cell">
+      {value}
+    </div>
+  )
+};

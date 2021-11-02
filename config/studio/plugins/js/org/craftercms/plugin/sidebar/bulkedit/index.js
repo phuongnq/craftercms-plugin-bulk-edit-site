@@ -24686,6 +24686,29 @@ function ImageCell(props) {
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+function VideoCell(props) {
+  var value = props.value;
+  console.log(props);
+  return /*#__PURE__*/e__default.createElement("div", {
+    className: "bulk-edit-video-cell"
+  }, value);
+}
+
+/*
+ * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 var ContentTypeHelper = {
   FIELD_TYPE_INPUT: 'input',
   FIELD_TYPE_RTE: 'rte',
@@ -24775,7 +24798,6 @@ var getColumnsFromHeader = function getColumnsFromHeader(fields) {
       width: DEFAULT_COLUMN_WIDTH,
       editable: true
     };
-    console.log(fieldType);
 
     if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
       column.renderCell = renderCellExpand;
@@ -24783,6 +24805,10 @@ var getColumnsFromHeader = function getColumnsFromHeader(fields) {
 
     if (fieldType === ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER) {
       column.renderCell = ImageCell;
+    }
+
+    if (fieldType === ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER) {
+      column.renderCell = VideoCell;
     }
 
     columns.push(column);

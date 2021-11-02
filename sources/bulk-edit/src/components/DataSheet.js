@@ -18,6 +18,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
 
 import CellExpand from './CellExpand';
+import ImageCell from './ImageCell';
+import VideoCell from './VideoCell';
 
 import {
   contentTypeSub,
@@ -99,11 +101,20 @@ const getColumnsFromHeader = (fields) => {
       sortable: false,
       width: DEFAULT_COLUMN_WIDTH,
       editable: true,
-      renderCell: CellExpand,
     };
+
     if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
       column.renderCell = CellExpand;
     }
+
+    if (fieldType === ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER) {
+      column.renderCell = ImageCell;
+    }
+
+    if (fieldType === ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER) {
+      column.renderCell = VideoCell;
+    }
+
     columns.push(column);
   }
 
