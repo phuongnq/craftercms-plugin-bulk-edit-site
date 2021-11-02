@@ -24862,7 +24862,7 @@ var CardMedia$1 = CardMedia;
 function ImageCell(props) {
   var value = props.value;
 
-  var onImageClick = function onImageClick(event) {
+  var onCardClick = function onCardClick(event) {
     console.log(event);
   };
 
@@ -24872,7 +24872,7 @@ function ImageCell(props) {
       minHeight: 140
     }
   }, /*#__PURE__*/e__default.createElement(CardActionArea, {
-    onClick: onImageClick
+    onClick: onCardClick
   }, /*#__PURE__*/e__default.createElement(CardMedia$1, {
     component: "img",
     height: "140",
@@ -24906,9 +24906,31 @@ function ImageCell(props) {
 function VideoCell(props) {
   var value = props.value;
   console.log(props);
-  return /*#__PURE__*/e__default.createElement("div", {
-    className: "bulk-edit-video-cell"
-  }, value);
+
+  var onCardClick = function onCardClick(event) {
+    console.log(event);
+  };
+
+  return /*#__PURE__*/e__default.createElement(Card$1, {
+    sx: {
+      maxWidth: 345,
+      minHeight: 140
+    }
+  }, /*#__PURE__*/e__default.createElement(CardActionArea, {
+    onClick: onCardClick
+  }, /*#__PURE__*/e__default.createElement(CardMedia$1, {
+    component: "video",
+    height: "140",
+    image: value,
+    alt: value
+  }), /*#__PURE__*/e__default.createElement(CardContent$1, null, /*#__PURE__*/e__default.createElement(Typography$1, {
+    gutterBottom: true,
+    variant: "h5",
+    component: "div"
+  }, "Video"), /*#__PURE__*/e__default.createElement(Typography$1, {
+    variant: "body2",
+    color: "text.secondary"
+  }, "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"))));
 }
 
 /*
