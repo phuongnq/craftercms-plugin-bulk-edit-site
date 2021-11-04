@@ -24853,11 +24853,6 @@ var DialogHelper = {
         onSaveSuccess: {
           type: 'BATCH_ACTIONS',
           payload: [{
-            type: 'UPDATE_EDIT_CONFIG',
-            payload: {
-              path: null
-            }
-          }, {
             type: 'DISPATCH_DOM_EVENT',
             payload: {
               id: eventId,
@@ -24870,10 +24865,7 @@ var DialogHelper = {
         onClose: {
           type: 'BATCH_ACTIONS',
           payload: [{
-            type: 'UPDATE_EDIT_CONFIG',
-            payload: {
-              path: null
-            }
+            type: 'CLOSE_EDIT_DIALOG'
           }, {
             type: 'DISPATCH_DOM_EVENT',
             payload: {
@@ -24881,7 +24873,7 @@ var DialogHelper = {
               type: 'close'
             }
           }, {
-            type: 'CLOSE_NEW_CONTENT_DIALOG'
+            type: 'NEW_CONTENT_DIALOG_CLOSED'
           }]
         }
       })
