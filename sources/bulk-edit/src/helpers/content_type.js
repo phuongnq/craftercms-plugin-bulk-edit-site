@@ -29,6 +29,9 @@ const ContentTypeHelper = {
   isFieldTypeSupported(fieldType) {
     return ContentTypeHelper.supportedFieldTypes().includes(fieldType);
   },
+  isMediaType(fieldType) {
+    return ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER === fieldType || ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER === fieldType;
+  },
 };
 
 export default ContentTypeHelper;

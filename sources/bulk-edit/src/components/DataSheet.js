@@ -18,8 +18,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
 
 import CellExpand from './CellExpand';
-import ImageCell from './ImageCell';
-import VideoCell from './VideoCell';
+import MediaCell from './MediaCell';
+import CellActionMenu from './CellActionMenu';
 
 import {
   contentTypeSub,
@@ -30,6 +30,7 @@ import {
 import StudioAPI from '../api/studio';
 import ActionHelper from '../helpers/action';
 import ContentTypeHelper from '../helpers/content_type';
+import DialogHelper from '../helpers/dialog';
 
 const PAGE_SIZE = 100;
 const ROWS_PER_PAGE_OPTIONS = [100];
@@ -101,19 +102,15 @@ const getColumnsFromHeader = (fields) => {
       sortable: false,
       width: DEFAULT_COLUMN_WIDTH,
       editable: true,
-
+      fieldType,
     };
 
     if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
       column.renderCell = CellExpand;
     }
 
-    if (fieldType === ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER) {
-      column.renderCell = ImageCell;
-    }
-
-    if (fieldType === ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER) {
-      column.renderCell = VideoCell;
+    if (ContentTypeHelper.isMediaType(fieldType)) {
+      column.renderCell = MediaCell;
     }
 
     columns.push(column);
@@ -189,6 +186,8 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [contentType, setContentType] = React.useState('');
   const [keyword, setKeyword] = React.useState('');
   const [editDate, setEditDate] = React.useState(null);
+  const [menuActionAnchor, setMenuActionAnchor] = React.useState(null);
+  const [selectedRow, setSelectedRow] = React.useState(null);
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
@@ -336,6 +335,52 @@ const DataSheet = React.forwardRef((props, ref) => {
     setEditedRows(currentEditedRows);
   };
 
+  const handleOnCellClick = (model, event, detail) => {
+    setSelectedRow(model);
+    if (ContentTypeHelper.isMediaType(model.colDef.fieldType)) {
+      event.preventDefault();
+      event.stopPropagation();
+      setMenuActionAnchor(event.currentTarget);
+    }
+  };
+
+  const handleMenuActionViewClick = (event) => {
+    setMenuActionAnchor(null);
+    const isEdit = false;
+    openEditDialog(isEdit);
+  };
+
+  const handleMenuActionEditClick = (event) => {
+    setMenuActionAnchor(null);
+    const isEdit = true;
+    openEditDialog(isEdit);
+  };
+
+  const openEditDialog = (isEdit) => {
+    const { row, field } = selectedRow;
+    const payload = {
+      path: row.path,
+      authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
+      site: StudioAPI.siteId(),
+      readonly: !isEdit,
+      selectedFields: [field]
+    };
+
+    const onEditedSussessful = (response) => {
+      const model = selectedRow;
+      model.path = response.updatedModel[model.field];
+      saveEditState(model);
+      setSelectedRow(null);
+    };
+
+    const onEditedFailed = (error) => {
+      setSelectedRow(null);
+    };
+
+    DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
+  };
+
+
   return (
     <div className={classes.root}>
       <DataGrid
@@ -346,6 +391,7 @@ const DataSheet = React.forwardRef((props, ref) => {
         rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
         disableSelectionOnClick
         editRowsModel={editRowsModel}
+        onCellClick={handleOnCellClick}
         getCellClassName={(params) => {
           if (!params.isEditable) return '';
 
@@ -362,6 +408,13 @@ const DataSheet = React.forwardRef((props, ref) => {
         onEditRowsModelChange={handleEditRowsModelChange}
         onCellEditCommit={handleOnCellEditCommit}
       />
+      <CellActionMenu
+        anchorEl={menuActionAnchor}
+        handleClose={() => setMenuActionAnchor(null)}
+        handleViewAction={handleMenuActionViewClick}
+        handleEditAction={handleMenuActionEditClick}
+      >
+      </CellActionMenu>
     </div>
   );
 });
