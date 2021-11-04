@@ -25247,7 +25247,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     if (ContentTypeHelper.isMediaType(model.colDef.fieldType)) {
       event.preventDefault();
       event.stopPropagation();
-      setAnchorEl(event.currentTarget);
+      setMenuActionAnchor(event.currentTarget);
     }
   };
 
