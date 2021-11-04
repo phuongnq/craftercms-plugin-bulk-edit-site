@@ -24702,10 +24702,14 @@ function MediaCell(props) {
       anchorEl = _React$useState2[0],
       setAnchorEl = _React$useState2[1];
 
-  var _React$useState3 = e__default.useState(value),
+  var _React$useState3 = e__default.useState(null),
       _React$useState4 = _slicedToArray(_React$useState3, 2),
       mediaPath = _React$useState4[0],
       setMediaPath = _React$useState4[1];
+
+  e__default.useEffect(function () {
+    setMediaPath(value);
+  }, [value]);
 
   var handleClick = function handleClick(event) {
     setAnchorEl(event.currentTarget);
