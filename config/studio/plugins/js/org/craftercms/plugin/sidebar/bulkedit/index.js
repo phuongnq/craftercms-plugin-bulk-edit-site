@@ -24960,15 +24960,11 @@ function MediaCell(props) {
     DialogHelper.showEditDialog(payload, onEditedSussessful);
   };
 
-  return /*#__PURE__*/e__default.createElement(Card$1, {
-    sx: {
-      maxWidth: 345
-    }
-  }, /*#__PURE__*/e__default.createElement(CardActionArea, {
+  return /*#__PURE__*/e__default.createElement(Card$1, null, /*#__PURE__*/e__default.createElement(CardActionArea, {
     onClick: onCardClick
   }, /*#__PURE__*/e__default.createElement(CardMedia$1, {
     component: getMediaType(colDef.fieldType),
-    height: "140",
+    height: "35",
     image: mediaPath,
     alt: mediaPath
   }), /*#__PURE__*/e__default.createElement(CardContent$1, null, /*#__PURE__*/e__default.createElement(Typography$1, {
