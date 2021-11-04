@@ -24694,6 +24694,7 @@ function MediaCell(props) {
  */
 function CellActionMenu(_ref) {
   var anchorEl = _ref.anchorEl,
+      handleClose = _ref.handleClose,
       handleViewAction = _ref.handleViewAction,
       handleEditAction = _ref.handleEditAction;
   return /*#__PURE__*/e__default.createElement(Menu$1, {
@@ -25315,6 +25316,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     onCellEditCommit: handleOnCellEditCommit
   }), /*#__PURE__*/e__default.createElement(CellActionMenu, {
     anchorEl: menuActionAnchor,
+    handleClose: function handleClose() {
+      return setMenuActionAnchor(null);
+    },
     handleViewAction: handleMenuActionViewClick,
     handleEditAction: handleMenuActionEditClick
   }));
