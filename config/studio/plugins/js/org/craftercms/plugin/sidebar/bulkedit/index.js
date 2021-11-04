@@ -24881,7 +24881,7 @@ var DialogHelper = {
     CrafterCMSNext.createLegacyCallbackListener(eventId, function (response) {
       console.log(response);
 
-      if (response.type === 'success') {
+      if (response.type === 'EMBEDDED_LEGACY_FORM_SUCCESS' || response.type === 'success') {
         callback(response);
       }
     });
