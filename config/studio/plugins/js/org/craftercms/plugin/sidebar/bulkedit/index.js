@@ -24740,9 +24740,27 @@ var ContentTypeHelper = {
   },
   isMediaType: function isMediaType(fieldType) {
     return ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER === fieldType || ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER === fieldType;
+  },
+  isRteType: function isRteType(fieldType) {
+    return ContentTypeHelper.FIELD_TYPE_RTE === fieldType;
   }
 };
 
+/*
+ * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 var DialogHelper = {
   showEditDialog: function showEditDialog(payload, success, failed) {
     var eventId = 'bulkEditDialogCallback';
@@ -25241,10 +25259,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   };
 
   var handleOnCellClick = function handleOnCellClick(model, event, detail) {
-    console.log(model, event, detail);
     setSelectedRow(model);
+    var fieldType = model.colDef.fieldType;
 
-    if (ContentTypeHelper.isMediaType(model.colDef.fieldType)) {
+    if (ContentTypeHelper.isMediaType(fieldType) || ContentTypeHelper.isRteType(fieldType)) {
       event.preventDefault();
       event.stopPropagation();
       setMenuActionAnchor(event.currentTarget);
