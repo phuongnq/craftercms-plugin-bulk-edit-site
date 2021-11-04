@@ -24846,15 +24846,22 @@ var CardMedia$1 = CardMedia;
 
 var DialogHelper = {
   showEditDialog: function showEditDialog(payload, callback) {
+    var eventId = 'bulkEditDialogCallback';
     CrafterCMSNext.system.store.dispatch({
       type: 'SHOW_EDIT_DIALOG',
       payload: Object.assign(payload, {
         onSaveSuccess: {
           type: 'BATCH_ACTIONS',
           payload: [{
+            type: 'UPDATE_EDIT_CONFIG',
+            payload: {
+              path: null
+            }
+          }, {
             type: 'DISPATCH_DOM_EVENT',
             payload: {
-              id: 'editDialogSuccess'
+              id: eventId,
+              type: 'success'
             }
           }, {
             type: 'CLOSE_NEW_CONTENT_DIALOG'
@@ -24863,24 +24870,26 @@ var DialogHelper = {
         onClosed: {
           type: 'BATCH_ACTIONS',
           payload: [{
-            type: 'DISPATCH_DOM_EVENT',
+            type: 'UPDATE_EDIT_CONFIG',
             payload: {
-              id: 'editDialogCancel'
+              path: null
             }
           }, {
-            type: 'NEW_CONTENT_DIALOG_CLOSED'
+            type: 'DISPATCH_DOM_EVENT',
+            payload: {
+              id: eventId,
+              type: 'close'
+            }
+          }, {
+            type: 'CLOSE_NEW_CONTENT_DIALOG'
           }]
         }
       })
     });
-    var unsubscribe;
-    unsubscribe = CrafterCMSNext.createLegacyCallbackListener('editDialogSuccess', function (response) {
-      if (response) {
+    CrafterCMSNext.createLegacyCallbackListener(eventId, function (response) {
+      if (response.type === 'success') {
         callback(response);
       }
-    });
-    CrafterCMSNext.createLegacyCallbackListener('editDialogCancel', function () {
-      unsubscribe();
     });
   }
 };
@@ -24905,9 +24914,7 @@ function ImageCell(props) {
       authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
       site: StudioAPI.siteId(),
       readonly: false,
-      selectedFields: {
-        0: field
-      }
+      selectedFields: [field]
     };
 
     var onEditedSussessful = function onEditedSussessful(response) {
