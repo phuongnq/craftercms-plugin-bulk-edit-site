@@ -24876,23 +24876,14 @@ var DialogHelper = {
     var unsubscribe, cancelUnsubscribe;
     unsubscribe = CrafterCMSNext.createLegacyCallbackListener('editDialogSuccess', function (response) {
       if (response) {
-        var page = CStudioAuthoring.Utils.getQueryParameterURL('page');
-        var acnDraftContent = $('.acnDraftContent').get(0);
+        console.log(response);
+        CStudioAuthoring.Utils.getQueryParameterURL('page');
+        $('.acnDraftContent').get(0);
         eventYS.data = response.item;
         eventYS.typeAction = 'createContent';
         eventYS.oldPath = null;
         eventYS.parent = response.item.path === '/site/website' ? null : false;
         document.dispatchEvent(eventYS);
-
-        if (response.item.isPage) {
-          CStudioAuthoring.Operations.refreshPreview(response.item);
-
-          if (page === response.item.browserUri && acnDraftContent) {
-            CStudioAuthoring.SelectedContent.setContent(response.item);
-          }
-        } else {
-          CStudioAuthoring.Operations.refreshPreview();
-        }
       }
 
       cancelUnsubscribe();
