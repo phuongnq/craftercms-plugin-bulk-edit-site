@@ -24888,101 +24888,6 @@ var DialogHelper = {
   }
 };
 
-function ImageCell(props) {
-  var value = props.value,
-      row = props.row,
-      field = props.field;
-
-  var _React$useState = e__default.useState(value),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      imagePath = _React$useState2[0],
-      setImagePath = _React$useState2[1];
-
-  console.log(value, row, field);
-  console.log(props);
-
-  var onCardClick = function onCardClick(event) {
-    event.preventDefault();
-    var payload = {
-      path: row.path,
-      authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
-      site: StudioAPI.siteId(),
-      readonly: false,
-      selectedFields: [field]
-    };
-
-    var onEditedSussessful = function onEditedSussessful(response) {
-      console.log(response);
-      var newPath = response.updatedModel[field];
-      setImagePath(newPath);
-    };
-
-    DialogHelper.showEditDialog(payload, onEditedSussessful);
-  };
-
-  return /*#__PURE__*/e__default.createElement(Card$1, {
-    sx: {
-      maxWidth: 345,
-      minHeight: 140
-    }
-  }, /*#__PURE__*/e__default.createElement(CardActionArea, {
-    onClick: onCardClick
-  }, /*#__PURE__*/e__default.createElement(CardMedia$1, {
-    component: "img",
-    height: "140",
-    image: imagePath,
-    alt: imagePath
-  }), /*#__PURE__*/e__default.createElement(CardContent$1, null, /*#__PURE__*/e__default.createElement(Typography$1, {
-    gutterBottom: true,
-    variant: "h5",
-    component: "div"
-  }, "Image"))));
-}
-
-/*
- * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as published by
- * the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-function VideoCell(props) {
-  var value = props.value;
-
-  var onCardClick = function onCardClick(event) {
-    console.log(event);
-  };
-
-  return /*#__PURE__*/e__default.createElement(Card$1, {
-    sx: {
-      maxWidth: 345,
-      minHeight: 140
-    }
-  }, /*#__PURE__*/e__default.createElement(CardActionArea, {
-    onClick: onCardClick
-  }, /*#__PURE__*/e__default.createElement(CardMedia$1, {
-    component: "video",
-    height: "140",
-    image: value,
-    alt: value
-  }), /*#__PURE__*/e__default.createElement(CardContent$1, null, /*#__PURE__*/e__default.createElement(Typography$1, {
-    gutterBottom: true,
-    variant: "h5",
-    component: "div"
-  }, "Video"), /*#__PURE__*/e__default.createElement(Typography$1, {
-    variant: "body2",
-    color: "text.secondary"
-  }, "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"))));
-}
-
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
  *
@@ -25008,8 +24913,74 @@ var ContentTypeHelper = {
   },
   isFieldTypeSupported: function isFieldTypeSupported(fieldType) {
     return ContentTypeHelper.supportedFieldTypes().includes(fieldType);
+  },
+  isMediaType: function isMediaType(fieldType) {
+    return ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER === fieldType || ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER === fieldType;
   }
 };
+
+var getMediaType = function getMediaType(fieldType) {
+  if (fieldType === ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER) {
+    return 'img';
+  }
+
+  if (fieldType === ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER) {
+    return 'video';
+  }
+
+  return '';
+};
+
+function MediaCell(props) {
+  var value = props.value,
+      row = props.row,
+      field = props.field,
+      colDef = props.colDef;
+
+  var _React$useState = e__default.useState(value),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      mediaPath = _React$useState2[0],
+      setMediaPath = _React$useState2[1];
+
+  console.log(props);
+
+  var onCardClick = function onCardClick(event) {
+    event.preventDefault();
+    var payload = {
+      path: row.path,
+      authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
+      site: StudioAPI.siteId(),
+      readonly: false,
+      selectedFields: [field]
+    };
+
+    var onEditedSussessful = function onEditedSussessful(response) {
+      console.log(response);
+      var newPath = response.updatedModel[field];
+      setMediaPath(newPath);
+    };
+
+    DialogHelper.showEditDialog(payload, onEditedSussessful);
+  };
+
+  return /*#__PURE__*/e__default.createElement(Card$1, {
+    sx: {
+      maxWidth: 345,
+      minHeight: 140
+    }
+  }, /*#__PURE__*/e__default.createElement(CardActionArea, {
+    onClick: onCardClick
+  }, /*#__PURE__*/e__default.createElement(CardMedia$1, {
+    component: getMediaType(colDef.fieldType),
+    height: "140",
+    image: mediaPath,
+    alt: mediaPath
+  }), /*#__PURE__*/e__default.createElement(CardContent$1, null, /*#__PURE__*/e__default.createElement(Typography$1, {
+    gutterBottom: true,
+    variant: "h5",
+    component: "div"
+  }, "Image"))));
+}
 
 var PAGE_SIZE = 100;
 var ROWS_PER_PAGE_OPTIONS = [100];
@@ -25085,19 +25056,16 @@ var getColumnsFromHeader = function getColumnsFromHeader(fields) {
       description: title,
       sortable: false,
       width: DEFAULT_COLUMN_WIDTH,
-      editable: true
+      editable: true,
+      fieldType: fieldType
     };
 
     if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
       column.renderCell = renderCellExpand;
     }
 
-    if (fieldType === ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER) {
-      column.renderCell = ImageCell;
-    }
-
-    if (fieldType === ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER) {
-      column.renderCell = VideoCell;
+    if (ContentTypeHelper.isMediaType(fieldType)) {
+      column.renderCell = MediaCell;
     }
 
     columns.push(column);
