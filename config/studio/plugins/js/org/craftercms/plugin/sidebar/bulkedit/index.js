@@ -24913,6 +24913,8 @@ function ImageCell(props) {
   var value = props.value,
       row = props.row,
       fieldId = props.fieldId;
+  console.log(value, row, fieldId);
+  console.log(props);
 
   var onCardClick = function onCardClick(event) {
     event.preventDefault();
@@ -24964,7 +24966,6 @@ function ImageCell(props) {
  */
 function VideoCell(props) {
   var value = props.value;
-  console.log(props);
 
   var onCardClick = function onCardClick(event) {
     console.log(event);
