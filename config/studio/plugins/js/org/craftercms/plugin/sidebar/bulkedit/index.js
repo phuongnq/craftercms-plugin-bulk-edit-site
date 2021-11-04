@@ -24702,15 +24702,6 @@ function MediaCell(props) {
       anchorEl = _React$useState2[0],
       setAnchorEl = _React$useState2[1];
 
-  var _React$useState3 = e__default.useState(null),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      mediaPath = _React$useState4[0],
-      setMediaPath = _React$useState4[1];
-
-  e__default.useEffect(function () {
-    setMediaPath(value);
-  }, [value]);
-
   var handleClick = function handleClick(event) {
     setAnchorEl(event.currentTarget);
   };
@@ -24758,7 +24749,7 @@ function MediaCell(props) {
     style: {
       padding: 16
     }
-  }, mediaPath)), /*#__PURE__*/e__default.createElement(Menu$1, {
+  }, value)), /*#__PURE__*/e__default.createElement(Menu$1, {
     id: "media-action-menu",
     anchorEl: anchorEl,
     open: Boolean(anchorEl),
@@ -25247,6 +25238,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     setEditedRows(currentEditedRows);
   };
 
+  var handleOnCellClick = function handleOnCellClick(model, event, detail) {
+    console.log(model, event, detail);
+  };
+
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root
   }, /*#__PURE__*/e__default.createElement(ds, {
@@ -25257,6 +25252,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     rowsPerPageOptions: ROWS_PER_PAGE_OPTIONS,
     disableSelectionOnClick: true,
     editRowsModel: editRowsModel,
+    onCellClick: handleOnCellClick,
     getCellClassName: function getCellClassName(params) {
       if (!params.isEditable) return '';
 
