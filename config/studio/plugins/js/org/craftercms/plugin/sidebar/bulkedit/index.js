@@ -24897,7 +24897,7 @@ var DialogHelper = {
 
       cancelUnsubscribe();
     });
-    cancelUnsubscribe = CrafterCMSNext.createLegacyCallbackListener(editDialogCancel, function () {
+    cancelUnsubscribe = CrafterCMSNext.createLegacyCallbackListener('editDialogCancel', function () {
       unsubscribe();
     });
   }
