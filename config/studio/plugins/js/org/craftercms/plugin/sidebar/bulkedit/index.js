@@ -24942,8 +24942,6 @@ function MediaCell(props) {
       mediaPath = _React$useState2[0],
       setMediaPath = _React$useState2[1];
 
-  console.log(props);
-
   var onCardClick = function onCardClick(event) {
     event.preventDefault();
     var payload = {
@@ -24955,7 +24953,6 @@ function MediaCell(props) {
     };
 
     var onEditedSussessful = function onEditedSussessful(response) {
-      console.log(response);
       var newPath = response.updatedModel[field];
       setMediaPath(newPath);
     };
@@ -24965,8 +24962,7 @@ function MediaCell(props) {
 
   return /*#__PURE__*/e__default.createElement(Card$1, {
     sx: {
-      maxWidth: 345,
-      minHeight: 140
+      maxWidth: 345
     }
   }, /*#__PURE__*/e__default.createElement(CardActionArea, {
     onClick: onCardClick
@@ -24979,7 +24975,7 @@ function MediaCell(props) {
     gutterBottom: true,
     variant: "h5",
     component: "div"
-  }, "Image"))));
+  }, mediaPath))));
 }
 
 var PAGE_SIZE = 100;
