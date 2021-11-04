@@ -24873,16 +24873,10 @@ var DialogHelper = {
         }
       })
     });
-    var unsubscribe, cancelUnsubscribe;
-    unsubscribe = CrafterCMSNext.createLegacyCallbackListener('editDialogSuccess', function (response) {
+    CrafterCMSNext.createLegacyCallbackListener('editDialogSuccess', function (response) {
       if (response) {
         callback(response);
       }
-
-      cancelUnsubscribe();
-    });
-    cancelUnsubscribe = CrafterCMSNext.createLegacyCallbackListener('editDialogCancel', function () {
-      unsubscribe();
     });
   }
 };
@@ -24935,10 +24929,7 @@ function ImageCell(props) {
     gutterBottom: true,
     variant: "h5",
     component: "div"
-  }, "Image"), /*#__PURE__*/e__default.createElement(Typography$1, {
-    variant: "body2",
-    color: "text.secondary"
-  }, "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"))));
+  }, "Image"))));
 }
 
 /*
