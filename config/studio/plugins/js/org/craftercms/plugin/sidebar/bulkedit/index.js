@@ -24844,9 +24844,10 @@ const CardMedia = /*#__PURE__*/e__default.forwardRef(function CardMedia(inProps,
 });
 var CardMedia$1 = CardMedia;
 
+var dispatch = CrafterCMSNext.util.redux.useDispatch();
 var DialogHelper = {
   showEditDialog: function showEditDialog(payload, callback) {
-    CrafterCMSNext.system.store.dispatch({
+    dispatch({
       type: 'SHOW_EDIT_DIALOG',
       payload: Object.assign(payload, {
         onSaveSuccess: {
@@ -24873,10 +24874,14 @@ var DialogHelper = {
         }
       })
     });
-    CrafterCMSNext.createLegacyCallbackListener('editDialogSuccess', function (response) {
+    var unsubscribe;
+    unsubscribe = CrafterCMSNext.createLegacyCallbackListener('editDialogSuccess', function (response) {
       if (response) {
         callback(response);
       }
+    });
+    CrafterCMSNext.createLegacyCallbackListener('editDialogCancel', function () {
+      unsubscribe();
     });
   }
 };
