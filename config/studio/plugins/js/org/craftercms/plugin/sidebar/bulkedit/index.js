@@ -24844,9 +24844,8 @@ const CardMedia = /*#__PURE__*/e__default.forwardRef(function CardMedia(inProps,
 });
 var CardMedia$1 = CardMedia;
 
-var dispatch = CrafterCMSNext.util.redux.useDispatch();
 var DialogHelper = {
-  showEditDialog: function showEditDialog(payload, callback) {
+  showEditDialog: function showEditDialog(dispatch, payload, callback) {
     dispatch({
       type: 'SHOW_EDIT_DIALOG',
       payload: Object.assign(payload, {
@@ -24887,6 +24886,7 @@ var DialogHelper = {
 };
 
 function ImageCell(props) {
+  var dispatch = CrafterCMSNext.util.redux.useDispatch();
   var value = props.value,
       row = props.row,
       field = props.field;
@@ -24915,7 +24915,7 @@ function ImageCell(props) {
       setImagePath(newPath);
     };
 
-    DialogHelper.showEditDialog(payload, onEditedSussessful);
+    DialogHelper.showEditDialog(dispatch, payload, onEditedSussessful);
   };
 
   return /*#__PURE__*/e__default.createElement(Card$1, {
