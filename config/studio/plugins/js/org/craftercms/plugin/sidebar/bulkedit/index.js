@@ -24747,13 +24747,13 @@ function MediaCell(props) {
   };
 
   var handleViewAction = function handleViewAction() {
-    setAnchorEl(null);
+    handleClose();
     var isEdit = false;
     openEditDialog(isEdit);
   };
 
   var handleEditAction = function handleEditAction() {
-    setAnchorEl(null);
+    handleClose();
     var isEdit = true;
     openEditDialog(isEdit);
   };
@@ -24775,7 +24775,7 @@ function MediaCell(props) {
     DialogHelper.showEditDialog(payload, onEditedSussessful);
   };
 
-  return /*#__PURE__*/e__default.createElement("div", {
+  return /*#__PURE__*/e__default.createElement(e__default.Fragment, null, /*#__PURE__*/e__default.createElement("div", {
     style: {
       cursor: 'pointer'
     },
@@ -24785,13 +24785,13 @@ function MediaCell(props) {
     style: {
       padding: 16
     }
-  }, mediaPath), /*#__PURE__*/e__default.createElement(Menu$1, {
-    id: "action-menu",
+  }, mediaPath)), /*#__PURE__*/e__default.createElement(Menu$1, {
+    id: "media-action-menu",
     anchorEl: anchorEl,
-    open: Boolean(anchorEl),
+    open: open,
     onClose: handleClose,
     MenuListProps: {
-      'aria-labelledby': 'action-button'
+      'aria-labelledby': 'media-action-button'
     }
   }, /*#__PURE__*/e__default.createElement(MenuItem$1, {
     onClick: handleViewAction
