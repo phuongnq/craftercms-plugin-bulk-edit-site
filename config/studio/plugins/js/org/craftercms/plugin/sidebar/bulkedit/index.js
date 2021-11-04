@@ -24844,6 +24844,65 @@ const CardMedia = /*#__PURE__*/e__default.forwardRef(function CardMedia(inProps,
 });
 var CardMedia$1 = CardMedia;
 
+var DialogHelper = {
+  showEditDialog: function showEditDialog(payload) {
+    CrafterCMSNext.system.store.dispatch({
+      type: 'SHOW_EDIT_DIALOG',
+      payload: Object.assign(payload, {
+        onSaveSuccess: {
+          type: 'BATCH_ACTIONS',
+          payload: [{
+            type: 'DISPATCH_DOM_EVENT',
+            payload: {
+              id: 'editDialogSuccess'
+            }
+          }, {
+            type: 'CLOSE_NEW_CONTENT_DIALOG'
+          }]
+        },
+        onClosed: {
+          type: 'BATCH_ACTIONS',
+          payload: [{
+            type: 'DISPATCH_DOM_EVENT',
+            payload: {
+              id: 'editDialogCancel'
+            }
+          }, {
+            type: 'NEW_CONTENT_DIALOG_CLOSED'
+          }]
+        }
+      })
+    });
+    var unsubscribe, cancelUnsubscribe;
+    unsubscribe = CrafterCMSNext.createLegacyCallbackListener(editDialogSuccess, function (response) {
+      if (response) {
+        var page = CStudioAuthoring.Utils.getQueryParameterURL('page');
+        var acnDraftContent = $('.acnDraftContent').get(0);
+        eventYS.data = response.item;
+        eventYS.typeAction = 'createContent';
+        eventYS.oldPath = null;
+        eventYS.parent = response.item.path === '/site/website' ? null : false;
+        document.dispatchEvent(eventYS);
+
+        if (response.item.isPage) {
+          CStudioAuthoring.Operations.refreshPreview(response.item);
+
+          if (page === response.item.browserUri && acnDraftContent) {
+            CStudioAuthoring.SelectedContent.setContent(response.item);
+          }
+        } else {
+          CStudioAuthoring.Operations.refreshPreview();
+        }
+      }
+
+      cancelUnsubscribe();
+    });
+    cancelUnsubscribe = CrafterCMSNext.createLegacyCallbackListener(editDialogCancel, function () {
+      unsubscribe();
+    });
+  }
+};
+
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
  *
@@ -24860,10 +24919,19 @@ var CardMedia$1 = CardMedia;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 function ImageCell(props) {
-  var value = props.value;
+  var value = props.value,
+      row = props.row,
+      fieldId = props.fieldId;
 
   var onCardClick = function onCardClick(event) {
-    console.log(event);
+    event.preventDefault();
+    DialogHelper.showEditDialog({
+      path: row.path,
+      authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
+      site: StudioAPI.siteId(),
+      readonly: false,
+      selectedFields: [fieldId]
+    });
   };
 
   return /*#__PURE__*/e__default.createElement(Card$1, {
