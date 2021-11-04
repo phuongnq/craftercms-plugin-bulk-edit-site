@@ -24845,7 +24845,7 @@ const CardMedia = /*#__PURE__*/e__default.forwardRef(function CardMedia(inProps,
 var CardMedia$1 = CardMedia;
 
 var DialogHelper = {
-  showEditDialog: function showEditDialog(payload) {
+  showEditDialog: function showEditDialog(payload, callback) {
     CrafterCMSNext.system.store.dispatch({
       type: 'SHOW_EDIT_DIALOG',
       payload: Object.assign(payload, {
@@ -24876,14 +24876,7 @@ var DialogHelper = {
     var unsubscribe, cancelUnsubscribe;
     unsubscribe = CrafterCMSNext.createLegacyCallbackListener('editDialogSuccess', function (response) {
       if (response) {
-        console.log(response);
-        CStudioAuthoring.Utils.getQueryParameterURL('page');
-        $('.acnDraftContent').get(0);
-        eventYS.data = response.item;
-        eventYS.typeAction = 'createContent';
-        eventYS.oldPath = null;
-        eventYS.parent = response.item.path === '/site/website' ? null : false;
-        document.dispatchEvent(eventYS);
+        callback(response);
       }
 
       cancelUnsubscribe();
@@ -24894,37 +24887,36 @@ var DialogHelper = {
   }
 };
 
-/*
- * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 3 as published by
- * the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 function ImageCell(props) {
   var value = props.value,
       row = props.row,
       field = props.field;
+
+  var _React$useState = e__default.useState(value),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      imagePath = _React$useState2[0],
+      setImagePath = _React$useState2[1];
+
   console.log(value, row, field);
   console.log(props);
 
   var onCardClick = function onCardClick(event) {
     event.preventDefault();
-    DialogHelper.showEditDialog({
+    var payload = {
       path: row.path,
       authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
       site: StudioAPI.siteId(),
       readonly: false,
       selectedFields: [field]
-    });
+    };
+
+    var onEditedSussessful = function onEditedSussessful(response) {
+      console.log(response);
+      var newPath = response.updatedModel[field];
+      setImagePath(newPath);
+    };
+
+    DialogHelper.showEditDialog(payload, onEditedSussessful);
   };
 
   return /*#__PURE__*/e__default.createElement(Card$1, {
@@ -24937,8 +24929,8 @@ function ImageCell(props) {
   }, /*#__PURE__*/e__default.createElement(CardMedia$1, {
     component: "img",
     height: "140",
-    image: value,
-    alt: value
+    image: imagePath,
+    alt: imagePath
   }), /*#__PURE__*/e__default.createElement(CardContent$1, null, /*#__PURE__*/e__default.createElement(Typography$1, {
     gutterBottom: true,
     variant: "h5",
