@@ -24912,8 +24912,8 @@ var DialogHelper = {
 function ImageCell(props) {
   var value = props.value,
       row = props.row,
-      fieldId = props.fieldId;
-  console.log(value, row, fieldId);
+      field = props.field;
+  console.log(value, row, field);
   console.log(props);
 
   var onCardClick = function onCardClick(event) {
@@ -24923,7 +24923,7 @@ function ImageCell(props) {
       authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
       site: StudioAPI.siteId(),
       readonly: false,
-      selectedFields: [fieldId]
+      selectedFields: [field]
     });
   };
 
