@@ -24874,7 +24874,7 @@ var DialogHelper = {
       })
     });
     var unsubscribe, cancelUnsubscribe;
-    unsubscribe = CrafterCMSNext.createLegacyCallbackListener(editDialogSuccess, function (response) {
+    unsubscribe = CrafterCMSNext.createLegacyCallbackListener('editDialogSuccess', function (response) {
       if (response) {
         var page = CStudioAuthoring.Utils.getQueryParameterURL('page');
         var acnDraftContent = $('.acnDraftContent').get(0);
