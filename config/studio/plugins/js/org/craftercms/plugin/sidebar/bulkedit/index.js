@@ -24727,14 +24727,11 @@ function MediaCell(props) {
   var value = props.value,
       row = props.row,
       field = props.field;
-      props.colDef;
 
   var _React$useState = e__default.useState(null),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       anchorEl = _React$useState2[0],
       setAnchorEl = _React$useState2[1];
-
-  var open = Boolean(anchorEl);
 
   var _React$useState3 = e__default.useState(value),
       _React$useState4 = _slicedToArray(_React$useState3, 2),
@@ -24779,7 +24776,7 @@ function MediaCell(props) {
   };
 
   return /*#__PURE__*/e__default.createElement("div", {
-    sx: {
+    style: {
       cursor: 'pointer'
     },
     onClick: handleClick
@@ -24791,7 +24788,7 @@ function MediaCell(props) {
   }, mediaPath), /*#__PURE__*/e__default.createElement(Menu$1, {
     id: "action-menu",
     anchorEl: anchorEl,
-    open: open,
+    open: Boolean(anchorEl),
     onClose: handleClose,
     MenuListProps: {
       'aria-labelledby': 'action-button'
