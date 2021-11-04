@@ -19,6 +19,7 @@ import { makeStyles } from '@mui/styles';
 
 import CellExpand from './CellExpand';
 import MediaCell from './MediaCell';
+import RTECell from './RTECell';
 import CellActionMenu from './CellActionMenu';
 
 import {
@@ -106,7 +107,7 @@ const getColumnsFromHeader = (fields) => {
     };
 
     if (fieldType === ContentTypeHelper.FIELD_TYPE_RTE) {
-      column.renderCell = CellExpand;
+      column.renderCell = RTECell;
     }
 
     if (ContentTypeHelper.isMediaType(fieldType)) {
@@ -337,7 +338,8 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleOnCellClick = (model, event, detail) => {
     setSelectedRow(model);
-    if (ContentTypeHelper.isMediaType(model.colDef.fieldType)) {
+    const fieldType = model.colDef.fieldType;
+    if (ContentTypeHelper.isMediaType(fieldType) || ContentTypeHelper.isRteType(fieldType)) {
       event.preventDefault();
       event.stopPropagation();
       setMenuActionAnchor(event.currentTarget);

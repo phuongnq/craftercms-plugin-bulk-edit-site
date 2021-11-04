@@ -32,6 +32,9 @@ const ContentTypeHelper = {
   isMediaType(fieldType) {
     return ContentTypeHelper.FIELD_TYPE_VIDEO_PICKER === fieldType || ContentTypeHelper.FIELD_TYPE_IMAGE_PICKER === fieldType;
   },
+  isRteType(fieldType) {
+    return ContentTypeHelper.FIELD_TYPE_RTE === fieldType;
+  }
 };
 
 export default ContentTypeHelper;
