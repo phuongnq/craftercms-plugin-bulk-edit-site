@@ -25244,7 +25244,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     console.log(model, event, detail);
     setSelectedRow(model);
 
-    if (ContentTypeHelper.isMediaType(model.conDef.fieldType)) {
+    if (ContentTypeHelper.isMediaType(model.colDef.fieldType)) {
       event.preventDefault();
       event.stopPropagation();
       setAnchorEl(event.currentTarget);
@@ -25264,10 +25264,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   };
 
   var openEditDialog = function openEditDialog(isEdit) {
-    var path = selectedRow.path,
+    var row = selectedRow.row,
         field = selectedRow.field;
     var payload = {
-      path: path,
+      path: row.path,
       authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
       site: StudioAPI.siteId(),
       readonly: !isEdit,
