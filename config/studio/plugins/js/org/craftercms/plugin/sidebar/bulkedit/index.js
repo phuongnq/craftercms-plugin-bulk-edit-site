@@ -24867,7 +24867,7 @@ var DialogHelper = {
             type: 'CLOSE_NEW_CONTENT_DIALOG'
           }]
         },
-        onClosed: {
+        onClose: {
           type: 'BATCH_ACTIONS',
           payload: [{
             type: 'UPDATE_EDIT_CONFIG',
@@ -24887,6 +24887,8 @@ var DialogHelper = {
       })
     });
     CrafterCMSNext.createLegacyCallbackListener(eventId, function (response) {
+      console.log(response);
+
       if (response.type === 'success') {
         callback(response);
       }
