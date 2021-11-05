@@ -25442,6 +25442,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
   var saveEditState = function saveEditState(model) {
     var currentEditedRows = editedRows;
+    console.log(editedRows);
     if (!isCellEdited(model, rows)) return;
     var key = rows[model.id].path;
 
@@ -25451,6 +25452,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
     currentEditedRows[key][model.field] = model.value;
     setEditedRows(currentEditedRows);
+    console.log(currentEditedRows);
   };
 
   var handleOnCellClick = function handleOnCellClick(model, event, detail) {
