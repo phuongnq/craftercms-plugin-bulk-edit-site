@@ -24891,6 +24891,11 @@ function CellActionMenu(_ref) {
     onClose: handleClose,
     MenuListProps: {
       'aria-labelledby': 'media-action-button'
+    },
+    PaperProps: {
+      style: {
+        minWidth: 120
+      }
     }
   }, /*#__PURE__*/e__default.createElement(MenuItem$1, {
     onClick: handleViewAction
