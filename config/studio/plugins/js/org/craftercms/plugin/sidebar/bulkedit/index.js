@@ -25420,7 +25420,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               break;
 
             case 24:
-              setRows.apply(void 0, dtRows);
+              setRows([].concat(dtRows));
               console.log(dtRows);
               setSessionRows(dtRows);
 
