@@ -25285,6 +25285,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
             return _ref2.apply(this, arguments);
           };
         }());
+        setRefresh(1 - refresh);
       }
     };
   });
