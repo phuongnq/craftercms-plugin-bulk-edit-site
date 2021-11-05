@@ -25450,6 +25450,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     }
 
     currentEditedRows[key][model.field] = model.value;
+    console.log(currentEditedRows);
     setEditedRows(currentEditedRows);
   };
 
