@@ -25483,6 +25483,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   };
 
   var openEditDialog = function openEditDialog(isEdit) {
+    console.log(rows);
     var row = selectedRow.row,
         field = selectedRow.field;
     var payload = {
@@ -25509,6 +25510,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       setSelectedRow(null);
     };
 
+    console.log(rows);
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
   };
 
