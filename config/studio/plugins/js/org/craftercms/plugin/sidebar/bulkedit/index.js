@@ -154,20 +154,8 @@ function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest();
 }
 
-function _toConsumableArray$1(arr) {
-  return _arrayWithoutHoles$1(arr) || _iterableToArray$1(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread$1();
-}
-
-function _arrayWithoutHoles$1(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
-}
-
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArray$1(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
 function _iterableToArrayLimit(arr, i) {
@@ -215,10 +203,6 @@ function _arrayLikeToArray$1(arr, len) {
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 
   return arr2;
-}
-
-function _nonIterableSpread$1() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 function _nonIterableRest() {
@@ -25439,10 +25423,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 26:
               setRows(dtRows);
-              console.log(dtRows);
               setSessionRows(dtSessionRows);
 
-            case 29:
+            case 28:
             case "end":
               return _context3.stop();
           }
@@ -25513,18 +25496,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     };
 
     var onEditedSussessful = function onEditedSussessful(response) {
-      console.log(rows);
-
-      var model = _objectSpread2({}, selectedRow);
-
+      var model = selectedRow;
       model.path = response.updatedModel[model.field];
       model.value = response.updatedModel[model.field];
-
-      var newSessionRows = _toConsumableArray$1(sessionRows);
-
-      newSessionRows[model.id][model.field] = response.updatedModel[model.field];
-      setSessionRows(newSessionRows);
-      console.log(rows);
+      sessionRows[model.id][model.field] = response.updatedModel[model.field];
+      setSessionRows(sessionRows);
       saveEditState(model);
       setSelectedRow(null);
     };
