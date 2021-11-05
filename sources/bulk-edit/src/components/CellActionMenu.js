@@ -17,6 +17,10 @@
 import React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import PreviewIcon from '@mui/icons-material/Preview';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function CellActionMenu({ anchorEl, handleClose, handleViewAction, handleEditAction }) {
   return (
@@ -28,9 +32,24 @@ export default function CellActionMenu({ anchorEl, handleClose, handleViewAction
         MenuListProps={{
           'aria-labelledby': 'media-action-button',
         }}
+        PaperProps={{
+          style: {
+            minWidth: 120,
+          },
+       }}
       >
-      <MenuItem onClick={handleViewAction}>View</MenuItem>
-      <MenuItem onClick={handleEditAction}>Edit</MenuItem>
+      <MenuItem onClick={handleViewAction}>
+        <ListItemIcon>
+            <PreviewIcon />
+          </ListItemIcon>
+          <ListItemText primary="View" />
+      </MenuItem>
+      <MenuItem onClick={handleEditAction}>
+        <ListItemIcon>
+          <EditIcon />
+        </ListItemIcon>
+        <ListItemText primary="Edit" />
+      </MenuItem>
     </Menu>
   );
 }

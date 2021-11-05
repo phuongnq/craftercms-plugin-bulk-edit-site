@@ -382,11 +382,6 @@ const DataSheet = React.forwardRef((props, ref) => {
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
   };
 
-  const handleCellMouseDown = (model, event) => {
-    console.log(model, event);
-  };
-
-
   return (
     <div className={classes.root}>
       <DataGrid
@@ -398,7 +393,6 @@ const DataSheet = React.forwardRef((props, ref) => {
         disableSelectionOnClick
         editRowsModel={editRowsModel}
         onCellClick={handleOnCellClick}
-        onMouseDown={handleCellMouseDown}
         getCellClassName={(params) => {
           if (!params.isEditable) return '';
 
