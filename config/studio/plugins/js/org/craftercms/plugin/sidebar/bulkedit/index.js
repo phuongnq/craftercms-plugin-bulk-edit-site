@@ -25428,7 +25428,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
             case 18:
               content = _context3.sent;
               row = rowFromApiContent(i, path, content, headerList);
-              dtRows.push(row);
+              dtRows.push(_objectSpread2({}, row));
 
             case 21:
               i += 1;
