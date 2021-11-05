@@ -186,7 +186,7 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [findText, setFindText] = React.useState('');
   const [contentType, setContentType] = React.useState('');
   const [keyword, setKeyword] = React.useState('');
-  const [editDate, setEditDate] = React.useState(null);
+  const [filterEditDate, setFilterEditDate] = React.useState(null);
   const [menuActionAnchor, setMenuActionAnchor] = React.useState(null);
   const [selectedRow, setSelectedRow] = React.useState(null);
 
@@ -275,7 +275,7 @@ const DataSheet = React.forwardRef((props, ref) => {
     });
 
     const subscriberEditDate = filterEditDateSub.subscribe((filterDate) => {
-      setEditDate(filterDate);
+      setFilterEditDate(filterDate);
     })
 
     return (() => {
@@ -297,7 +297,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       const headerList = getDataSheetHeadersFromConfig(config);
       setColumns(getColumnsFromHeader(headerList));
 
-      const items = await StudioAPI.searchByContentType(contentType, keyword, editDate);
+      const items = await StudioAPI.searchByContentType(contentType, keyword, filterEditDate);
       const paths = items.map(item => item.path);
 
       const dtRows = [];
@@ -312,7 +312,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       setRows(dtRows);
       setSessionRows(dtRows);
     })();
-  }, [contentType, keyword, editDate]);
+  }, [contentType, keyword, filterEditDate]);
 
   const handleEditRowsModelChange = (model) => {
     setEditRowsModel(model);
@@ -382,6 +382,10 @@ const DataSheet = React.forwardRef((props, ref) => {
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
   };
 
+  const handleCellMouseDown = (model, event) => {
+    console.log(model, event);
+  };
+
 
   return (
     <div className={classes.root}>
@@ -394,6 +398,7 @@ const DataSheet = React.forwardRef((props, ref) => {
         disableSelectionOnClick
         editRowsModel={editRowsModel}
         onCellClick={handleOnCellClick}
+        onMouseDown={handleCellMouseDown}
         getCellClassName={(params) => {
           if (!params.isEditable) return '';
 

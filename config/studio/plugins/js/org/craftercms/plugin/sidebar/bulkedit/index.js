@@ -25335,6 +25335,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
   };
 
+  var handleCellMouseDown = function handleCellMouseDown(model, event) {
+    console.log(model, event);
+  };
+
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root
   }, /*#__PURE__*/e__default.createElement(ds, {
@@ -25346,6 +25350,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     disableSelectionOnClick: true,
     editRowsModel: editRowsModel,
     onCellClick: handleOnCellClick,
+    onMouseDown: handleCellMouseDown,
     getCellClassName: function getCellClassName(params) {
       if (!params.isEditable) return '';
 
