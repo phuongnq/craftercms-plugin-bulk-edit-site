@@ -25383,7 +25383,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   }, []);
   e__default.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var config, headerList, items, paths, dtRows, i, path, content, row;
+      var config, headerList, items, paths, dtRows, dtSessionRows, i, path, content, row;
       return regeneratorRuntime.wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -25413,34 +25413,36 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 return item.path;
               });
               dtRows = [];
+              dtSessionRows = [];
               i = 0;
 
-            case 14:
+            case 15:
               if (!(i < paths.length)) {
-                _context3.next = 24;
+                _context3.next = 26;
                 break;
               }
 
               path = paths[i];
-              _context3.next = 18;
+              _context3.next = 19;
               return StudioAPI.getContent(path);
 
-            case 18:
+            case 19:
               content = _context3.sent;
               row = rowFromApiContent(i, path, content, headerList);
               dtRows.push(_objectSpread2({}, row));
+              dtSessionRows.push(_objectSpread2({}, row));
 
-            case 21:
+            case 23:
               i += 1;
-              _context3.next = 14;
+              _context3.next = 15;
               break;
 
-            case 24:
-              setRows([].concat(dtRows));
+            case 26:
+              setRows(dtRows);
               console.log(dtRows);
-              setSessionRows(dtRows);
+              setSessionRows(dtSessionRows);
 
-            case 27:
+            case 29:
             case "end":
               return _context3.stop();
           }
