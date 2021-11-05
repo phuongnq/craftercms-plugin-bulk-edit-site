@@ -25421,9 +25421,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 24:
               setRows(dtRows);
+              console.log(dtRows);
               setSessionRows(dtRows);
 
-            case 26:
+            case 27:
             case "end":
               return _context3.stop();
           }
