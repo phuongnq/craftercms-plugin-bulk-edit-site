@@ -25492,6 +25492,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     var onEditedSussessful = function onEditedSussessful(response) {
       var model = selectedRow;
       model.path = response.updatedModel[model.field];
+      model.value = response.updatedModel[model.field];
       saveEditState(model);
       setSelectedRow(null);
     };
