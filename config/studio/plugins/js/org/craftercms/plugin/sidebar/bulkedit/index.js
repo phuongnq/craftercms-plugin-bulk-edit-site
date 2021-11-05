@@ -25286,6 +25286,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
           };
         }());
         setRefresh(1 - refresh);
+        console.log(rows);
+        console.log(sessionRows);
       }
     };
   });
