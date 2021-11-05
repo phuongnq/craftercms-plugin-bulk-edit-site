@@ -25444,10 +25444,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
   var saveEditState = function saveEditState(model) {
     var currentEditedRows = editedRows;
-    console.log(editedRows);
-    console.log(isCellEdited(model, rows));
-    console.log(model);
-    console.log(rows);
     if (!isCellEdited(model, rows)) return;
     var key = rows[model.id].path;
 
@@ -25457,7 +25453,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
     currentEditedRows[key][model.field] = model.value;
     setEditedRows(currentEditedRows);
-    console.log(currentEditedRows);
   };
 
   var handleOnCellClick = function handleOnCellClick(model, event, detail) {
@@ -25484,7 +25479,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   };
 
   var openEditDialog = function openEditDialog(isEdit) {
-    console.log(rows);
     var row = selectedRow.row,
         field = selectedRow.field;
     var payload = {
@@ -25509,7 +25503,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       setSelectedRow(null);
     };
 
-    console.log(rows);
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
   };
 
