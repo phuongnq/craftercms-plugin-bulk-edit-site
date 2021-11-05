@@ -25335,21 +25335,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
   };
 
-  var handleContextMenu = function handleContextMenu(event) {
-    var rowIdx = Number(event.currentTarget.getAttribute('data-id'));
-    var colIdx = Number(event.currentTarget.getAttribute('data-colindex'));
+  var handleCellContextMenu = function handleCellContextMenu(event) {
     console.log(event.currentTarget);
-    console.log(rowIdx, colIdx);
-    var row = rows[rowIdx];
-    var col = columns[colIdx];
-    var fieldType = col.fieldType;
-
-    if (ContentTypeHelper.isMediaType(fieldType) || ContentTypeHelper.isRteType(fieldType)) {
-      event.preventDefault();
-      event.stopPropagation();
-      setCurrentRow(row);
-      setMenuActionAnchor(event.currentTarget);
-    }
   };
 
   return /*#__PURE__*/e__default.createElement("div", {
@@ -25364,11 +25351,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     editRowsModel: editRowsModel,
     onCellClick: handleOnCellClick,
     componentsProps: {
-      row: {
-        onContextMenu: handleContextMenu,
-        style: {
-          cursor: 'context-menu'
-        }
+      cell: {
+        onContextMenu: handleCellContextMenu
       }
     },
     getCellClassName: function getCellClassName(params) {
