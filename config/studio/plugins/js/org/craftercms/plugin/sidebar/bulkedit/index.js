@@ -25115,7 +25115,6 @@ var rowFromApiContent = function rowFromApiContent(index, path, content, headers
 };
 
 var isCellEdited = function isCellEdited(params, rows) {
-  console.log('isCellEdited', params, rows);
   if (!params || rows.length === 0) return false;
   var cellId = params.id;
   var cellField = params.field;
@@ -25451,7 +25450,6 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     }
 
     currentEditedRows[key][model.field] = model.value;
-    console.log(currentEditedRows);
     setEditedRows(currentEditedRows);
   };
 
@@ -25493,6 +25491,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       var model = selectedRow;
       model.path = response.updatedModel[model.field];
       model.value = response.updatedModel[model.field];
+      sessionRows[model.id][model.field] = response.updatedModel[model.field];
+      setSessionRows(sessionRows);
       saveEditState(model);
       setSelectedRow(null);
     };
