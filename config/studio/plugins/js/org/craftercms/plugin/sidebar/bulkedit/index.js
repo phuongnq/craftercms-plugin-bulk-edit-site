@@ -25444,6 +25444,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     var currentEditedRows = editedRows;
     console.log(editedRows);
     console.log(isCellEdited(model, rows));
+    console.log(model);
+    console.log(rows);
     if (!isCellEdited(model, rows)) return;
     var key = rows[model.id].path;
 
