@@ -301,16 +301,18 @@ const DataSheet = React.forwardRef((props, ref) => {
       const paths = items.map(item => item.path);
 
       const dtRows = [];
+      const dtSessionRows = [];
       for (let i = 0; i < paths.length; i += 1) {
         const path = paths[i];
 
         const content = await StudioAPI.getContent(path);
         const row = rowFromApiContent(i, path, content, headerList);
-        dtRows.push(row);
+        dtRows.push({ ...row });
+        dtSessionRows.push({ ...row });
       }
 
       setRows(dtRows);
-      setSessionRows(dtRows);
+      setSessionRows(dtSessionRows);
     })();
   }, [contentType, keyword, filterEditDate]);
 
@@ -371,6 +373,9 @@ const DataSheet = React.forwardRef((props, ref) => {
     const onEditedSussessful = (response) => {
       const model = selectedRow;
       model.path = response.updatedModel[model.field];
+      model.value = response.updatedModel[model.field];
+      sessionRows[model.id][model.field] = response.updatedModel[model.field];
+      setSessionRows(sessionRows);
       saveEditState(model);
       setSelectedRow(null);
     };
