@@ -25336,7 +25336,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   };
 
   var handleContextMenu = function handleContextMenu(event) {
-    console.log(event.currentTarget());
+    console.log(event.currentTarget);
     event.preventDefault();
   };
 
