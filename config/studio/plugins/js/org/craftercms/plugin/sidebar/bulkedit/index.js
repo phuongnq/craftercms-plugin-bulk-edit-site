@@ -25336,8 +25336,20 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   };
 
   var handleContextMenu = function handleContextMenu(event) {
+    var rowIdx = Number(event.currentTarget.getAttribute('data-id'));
+    var colIdx = Number(event.currentTarget.getAttribute('data-colindex'));
     console.log(event.currentTarget);
-    event.preventDefault();
+    console.log(rowIdx, colIdx);
+    var row = rows[rowIdx];
+    var col = columns[colIdx];
+    var fieldType = col.fieldType;
+
+    if (ContentTypeHelper.isMediaType(fieldType) || ContentTypeHelper.isRteType(fieldType)) {
+      event.preventDefault();
+      event.stopPropagation();
+      setCurrentRow(row);
+      setMenuActionAnchor(event.currentTarget);
+    }
   };
 
   return /*#__PURE__*/e__default.createElement("div", {
