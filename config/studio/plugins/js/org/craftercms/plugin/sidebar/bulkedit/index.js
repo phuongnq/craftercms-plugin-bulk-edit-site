@@ -25115,6 +25115,7 @@ var rowFromApiContent = function rowFromApiContent(index, path, content, headers
 };
 
 var isCellEdited = function isCellEdited(params, rows) {
+  console.log('isCellEdited', params, rows);
   if (!params || rows.length === 0) return false;
   var cellId = params.id;
   var cellField = params.field;
