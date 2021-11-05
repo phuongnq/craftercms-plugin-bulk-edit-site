@@ -25065,8 +25065,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
   var _React$useState19 = e__default.useState(null),
       _React$useState20 = _slicedToArray(_React$useState19, 2),
-      editDate = _React$useState20[0],
-      setEditDate = _React$useState20[1];
+      filterEditDate = _React$useState20[0],
+      setFilterEditDate = _React$useState20[1];
 
   var _React$useState21 = e__default.useState(null),
       _React$useState22 = _slicedToArray(_React$useState21, 2),
@@ -25191,7 +25191,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       setKeyword(keyword);
     });
     var subscriberEditDate = filterEditDateSub.subscribe(function (filterDate) {
-      setEditDate(filterDate);
+      setFilterEditDate(filterDate);
     });
     return function () {
       subscriberContentType.unsubscribe();
@@ -25223,7 +25223,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               headerList = getDataSheetHeadersFromConfig(config);
               setColumns(getColumnsFromHeader(headerList));
               _context3.next = 10;
-              return StudioAPI.searchByContentType(contentType, keyword, editDate);
+              return StudioAPI.searchByContentType(contentType, keyword, filterEditDate);
 
             case 10:
               items = _context3.sent;
@@ -25264,7 +25264,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
         }
       }, _callee3);
     }))();
-  }, [contentType, keyword, editDate]);
+  }, [contentType, keyword, filterEditDate]);
 
   var handleEditRowsModelChange = function handleEditRowsModelChange(model) {
     setEditRowsModel(model);
