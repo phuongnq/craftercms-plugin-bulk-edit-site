@@ -25495,14 +25495,17 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     };
 
     var onEditedSussessful = function onEditedSussessful(response) {
-      console.log(rows); // const model = selectedRow;
-      // model.path = response.updatedModel[model.field];
-      // model.value = response.updatedModel[model.field];
-      // sessionRows[model.id][model.field] = response.updatedModel[model.field];
-      // setSessionRows(sessionRows);
-      // console.log(rows);
-      // saveEditState(model);
-      // setSelectedRow(null);
+      console.log(rows);
+
+      var model = _objectSpread2({}, selectedRow);
+
+      model.path = response.updatedModel[model.field];
+      model.value = response.updatedModel[model.field];
+      sessionRows[model.id][model.field] = response.updatedModel[model.field];
+      setSessionRows(sessionRows);
+      console.log(rows);
+      saveEditState(model);
+      setSelectedRow(null);
     };
 
     var onEditedFailed = function onEditedFailed(error) {
