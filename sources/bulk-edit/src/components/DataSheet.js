@@ -57,7 +57,7 @@ const useStyles = makeStyles({
  * @param {*} config - form-definition.xml
  * @returns
  */
-const getDataSheetHeadersFromConfig = (config) => {
+const getDisplayFieldsFromConfig = (config) => {
   const xml = (new DOMParser()).parseFromString(config, 'text/xml');
   const fields = xml.getElementsByTagName('field');
   const headers = [];
@@ -74,7 +74,7 @@ const getDataSheetHeadersFromConfig = (config) => {
   return headers;
 };
 
-const getColumnsFromHeader = (fields) => {
+const buildColumnsFromDisplayFields = (displayFields) => {
   // default to have `id` and `path`
   const columns = [{
     field: 'id',
@@ -94,8 +94,8 @@ const getColumnsFromHeader = (fields) => {
     renderCell: CellExpand,
   }];
 
-  for (let i = 0; i < fields.length; i +=1 ) {
-    const field = fields[i];
+  for (let i = 0; i < displayFields.length; i +=1 ) {
+    const field = displayFields[i];
     const { fieldId, fieldType, title } = field;
     const column = {
       field: fieldId,
@@ -125,12 +125,11 @@ const getColumnProperties = (fieldName, columns) => {
   return columns.find((cl) => cl.field === fieldName);
 };
 
-const rowFromApiContent = (index, path, content, headers) => {
+const rowFromApiContent = (index, path, content, fieldIds) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
   const row = { id: index, path };
-  for (let i = 0; i < headers.length; i += 1) {
-    const column = headers[i];
-    const { fieldId } = column;
+  for (let i = 0; i < fieldIds.length; i += 1) {
+    const fieldId = fieldIds[i];
     const field = xml.getElementsByTagName(fieldId)[0];
     row[fieldId] = field ? field.textContent : '';
   };
@@ -172,7 +171,13 @@ const writeContent = async (path, editedObj) => {
       }
   }
 
-  return await StudioAPI.writeContent(path, (new XMLSerializer()).serializeToString(xml));
+  const newContent = new XMLSerializer().serializeToString(xml);
+  const res = await StudioAPI.writeContent(path, newContent);
+  if (res) {
+    return newContent;
+  }
+
+  return null;
 };
 
 const DataSheet = React.forwardRef((props, ref) => {
@@ -203,6 +208,7 @@ const DataSheet = React.forwardRef((props, ref) => {
 
       const totalCount = keys.length;
       let completedCount = 0;
+      const failedRows = [];
 
       if (totalCount === 0) {
         return;
@@ -211,14 +217,22 @@ const DataSheet = React.forwardRef((props, ref) => {
       setIsProcessing(true);
       setBulkTotalCount(totalCount);
 
+      const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path');
+
       for (let i = 0; i < totalCount; i++) {
         const path = keys[i];
-        const res = await writeContent(path, editedRows[path], contentType);
-        if (!res) {
+        const newContent = await writeContent(path, editedRows[path], contentType);
+        if (!newContent) {
           console.log(`Error while saving path ${path}`);
+          failedRows.push(editedRows[path]);
         } else {
           completedCount += 1;
           setBulkCompletedCount(completedCount);
+          const row = sessionRows.find((r) => r.path === path);
+          if (row) {
+            const rowIndex = row.id;
+            sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fieldIds);
+          }
         }
       };
 
@@ -226,9 +240,12 @@ const DataSheet = React.forwardRef((props, ref) => {
         setTimeout(() => {
           setIsProcessing(false);
         }, 4000);
+        setSessionRows(sessionRows);
         setRows(sessionRows);
         setEditedRows({});
         setRefresh(1 - refresh);
+      } else {
+        setEditedRows(failedRows);
       }
     },
   }));
@@ -318,8 +335,8 @@ const DataSheet = React.forwardRef((props, ref) => {
       setRefresh(1 - refresh);
 
       const config = await StudioAPI.getContentTypeConfig(contentType);
-      const headerList = getDataSheetHeadersFromConfig(config);
-      setColumns(getColumnsFromHeader(headerList));
+      const displayFields = getDisplayFieldsFromConfig(config);
+      setColumns(buildColumnsFromDisplayFields(displayFields));
 
       const items = await StudioAPI.searchByContentType(contentType, keyword, filterEditDate);
       const paths = items.map(item => item.path);
@@ -330,7 +347,8 @@ const DataSheet = React.forwardRef((props, ref) => {
         const path = paths[i];
 
         const content = await StudioAPI.getContent(path);
-        const row = rowFromApiContent(i, path, content, headerList);
+        const fieldIds = displayFields.map((elm) => elm.fieldId);
+        const row = rowFromApiContent(i, path, content, fieldIds);
         dtRows.push({ ...row });
         dtSessionRows.push({ ...row });
       }
