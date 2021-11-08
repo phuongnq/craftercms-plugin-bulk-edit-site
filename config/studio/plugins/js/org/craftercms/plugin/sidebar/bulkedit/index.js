@@ -26176,7 +26176,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               row = selectedRow.row;
               console.log(selectedRow);
 
-              if (!(!row || row.path)) {
+              if (!(!row || !row.path || !row.lockOwner)) {
                 _context5.next = 5;
                 break;
               }
