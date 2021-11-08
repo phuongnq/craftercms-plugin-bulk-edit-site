@@ -22,7 +22,6 @@ import {
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-import CellExpand from './CellExpand';
 import PathCell from './PathCell';
 import MediaCell from './MediaCell';
 import RTECell from './RTECell';
@@ -88,8 +87,9 @@ const buildColumnsFromDisplayFields = (displayFields) => {
     headerName: 'Action',
     description: 'Action',
     sortable: false,
-    width: 45,
+    width: 72,
     editable: false,
+    align: 'center',
     renderCell: ((params) => (
       <IconButton>
         <MoreVertIcon />
