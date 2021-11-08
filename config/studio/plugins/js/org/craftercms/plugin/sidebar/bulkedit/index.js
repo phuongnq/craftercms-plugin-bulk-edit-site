@@ -25274,22 +25274,18 @@ function LinearProgressWithLabel(props) {
   }, "".concat(Math.round(props.value), "%"))));
 }
 
-function SaveProgress() {
-  var _React$useState = e__default.useState(10),
+function SaveProgress(_ref) {
+  var completed = _ref.completed,
+      total = _ref.total;
+
+  var _React$useState = e__default.useState(0),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       progress = _React$useState2[0],
       setProgress = _React$useState2[1];
 
   e__default.useEffect(function () {
-    var timer = setInterval(function () {
-      setProgress(function (prevProgress) {
-        return prevProgress >= 100 ? 10 : prevProgress + 10;
-      });
-    }, 800);
-    return function () {
-      clearInterval(timer);
-    };
-  }, []);
+    setProgress(completed / total * 100);
+  }, [completed, total]);
   return /*#__PURE__*/e__default.createElement(Box$1, {
     sx: {
       width: '100%'
@@ -25636,6 +25632,21 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       selectedRow = _React$useState24[0],
       setSelectedRow = _React$useState24[1];
 
+  var _React$useState25 = e__default.useState(false),
+      _React$useState26 = _slicedToArray(_React$useState25, 2);
+      _React$useState26[0];
+      var setIsProcessing = _React$useState26[1];
+
+  var _React$useState27 = e__default.useState(0),
+      _React$useState28 = _slicedToArray(_React$useState27, 2),
+      bulkCompletedCount = _React$useState28[0],
+      setBulkCompletedCount = _React$useState28[1];
+
+  var _React$useState29 = e__default.useState(0),
+      _React$useState30 = _slicedToArray(_React$useState29, 2),
+      bulkTotalCount = _React$useState30[0],
+      setBulkTotalCount = _React$useState30[1];
+
   e__default.useImperativeHandle(ref, function () {
     return {
       cancelAllChanges: function cancelAllChanges() {
@@ -25648,6 +25659,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
           return;
         }
 
+        setIsProcessing(true);
+        setBulkTotalCount(keys.length);
         keys.forEach( /*#__PURE__*/function () {
           var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path) {
             var res;
@@ -25663,6 +25676,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
                     if (!res) {
                       console.log("Error while saving path ".concat(path));
+                    } else {
+                      setBulkCompletedCount(bulkCompletedCount + 1);
                     }
 
                   case 4:
@@ -25931,7 +25946,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     },
     handleViewAction: handleMenuActionViewClick,
     handleEditAction: handleMenuActionEditClick
-  }), /*#__PURE__*/e__default.createElement(SaveProgress, null));
+  }), /*#__PURE__*/e__default.createElement(SaveProgress, {
+    completed: bulkCompletedCount,
+    total: bulkTotalCount
+  }));
 });
 
 var DRAWER_WIDTH = 240;
