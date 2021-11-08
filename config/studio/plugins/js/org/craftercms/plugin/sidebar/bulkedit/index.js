@@ -25555,7 +25555,7 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
     headerName: 'Action',
     description: 'Action',
     sortable: false,
-    width: 45,
+    width: 100,
     editable: false,
     renderCell: function renderCell(params) {
     }
