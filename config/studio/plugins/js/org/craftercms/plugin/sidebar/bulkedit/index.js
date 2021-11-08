@@ -25792,7 +25792,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       menuActionAnchor = _React$useState22[0],
       setMenuActionAnchor = _React$useState22[1];
 
-  var _React$useState23 = e__default.useState(null),
+  var _React$useState23 = e__default.useState({}),
       _React$useState24 = _slicedToArray(_React$useState23, 2),
       selectedRow = _React$useState24[0],
       setSelectedRow = _React$useState24[1];
