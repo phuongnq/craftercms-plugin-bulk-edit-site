@@ -25400,13 +25400,14 @@ var ClearIcon = /*@__PURE__*/getDefaultExportFromCjs(Clear);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 function RowActionMenu(_ref) {
-  var selectedRow = _ref.selectedRow,
+  var selectedCell = _ref.selectedCell,
       anchorEl = _ref.anchorEl,
       handleClose = _ref.handleClose,
       handleUnlockAction = _ref.handleUnlockAction,
       handleSaveAction = _ref.handleSaveAction,
       handleClearAction = _ref.handleClearAction;
-  console.log(selectedRow);
+  console.log(selectedCell);
+  var row = selectedCell.row;
   return /*#__PURE__*/e__default.createElement(Menu$1, {
     id: "row-action-menu",
     anchorEl: anchorEl,
@@ -25420,7 +25421,7 @@ function RowActionMenu(_ref) {
         minWidth: 120
       }
     }
-  }, selectedRow && selectedRow.lockOwner && /*#__PURE__*/e__default.createElement(MenuItem$1, {
+  }, row && row.lockOwner && /*#__PURE__*/e__default.createElement(MenuItem$1, {
     onClick: handleUnlockAction
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(LockOpenOutlinedIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$1, {
     primary: "Unlock"
@@ -26217,7 +26218,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     handleClearAction: function handleClearAction() {
       return handleRowMenuActionClear;
     },
-    selectedRow: selectedRow
+    selectedCell: selectedRow
   }), /*#__PURE__*/e__default.createElement(CellActionMenu, {
     anchorEl: menuActionAnchor,
     handleClose: function handleClose() {
