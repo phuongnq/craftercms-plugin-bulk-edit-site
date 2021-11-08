@@ -26321,6 +26321,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               });
               rowFromApi = rowFromApiContent(row.id, path, content, fieldIds, meta);
               console.log(rowFromApi);
+              console.log(sessionRows);
               sessionRows[row.id] = rowFromApi;
               rows[row.id] = rowFromApi;
               console.log(sessionRows);
@@ -26330,7 +26331,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               setEditedRows(editedRows);
               setRowActionMenuAnchor(null);
 
-            case 25:
+            case 26:
             case "end":
               return _context7.stop();
           }
