@@ -3939,10 +3939,6 @@ function createGenerateClassName(options = {}) {
   };
 }
 
-function createStyles(styles) {
-  return styles;
-}
-
 /* eslint-disable no-restricted-syntax */
 function getThemeProps$1(params) {
   const {
@@ -24769,24 +24765,6 @@ exports.default = _default;
 
 var MoreVertIcon = /*@__PURE__*/getDefaultExportFromCjs(MoreVert);
 
-makeStyles(function () {
-  return createStyles({
-    root: {
-      alignItems: 'center',
-      lineHeight: '24px',
-      width: '100%',
-      height: '100%',
-      position: 'relative',
-      display: 'flex',
-      '& .cellValue': {
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis'
-      }
-    }
-  });
-});
-
 var LockOutlined = createCommonjsModule(function (module, exports) {
 
 
@@ -25594,10 +25572,15 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
     headerName: 'Action',
     description: 'Action',
     sortable: false,
-    width: 90,
+    width: 72,
     editable: false,
     renderCell: function renderCell(params) {
-      return /*#__PURE__*/e__default.createElement(IconButton$1, null, /*#__PURE__*/e__default.createElement(MoreVertIcon, null));
+      return /*#__PURE__*/e__default.createElement(IconButton$1, {
+        style: {
+          display: 'block',
+          textAlign: 'center'
+        }
+      }, /*#__PURE__*/e__default.createElement(MoreVertIcon, null));
     }
   }, {
     field: 'id',
