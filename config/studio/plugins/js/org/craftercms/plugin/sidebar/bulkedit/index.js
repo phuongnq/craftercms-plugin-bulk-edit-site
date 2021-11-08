@@ -25710,6 +25710,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                     }, 4000);
                     setRows(sessionRows);
                     setEditedRows({});
+                    setRefresh(1 - refresh);
                   }
 
                 case 19:
