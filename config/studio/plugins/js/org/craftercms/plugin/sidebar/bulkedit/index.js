@@ -25594,7 +25594,7 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
     headerName: 'Action',
     description: 'Action',
     sortable: false,
-    width: 45,
+    width: 90,
     editable: false,
     renderCell: function renderCell(params) {
       return /*#__PURE__*/e__default.createElement(IconButton$1, null, /*#__PURE__*/e__default.createElement(MoreVertIcon, null));
