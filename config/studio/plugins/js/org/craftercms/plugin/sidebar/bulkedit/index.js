@@ -25514,7 +25514,7 @@ var rowFromApiContent = function rowFromApiContent(index, path, content, fieldId
   };
 
   if (meta && meta.lockOwner) {
-    row.lockOwner = lockOwner;
+    row.lockOwner = meta.lockOwner;
   }
 
   for (var i = 0; i < fieldIds.length; i += 1) {
