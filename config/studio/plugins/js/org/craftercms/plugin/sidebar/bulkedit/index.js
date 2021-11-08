@@ -24811,7 +24811,6 @@ var LockOutlinedIcon = /*@__PURE__*/getDefaultExportFromCjs(LockOutlined);
 function PathCell(props) {
   var value = props.value,
       row = props.row;
-  console.log(props);
   return /*#__PURE__*/e__default.createElement(e__default.Fragment, null, /*#__PURE__*/e__default.createElement("div", {
     style: {
       cursor: 'auto'
@@ -25401,11 +25400,13 @@ var ClearIcon = /*@__PURE__*/getDefaultExportFromCjs(Clear);
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 function RowActionMenu(_ref) {
-  var anchorEl = _ref.anchorEl,
+  var selectedRow = _ref.selectedRow,
+      anchorEl = _ref.anchorEl,
       handleClose = _ref.handleClose,
       handleUnlockAction = _ref.handleUnlockAction,
       handleSaveAction = _ref.handleSaveAction,
       handleClearAction = _ref.handleClearAction;
+  console.log(selectedRow);
   return /*#__PURE__*/e__default.createElement(Menu$1, {
     id: "row-action-menu",
     anchorEl: anchorEl,
@@ -25419,7 +25420,7 @@ function RowActionMenu(_ref) {
         minWidth: 120
       }
     }
-  }, /*#__PURE__*/e__default.createElement(MenuItem$1, {
+  }, selectedRow && selectedRow.lockOwner && /*#__PURE__*/e__default.createElement(MenuItem$1, {
     onClick: handleUnlockAction
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(LockOpenOutlinedIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$1, {
     primary: "Unlock"
@@ -25577,7 +25578,7 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
     headerName: 'Action',
     description: 'Action',
     sortable: false,
-    width: 32,
+    width: 45,
     editable: false,
     renderCell: function renderCell(params) {
       return /*#__PURE__*/e__default.createElement(IconButton$1, null, /*#__PURE__*/e__default.createElement(MoreVertIcon, null));
@@ -26215,7 +26216,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     },
     handleClearAction: function handleClearAction() {
       return handleRowMenuActionClear;
-    }
+    },
+    selectedRow: selectedRow
   }), /*#__PURE__*/e__default.createElement(CellActionMenu, {
     anchorEl: menuActionAnchor,
     handleClose: function handleClose() {
