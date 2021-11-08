@@ -25673,22 +25673,21 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   return _context2.abrupt("return");
 
                 case 5:
-                  console.log(editedRows);
                   setIsProcessing(true);
                   setBulkTotalCount(totalCount);
                   i = 0;
 
-                case 9:
+                case 8:
                   if (!(i < totalCount)) {
-                    _context2.next = 18;
+                    _context2.next = 17;
                     break;
                   }
 
                   path = keys[i];
-                  _context2.next = 13;
+                  _context2.next = 12;
                   return writeContent(path, editedRows[path], contentType);
 
-                case 13:
+                case 12:
                   res = _context2.sent;
 
                   if (!res) {
@@ -25698,21 +25697,21 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                     setBulkCompletedCount(completedCount);
                   }
 
-                case 15:
+                case 14:
                   i++;
-                  _context2.next = 9;
+                  _context2.next = 8;
                   break;
 
-                case 18:
-                  console.log(completedCount === totalCount);
+                case 17:
 
                   if (completedCount === totalCount) {
                     setTimeout(function () {
                       setIsProcessing(false);
                     }, 4000);
+                    setRows(sessionRows);
                   }
 
-                case 21:
+                case 19:
                 case "end":
                   return _context2.stop();
               }
