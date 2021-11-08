@@ -26062,9 +26062,9 @@ var Main = styled$3('main', {
   });
 });
 var StyledIconButton = styled$3(IconButton$1)(function (_ref2) {
-  var theme = _ref2.theme;
+  _ref2.theme;
   return {
-    color: theme.utils.rgba(0, 0, 0, 0.54)
+    color: 'rgba(0, 0, 0, 0.54)'
   };
 });
 function Editor() {
