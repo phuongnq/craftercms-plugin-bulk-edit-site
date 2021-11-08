@@ -26291,29 +26291,31 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 6:
               content = _context7.sent;
+              console.log(content);
 
               if (content) {
-                _context7.next = 9;
+                _context7.next = 10;
                 break;
               }
 
               return _context7.abrupt("return");
 
-            case 9:
-              _context7.next = 11;
+            case 10:
+              _context7.next = 12;
               return StudioAPI.getSandboxItemByPath(path);
 
-            case 11:
+            case 12:
               meta = _context7.sent;
+              console.log(meta);
 
               if (meta) {
-                _context7.next = 14;
+                _context7.next = 16;
                 break;
               }
 
               return _context7.abrupt("return");
 
-            case 14:
+            case 16:
               fieldIds = columns.map(function (cl) {
                 return cl.field;
               }).filter(function (field) {
@@ -26326,7 +26328,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               setRows(rows);
               setRowActionMenuAnchor(null);
 
-            case 21:
+            case 23:
             case "end":
               return _context7.stop();
           }
