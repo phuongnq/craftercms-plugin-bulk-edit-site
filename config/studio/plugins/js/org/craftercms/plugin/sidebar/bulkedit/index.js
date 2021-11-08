@@ -25574,13 +25574,9 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
     sortable: false,
     width: 72,
     editable: false,
+    align: 'center',
     renderCell: function renderCell(params) {
-      return /*#__PURE__*/e__default.createElement(IconButton$1, {
-        style: {
-          display: 'block',
-          textAlign: 'center'
-        }
-      }, /*#__PURE__*/e__default.createElement(MoreVertIcon, null));
+      return /*#__PURE__*/e__default.createElement(IconButton$1, null, /*#__PURE__*/e__default.createElement(MoreVertIcon, null));
     }
   }, {
     field: 'id',
