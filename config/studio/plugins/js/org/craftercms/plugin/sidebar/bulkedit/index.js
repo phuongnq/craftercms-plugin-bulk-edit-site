@@ -25667,7 +25667,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       },
       saveAllChanges: function () {
         var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          var keys, totalCount, completedCount, fields, _loop, i;
+          var keys, totalCount, completedCount, failedRows, fields, _loop, i;
 
           return regeneratorRuntime.wrap(function _callee2$(_context3) {
             while (1) {
@@ -25676,15 +25676,16 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   keys = Object.keys(editedRows);
                   totalCount = keys.length;
                   completedCount = 0;
+                  failedRows = [];
 
                   if (!(totalCount === 0)) {
-                    _context3.next = 5;
+                    _context3.next = 6;
                     break;
                   }
 
                   return _context3.abrupt("return");
 
-                case 5:
+                case 6:
                   setIsProcessing(true);
                   setBulkTotalCount(totalCount);
                   fields = columns.map(function (cl) {
@@ -25707,21 +25708,19 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                           case 3:
                             newContent = _context2.sent;
 
-                            if (!newContent) {
+                            if (newContent) {
                               console.log("Error while saving path ".concat(path));
+                              failedRows.push(editedRows[path]);
                             } else {
                               completedCount += 1;
                               setBulkCompletedCount(completedCount);
                               row = sessionRows.find(function (r) {
                                 return r.path === path;
                               });
-                              console.log(row);
 
                               if (row) {
                                 rowIndex = row.id;
-                                console.log(newContent);
                                 sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fields);
-                                console.log(sessionRows[rowIndex]);
                               }
                             }
 
@@ -25734,20 +25733,20 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   });
                   i = 0;
 
-                case 10:
+                case 11:
                   if (!(i < totalCount)) {
-                    _context3.next = 15;
+                    _context3.next = 16;
                     break;
                   }
 
-                  return _context3.delegateYield(_loop(i), "t0", 12);
+                  return _context3.delegateYield(_loop(i), "t0", 13);
 
-                case 12:
+                case 13:
                   i++;
-                  _context3.next = 10;
+                  _context3.next = 11;
                   break;
 
-                case 15:
+                case 16:
 
                   if (completedCount === totalCount) {
                     setTimeout(function () {
@@ -25757,9 +25756,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                     setRows(sessionRows);
                     setEditedRows({});
                     setRefresh(1 - refresh);
+                  } else {
+                    setEditedRows(failedRows);
                   }
 
-                case 17:
+                case 18:
                 case "end":
                   return _context3.stop();
               }
