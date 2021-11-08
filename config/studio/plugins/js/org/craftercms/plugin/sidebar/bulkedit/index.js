@@ -26078,7 +26078,8 @@ function Editor() {
     }
   }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), !drawerOpen && /*#__PURE__*/e__default.createElement("div", {
     style: {
-      "float": 'right'
+      position: 'absolute',
+      right: '0px'
     }
   }, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
