@@ -25284,7 +25284,9 @@ function SaveProgress(_ref) {
       setProgress = _React$useState2[1];
 
   e__default.useEffect(function () {
-    setProgress(completed / total * 100);
+    if (total > 0) {
+      setProgress(completed / total * 100);
+    }
   }, [completed, total]);
   return /*#__PURE__*/e__default.createElement(Box$1, {
     sx: {
@@ -25633,9 +25635,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       setSelectedRow = _React$useState24[1];
 
   var _React$useState25 = e__default.useState(false),
-      _React$useState26 = _slicedToArray(_React$useState25, 2);
-      _React$useState26[0];
-      var setIsProcessing = _React$useState26[1];
+      _React$useState26 = _slicedToArray(_React$useState25, 2),
+      isProcessing = _React$useState26[0],
+      setIsProcessing = _React$useState26[1];
 
   var _React$useState27 = e__default.useState(0),
       _React$useState28 = _slicedToArray(_React$useState27, 2),
@@ -25692,6 +25694,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
             return _ref2.apply(this, arguments);
           };
         }());
+        setIsProcessing(false);
       }
     };
   });
@@ -25946,7 +25949,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     },
     handleViewAction: handleMenuActionViewClick,
     handleEditAction: handleMenuActionEditClick
-  }), /*#__PURE__*/e__default.createElement(SaveProgress, {
+  }), isProcessing && /*#__PURE__*/e__default.createElement(SaveProgress, {
     completed: bulkCompletedCount,
     total: bulkTotalCount
   }));
