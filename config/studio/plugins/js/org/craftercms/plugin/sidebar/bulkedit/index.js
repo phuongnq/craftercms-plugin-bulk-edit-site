@@ -26194,7 +26194,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 setSessionRows(sessionRows);
               }
 
-            case 8:
+              setRowActionMenuAnchor(null);
+
+            case 9:
             case "end":
               return _context5.stop();
           }
@@ -26246,15 +26248,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     handleClose: function handleClose() {
       return setRowActionMenuAnchor(null);
     },
-    handleUnlockAction: function handleUnlockAction() {
-      return handleRowMenuActionUnlock;
-    },
-    handleSaveAction: function handleSaveAction() {
-      return handleRowMenuActionSave;
-    },
-    handleClearAction: function handleClearAction() {
-      return handleRowMenuActionClear;
-    },
+    handleUnlockAction: handleRowMenuActionUnlock,
+    handleSaveAction: handleRowMenuActionSave,
+    handleClearAction: handleRowMenuActionClear,
     selectedCell: selectedRow
   }), /*#__PURE__*/e__default.createElement(CellActionMenu, {
     anchorEl: menuActionAnchor,
