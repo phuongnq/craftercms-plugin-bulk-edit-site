@@ -8193,7 +8193,7 @@ var StyleSheet = /*#__PURE__*/function () {
   return StyleSheet;
 }();
 
-var e="-ms-";var r="-moz-";var a="-webkit-";var c="comm";var n="rule";var t="decl";var i$1="@import";var p="@keyframes";var k$1=Math.abs;var d=String.fromCharCode;function m(e,r){return (((r<<2^z$1(e,0))<<2^z$1(e,1))<<2^z$1(e,2))<<2^z$1(e,3)}function g(e){return e.trim()}function x$1(e,r){return (e=r.exec(e))?e[0]:e}function y$1(e,r,a){return e.replace(r,a)}function j$1(e,r){return e.indexOf(r)}function z$1(e,r){return e.charCodeAt(r)|0}function C(e,r,a){return e.slice(r,a)}function A$1(e){return e.length}function M$1(e){return e.length}function O$1(e,r){return r.push(e),e}function S(e,r){return e.map(r).join("")}var q=1;var B$1=1;var D=0;var E=0;var F$1=0;var G="";function H$1(e,r,a,c,n,t,s){return {value:e,root:r,parent:a,type:c,props:n,children:t,line:q,column:B$1,length:s,return:""}}function I(e,r,a){return H$1(e,r.root,r.parent,a,r.props,r.children,0)}function J(){return F$1}function K(){F$1=E>0?z$1(G,--E):0;if(B$1--,F$1===10)B$1=1,q--;return F$1}function L$1(){F$1=E<D?z$1(G,E++):0;if(B$1++,F$1===10)B$1=1,q++;return F$1}function N$1(){return z$1(G,E)}function P$1(){return E}function Q(e,r){return C(G,e,r)}function R$1(e){switch(e){case 0:case 9:case 10:case 13:case 32:return 5;case 33:case 43:case 44:case 47:case 62:case 64:case 126:case 59:case 123:case 125:return 4;case 58:return 3;case 34:case 39:case 40:case 91:return 2;case 41:case 93:return 1}return 0}function T(e){return q=B$1=1,D=A$1(G=e),E=0,[]}function U(e){return G="",e}function V$1(e){return g(Q(E-1,_$4(e===91?e+2:e===40?e+1:e)))}function X(e){while(F$1=N$1())if(F$1<33)L$1();else break;return R$1(e)>2||R$1(F$1)>3?"":" "}function Z(e,r){while(--r&&L$1())if(F$1<48||F$1>102||F$1>57&&F$1<65||F$1>70&&F$1<97)break;return Q(e,P$1()+(r<6&&N$1()==32&&L$1()==32))}function _$4(e){while(L$1())switch(F$1){case e:return E;case 34:case 39:return _$4(e===34||e===39?e:F$1);case 40:if(e===41)_$4(e);break;case 92:L$1();break}return E}function ee(e,r){while(L$1())if(e+F$1===47+10)break;else if(e+F$1===42+42&&N$1()===47)break;return "/*"+Q(r,E-1)+"*"+d(e===47?e:L$1())}function re(e){while(!R$1(N$1()))L$1();return Q(e,E)}function ae(e){return U(ce("",null,null,null,[""],e=T(e),0,[0],e))}function ce(e,r,a,c,n,t,s,u,i){var f=0;var o=0;var l=s;var v=0;var h=0;var p=0;var b=1;var w=1;var $=1;var k=0;var m="";var g=n;var x=t;var j=c;var z=m;while(w)switch(p=k,k=L$1()){case 34:case 39:case 91:case 40:z+=V$1(k);break;case 9:case 10:case 13:case 32:z+=X(p);break;case 92:z+=Z(P$1()-1,7);continue;case 47:switch(N$1()){case 42:case 47:O$1(te(ee(L$1(),P$1()),r,a),i);break;default:z+="/";}break;case 123*b:u[f++]=A$1(z)*$;case 125*b:case 59:case 0:switch(k){case 0:case 125:w=0;case 59+o:if(h>0&&A$1(z)-l)O$1(h>32?se(z+";",c,a,l-1):se(y$1(z," ","")+";",c,a,l-2),i);break;case 59:z+=";";default:O$1(j=ne(z,r,a,f,o,n,u,m,g=[],x=[],l),t);if(k===123)if(o===0)ce(z,r,j,j,g,t,l,u,x);else switch(v){case 100:case 109:case 115:ce(e,j,j,c&&O$1(ne(e,j,j,0,0,n,u,m,n,g=[],l),x),n,x,l,u,c?g:x);break;default:ce(z,j,j,j,[""],x,l,u,x);}}f=o=h=0,b=$=1,m=z="",l=s;break;case 58:l=1+A$1(z),h=p;default:if(b<1)if(k==123)--b;else if(k==125&&b++==0&&K()==125)continue;switch(z+=d(k),k*b){case 38:$=o>0?1:(z+="\f",-1);break;case 44:u[f++]=(A$1(z)-1)*$,$=1;break;case 64:if(N$1()===45)z+=V$1(L$1());v=N$1(),o=A$1(m=z+=re(P$1())),k++;break;case 45:if(p===45&&A$1(z)==2)b=0;}}return t}function ne(e,r,a,c,t,s,u,i,f,o,l){var v=t-1;var h=t===0?s:[""];var p=M$1(h);for(var b=0,w=0,$=0;b<c;++b)for(var d=0,m=C(e,v+1,v=k$1(w=u[b])),x=e;d<p;++d)if(x=g(w>0?h[d]+" "+m:y$1(m,/&\f/g,h[d])))f[$++]=x;return H$1(e,r,a,t===0?n:i,f,o,l)}function te(e,r,a){return H$1(e,r,a,c,d(J()),C(e,2,-2),0)}function se(e,r,a,c){return H$1(e,r,a,t,C(e,0,c),C(e,c+1,-1),c)}function ue$1(c,n){switch(m(c,n)){case 5103:return a+"print-"+c+c;case 5737:case 4201:case 3177:case 3433:case 1641:case 4457:case 2921:case 5572:case 6356:case 5844:case 3191:case 6645:case 3005:case 6391:case 5879:case 5623:case 6135:case 4599:case 4855:case 4215:case 6389:case 5109:case 5365:case 5621:case 3829:return a+c+c;case 5349:case 4246:case 4810:case 6968:case 2756:return a+c+r+c+e+c+c;case 6828:case 4268:return a+c+e+c+c;case 6165:return a+c+e+"flex-"+c+c;case 5187:return a+c+y$1(c,/(\w+).+(:[^]+)/,a+"box-$1$2"+e+"flex-$1$2")+c;case 5443:return a+c+e+"flex-item-"+y$1(c,/flex-|-self/,"")+c;case 4675:return a+c+e+"flex-line-pack"+y$1(c,/align-content|flex-|-self/,"")+c;case 5548:return a+c+e+y$1(c,"shrink","negative")+c;case 5292:return a+c+e+y$1(c,"basis","preferred-size")+c;case 6060:return a+"box-"+y$1(c,"-grow","")+a+c+e+y$1(c,"grow","positive")+c;case 4554:return a+y$1(c,/([^-])(transform)/g,"$1"+a+"$2")+c;case 6187:return y$1(y$1(y$1(c,/(zoom-|grab)/,a+"$1"),/(image-set)/,a+"$1"),c,"")+c;case 5495:case 3959:return y$1(c,/(image-set\([^]*)/,a+"$1"+"$`$1");case 4968:return y$1(y$1(c,/(.+:)(flex-)?(.*)/,a+"box-pack:$3"+e+"flex-pack:$3"),/s.+-b[^;]+/,"justify")+a+c+c;case 4095:case 3583:case 4068:case 2532:return y$1(c,/(.+)-inline(.+)/,a+"$1$2")+c;case 8116:case 7059:case 5753:case 5535:case 5445:case 5701:case 4933:case 4677:case 5533:case 5789:case 5021:case 4765:if(A$1(c)-1-n>6)switch(z$1(c,n+1)){case 109:if(z$1(c,n+4)!==45)break;case 102:return y$1(c,/(.+:)(.+)-([^]+)/,"$1"+a+"$2-$3"+"$1"+r+(z$1(c,n+3)==108?"$3":"$2-$3"))+c;case 115:return ~j$1(c,"stretch")?ue$1(y$1(c,"stretch","fill-available"),n)+c:c}break;case 4949:if(z$1(c,n+1)!==115)break;case 6444:switch(z$1(c,A$1(c)-3-(~j$1(c,"!important")&&10))){case 107:return y$1(c,":",":"+a)+c;case 101:return y$1(c,/(.+:)([^;!]+)(;|!.+)?/,"$1"+a+(z$1(c,14)===45?"inline-":"")+"box$3"+"$1"+a+"$2$3"+"$1"+e+"$2box$3")+c}break;case 5936:switch(z$1(c,n+11)){case 114:return a+c+e+y$1(c,/[svh]\w+-[tblr]{2}/,"tb")+c;case 108:return a+c+e+y$1(c,/[svh]\w+-[tblr]{2}/,"tb-rl")+c;case 45:return a+c+e+y$1(c,/[svh]\w+-[tblr]{2}/,"lr")+c}return a+c+e+c+c}return c}function ie(e,r){var a="";var c=M$1(e);for(var n=0;n<c;n++)a+=r(e[n],n,e,r)||"";return a}function fe$1(e,r,a,s){switch(e.type){case i$1:case t:return e.return=e.return||e.value;case c:return "";case n:e.value=e.props.join(",");}return A$1(a=ie(e.children,s))?e.return=e.value+"{"+a+"}":""}function oe(e){var r=M$1(e);return function(a,c,n,t){var s="";for(var u=0;u<r;u++)s+=e[u](a,c,n,t)||"";return s}}function le(e){return function(r){if(!r.root)if(r=r.return)e(r);}}function ve$1(c,s,u,i){if(!c.return)switch(c.type){case t:c.return=ue$1(c.value,c.length);break;case p:return ie([I(y$1(c.value,"@","@"+a),c,"")],i);case n:if(c.length)return S(c.props,(function(n){switch(x$1(n,/(::plac\w+|:read-\w+)/)){case":read-only":case":read-write":return ie([I(y$1(n,/:(read-\w+)/,":"+r+"$1"),c,"")],i);case"::placeholder":return ie([I(y$1(n,/:(plac\w+)/,":"+a+"input-$1"),c,""),I(y$1(n,/:(plac\w+)/,":"+r+"$1"),c,""),I(y$1(n,/:(plac\w+)/,e+"input-$1"),c,"")],i)}return ""}))}}
+var e="-ms-";var r="-moz-";var a="-webkit-";var c="comm";var n="rule";var t="decl";var i="@import";var p="@keyframes";var k$1=Math.abs;var d=String.fromCharCode;function m(e,r){return (((r<<2^z$1(e,0))<<2^z$1(e,1))<<2^z$1(e,2))<<2^z$1(e,3)}function g(e){return e.trim()}function x$1(e,r){return (e=r.exec(e))?e[0]:e}function y$1(e,r,a){return e.replace(r,a)}function j$1(e,r){return e.indexOf(r)}function z$1(e,r){return e.charCodeAt(r)|0}function C(e,r,a){return e.slice(r,a)}function A$1(e){return e.length}function M$1(e){return e.length}function O$1(e,r){return r.push(e),e}function S(e,r){return e.map(r).join("")}var q=1;var B$1=1;var D=0;var E=0;var F$1=0;var G="";function H$1(e,r,a,c,n,t,s){return {value:e,root:r,parent:a,type:c,props:n,children:t,line:q,column:B$1,length:s,return:""}}function I(e,r,a){return H$1(e,r.root,r.parent,a,r.props,r.children,0)}function J(){return F$1}function K(){F$1=E>0?z$1(G,--E):0;if(B$1--,F$1===10)B$1=1,q--;return F$1}function L$1(){F$1=E<D?z$1(G,E++):0;if(B$1++,F$1===10)B$1=1,q++;return F$1}function N$1(){return z$1(G,E)}function P$1(){return E}function Q(e,r){return C(G,e,r)}function R$1(e){switch(e){case 0:case 9:case 10:case 13:case 32:return 5;case 33:case 43:case 44:case 47:case 62:case 64:case 126:case 59:case 123:case 125:return 4;case 58:return 3;case 34:case 39:case 40:case 91:return 2;case 41:case 93:return 1}return 0}function T(e){return q=B$1=1,D=A$1(G=e),E=0,[]}function U(e){return G="",e}function V$1(e){return g(Q(E-1,_$4(e===91?e+2:e===40?e+1:e)))}function X(e){while(F$1=N$1())if(F$1<33)L$1();else break;return R$1(e)>2||R$1(F$1)>3?"":" "}function Z(e,r){while(--r&&L$1())if(F$1<48||F$1>102||F$1>57&&F$1<65||F$1>70&&F$1<97)break;return Q(e,P$1()+(r<6&&N$1()==32&&L$1()==32))}function _$4(e){while(L$1())switch(F$1){case e:return E;case 34:case 39:return _$4(e===34||e===39?e:F$1);case 40:if(e===41)_$4(e);break;case 92:L$1();break}return E}function ee(e,r){while(L$1())if(e+F$1===47+10)break;else if(e+F$1===42+42&&N$1()===47)break;return "/*"+Q(r,E-1)+"*"+d(e===47?e:L$1())}function re(e){while(!R$1(N$1()))L$1();return Q(e,E)}function ae(e){return U(ce("",null,null,null,[""],e=T(e),0,[0],e))}function ce(e,r,a,c,n,t,s,u,i){var f=0;var o=0;var l=s;var v=0;var h=0;var p=0;var b=1;var w=1;var $=1;var k=0;var m="";var g=n;var x=t;var j=c;var z=m;while(w)switch(p=k,k=L$1()){case 34:case 39:case 91:case 40:z+=V$1(k);break;case 9:case 10:case 13:case 32:z+=X(p);break;case 92:z+=Z(P$1()-1,7);continue;case 47:switch(N$1()){case 42:case 47:O$1(te(ee(L$1(),P$1()),r,a),i);break;default:z+="/";}break;case 123*b:u[f++]=A$1(z)*$;case 125*b:case 59:case 0:switch(k){case 0:case 125:w=0;case 59+o:if(h>0&&A$1(z)-l)O$1(h>32?se(z+";",c,a,l-1):se(y$1(z," ","")+";",c,a,l-2),i);break;case 59:z+=";";default:O$1(j=ne(z,r,a,f,o,n,u,m,g=[],x=[],l),t);if(k===123)if(o===0)ce(z,r,j,j,g,t,l,u,x);else switch(v){case 100:case 109:case 115:ce(e,j,j,c&&O$1(ne(e,j,j,0,0,n,u,m,n,g=[],l),x),n,x,l,u,c?g:x);break;default:ce(z,j,j,j,[""],x,l,u,x);}}f=o=h=0,b=$=1,m=z="",l=s;break;case 58:l=1+A$1(z),h=p;default:if(b<1)if(k==123)--b;else if(k==125&&b++==0&&K()==125)continue;switch(z+=d(k),k*b){case 38:$=o>0?1:(z+="\f",-1);break;case 44:u[f++]=(A$1(z)-1)*$,$=1;break;case 64:if(N$1()===45)z+=V$1(L$1());v=N$1(),o=A$1(m=z+=re(P$1())),k++;break;case 45:if(p===45&&A$1(z)==2)b=0;}}return t}function ne(e,r,a,c,t,s,u,i,f,o,l){var v=t-1;var h=t===0?s:[""];var p=M$1(h);for(var b=0,w=0,$=0;b<c;++b)for(var d=0,m=C(e,v+1,v=k$1(w=u[b])),x=e;d<p;++d)if(x=g(w>0?h[d]+" "+m:y$1(m,/&\f/g,h[d])))f[$++]=x;return H$1(e,r,a,t===0?n:i,f,o,l)}function te(e,r,a){return H$1(e,r,a,c,d(J()),C(e,2,-2),0)}function se(e,r,a,c){return H$1(e,r,a,t,C(e,0,c),C(e,c+1,-1),c)}function ue$1(c,n){switch(m(c,n)){case 5103:return a+"print-"+c+c;case 5737:case 4201:case 3177:case 3433:case 1641:case 4457:case 2921:case 5572:case 6356:case 5844:case 3191:case 6645:case 3005:case 6391:case 5879:case 5623:case 6135:case 4599:case 4855:case 4215:case 6389:case 5109:case 5365:case 5621:case 3829:return a+c+c;case 5349:case 4246:case 4810:case 6968:case 2756:return a+c+r+c+e+c+c;case 6828:case 4268:return a+c+e+c+c;case 6165:return a+c+e+"flex-"+c+c;case 5187:return a+c+y$1(c,/(\w+).+(:[^]+)/,a+"box-$1$2"+e+"flex-$1$2")+c;case 5443:return a+c+e+"flex-item-"+y$1(c,/flex-|-self/,"")+c;case 4675:return a+c+e+"flex-line-pack"+y$1(c,/align-content|flex-|-self/,"")+c;case 5548:return a+c+e+y$1(c,"shrink","negative")+c;case 5292:return a+c+e+y$1(c,"basis","preferred-size")+c;case 6060:return a+"box-"+y$1(c,"-grow","")+a+c+e+y$1(c,"grow","positive")+c;case 4554:return a+y$1(c,/([^-])(transform)/g,"$1"+a+"$2")+c;case 6187:return y$1(y$1(y$1(c,/(zoom-|grab)/,a+"$1"),/(image-set)/,a+"$1"),c,"")+c;case 5495:case 3959:return y$1(c,/(image-set\([^]*)/,a+"$1"+"$`$1");case 4968:return y$1(y$1(c,/(.+:)(flex-)?(.*)/,a+"box-pack:$3"+e+"flex-pack:$3"),/s.+-b[^;]+/,"justify")+a+c+c;case 4095:case 3583:case 4068:case 2532:return y$1(c,/(.+)-inline(.+)/,a+"$1$2")+c;case 8116:case 7059:case 5753:case 5535:case 5445:case 5701:case 4933:case 4677:case 5533:case 5789:case 5021:case 4765:if(A$1(c)-1-n>6)switch(z$1(c,n+1)){case 109:if(z$1(c,n+4)!==45)break;case 102:return y$1(c,/(.+:)(.+)-([^]+)/,"$1"+a+"$2-$3"+"$1"+r+(z$1(c,n+3)==108?"$3":"$2-$3"))+c;case 115:return ~j$1(c,"stretch")?ue$1(y$1(c,"stretch","fill-available"),n)+c:c}break;case 4949:if(z$1(c,n+1)!==115)break;case 6444:switch(z$1(c,A$1(c)-3-(~j$1(c,"!important")&&10))){case 107:return y$1(c,":",":"+a)+c;case 101:return y$1(c,/(.+:)([^;!]+)(;|!.+)?/,"$1"+a+(z$1(c,14)===45?"inline-":"")+"box$3"+"$1"+a+"$2$3"+"$1"+e+"$2box$3")+c}break;case 5936:switch(z$1(c,n+11)){case 114:return a+c+e+y$1(c,/[svh]\w+-[tblr]{2}/,"tb")+c;case 108:return a+c+e+y$1(c,/[svh]\w+-[tblr]{2}/,"tb-rl")+c;case 45:return a+c+e+y$1(c,/[svh]\w+-[tblr]{2}/,"lr")+c}return a+c+e+c+c}return c}function ie(e,r){var a="";var c=M$1(e);for(var n=0;n<c;n++)a+=r(e[n],n,e,r)||"";return a}function fe$1(e,r,a,s){switch(e.type){case i:case t:return e.return=e.return||e.value;case c:return "";case n:e.value=e.props.join(",");}return A$1(a=ie(e.children,s))?e.return=e.value+"{"+a+"}":""}function oe(e){var r=M$1(e);return function(a,c,n,t){var s="";for(var u=0;u<r;u++)s+=e[u](a,c,n,t)||"";return s}}function le(e){return function(r){if(!r.root)if(r=r.return)e(r);}}function ve$1(c,s,u,i){if(!c.return)switch(c.type){case t:c.return=ue$1(c.value,c.length);break;case p:return ie([I(y$1(c.value,"@","@"+a),c,"")],i);case n:if(c.length)return S(c.props,(function(n){switch(x$1(n,/(::plac\w+|:read-\w+)/)){case":read-only":case":read-write":return ie([I(y$1(n,/:(read-\w+)/,":"+r+"$1"),c,"")],i);case"::placeholder":return ie([I(y$1(n,/:(plac\w+)/,":"+a+"input-$1"),c,""),I(y$1(n,/:(plac\w+)/,":"+r+"$1"),c,""),I(y$1(n,/:(plac\w+)/,e+"input-$1"),c,"")],i)}return ""}))}}
 
 var identifierWithPointTracking = function identifierWithPointTracking(begin, points, index) {
   var previous = 0;
@@ -25555,8 +25555,8 @@ var getDisplayFieldsFromConfig = function getDisplayFieldsFromConfig(config) {
   var fields = xml.getElementsByTagName('field');
   var headers = [];
 
-  for (var _i = 0; _i < fields.length; _i += 1) {
-    var field = fields[_i];
+  for (var i = 0; i < fields.length; i += 1) {
+    var field = fields[i];
     var fieldType = field.getElementsByTagName('type')[0].textContent;
     if (!ContentTypeHelper.isFieldTypeSupported(fieldType)) continue;
     var fieldId = field.getElementsByTagName('id')[0].textContent;
@@ -25601,8 +25601,8 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
     renderCell: PathCell
   }];
 
-  for (var _i2 = 0; _i2 < displayFields.length; _i2 += 1) {
-    var field = displayFields[_i2];
+  for (var i = 0; i < displayFields.length; i += 1) {
+    var field = displayFields[i];
     var fieldId = field.fieldId,
         fieldType = field.fieldType,
         title = field.title;
@@ -25647,8 +25647,8 @@ var rowFromApiContent = function rowFromApiContent(index, path, content, fieldId
     row.lockOwner = meta.lockOwner;
   }
 
-  for (var _i3 = 0; _i3 < fieldIds.length; _i3 += 1) {
-    var fieldId = fieldIds[_i3];
+  for (var i = 0; i < fieldIds.length; i += 1) {
+    var fieldId = fieldIds[i];
     var field = xml.getElementsByTagName(fieldId)[0];
     row[fieldId] = field ? field.textContent : '';
   }
@@ -25671,8 +25671,7 @@ var isCellContainText = function isCellContainText(text, params) {
 
 var writeContent = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(path, editedObj) {
-    var content, xml, keys, _i4, fieldName, value, node, newContent, res;
-
+    var content, xml, keys, i, fieldName, value, node, newContent, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -25694,8 +25693,8 @@ var writeContent = /*#__PURE__*/function () {
             xml = new DOMParser().parseFromString(content, 'text/xml');
             keys = Object.keys(editedObj);
 
-            for (_i4 = 0; _i4 < keys.length; _i4++) {
-              fieldName = keys[_i4];
+            for (i = 0; i < keys.length; i++) {
+              fieldName = keys[i];
               value = editedObj[fieldName];
               node = xml.getElementsByTagName(fieldName)[0];
 
@@ -25824,7 +25823,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       },
       saveAllChanges: function () {
         var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          var keys, totalCount, completedCount, failedRows, fieldIds, _loop, _i5;
+          var keys, totalCount, completedCount, failedRows, fieldIds, _loop, i;
 
           return regeneratorRuntime.wrap(function _callee2$(_context3) {
             while (1) {
@@ -25848,15 +25847,15 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   fieldIds = columns.map(function (cl) {
                     return cl.field;
                   }).filter(function (field) {
-                    return field !== 'id' && field !== 'path';
+                    return field !== 'id' && field !== 'path' && field !== 'action';
                   });
-                  _loop = /*#__PURE__*/regeneratorRuntime.mark(function _loop(_i5) {
+                  _loop = /*#__PURE__*/regeneratorRuntime.mark(function _loop(i) {
                     var path, newContent, row, rowIndex;
                     return regeneratorRuntime.wrap(function _loop$(_context2) {
                       while (1) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
-                            path = keys[_i5];
+                            path = keys[i];
                             _context2.next = 3;
                             return writeContent(path, editedRows[path], contentType);
 
@@ -25886,18 +25885,18 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                       }
                     }, _loop);
                   });
-                  _i5 = 0;
+                  i = 0;
 
                 case 11:
-                  if (!(_i5 < totalCount)) {
+                  if (!(i < totalCount)) {
                     _context3.next = 16;
                     break;
                   }
 
-                  return _context3.delegateYield(_loop(_i5), "t0", 13);
+                  return _context3.delegateYield(_loop(i), "t0", 13);
 
                 case 13:
-                  _i5++;
+                  i++;
                   _context3.next = 11;
                   break;
 
@@ -25935,8 +25934,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   var replaceTextInAllRows = function replaceTextInAllRows(text, replaceText, rows, columns) {
     var newRows = [];
 
-    for (var _i6 = 0; _i6 < rows.length; _i6 += 1) {
-      var newRow = replaceTextInRow(text, replaceText, rows[_i6], columns);
+    for (var i = 0; i < rows.length; i += 1) {
+      var newRow = replaceTextInRow(text, replaceText, rows[i], columns);
       newRows.push(newRow);
     }
 
@@ -25947,8 +25946,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     var newRow = {};
     var keys = Object.keys(row);
 
-    for (var _i7 = 0; _i7 < keys.length; _i7 += 1) {
-      var fieldName = keys[_i7];
+    for (var i = 0; i < keys.length; i += 1) {
+      var fieldName = keys[i];
       var fieldValue = row[fieldName];
       var newFieldValue = fieldValue;
 
@@ -26010,8 +26009,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   }, []);
   e__default.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var config, displayFields, items, paths, dtRows, dtSessionRows, _i8, path, content, meta, fieldIds, row;
-
+      var config, displayFields, items, paths, dtRows, dtSessionRows, i, path, content, meta, fieldIds, row;
       return regeneratorRuntime.wrap(function _callee3$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
@@ -26042,15 +26040,15 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               });
               dtRows = [];
               dtSessionRows = [];
-              _i8 = 0;
+              i = 0;
 
             case 15:
-              if (!(_i8 < paths.length)) {
+              if (!(i < paths.length)) {
                 _context4.next = 30;
                 break;
               }
 
-              path = paths[_i8];
+              path = paths[i];
               _context4.next = 19;
               return StudioAPI.getContent(path);
 
@@ -26064,12 +26062,12 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               fieldIds = displayFields.map(function (elm) {
                 return elm.fieldId;
               });
-              row = rowFromApiContent(_i8, path, content, fieldIds, meta);
+              row = rowFromApiContent(i, path, content, fieldIds, meta);
               dtRows.push(_objectSpread2({}, row));
               dtSessionRows.push(_objectSpread2({}, row));
 
             case 27:
-              _i8 += 1;
+              i += 1;
               _context4.next = 15;
               break;
 
@@ -26247,7 +26245,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 fieldIds = columns.map(function (cl) {
                   return cl.field;
                 }).filter(function (field) {
-                  return field !== 'id' && field !== 'path';
+                  return field !== 'id' && field !== 'path' && field !== 'action';
                 });
                 sessionRows[row.id] = rowFromApiContent(row.id, path, newContent, fieldIds);
                 rows[row.id] = sessionRows[row.id];
@@ -26319,9 +26317,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               fieldIds = columns.map(function (cl) {
                 return cl.field;
               }).filter(function (field) {
-                return field !== 'id' && field !== 'path';
+                return field !== 'id' && field !== 'path' && field != 'action';
               });
-              rowFromApi = rowFromApiContent(i, path, content, fieldIds, meta);
+              rowFromApi = rowFromApiContent(row.id, path, content, fieldIds, meta);
               sessionRows[row.id] = rowFromApi;
               rows[row.id] = rowFromApi;
               setSessionRows(sessionRows);
