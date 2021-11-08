@@ -25667,7 +25667,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       },
       saveAllChanges: function () {
         var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          var keys, totalCount, completedCount, _loop, i;
+          var keys, totalCount, completedCount, fieldIds, _loop, i;
 
           return regeneratorRuntime.wrap(function _callee2$(_context3) {
             while (1) {
@@ -25687,6 +25687,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 case 5:
                   setIsProcessing(true);
                   setBulkTotalCount(totalCount);
+                  fieldIds = columns.map(function (cl) {
+                    return cl.field;
+                  }).filter(function (field) {
+                    return field !== 'id' && field !== 'path';
+                  });
                   _loop = /*#__PURE__*/regeneratorRuntime.mark(function _loop(i) {
                     var path, newContent, row, rowIndex;
                     return regeneratorRuntime.wrap(function _loop$(_context2) {
@@ -25713,7 +25718,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                               if (row) {
                                 rowIndex = row.id;
                                 console.log(newContent);
-                                sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, columns);
+                                sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fieldIds);
                                 console.log(sessionRows[rowIndex]);
                               }
                             }
@@ -25727,20 +25732,20 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   });
                   i = 0;
 
-                case 9:
+                case 10:
                   if (!(i < totalCount)) {
-                    _context3.next = 14;
+                    _context3.next = 15;
                     break;
                   }
 
-                  return _context3.delegateYield(_loop(i), "t0", 11);
+                  return _context3.delegateYield(_loop(i), "t0", 12);
 
-                case 11:
+                case 12:
                   i++;
-                  _context3.next = 9;
+                  _context3.next = 10;
                   break;
 
-                case 14:
+                case 15:
 
                   if (completedCount === totalCount) {
                     setTimeout(function () {
@@ -25752,7 +25757,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                     setRefresh(1 - refresh);
                   }
 
-                case 16:
+                case 17:
                 case "end":
                   return _context3.stop();
               }
