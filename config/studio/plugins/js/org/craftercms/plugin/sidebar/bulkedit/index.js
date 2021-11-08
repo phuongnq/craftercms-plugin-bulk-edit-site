@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, IconButton: IconButton$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, Tooltip: Tooltip$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$2, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, IconButton: IconButton$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, Tooltip: Tooltip$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -2918,7 +2918,7 @@ var StyledTextField$1 = styled$3(TextField$1)(function (_ref) {
     marginBottom: theme.spacing(2)
   };
 });
-var StyledButton$1 = styled$3(Button$1)(function (_ref2) {
+var StyledButton$1 = styled$3(Button$2)(function (_ref2) {
   _ref2.theme;
   return {
     margin: '5px',
@@ -3104,7 +3104,7 @@ var StyledTextField = styled$3(TextField$1)(function (_ref) {
     marginBottom: theme.spacing(2)
   };
 });
-var StyledButton = styled$3(Button$1)(function (_ref2) {
+var StyledButton = styled$3(Button$2)(function (_ref2) {
   _ref2.theme;
   return {
     margin: '5px',
@@ -22167,7 +22167,7 @@ const ButtonEndIcon = styled$1('span', {
 }, ownerState.size === 'small' && {
   marginRight: -2
 }, commonIconStyles(ownerState)));
-const Button = /*#__PURE__*/e__default.forwardRef(function Button(inProps, ref) {
+const Button$1 = /*#__PURE__*/e__default.forwardRef(function Button(inProps, ref) {
   const props = useThemeProps({
     props: inProps,
     name: 'MuiButton'
@@ -22229,7 +22229,7 @@ const Button = /*#__PURE__*/e__default.forwardRef(function Button(inProps, ref) 
     children: [startIcon, children, endIcon]
   }));
 });
-var z = Button;
+var z = Button$1;
 
 function getFormControlLabelUtilityClasses(slot) {
   return generateUtilityClass('MuiFormControlLabel', slot);
@@ -24792,12 +24792,15 @@ function PathCell(props) {
   console.log(props);
   return /*#__PURE__*/e__default.createElement(e__default.Fragment, null, /*#__PURE__*/e__default.createElement("div", {
     style: {
-      cursor: 'context-menu'
+      cursor: 'auto'
     }
   }, /*#__PURE__*/e__default.createElement(Typography$1, {
     variant: "body2",
     style: {
-      padding: 16
+      padding: 16,
+      display: 'flex',
+      alignItems: 'center',
+      flexWrap: 'wrap'
     }
   }, row.lockOwner && /*#__PURE__*/e__default.createElement(LockOutlinedIcon, {
     style: {
@@ -25316,6 +25319,28 @@ function SaveProgress(_ref) {
   }));
 }
 
+var MoreVert = createCommonjsModule(function (module, exports) {
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createSvgIcon = interopRequireDefault(require$$0);
+
+
+
+var _default = (0, _createSvgIcon.default)( /*#__PURE__*/(0, jsxRuntime.jsx)("path", {
+  d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+}), 'MoreVert');
+
+exports.default = _default;
+});
+
+var MoreVertIcon = /*@__PURE__*/getDefaultExportFromCjs(MoreVert);
+
 /*
  * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
  *
@@ -25455,6 +25480,24 @@ var getDisplayFieldsFromConfig = function getDisplayFieldsFromConfig(config) {
 var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displayFields) {
   // default to have `id` and `path`
   var columns = [{
+    field: 'action',
+    headerName: 'Action',
+    description: 'Action',
+    sortable: false,
+    width: 45,
+    editable: false,
+    renderCell: function renderCell(params) {
+      /*#__PURE__*/
+      e__default.createElement(Button, {
+        variant: "contained",
+        color: "primary",
+        size: "small",
+        style: {
+          marginLeft: 16
+        }
+      }, /*#__PURE__*/e__default.createElement(MoreVertIcon, null));
+    }
+  }, {
     field: 'id',
     headerName: 'ID',
     description: 'ID',
@@ -25681,6 +25724,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       _React$useState30 = _slicedToArray(_React$useState29, 2),
       bulkTotalCount = _React$useState30[0],
       setBulkTotalCount = _React$useState30[1];
+
+  var _React$useState31 = e__default.useState(null),
+      _React$useState32 = _slicedToArray(_React$useState31, 2),
+      rowActionMenuAnchor = _React$useState32[0],
+      setRowActionMenuAnchor = _React$useState32[1];
 
   e__default.useImperativeHandle(ref, function () {
     return {
@@ -25973,6 +26021,15 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
   var handleOnCellClick = function handleOnCellClick(model, event, detail) {
     setSelectedRow(model);
+    var field = model.field;
+
+    if (field === 'action') {
+      event.preventDefault();
+      event.stopPropagation();
+      setRowActionMenuAnchor(event.currentTarget);
+      return;
+    }
+
     var fieldType = model.colDef.fieldType;
 
     if (ContentTypeHelper.isMediaType(fieldType) || ContentTypeHelper.isRteType(fieldType)) {
@@ -26022,6 +26079,18 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
   };
 
+  var handleRowMenuActionUnlock = function handleRowMenuActionUnlock() {
+    console.log('unlock');
+  };
+
+  var handleRowMenuActionSave = function handleRowMenuActionSave() {
+    console.log('save');
+  };
+
+  var handleRowMenuActionClear = function handleRowMenuActionClear() {
+    console.log('clear');
+  };
+
   return /*#__PURE__*/e__default.createElement("div", {
     className: classes.root
   }, /*#__PURE__*/e__default.createElement(ds, {
@@ -26048,6 +26117,20 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     },
     onEditRowsModelChange: handleEditRowsModelChange,
     onCellEditCommit: handleOnCellEditCommit
+  }), /*#__PURE__*/e__default.createElement(RowActionMenu, {
+    anchorEl: rowActionMenuAnchor,
+    handleClose: function handleClose() {
+      return setRowActionMenuAnchor(null);
+    },
+    handleUnlockAction: function handleUnlockAction() {
+      return handleRowMenuActionUnlock;
+    },
+    handleSaveAction: function handleSaveAction() {
+      return handleRowMenuActionSave;
+    },
+    handleClearAction: function handleClearAction() {
+      return handleRowMenuActionClear;
+    }
   }), /*#__PURE__*/e__default.createElement(CellActionMenu, {
     anchorEl: menuActionAnchor,
     handleClose: function handleClose() {
