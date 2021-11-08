@@ -25688,7 +25688,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   setIsProcessing(true);
                   setBulkTotalCount(totalCount);
                   _loop = /*#__PURE__*/regeneratorRuntime.mark(function _loop(i) {
-                    var path, newContent, row;
+                    var path, newContent, row, rowIndex;
                     return regeneratorRuntime.wrap(function _loop$(_context2) {
                       while (1) {
                         switch (_context2.prev = _context2.next) {
