@@ -26291,37 +26291,36 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 6:
               content = _context7.sent;
-              console.log(content);
 
               if (content) {
-                _context7.next = 10;
+                _context7.next = 9;
                 break;
               }
 
               return _context7.abrupt("return");
 
-            case 10:
-              _context7.next = 12;
+            case 9:
+              _context7.next = 11;
               return StudioAPI.getSandboxItemByPath(path);
 
-            case 12:
+            case 11:
               meta = _context7.sent;
-              console.log(meta);
 
               if (meta) {
-                _context7.next = 16;
+                _context7.next = 14;
                 break;
               }
 
               return _context7.abrupt("return");
 
-            case 16:
+            case 14:
               fieldIds = columns.map(function (cl) {
                 return cl.field;
               }).filter(function (field) {
                 return field !== 'id' && field !== 'path' && field != 'action';
               });
               rowFromApi = rowFromApiContent(row.id, path, content, fieldIds, meta);
+              console.log(rowFromApi);
               sessionRows[row.id] = rowFromApi;
               rows[row.id] = rowFromApi;
               setSessionRows(sessionRows);
@@ -26330,7 +26329,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               setEditedRows(editedRows);
               setRowActionMenuAnchor(null);
 
-            case 25:
+            case 24:
             case "end":
               return _context7.stop();
           }
