@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, Popper: Popper$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, IconButton: IconButton$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, Popper: Popper$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, IconButton: IconButton$1, Tooltip: Tooltip$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -25987,6 +25987,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 });
 
 var DRAWER_WIDTH = 240;
+var TEXT_FIND_REPLACE = 'Find and Replace';
+var TEXT_FILTER = 'Apply Filters';
+var TEXT_SAVE = 'Save Change';
+var TEXT_CANCEL = 'Cancel All Change';
 var Main = styled$3('main', {
   shouldForwardProp: function shouldForwardProp(prop) {
     return prop !== 'open';
@@ -26081,39 +26085,51 @@ function Editor() {
       position: 'absolute',
       right: '0px'
     }
+  }, /*#__PURE__*/e__default.createElement(Tooltip$1, {
+    title: TEXT_FIND_REPLACE
   }, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
-    "aria-label": "find and replace",
-    onClick: toggleDrawer,
+    "aria-label": TEXT_FIND_REPLACE,
+    onClick: function onClick() {
+      return setFindReplaceDialogOpen(true);
+    },
     edge: "start",
     sx: {
       mr: 2
     }
-  }, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null)), /*#__PURE__*/e__default.createElement(IconButton$1, {
+  }, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null))), /*#__PURE__*/e__default.createElement(Tooltip$1, {
+    title: TEXT_FILTER
+  }, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
-    "aria-label": "filters",
-    onClick: toggleDrawer,
+    "aria-label": TEXT_FILTER,
+    onClick: function onClick() {
+      return setFilterDialogOpen(true);
+    },
     edge: "start",
     sx: {
       mr: 2
     }
-  }, /*#__PURE__*/e__default.createElement(FilterListIcon, null)), /*#__PURE__*/e__default.createElement(IconButton$1, {
+  }, /*#__PURE__*/e__default.createElement(FilterListIcon, null))), /*#__PURE__*/e__default.createElement(Tooltip$1, {
+    title: TEXT_SAVE
+  }, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
-    "aria-label": "Save all change",
-    onClick: toggleDrawer,
+    "aria-label": TEXT_SAVE,
+    onClick: handleSaveChangeClick,
     edge: "start",
     sx: {
       mr: 2
     }
-  }, /*#__PURE__*/e__default.createElement(SaveIcon, null)), /*#__PURE__*/e__default.createElement(IconButton$1, {
+  }, /*#__PURE__*/e__default.createElement(SaveIcon, null))), /*#__PURE__*/e__default.createElement(Tooltip$1, {
+    title: TEXT_CANCEL
+  }, /*#__PURE__*/e__default.createElement(IconButton$1, {
     color: "inherit",
-    "aria-label": "Cancel all change",
-    onClick: toggleDrawer,
+    "aria-label": TEXT_CANCEL,
+    onClick: handleCancelAllChangeClick,
     edge: "start",
     sx: {
       mr: 2
     }
-  }, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)))));
+  }, /*#__PURE__*/e__default.createElement(ClearAllIcon, null))))));
   var drawer = /*#__PURE__*/e__default.createElement(Drawer, {
     variant: "persistent",
     sx: {
@@ -26155,32 +26171,32 @@ function Editor() {
     }
   }, /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, null, /*#__PURE__*/e__default.createElement(ContentTypeSelect, null))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
-    key: "Find and Replace",
+    key: TEXT_FIND_REPLACE,
     onClick: function onClick() {
       return setFindReplaceDialogOpen(true);
     }
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$2, null, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$2, {
-    primary: "Find and Replace"
+    primary: TEXT_FIND_REPLACE
   })), /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
-    key: "Apply Filters",
+    key: TEXT_FILTER,
     onClick: function onClick() {
       return setFilterDialogOpen(true);
     }
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$2, null, /*#__PURE__*/e__default.createElement(FilterListIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$2, {
-    primary: "Apply Filters"
+    primary: TEXT_FILTER
   }))), /*#__PURE__*/e__default.createElement(Divider, null), /*#__PURE__*/e__default.createElement(List$2, null, /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
-    key: "Save Change",
+    key: TEXT_SAVE,
     onClick: handleSaveChangeClick
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$2, null, /*#__PURE__*/e__default.createElement(SaveIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$2, {
-    primary: "Save Change"
+    primary: TEXT_SAVE
   })), /*#__PURE__*/e__default.createElement(ListItem, {
     button: true,
-    key: "Cancel All Change",
+    key: TEXT_CANCEL,
     onClick: handleCancelAllChangeClick
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$2, null, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$2, {
-    primary: "Cancel All Change"
+    primary: TEXT_CANCEL
   }))), /*#__PURE__*/e__default.createElement(Divider, null));
   return /*#__PURE__*/e__default.createElement(Box$2, null, /*#__PURE__*/e__default.createElement(CssBaseline, null), appbar, /*#__PURE__*/e__default.createElement("section", {
     id: "drawer-container",
