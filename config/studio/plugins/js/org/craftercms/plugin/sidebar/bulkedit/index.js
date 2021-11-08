@@ -25705,7 +25705,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                           case 3:
                             newContent = _context2.sent;
 
-                            if (newContent) {
+                            if (!newContent) {
                               console.log("Error while saving path ".concat(path));
                               failedRows.push(editedRows[path]);
                             } else {
