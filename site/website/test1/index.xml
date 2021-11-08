@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page>
+	<savedAsDraft>true</savedAsDraft>
 	<content-type>/page/entry</content-type>
 	<display-template>/templates/web/entry.ftl</display-template>
 	<no-template-required/>
@@ -17,12 +18,12 @@
 &lt;p&gt;Add new line&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h1&gt;This is a test&lt;/h1&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;This is an other test&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;</body_html>
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</body_html>
 	<createdDate>2021-10-20T02:42:08.575Z</createdDate>
 	<createdDate_dt>2021-10-20T02:42:08.575Z</createdDate_dt>
-	<lastModifiedDate>2021-11-05T09:15:08.999Z</lastModifiedDate>
-	<lastModifiedDate_dt>2021-11-05T09:15:08.999Z</lastModifiedDate_dt>
+	<lastModifiedDate>2021-11-08T03:12:24.186Z</lastModifiedDate>
+	<lastModifiedDate_dt>2021-11-08T03:12:24.186Z</lastModifiedDate_dt>
 </page>
