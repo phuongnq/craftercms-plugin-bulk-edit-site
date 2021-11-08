@@ -26174,19 +26174,20 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
             case 0:
               console.log('unlock');
               row = selectedRow.row;
+              console.log(selectedRow);
 
               if (!(!row || row.path)) {
-                _context5.next = 4;
+                _context5.next = 5;
                 break;
               }
 
               return _context5.abrupt("return");
 
-            case 4:
-              _context5.next = 6;
+            case 5:
+              _context5.next = 7;
               return StudioAPI.unlockContent(row.path);
 
-            case 6:
+            case 7:
               res = _context5.sent;
 
               if (res) {
@@ -26196,7 +26197,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
               setRowActionMenuAnchor(null);
 
-            case 9:
+            case 10:
             case "end":
               return _context5.stop();
           }
