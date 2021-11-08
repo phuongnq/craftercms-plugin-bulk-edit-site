@@ -25520,7 +25520,7 @@ var isCellContainText = function isCellContainText(text, params) {
 
 var writeContent = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(path, editedObj) {
-    var content, xml, keys, i, fieldName, value, node;
+    var content, xml, keys, i, fieldName, value, node, newContent, res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -25552,13 +25552,24 @@ var writeContent = /*#__PURE__*/function () {
               }
             }
 
-            _context.next = 10;
-            return StudioAPI.writeContent(path, new XMLSerializer().serializeToString(xml));
-
-          case 10:
-            return _context.abrupt("return", _context.sent);
+            newContent = new XMLSerializer().serializeToString(xml);
+            _context.next = 11;
+            return StudioAPI.writeContent(path, newContent);
 
           case 11:
+            res = _context.sent;
+
+            if (!res) {
+              _context.next = 14;
+              break;
+            }
+
+            return _context.abrupt("return", newContent);
+
+          case 14:
+            return _context.abrupt("return", null);
+
+          case 15:
           case "end":
             return _context.stop();
         }
@@ -25656,66 +25667,91 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       },
       saveAllChanges: function () {
         var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          var keys, totalCount, completedCount, i, path, res;
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          var keys, totalCount, completedCount, _loop, i;
+
+          return regeneratorRuntime.wrap(function _callee2$(_context3) {
             while (1) {
-              switch (_context2.prev = _context2.next) {
+              switch (_context3.prev = _context3.next) {
                 case 0:
                   keys = Object.keys(editedRows);
                   totalCount = keys.length;
                   completedCount = 0;
 
                   if (!(totalCount === 0)) {
-                    _context2.next = 5;
+                    _context3.next = 5;
                     break;
                   }
 
-                  return _context2.abrupt("return");
+                  return _context3.abrupt("return");
 
                 case 5:
                   setIsProcessing(true);
                   setBulkTotalCount(totalCount);
+                  _loop = /*#__PURE__*/regeneratorRuntime.mark(function _loop(i) {
+                    var path, newContent, row;
+                    return regeneratorRuntime.wrap(function _loop$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            path = keys[i];
+                            _context2.next = 3;
+                            return writeContent(path, editedRows[path], contentType);
+
+                          case 3:
+                            newContent = _context2.sent;
+
+                            if (!newContent) {
+                              console.log("Error while saving path ".concat(path));
+                            } else {
+                              completedCount += 1;
+                              setBulkCompletedCount(completedCount);
+                              row = sessionRows.find(function (r) {
+                                return r.path === path;
+                              });
+
+                              if (row) {
+                                rowIndex = row.id;
+                                sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, columns);
+                              }
+                            }
+
+                          case 5:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _loop);
+                  });
                   i = 0;
 
-                case 8:
+                case 9:
                   if (!(i < totalCount)) {
-                    _context2.next = 17;
+                    _context3.next = 14;
                     break;
                   }
 
-                  path = keys[i];
-                  _context2.next = 12;
-                  return writeContent(path, editedRows[path], contentType);
+                  return _context3.delegateYield(_loop(i), "t0", 11);
 
-                case 12:
-                  res = _context2.sent;
-
-                  if (!res) {
-                    console.log("Error while saving path ".concat(path));
-                  } else {
-                    completedCount += 1;
-                    setBulkCompletedCount(completedCount);
-                  }
-
-                case 14:
+                case 11:
                   i++;
-                  _context2.next = 8;
+                  _context3.next = 9;
                   break;
 
-                case 17:
+                case 14:
 
                   if (completedCount === totalCount) {
                     setTimeout(function () {
                       setIsProcessing(false);
                     }, 4000);
+                    setSessionRows(sessionRows);
                     setRows(sessionRows);
                     setEditedRows({});
                     setRefresh(1 - refresh);
                   }
 
-                case 19:
+                case 16:
                 case "end":
-                  return _context2.stop();
+                  return _context3.stop();
               }
             }
           }, _callee2);
@@ -25809,31 +25845,31 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   e__default.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
       var config, headerList, items, paths, dtRows, dtSessionRows, i, path, content, row;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      return regeneratorRuntime.wrap(function _callee3$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               if (contentType) {
-                _context3.next = 2;
+                _context4.next = 2;
                 break;
               }
 
-              return _context3.abrupt("return");
+              return _context4.abrupt("return");
 
             case 2:
               setRefresh(1 - refresh);
-              _context3.next = 5;
+              _context4.next = 5;
               return StudioAPI.getContentTypeConfig(contentType);
 
             case 5:
-              config = _context3.sent;
+              config = _context4.sent;
               headerList = getDataSheetHeadersFromConfig(config);
               setColumns(getColumnsFromHeader(headerList));
-              _context3.next = 10;
+              _context4.next = 10;
               return StudioAPI.searchByContentType(contentType, keyword, filterEditDate);
 
             case 10:
-              items = _context3.sent;
+              items = _context4.sent;
               paths = items.map(function (item) {
                 return item.path;
               });
@@ -25843,23 +25879,23 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 15:
               if (!(i < paths.length)) {
-                _context3.next = 26;
+                _context4.next = 26;
                 break;
               }
 
               path = paths[i];
-              _context3.next = 19;
+              _context4.next = 19;
               return StudioAPI.getContent(path);
 
             case 19:
-              content = _context3.sent;
+              content = _context4.sent;
               row = rowFromApiContent(i, path, content, headerList);
               dtRows.push(_objectSpread2({}, row));
               dtSessionRows.push(_objectSpread2({}, row));
 
             case 23:
               i += 1;
-              _context3.next = 15;
+              _context4.next = 15;
               break;
 
             case 26:
@@ -25868,7 +25904,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 28:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
       }, _callee3);
