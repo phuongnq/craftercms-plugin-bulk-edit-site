@@ -25667,7 +25667,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       },
       saveAllChanges: function () {
         var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          var keys, totalCount, completedCount, fieldIds, _loop, i;
+          var keys, totalCount, completedCount, fields, _loop, i;
 
           return regeneratorRuntime.wrap(function _callee2$(_context3) {
             while (1) {
@@ -25687,10 +25687,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 case 5:
                   setIsProcessing(true);
                   setBulkTotalCount(totalCount);
-                  fieldIds = columns.map(function (cl) {
-                    return cl.field;
+                  fields = columns.map(function (cl) {
+                    cl.field;
                   }).filter(function (field) {
-                    return field !== 'id' && field !== 'path';
+                    return field.fieldId !== 'id' && field.fieldId !== 'path';
                   });
                   _loop = /*#__PURE__*/regeneratorRuntime.mark(function _loop(i) {
                     var path, newContent, row, rowIndex;
@@ -25718,7 +25718,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                               if (row) {
                                 rowIndex = row.id;
                                 console.log(newContent);
-                                sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fieldIds);
+                                sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fields);
                                 console.log(sessionRows[rowIndex]);
                               }
                             }
