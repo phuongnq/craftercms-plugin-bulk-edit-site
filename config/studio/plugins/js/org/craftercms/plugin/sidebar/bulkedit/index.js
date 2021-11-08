@@ -26356,6 +26356,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     onCellClick: handleOnCellClick,
     getCellClassName: function getCellClassName(params) {
       if (!params.isEditable) return '';
+      console.log(params);
 
       if (isCellEdited(params, rows)) {
         return 'edited';
