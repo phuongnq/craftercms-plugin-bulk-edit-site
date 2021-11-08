@@ -25704,7 +25704,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   break;
 
                 case 18:
-                  console.log(completedCount);
+                  console.log(completedCount === bulkTotalCount);
 
                   if (completedCount === bulkTotalCount) {
                     setTimeout(function () {
