@@ -26253,7 +26253,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 setRows(rows);
               }
 
-            case 10:
+              setRowActionMenuAnchor(null);
+
+            case 11:
             case "end":
               return _context6.stop();
           }
