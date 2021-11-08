@@ -26076,7 +26076,11 @@ function Editor() {
     sx: {
       mr: 2
     }
-  }, /*#__PURE__*/e__default.createElement(MenuIcon, null))));
+  }, /*#__PURE__*/e__default.createElement(MenuIcon, null))), !drawerOpen && /*#__PURE__*/e__default.createElement(Toolbar$2, {
+    style: {
+      "float": 'right'
+    }
+  }, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null), /*#__PURE__*/e__default.createElement(FilterListIcon, null), /*#__PURE__*/e__default.createElement(SaveIcon, null), /*#__PURE__*/e__default.createElement(ClearAllIcon, null)));
   var drawer = /*#__PURE__*/e__default.createElement(Drawer, {
     variant: "persistent",
     sx: {
