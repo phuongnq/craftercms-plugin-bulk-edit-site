@@ -25412,7 +25412,7 @@ var useStyles = makeStyles({
  * @returns
  */
 
-var getDataSheetHeadersFromConfig = function getDataSheetHeadersFromConfig(config) {
+var getDisplayFieldsFromConfig = function getDisplayFieldsFromConfig(config) {
   var xml = new DOMParser().parseFromString(config, 'text/xml');
   var fields = xml.getElementsByTagName('field');
   var headers = [];
@@ -25433,7 +25433,7 @@ var getDataSheetHeadersFromConfig = function getDataSheetHeadersFromConfig(confi
   return headers;
 };
 
-var getColumnsFromHeader = function getColumnsFromHeader(fields) {
+var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displayFields) {
   // default to have `id` and `path`
   var columns = [{
     field: 'id',
@@ -25453,8 +25453,8 @@ var getColumnsFromHeader = function getColumnsFromHeader(fields) {
     renderCell: renderCellExpand
   }];
 
-  for (var i = 0; i < fields.length; i += 1) {
-    var field = fields[i];
+  for (var i = 0; i < displayFields.length; i += 1) {
+    var field = displayFields[i];
     var fieldId = field.fieldId,
         fieldType = field.fieldType,
         title = field.title;
@@ -25488,16 +25488,15 @@ var getColumnProperties = function getColumnProperties(fieldName, columns) {
   });
 };
 
-var rowFromApiContent = function rowFromApiContent(index, path, content, headers) {
+var rowFromApiContent = function rowFromApiContent(index, path, content, fieldIds) {
   var xml = new DOMParser().parseFromString(content, 'text/xml');
   var row = {
     id: index,
     path: path
   };
 
-  for (var i = 0; i < headers.length; i += 1) {
-    var column = headers[i];
-    var fieldId = column.fieldId;
+  for (var i = 0; i < fieldIds.length; i += 1) {
+    var fieldId = fieldIds[i];
     var field = xml.getElementsByTagName(fieldId)[0];
     row[fieldId] = field ? field.textContent : '';
   }
@@ -25667,7 +25666,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       },
       saveAllChanges: function () {
         var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          var keys, totalCount, completedCount, failedRows, fields, _loop, i;
+          var keys, totalCount, completedCount, failedRows, fieldIds, _loop, i;
 
           return regeneratorRuntime.wrap(function _callee2$(_context3) {
             while (1) {
@@ -25688,12 +25687,10 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 case 6:
                   setIsProcessing(true);
                   setBulkTotalCount(totalCount);
-                  fields = columns.map(function (cl) {
-                    return {
-                      fieldId: cl.field
-                    };
+                  fieldIds = columns.map(function (cl) {
+                    return cl.field;
                   }).filter(function (field) {
-                    return field.fieldId !== 'id' && field.fieldId !== 'path';
+                    return field !== 'id' && field !== 'path';
                   });
                   _loop = /*#__PURE__*/regeneratorRuntime.mark(function _loop(i) {
                     var path, newContent, row, rowIndex;
@@ -25720,7 +25717,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
                               if (row) {
                                 rowIndex = row.id;
-                                sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fields);
+                                sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, fieldIds);
                               }
                             }
 
@@ -25855,7 +25852,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
   }, []);
   e__default.useEffect(function () {
     _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-      var config, headerList, items, paths, dtRows, dtSessionRows, i, path, content, row;
+      var config, displayFields, items, paths, dtRows, dtSessionRows, i, path, content, fieldIds, row;
       return regeneratorRuntime.wrap(function _callee3$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
@@ -25874,8 +25871,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 5:
               config = _context4.sent;
-              headerList = getDataSheetHeadersFromConfig(config);
-              setColumns(getColumnsFromHeader(headerList));
+              displayFields = getDisplayFieldsFromConfig(config);
+              setColumns(buildColumnsFromDisplayFields(displayFields));
               _context4.next = 10;
               return StudioAPI.searchByContentType(contentType, keyword, filterEditDate);
 
@@ -25890,7 +25887,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 15:
               if (!(i < paths.length)) {
-                _context4.next = 26;
+                _context4.next = 27;
                 break;
               }
 
@@ -25900,20 +25897,23 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 19:
               content = _context4.sent;
-              row = rowFromApiContent(i, path, content, headerList);
+              fieldIds = displayFields.map(function (elm) {
+                return elm.fieldId;
+              });
+              row = rowFromApiContent(i, path, content, fieldIds);
               dtRows.push(_objectSpread2({}, row));
               dtSessionRows.push(_objectSpread2({}, row));
 
-            case 23:
+            case 24:
               i += 1;
               _context4.next = 15;
               break;
 
-            case 26:
+            case 27:
               setRows(dtRows);
               setSessionRows(dtSessionRows);
 
-            case 28:
+            case 29:
             case "end":
               return _context4.stop();
           }
