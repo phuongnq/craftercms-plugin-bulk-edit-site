@@ -25406,7 +25406,6 @@ function RowActionMenu(_ref) {
       handleUnlockAction = _ref.handleUnlockAction,
       handleSaveAction = _ref.handleSaveAction,
       handleClearAction = _ref.handleClearAction;
-  console.log(selectedCell);
   var row = selectedCell.row;
   return /*#__PURE__*/e__default.createElement(Menu$1, {
     id: "row-action-menu",
@@ -26166,9 +26165,47 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
   };
 
-  var handleRowMenuActionUnlock = function handleRowMenuActionUnlock() {
-    console.log('unlock');
-  };
+  var handleRowMenuActionUnlock = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+      var row, res;
+      return regeneratorRuntime.wrap(function _callee4$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              console.log('unlock');
+              row = selectedRow.row;
+
+              if (!(!row || row.path)) {
+                _context5.next = 4;
+                break;
+              }
+
+              return _context5.abrupt("return");
+
+            case 4:
+              _context5.next = 6;
+              return StudioAPI.unlockContent(row.path);
+
+            case 6:
+              res = _context5.sent;
+
+              if (res) {
+                sessionRows[row.id].lockOwner = null;
+                setSessionRows(sessionRows);
+              }
+
+            case 8:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function handleRowMenuActionUnlock() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
 
   var handleRowMenuActionSave = function handleRowMenuActionSave() {
     console.log('save');
