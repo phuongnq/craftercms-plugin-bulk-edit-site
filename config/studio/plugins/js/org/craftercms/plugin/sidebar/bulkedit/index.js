@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, Popper: Popper$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Snackbar, Alert, Toolbar: Toolbar$2, IconButton: IconButton$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, Popper: Popper$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, IconButton: IconButton$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -25654,50 +25654,70 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       cancelAllChanges: function cancelAllChanges() {
         setRefresh(1 - refresh);
       },
-      saveAllChanges: function saveAllChanges() {
-        var keys = Object.keys(editedRows);
+      saveAllChanges: function () {
+        var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+          var keys, i, path, res;
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  keys = Object.keys(editedRows);
 
-        if (keys.length === 0) {
-          return;
+                  if (!(keys.length === 0)) {
+                    _context2.next = 3;
+                    break;
+                  }
+
+                  return _context2.abrupt("return");
+
+                case 3:
+                  setIsProcessing(true);
+                  setBulkTotalCount(keys.length);
+                  i = 0;
+
+                case 6:
+                  if (!(i < keys.length)) {
+                    _context2.next = 15;
+                    break;
+                  }
+
+                  path = keys[i];
+                  _context2.next = 10;
+                  return writeContent(path, editedRows[path], contentType);
+
+                case 10:
+                  res = _context2.sent;
+
+                  if (!res) {
+                    console.log("Error while saving path ".concat(path));
+                  } else {
+                    setBulkCompletedCount(bulkCompletedCount + 1);
+                  }
+
+                case 12:
+                  i++;
+                  _context2.next = 6;
+                  break;
+
+                case 15:
+                  setTimeout(function () {
+                    setIsProcessing(false);
+                  }, 4000);
+
+                case 17:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }));
+
+        function saveAllChanges() {
+          return _saveAllChanges.apply(this, arguments);
         }
 
-        setIsProcessing(true);
-        setBulkTotalCount(keys.length);
-        keys.forEach( /*#__PURE__*/function () {
-          var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path) {
-            var res;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    _context2.next = 2;
-                    return writeContent(path, editedRows[path], contentType);
-
-                  case 2:
-                    res = _context2.sent;
-
-                    if (!res) {
-                      console.log("Error while saving path ".concat(path));
-                    } else {
-                      setBulkCompletedCount(bulkCompletedCount + 1);
-                    }
-
-                  case 4:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2);
-          }));
-
-          return function (_x3) {
-            return _ref2.apply(this, arguments);
-          };
-        }());
-        setTimeout(function () {
-          setIsProcessing(false);
-        }, 4000);
-      }
+        return saveAllChanges;
+      }()
     };
   });
 
@@ -25997,11 +26017,6 @@ function Editor() {
       filterDialogOpen = _React$useState6[0],
       setFilterDialogOpen = _React$useState6[1];
 
-  var _React$useState7 = e__default.useState(false),
-      _React$useState8 = _slicedToArray(_React$useState7, 2),
-      openAlert = _React$useState8[0],
-      setOpenAlert = _React$useState8[1];
-
   var rootRef = e__default.useRef(null);
   var dataSheetRef = e__default.useRef(null);
 
@@ -26013,10 +26028,6 @@ function Editor() {
     setFilterDialogOpen(false);
   };
 
-  var handleCloseAlert = function handleCloseAlert() {
-    setOpenAlert(false);
-  };
-
   var handleSaveChangeClick = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -26024,9 +26035,8 @@ function Editor() {
           switch (_context.prev = _context.next) {
             case 0:
               dataSheetRef.current.saveAllChanges();
-              setOpenAlert(true);
 
-            case 2:
+            case 1:
             case "end":
               return _context.stop();
           }
@@ -26149,17 +26159,7 @@ function Editor() {
   }), /*#__PURE__*/e__default.createElement(FilterDialog, {
     isOpen: filterDialogOpen,
     handleClose: handleFilterDialogClose
-  }), /*#__PURE__*/e__default.createElement(Snackbar, {
-    open: openAlert,
-    autoHideDuration: 6000,
-    onClose: handleCloseAlert
-  }, /*#__PURE__*/e__default.createElement(Alert, {
-    onClose: handleCloseAlert,
-    severity: "success",
-    sx: {
-      width: '100%'
-    }
-  }, "Change has been saved.")));
+  }));
 }
 
 var _excluded = ["children", "onClose"];
