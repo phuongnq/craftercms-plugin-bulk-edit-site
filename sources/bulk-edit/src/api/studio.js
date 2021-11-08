@@ -23,6 +23,8 @@ const API_SEARCH = '/studio/api/2/search/search.json';
 const API_GET_CONTENT = '/studio/api/1/services/api/1/content/get-content.json';
 const API_WRITE_CONTENT = '/studio/api/1/services/api/1/content/write-content.json';
 const API_ME = '/studio/api/2/users/me.json';
+const API_UNLOCK_CONTENT = '/studio/api/1/services/api/1/content/unlock-content.json';
+const API_SANDBOX_ITEM_BY_PATH = '/studio/api/2/content/sandbox_items_by_path';
 
 const StudioAPI = {
   origin() {
@@ -128,6 +130,26 @@ const StudioAPI = {
 
     return null;
   },
+  async unlockContent(path) {
+    const url = `${StudioAPI.origin()}${API_UNLOCK_CONTENT}?site=${StudioAPI.siteId()}&path=${path}`;
+    const res = await HttpHelper.get(url);
+    return res.status === 200
+  },
+  async getSandboxItemByPath(path) {
+    const url = `${StudioAPI.origin()}${API_SANDBOX_ITEM_BY_PATH}`;
+    const body = {
+      siteId: StudioAPI.siteId(),
+      paths: [path],
+      preferContent: true,
+    }
+
+    const res = await HttpHelper.post(url, body);
+    if (res.status === 200) {
+      return res.response.items[0]
+    }
+
+    return null;
+  }
 };
 
 export default StudioAPI;

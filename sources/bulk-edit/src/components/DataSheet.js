@@ -16,12 +16,19 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
+import {
+  IconButton
+} from '@mui/material';
+
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import CellExpand from './CellExpand';
+import PathCell from './PathCell';
 import MediaCell from './MediaCell';
 import RTECell from './RTECell';
 import CellActionMenu from './CellActionMenu';
 import SaveProgress from './SaveProgress';
+import RowActionMenu from './RowActionMenu';
 
 import {
   contentTypeSub,
@@ -77,6 +84,18 @@ const getDisplayFieldsFromConfig = (config) => {
 const buildColumnsFromDisplayFields = (displayFields) => {
   // default to have `id` and `path`
   const columns = [{
+    field: 'action',
+    headerName: 'Action',
+    description: 'Action',
+    sortable: false,
+    width: 45,
+    editable: false,
+    renderCell: ((params) => (
+      <IconButton>
+        <MoreVertIcon />
+      </IconButton>
+    ))
+  }, {
     field: 'id',
     headerName: 'ID',
     description: 'ID',
@@ -91,7 +110,7 @@ const buildColumnsFromDisplayFields = (displayFields) => {
     sortable: false,
     width: DEFAULT_COLUMN_WIDTH,
     editable: false,
-    renderCell: CellExpand,
+    renderCell: PathCell,
   }];
 
   for (let i = 0; i < displayFields.length; i +=1 ) {
@@ -125,9 +144,12 @@ const getColumnProperties = (fieldName, columns) => {
   return columns.find((cl) => cl.field === fieldName);
 };
 
-const rowFromApiContent = (index, path, content, fieldIds) => {
+const rowFromApiContent = (index, path, content, fieldIds, meta) => {
   const xml = (new DOMParser()).parseFromString(content, 'text/xml');
   const row = { id: index, path };
+  if (meta && meta.lockOwner) {
+    row.lockOwner = meta.lockOwner;
+  }
   for (let i = 0; i < fieldIds.length; i += 1) {
     const fieldId = fieldIds[i];
     const field = xml.getElementsByTagName(fieldId)[0];
@@ -194,10 +216,11 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [keyword, setKeyword] = React.useState('');
   const [filterEditDate, setFilterEditDate] = React.useState(null);
   const [menuActionAnchor, setMenuActionAnchor] = React.useState(null);
-  const [selectedRow, setSelectedRow] = React.useState(null);
+  const [selectedRow, setSelectedRow] = React.useState({});
   const [isProcessing, setIsProcessing] = React.useState(false);
   const [bulkCompletedCount, setBulkCompletedCount] = React.useState(0);
   const [bulkTotalCount, setBulkTotalCount] = React.useState(0);
+  const [rowActionMenuAnchor, setRowActionMenuAnchor] = React.useState(null);
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
@@ -347,8 +370,9 @@ const DataSheet = React.forwardRef((props, ref) => {
         const path = paths[i];
 
         const content = await StudioAPI.getContent(path);
+        const meta = await StudioAPI.getSandboxItemByPath(path);
         const fieldIds = displayFields.map((elm) => elm.fieldId);
-        const row = rowFromApiContent(i, path, content, fieldIds);
+        const row = rowFromApiContent(i, path, content, fieldIds, meta);
         dtRows.push({ ...row });
         dtSessionRows.push({ ...row });
       }
@@ -382,6 +406,15 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleOnCellClick = (model, event, detail) => {
     setSelectedRow(model);
+
+    const field = model.field;
+    if (field === 'action') {
+      event.preventDefault();
+      event.stopPropagation();
+      setRowActionMenuAnchor(event.currentTarget);
+      return;
+    }
+
     const fieldType = model.colDef.fieldType;
     if (ContentTypeHelper.isMediaType(fieldType) || ContentTypeHelper.isRteType(fieldType)) {
       event.preventDefault();
@@ -429,6 +462,27 @@ const DataSheet = React.forwardRef((props, ref) => {
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
   };
 
+  const handleRowMenuActionUnlock = async () => {
+    const { row } = selectedRow;
+    if (!row || !row.path || !row.lockOwner) return;
+
+    const res = await StudioAPI.unlockContent(row.path);
+    if (res) {
+      sessionRows[row.id].lockOwner = null;
+      setSessionRows(sessionRows);
+    }
+
+    setRowActionMenuAnchor(null);
+  };
+
+  const handleRowMenuActionSave = () => {
+    console.log('save');
+  };
+
+  const handleRowMenuActionClear = () => {
+    console.log('clear');
+  };
+
   return (
     <div className={classes.root}>
       <DataGrid
@@ -455,6 +509,14 @@ const DataSheet = React.forwardRef((props, ref) => {
         }}
         onEditRowsModelChange={handleEditRowsModelChange}
         onCellEditCommit={handleOnCellEditCommit}
+      />
+      <RowActionMenu
+        anchorEl={rowActionMenuAnchor}
+        handleClose={() => setRowActionMenuAnchor(null)}
+        handleUnlockAction={handleRowMenuActionUnlock}
+        handleSaveAction={handleRowMenuActionSave}
+        handleClearAction={handleRowMenuActionClear}
+        selectedCell={selectedRow}
       />
       <CellActionMenu
         anchorEl={menuActionAnchor}
