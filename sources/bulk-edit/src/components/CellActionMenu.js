@@ -42,13 +42,13 @@ export default function CellActionMenu({ anchorEl, handleClose, handleViewAction
         <ListItemIcon>
             <PreviewIcon />
           </ListItemIcon>
-          <ListItemText primary="View" />
+          <ListItemText primary="View Field" />
       </MenuItem>
       <MenuItem onClick={handleEditAction}>
         <ListItemIcon>
           <EditIcon />
         </ListItemIcon>
-        <ListItemText primary="Edit" />
+        <ListItemText primary="Edit Field" />
       </MenuItem>
     </Menu>
   );

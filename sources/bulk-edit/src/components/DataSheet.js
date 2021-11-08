@@ -240,7 +240,7 @@ const DataSheet = React.forwardRef((props, ref) => {
       setIsProcessing(true);
       setBulkTotalCount(totalCount);
 
-      const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path');
+      const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field !== 'action');
 
       for (let i = 0; i < totalCount; i++) {
         const path = keys[i];
@@ -452,11 +452,11 @@ const DataSheet = React.forwardRef((props, ref) => {
       sessionRows[model.id][model.field] = response.updatedModel[model.field];
       setSessionRows(sessionRows);
       saveEditState(model);
-      setSelectedRow(null);
+      setSelectedRow({});
     };
 
     const onEditedFailed = (error) => {
-      setSelectedRow(null);
+      setSelectedRow({});
     };
 
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
@@ -475,12 +475,44 @@ const DataSheet = React.forwardRef((props, ref) => {
     setRowActionMenuAnchor(null);
   };
 
-  const handleRowMenuActionSave = () => {
-    console.log('save');
+  const handleRowMenuActionSave = async () => {
+    const { row } = selectedRow;
+    if (!row || !row.path) return;
+
+    const path = row.path;
+    if (!editedRows[path]) return;
+
+    const newContent = await writeContent(path, editedRows[path], contentType);
+    if (newContent) {
+      const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field !== 'action');
+      sessionRows[row.id] = rowFromApiContent(row.id, path, newContent, fieldIds);
+      rows[row.id] = sessionRows[row.id]
+      setSessionRows(sessionRows);
+      setRows(rows);
+    }
+
+    setRowActionMenuAnchor(null);
   };
 
-  const handleRowMenuActionClear = () => {
-    console.log('clear');
+  const handleRowMenuActionClear = async () => {
+    const { row } = selectedRow;
+    if (!row || !row.path) return;
+
+    const path = row.path;
+    const content = await StudioAPI.getContent(path);
+    if (!content) return;
+
+    const meta = await StudioAPI.getSandboxItemByPath(path);
+    if (!meta) return;
+
+    const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field != 'action');
+    const rowFromApi = rowFromApiContent(row.id, path, content, fieldIds, meta);
+    sessionRows[row.id] = rowFromApi;
+    setSessionRows([...sessionRows]);
+
+    delete editedRows[path];
+    setEditedRows(editedRows);
+    setRowActionMenuAnchor(null);
   };
 
   return (
