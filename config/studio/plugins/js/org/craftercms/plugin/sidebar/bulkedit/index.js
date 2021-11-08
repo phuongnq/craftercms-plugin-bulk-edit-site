@@ -154,8 +154,20 @@ function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray$1(arr, i) || _nonIterableRest();
 }
 
+function _toConsumableArray$1(arr) {
+  return _arrayWithoutHoles$1(arr) || _iterableToArray$1(arr) || _unsupportedIterableToArray$1(arr) || _nonIterableSpread$1();
+}
+
+function _arrayWithoutHoles$1(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray$1(arr);
+}
+
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArray$1(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
 function _iterableToArrayLimit(arr, i) {
@@ -203,6 +215,10 @@ function _arrayLikeToArray$1(arr, len) {
   for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
 
   return arr2;
+}
+
+function _nonIterableSpread$1() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
 function _nonIterableRest() {
@@ -26323,15 +26339,13 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               console.log(rowFromApi);
               console.log(sessionRows);
               sessionRows[row.id] = rowFromApi;
-              rows[row.id] = rowFromApi;
               console.log(sessionRows);
-              setSessionRows(sessionRows);
-              setRows(rows);
+              setSessionRows(_toConsumableArray$1(sessionRows));
               delete editedRows[path];
               setEditedRows(editedRows);
               setRowActionMenuAnchor(null);
 
-            case 26:
+            case 24:
             case "end":
               return _context7.stop();
           }
