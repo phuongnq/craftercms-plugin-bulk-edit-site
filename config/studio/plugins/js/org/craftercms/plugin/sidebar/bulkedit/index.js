@@ -26326,9 +26326,12 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               rows[row.id] = rowFromApi;
               setSessionRows(sessionRows);
               setRows(rows);
+              setEditedRows(editedRows.filter(function (elm) {
+                return elm.key !== path;
+              }));
               setRowActionMenuAnchor(null);
 
-            case 23:
+            case 24:
             case "end":
               return _context7.stop();
           }
