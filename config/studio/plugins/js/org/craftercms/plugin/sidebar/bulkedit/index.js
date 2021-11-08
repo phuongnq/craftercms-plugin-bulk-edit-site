@@ -25656,55 +25656,62 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       },
       saveAllChanges: function () {
         var _saveAllChanges = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          var keys, i, path, res;
+          var keys, totalCount, completedCount, i, path, res;
           return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
                   keys = Object.keys(editedRows);
+                  totalCount = keys.length;
+                  completedCount = 0;
 
-                  if (!(keys.length === 0)) {
-                    _context2.next = 3;
+                  if (!(totalCount === 0)) {
+                    _context2.next = 5;
                     break;
                   }
 
                   return _context2.abrupt("return");
 
-                case 3:
+                case 5:
+                  console.log(editedRows);
                   setIsProcessing(true);
-                  setBulkTotalCount(keys.length);
+                  setBulkTotalCount(totalCount);
                   i = 0;
 
-                case 6:
-                  if (!(i < keys.length)) {
-                    _context2.next = 15;
+                case 9:
+                  if (!(i < totalCount)) {
+                    _context2.next = 18;
                     break;
                   }
 
                   path = keys[i];
-                  _context2.next = 10;
+                  _context2.next = 13;
                   return writeContent(path, editedRows[path], contentType);
 
-                case 10:
+                case 13:
                   res = _context2.sent;
 
                   if (!res) {
                     console.log("Error while saving path ".concat(path));
                   } else {
-                    setBulkCompletedCount(bulkCompletedCount + 1);
+                    completedCount += 1;
+                    setBulkCompletedCount(completedCount);
                   }
 
-                case 12:
+                case 15:
                   i++;
-                  _context2.next = 6;
+                  _context2.next = 9;
                   break;
 
-                case 15:
-                  setTimeout(function () {
-                    setIsProcessing(false);
-                  }, 4000);
+                case 18:
 
-                case 17:
+                  if (completedCount === bulkTotalCount) {
+                    setTimeout(function () {
+                      setIsProcessing(false);
+                    }, 4000);
+                  }
+
+                case 20:
                 case "end":
                   return _context2.stop();
               }
