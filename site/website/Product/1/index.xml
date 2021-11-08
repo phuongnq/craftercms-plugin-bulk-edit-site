@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page>
+	<savedAsDraft>true</savedAsDraft>
 	<content-type>/page/product</content-type>
 	<display-template/>
 	<no-template-required/>
@@ -16,6 +17,6 @@
 	<image_s>/static-assets/jon-parry-C8eSYwQkwHw-unsplash.jpg</image_s>
 	<createdDate>2021-11-02T04:01:02.977Z</createdDate>
 	<createdDate_dt>2021-11-02T04:01:02.977Z</createdDate_dt>
-	<lastModifiedDate>2021-11-05T09:06:06.673Z</lastModifiedDate>
-	<lastModifiedDate_dt>2021-11-05T09:06:06.673Z</lastModifiedDate_dt>
+	<lastModifiedDate>2021-11-08T03:14:09.275Z</lastModifiedDate>
+	<lastModifiedDate_dt>2021-11-08T03:14:09.275Z</lastModifiedDate_dt>
 </page>
