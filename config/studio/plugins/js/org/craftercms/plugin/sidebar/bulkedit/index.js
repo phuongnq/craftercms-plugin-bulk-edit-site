@@ -26323,13 +26323,14 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               console.log(rowFromApi);
               sessionRows[row.id] = rowFromApi;
               rows[row.id] = rowFromApi;
+              console.log(sessionRows);
               setSessionRows(sessionRows);
               setRows(rows);
               delete editedRows[path];
               setEditedRows(editedRows);
               setRowActionMenuAnchor(null);
 
-            case 24:
+            case 25:
             case "end":
               return _context7.stop();
           }
