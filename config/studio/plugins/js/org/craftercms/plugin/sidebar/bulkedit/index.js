@@ -25708,6 +25708,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                               row = sessionRows.find(function (r) {
                                 return r.path === path;
                               });
+                              console.log(row);
 
                               if (row) {
                                 rowIndex = row.id;
