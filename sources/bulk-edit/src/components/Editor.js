@@ -27,6 +27,7 @@ import {
   Drawer,
   IconButton,
   styled,
+  Tooltip,
 } from '@mui/material';
 
 import FindReplaceIcon from '@mui/icons-material/FindReplace';
@@ -41,6 +42,11 @@ import FilterDialog from './Filter';
 import DataSheet from './DataSheet';
 
 const DRAWER_WIDTH = 240;
+
+const TEXT_FIND_REPLACE = 'Find and Replace';
+const TEXT_FILTER = 'Apply Filters';
+const TEXT_SAVE = 'Save Change';
+const TEXT_CANCEL = 'Cancel All Change';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -101,6 +107,54 @@ export default function Editor() {
         >
           <MenuIcon />
         </IconButton>
+        {!drawerOpen && (
+          <div style={{ position: 'absolute', right: '0px' }}>
+            <Tooltip title={TEXT_FIND_REPLACE}>
+              <IconButton
+                color="inherit"
+                aria-label={TEXT_FIND_REPLACE}
+                onClick={() => setFindReplaceDialogOpen(true)}
+                edge="start"
+                sx={{ mr: 2 }}
+              >
+                <FindReplaceIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={TEXT_FILTER}>
+              <IconButton
+                color="inherit"
+                aria-label={TEXT_FILTER}
+                onClick={() => setFilterDialogOpen(true)}
+                edge="start"
+                sx={{ mr: 2 }}
+              >
+                <FilterListIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={TEXT_SAVE}>
+              <IconButton
+                color="inherit"
+                aria-label={TEXT_SAVE}
+                onClick={handleSaveChangeClick}
+                edge="start"
+                sx={{ mr: 2 }}
+              >
+                <SaveIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={TEXT_CANCEL}>
+              <IconButton
+                color="inherit"
+                aria-label={TEXT_CANCEL}
+                onClick={handleCancelAllChangeClick}
+                edge="start"
+                sx={{ mr: 2 }}
+              >
+                <ClearAllIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
+        )}
       </Toolbar>
     </Box>
   );
@@ -147,32 +201,32 @@ export default function Editor() {
       </List>
       <Divider />
       <List>
-        <ListItem button key="Find and Replace" onClick={() => setFindReplaceDialogOpen(true)}>
+        <ListItem button key={TEXT_FIND_REPLACE} onClick={() => setFindReplaceDialogOpen(true)}>
               <ListItemIcon>
                 <FindReplaceIcon />
               </ListItemIcon>
-              <ListItemText primary="Find and Replace" />
+              <ListItemText primary={TEXT_FIND_REPLACE} />
         </ListItem>
-        <ListItem button key="Apply Filters" onClick={() => setFilterDialogOpen(true)}>
+        <ListItem button key={TEXT_FILTER} onClick={() => setFilterDialogOpen(true)}>
           <ListItemIcon>
             <FilterListIcon />
           </ListItemIcon>
-          <ListItemText primary="Apply Filters" />
+          <ListItemText primary={TEXT_FILTER} />
         </ListItem>
       </List>
       <Divider />
       <List>
-        <ListItem button key="Save Change" onClick={handleSaveChangeClick}>
+        <ListItem button key={TEXT_SAVE} onClick={handleSaveChangeClick}>
           <ListItemIcon>
             <SaveIcon />
           </ListItemIcon>
-          <ListItemText primary="Save Change" />
+          <ListItemText primary={TEXT_SAVE} />
         </ListItem>
-        <ListItem button key="Cancel All Change" onClick={handleCancelAllChangeClick}>
+        <ListItem button key={TEXT_CANCEL} onClick={handleCancelAllChangeClick}>
           <ListItemIcon>
             <ClearAllIcon />
           </ListItemIcon>
-          <ListItemText primary="Cancel All Change" />
+          <ListItemText primary={TEXT_CANCEL} />
         </ListItem>
       </List>
       <Divider />
