@@ -25577,17 +25577,10 @@ var buildColumnsFromDisplayFields = function buildColumnsFromDisplayFields(displ
     headerName: 'Action',
     description: 'Action',
     sortable: false,
-    width: 100,
+    width: 32,
     editable: false,
     renderCell: function renderCell(params) {
-      return /*#__PURE__*/e__default.createElement(Button$1, {
-        variant: "contained",
-        color: "primary",
-        size: "small",
-        style: {
-          marginLeft: 16
-        }
-      }, /*#__PURE__*/e__default.createElement(MoreVertIcon, null));
+      return /*#__PURE__*/e__default.createElement(IconButton$1, null, /*#__PURE__*/e__default.createElement(MoreVertIcon, null));
     }
   }, {
     field: 'id',
