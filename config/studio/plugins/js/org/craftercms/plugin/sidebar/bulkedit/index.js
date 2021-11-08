@@ -25688,7 +25688,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                   setIsProcessing(true);
                   setBulkTotalCount(totalCount);
                   fields = columns.map(function (cl) {
-                    cl.field;
+                    return {
+                      fieldId: cl.field
+                    };
                   }).filter(function (field) {
                     return field.fieldId !== 'id' && field.fieldId !== 'path';
                   });
