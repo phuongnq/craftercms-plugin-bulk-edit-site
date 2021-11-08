@@ -25,8 +25,6 @@ import {
   ListItemText,
   Toolbar,
   Drawer,
-  Snackbar,
-  Alert,
   IconButton,
   styled,
 } from '@mui/material';
@@ -67,7 +65,6 @@ export default function Editor() {
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
   const [filterDialogOpen, setFilterDialogOpen] = React.useState(false);
-  const [openAlert, setOpenAlert] = React.useState(false);
 
   const rootRef = React.useRef(null);
   const dataSheetRef = React.useRef(null);
@@ -80,13 +77,8 @@ export default function Editor() {
     setFilterDialogOpen(false);
   };
 
-  const handleCloseAlert = () => {
-    setOpenAlert(false);
-  };
-
   const handleSaveChangeClick = async () => {
     dataSheetRef.current.saveAllChanges();
-    setOpenAlert(true);
   };
 
   const handleCancelAllChangeClick = () => {
@@ -212,11 +204,6 @@ export default function Editor() {
       </section>
       <FindAndReplace isOpen={findReplaceDialogOpen} handleClose={handleFindReplaceDialogClose} />
       <FilterDialog isOpen={filterDialogOpen} handleClose={handleFilterDialogClose} />
-      <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
-        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
-          Change has been saved.
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };

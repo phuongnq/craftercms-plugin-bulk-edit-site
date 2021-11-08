@@ -21,6 +21,7 @@ import CellExpand from './CellExpand';
 import MediaCell from './MediaCell';
 import RTECell from './RTECell';
 import CellActionMenu from './CellActionMenu';
+import SaveProgress from './SaveProgress';
 
 import {
   contentTypeSub,
@@ -189,23 +190,46 @@ const DataSheet = React.forwardRef((props, ref) => {
   const [filterEditDate, setFilterEditDate] = React.useState(null);
   const [menuActionAnchor, setMenuActionAnchor] = React.useState(null);
   const [selectedRow, setSelectedRow] = React.useState(null);
+  const [isProcessing, setIsProcessing] = React.useState(false);
+  const [bulkCompletedCount, setBulkCompletedCount] = React.useState(0);
+  const [bulkTotalCount, setBulkTotalCount] = React.useState(0);
 
   React.useImperativeHandle(ref, () => ({
     cancelAllChanges: () => {
       setRefresh(1 - refresh);
     },
-    saveAllChanges: () => {
+    saveAllChanges: async () => {
       const keys = Object.keys(editedRows);
-      if (keys.length === 0) {
+
+      const totalCount = keys.length;
+      let completedCount = 0;
+
+      if (totalCount === 0) {
         return;
       }
 
-      keys.forEach(async (path) => {
+      setIsProcessing(true);
+      setBulkTotalCount(totalCount);
+
+      for (let i = 0; i < totalCount; i++) {
+        const path = keys[i];
         const res = await writeContent(path, editedRows[path], contentType);
         if (!res) {
           console.log(`Error while saving path ${path}`);
+        } else {
+          completedCount += 1;
+          setBulkCompletedCount(completedCount);
         }
-      });
+      };
+
+      if (completedCount === totalCount) {
+        setTimeout(() => {
+          setIsProcessing(false);
+        }, 4000);
+        setRows(sessionRows);
+        setEditedRows({});
+        setRefresh(1 - refresh);
+      }
     },
   }));
 
@@ -421,6 +445,12 @@ const DataSheet = React.forwardRef((props, ref) => {
         handleEditAction={handleMenuActionEditClick}
       >
       </CellActionMenu>
+      {isProcessing && (
+        <SaveProgress
+          completed={bulkCompletedCount}
+          total={bulkTotalCount}
+        />
+      )}
     </div>
   );
 });
