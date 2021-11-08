@@ -26076,11 +26076,43 @@ function Editor() {
     sx: {
       mr: 2
     }
-  }, /*#__PURE__*/e__default.createElement(MenuIcon, null), !drawerOpen && /*#__PURE__*/e__default.createElement("div", {
+  }, /*#__PURE__*/e__default.createElement(MenuIcon, null)), !drawerOpen && /*#__PURE__*/e__default.createElement("div", {
     style: {
       "float": 'right'
     }
-  }, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null), /*#__PURE__*/e__default.createElement(FilterListIcon, null), /*#__PURE__*/e__default.createElement(SaveIcon, null), /*#__PURE__*/e__default.createElement(ClearAllIcon, null)))));
+  }, /*#__PURE__*/e__default.createElement(IconButton$1, {
+    color: "inherit",
+    "aria-label": "find and replace",
+    onClick: toggleDrawer,
+    edge: "start",
+    sx: {
+      mr: 2
+    }
+  }, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null)), /*#__PURE__*/e__default.createElement(IconButton$1, {
+    color: "inherit",
+    "aria-label": "filters",
+    onClick: toggleDrawer,
+    edge: "start",
+    sx: {
+      mr: 2
+    }
+  }, /*#__PURE__*/e__default.createElement(FilterListIcon, null)), /*#__PURE__*/e__default.createElement(IconButton$1, {
+    color: "inherit",
+    "aria-label": "Save all change",
+    onClick: toggleDrawer,
+    edge: "start",
+    sx: {
+      mr: 2
+    }
+  }, /*#__PURE__*/e__default.createElement(SaveIcon, null)), /*#__PURE__*/e__default.createElement(IconButton$1, {
+    color: "inherit",
+    "aria-label": "Cancel all change",
+    onClick: toggleDrawer,
+    edge: "start",
+    sx: {
+      mr: 2
+    }
+  }, /*#__PURE__*/e__default.createElement(ClearAllIcon, null)))));
   var drawer = /*#__PURE__*/e__default.createElement(Drawer, {
     variant: "persistent",
     sx: {
