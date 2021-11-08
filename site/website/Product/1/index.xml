@@ -10,7 +10,7 @@
 	<file-name>index.xml</file-name>
 	<folder-name>1</folder-name>
 	<internal-name>Product 2</internal-name>
-	<navLabel>Product 1</navLabel>
+	<navLabel>Product 2</navLabel>
 	<placeInNav>false</placeInNav>
 	<orderDefault_f>-1</orderDefault_f>
 	<video_s>/static-assets/videos/file_example_MP4_480_1_5MG.mp4</video_s>
