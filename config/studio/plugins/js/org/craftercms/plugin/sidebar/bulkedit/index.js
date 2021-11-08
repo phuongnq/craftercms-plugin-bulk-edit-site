@@ -1,7 +1,7 @@
 var e$3 = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
 var { forwardRef, useContext, createContext, useRef, useLayoutEffect, createElement, Children, isValidElement, cloneElement } = craftercms.libs.React;
 var e__default = craftercms.libs.React && Object.prototype.hasOwnProperty.call(craftercms.libs.React, 'default') ? craftercms.libs.React['default'] : craftercms.libs.React;
-var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, Popper: Popper$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, IconButton: IconButton$1, Tooltip: Tooltip$1, ListItemButton, Stack } = craftercms.libs.MaterialUI;
+var { FormControl: FormControl$1, InputLabel: InputLabel$1, Select: Select$1, MenuItem: MenuItem$2, styled: styled$3, TextField: TextField$1, Button: Button$1, Dialog, DialogTitle, DialogContent, Box: Box$2, DialogActions, Paper: Paper$1, Accordion, AccordionSummary, Typography: Typography$2, AccordionDetails, FormLabel: FormLabel$2, RadioGroup, FormControlLabel: FormControlLabel$1, Radio, Popper: Popper$1, Drawer, List: List$2, ListItem, Divider, ListItemIcon: ListItemIcon$2, ListItemText: ListItemText$2, CssBaseline, Toolbar: Toolbar$2, Tooltip: Tooltip$1, ListItemButton, IconButton: IconButton$1, Stack } = craftercms.libs.MaterialUI;
 var { useEventCallback: useEventCallback$1, ownerWindow: ownerWindow$1, useForkRef: useForkRef$1, createSvgIcon: createSvgIcon$2, capitalize: capitalize$1, ownerDocument: ownerDocument$1, unstable_useId, debounce: debounce$2 } = craftercms.libs.MaterialUI;
 var _utils = craftercms.libs.MaterialUI && Object.prototype.hasOwnProperty.call(craftercms.libs.MaterialUI, 'default') ? craftercms.libs.MaterialUI['default'] : craftercms.libs.MaterialUI;
 var { Subject } = CrafterCMSNext.rxjs;
@@ -26061,6 +26061,9 @@ var Main = styled$3('main', {
     marginLeft: 0
   });
 });
+var StyledIconButton = styled$3('IconButton')({
+  color: rgba(0, 0, 0, 0.54)
+});
 function Editor() {
   var _React$useState = e__default.useState(true),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -26119,7 +26122,7 @@ function Editor() {
 
   var appbar = /*#__PURE__*/e__default.createElement(Box$2, {
     position: "relative"
-  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(IconButton$1, {
+  }, /*#__PURE__*/e__default.createElement(Toolbar$2, null, /*#__PURE__*/e__default.createElement(StyledIconButton, {
     color: "inherit",
     "aria-label": "open drawer",
     onClick: toggleDrawer,
@@ -26134,7 +26137,7 @@ function Editor() {
     }
   }, /*#__PURE__*/e__default.createElement(Tooltip$1, {
     title: TEXT_FIND_REPLACE
-  }, /*#__PURE__*/e__default.createElement(IconButton$1, {
+  }, /*#__PURE__*/e__default.createElement(StyledIconButton, {
     color: "inherit",
     "aria-label": TEXT_FIND_REPLACE,
     onClick: function onClick() {
@@ -26146,7 +26149,7 @@ function Editor() {
     }
   }, /*#__PURE__*/e__default.createElement(FindReplaceIcon, null))), /*#__PURE__*/e__default.createElement(Tooltip$1, {
     title: TEXT_FILTER
-  }, /*#__PURE__*/e__default.createElement(IconButton$1, {
+  }, /*#__PURE__*/e__default.createElement(StyledIconButton, {
     color: "inherit",
     "aria-label": TEXT_FILTER,
     onClick: function onClick() {
@@ -26158,7 +26161,7 @@ function Editor() {
     }
   }, /*#__PURE__*/e__default.createElement(FilterListIcon, null))), /*#__PURE__*/e__default.createElement(Tooltip$1, {
     title: TEXT_SAVE
-  }, /*#__PURE__*/e__default.createElement(IconButton$1, {
+  }, /*#__PURE__*/e__default.createElement(StyledIconButton, {
     color: "inherit",
     "aria-label": TEXT_SAVE,
     onClick: handleSaveChangeClick,
@@ -26168,7 +26171,7 @@ function Editor() {
     }
   }, /*#__PURE__*/e__default.createElement(SaveIcon, null))), /*#__PURE__*/e__default.createElement(Tooltip$1, {
     title: TEXT_CANCEL
-  }, /*#__PURE__*/e__default.createElement(IconButton$1, {
+  }, /*#__PURE__*/e__default.createElement(StyledIconButton, {
     color: "inherit",
     "aria-label": TEXT_CANCEL,
     onClick: handleCancelAllChangeClick,
