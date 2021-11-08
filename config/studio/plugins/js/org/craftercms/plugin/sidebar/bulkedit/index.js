@@ -24968,11 +24968,11 @@ function CellActionMenu(_ref) {
   }, /*#__PURE__*/e__default.createElement(MenuItem$1, {
     onClick: handleViewAction
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(PreviewIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$1, {
-    primary: "View"
+    primary: "View Field"
   })), /*#__PURE__*/e__default.createElement(MenuItem$1, {
     onClick: handleEditAction
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(EditIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$1, {
-    primary: "Edit"
+    primary: "Edit Field"
   })));
 }
 
@@ -26155,11 +26155,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       sessionRows[model.id][model.field] = response.updatedModel[model.field];
       setSessionRows(sessionRows);
       saveEditState(model);
-      setSelectedRow(null);
+      setSelectedRow({});
     };
 
     var onEditedFailed = function onEditedFailed(error) {
-      setSelectedRow(null);
+      setSelectedRow({});
     };
 
     DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
@@ -26172,22 +26172,20 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              console.log('unlock');
               row = selectedRow.row;
-              console.log(selectedRow);
 
               if (!(!row || !row.path || !row.lockOwner)) {
-                _context5.next = 5;
+                _context5.next = 3;
                 break;
               }
 
               return _context5.abrupt("return");
 
-            case 5:
-              _context5.next = 7;
+            case 3:
+              _context5.next = 5;
               return StudioAPI.unlockContent(row.path);
 
-            case 7:
+            case 5:
               res = _context5.sent;
 
               if (res) {
@@ -26197,7 +26195,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
               setRowActionMenuAnchor(null);
 
-            case 10:
+            case 8:
             case "end":
               return _context5.stop();
           }
@@ -26210,9 +26208,63 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     };
   }();
 
-  var handleRowMenuActionSave = function handleRowMenuActionSave() {
-    console.log('save');
-  };
+  var handleRowMenuActionSave = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+      var row, path, newContent, fieldIds;
+      return regeneratorRuntime.wrap(function _callee5$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              row = selectedRow.row;
+
+              if (!(!row || !row.path)) {
+                _context6.next = 3;
+                break;
+              }
+
+              return _context6.abrupt("return");
+
+            case 3:
+              path = row.path;
+
+              if (editedRows[path]) {
+                _context6.next = 6;
+                break;
+              }
+
+              return _context6.abrupt("return");
+
+            case 6:
+              _context6.next = 8;
+              return writeContent(path, editedRows[path], contentType);
+
+            case 8:
+              newContent = _context6.sent;
+
+              if (newContent) {
+                fieldIds = columns.map(function (cl) {
+                  return cl.field;
+                }).filter(function (field) {
+                  return field !== 'id' && field !== 'path';
+                });
+                sessionRows[row.id] = rowFromApiContent(row.id, path, newContent, fieldIds);
+                rows[row.id] = sessionRows[row.id];
+                setSessionRows(sessionRows);
+                setRows(rows);
+              }
+
+            case 10:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function handleRowMenuActionSave() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
 
   var handleRowMenuActionClear = function handleRowMenuActionClear() {
     console.log('clear');
