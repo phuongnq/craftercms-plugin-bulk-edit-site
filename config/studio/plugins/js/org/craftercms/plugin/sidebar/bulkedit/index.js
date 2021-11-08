@@ -25712,7 +25712,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
                               if (row) {
                                 rowIndex = row.id;
+                                console.log(newContent);
                                 sessionRows[rowIndex] = rowFromApiContent(rowIndex, path, newContent, columns);
+                                console.log(sessionRows[rowIndex]);
                               }
                             }
 
