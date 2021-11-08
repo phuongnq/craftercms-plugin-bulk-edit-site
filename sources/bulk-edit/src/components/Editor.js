@@ -67,6 +67,12 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   }),
 );
 
+const StyledIconButton = styled(IconButton)(
+  ({ theme }) => ({
+    color: 'rgba(0, 0, 0, 0.54)',
+  }),
+);
+
 export default function Editor() {
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [findReplaceDialogOpen, setFindReplaceDialogOpen] = React.useState(false);
@@ -98,7 +104,7 @@ export default function Editor() {
   const appbar = (
     <Box position="relative">
       <Toolbar>
-        <IconButton
+        <StyledIconButton
           color="inherit"
           aria-label="open drawer"
           onClick={toggleDrawer}
@@ -106,11 +112,11 @@ export default function Editor() {
           sx={{ mr: 2 }}
         >
           <MenuIcon />
-        </IconButton>
+        </StyledIconButton>
         {!drawerOpen && (
           <div style={{ position: 'absolute', right: '0px' }}>
             <Tooltip title={TEXT_FIND_REPLACE}>
-              <IconButton
+              <StyledIconButton
                 color="inherit"
                 aria-label={TEXT_FIND_REPLACE}
                 onClick={() => setFindReplaceDialogOpen(true)}
@@ -118,10 +124,10 @@ export default function Editor() {
                 sx={{ mr: 2 }}
               >
                 <FindReplaceIcon />
-              </IconButton>
+              </StyledIconButton>
             </Tooltip>
             <Tooltip title={TEXT_FILTER}>
-              <IconButton
+              <StyledIconButton
                 color="inherit"
                 aria-label={TEXT_FILTER}
                 onClick={() => setFilterDialogOpen(true)}
@@ -129,10 +135,10 @@ export default function Editor() {
                 sx={{ mr: 2 }}
               >
                 <FilterListIcon />
-              </IconButton>
+              </StyledIconButton>
             </Tooltip>
             <Tooltip title={TEXT_SAVE}>
-              <IconButton
+              <StyledIconButton
                 color="inherit"
                 aria-label={TEXT_SAVE}
                 onClick={handleSaveChangeClick}
@@ -140,10 +146,10 @@ export default function Editor() {
                 sx={{ mr: 2 }}
               >
                 <SaveIcon />
-              </IconButton>
+              </StyledIconButton>
             </Tooltip>
             <Tooltip title={TEXT_CANCEL}>
-              <IconButton
+              <StyledIconButton
                 color="inherit"
                 aria-label={TEXT_CANCEL}
                 onClick={handleCancelAllChangeClick}
@@ -151,7 +157,7 @@ export default function Editor() {
                 sx={{ mr: 2 }}
               >
                 <ClearAllIcon />
-              </IconButton>
+              </StyledIconButton>
             </Tooltip>
           </div>
         )}
