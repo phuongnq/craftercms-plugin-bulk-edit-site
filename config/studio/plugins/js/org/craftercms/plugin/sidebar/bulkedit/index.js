@@ -26213,27 +26213,29 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               row = selectedRow.row;
 
               if (!(!row || !row.path)) {
-                _context6.next = 3;
+                _context6.next = 4;
                 break;
               }
 
+              setRowActionMenuAnchor(null);
               return _context6.abrupt("return");
 
-            case 3:
+            case 4:
               path = row.path;
 
               if (editedRows[path]) {
-                _context6.next = 6;
+                _context6.next = 8;
                 break;
               }
 
+              setRowActionMenuAnchor(null);
               return _context6.abrupt("return");
 
-            case 6:
-              _context6.next = 8;
+            case 8:
+              _context6.next = 10;
               return writeContent(path, editedRows[path], contentType);
 
-            case 8:
+            case 10:
               newContent = _context6.sent;
 
               if (newContent) {
@@ -26250,7 +26252,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
               setRowActionMenuAnchor(null);
 
-            case 11:
+            case 13:
             case "end":
               return _context6.stop();
           }
