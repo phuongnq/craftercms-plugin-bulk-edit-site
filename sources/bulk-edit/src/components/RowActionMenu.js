@@ -22,8 +22,17 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import ClearIcon from '@mui/icons-material/Clear';
+import EditIcon from '@mui/icons-material/Edit';
 
-export default function RowActionMenu({ selectedCell, anchorEl, handleClose, handleUnlockAction, handleSaveAction, handleClearAction }) {
+export default function RowActionMenu({
+  selectedCell,
+  anchorEl,
+  handleClose,
+  handleUnlockAction,
+  handleEditAction,
+  handleSaveAction,
+  handleClearAction
+}) {
   const { row } = selectedCell;
   return (
     <Menu
@@ -48,6 +57,12 @@ export default function RowActionMenu({ selectedCell, anchorEl, handleClose, han
           <ListItemText primary="Unlock" />
         </MenuItem>
       )}
+      <MenuItem onClick={handleEditAction}>
+        <ListItemIcon>
+          <EditIcon />
+        </ListItemIcon>
+        <ListItemText primary="Open Edit Form" />
+      </MenuItem>
       <MenuItem onClick={handleSaveAction}>
         <ListItemIcon>
           <SaveIcon />

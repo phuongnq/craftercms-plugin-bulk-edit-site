@@ -475,6 +475,38 @@ const DataSheet = React.forwardRef((props, ref) => {
     setRowActionMenuAnchor(null);
   };
 
+  const handleRowMenuActionEdit = async () => {
+    setRowActionMenuAnchor(null);
+    const { row } = selectedRow;
+    const payload = {
+      path: row.path,
+      authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
+      site: StudioAPI.siteId(),
+      readonly: false,
+    };
+
+    const onEditedSussessful = (response) => {
+      const model = selectedRow;
+      model.path = response.updatedModel[model.field];
+      model.value = response.updatedModel[model.field];
+      const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field !== 'action');
+      for (let i = 0; i < fieldIds.length; i += 1) {
+        const field = fieldIds[i];
+        sessionRows[model.id][field] = response.updatedModel[field];
+        rows[model.id][field] = response.updatedModel[field];
+      }
+      setSessionRows(sessionRows);
+      setRows(rows);
+      setSelectedRow({});
+    };
+
+    const onEditedFailed = (error) => {
+      setSelectedRow({});
+    };
+
+    DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
+  };
+
   const handleRowMenuActionSave = async () => {
     const { row } = selectedRow;
     if (!row || !row.path) {
@@ -561,6 +593,7 @@ const DataSheet = React.forwardRef((props, ref) => {
         anchorEl={rowActionMenuAnchor}
         handleClose={() => setRowActionMenuAnchor(null)}
         handleUnlockAction={handleRowMenuActionUnlock}
+        handleEditAction={handleRowMenuActionEdit}
         handleSaveAction={handleRowMenuActionSave}
         handleClearAction={handleRowMenuActionClear}
         selectedCell={selectedRow}
