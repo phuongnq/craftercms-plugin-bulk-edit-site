@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <page>
-	<savedAsDraft>true</savedAsDraft>
 	<content-type>/page/entry</content-type>
 	<display-template>/templates/web/entry.ftl</display-template>
 	<no-template-required/>
@@ -8,7 +7,7 @@
 	<objectGroupId>7d59</objectGroupId>
 	<objectId>7d5988d9-f678-cd5c-5580-d69293972987</objectId>
 	<internal-name>UpdateTest 10</internal-name>
-	<title_t>UpdateTest 23</title_t>
+	<title_t>UpdateTest 24</title_t>
 	<file-name>index.xml</file-name>
 	<folder-name>test1</folder-name>
 	<placeInNav>false</placeInNav>
@@ -24,6 +23,6 @@
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;</body_html>
 	<createdDate>2021-10-20T02:42:08.575Z</createdDate>
 	<createdDate_dt>2021-10-20T02:42:08.575Z</createdDate_dt>
-	<lastModifiedDate>2021-11-08T03:12:24.186Z</lastModifiedDate>
-	<lastModifiedDate_dt>2021-11-08T03:12:24.186Z</lastModifiedDate_dt>
+	<lastModifiedDate>2021-11-10T08:23:14.483Z</lastModifiedDate>
+	<lastModifiedDate_dt>2021-11-10T08:23:14.483Z</lastModifiedDate_dt>
 </page>
