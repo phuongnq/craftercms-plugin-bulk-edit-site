@@ -26324,8 +26324,9 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               setSessionRows(_toConsumableArray$1(sessionRows));
               delete editedRows[path];
               setEditedRows(editedRows);
+              setRowActionMenuAnchor(null);
 
-            case 23:
+            case 24:
             case "end":
               return _context7.stop();
           }
