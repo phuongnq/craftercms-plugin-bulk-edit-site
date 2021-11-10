@@ -25398,6 +25398,7 @@ function RowActionMenu(_ref) {
       anchorEl = _ref.anchorEl,
       handleClose = _ref.handleClose,
       handleUnlockAction = _ref.handleUnlockAction,
+      handleEditAction = _ref.handleEditAction,
       handleSaveAction = _ref.handleSaveAction,
       handleClearAction = _ref.handleClearAction;
   var row = selectedCell.row;
@@ -25418,6 +25419,10 @@ function RowActionMenu(_ref) {
     onClick: handleUnlockAction
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(LockOpenOutlinedIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$1, {
     primary: "Unlock"
+  })), /*#__PURE__*/e__default.createElement(MenuItem$1, {
+    onClick: handleEditAction
+  }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(ClearIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$1, {
+    primary: "Open Edit Form"
   })), /*#__PURE__*/e__default.createElement(MenuItem$1, {
     onClick: handleSaveAction
   }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(SaveIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$1, {
@@ -26203,40 +26208,94 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
     };
   }();
 
-  var handleRowMenuActionSave = /*#__PURE__*/function () {
+  var handleRowMenuActionEdit = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-      var row, path, newContent, fieldIds;
+      var row, payload, onEditedSussessful, onEditedFailed;
       return regeneratorRuntime.wrap(function _callee5$(_context6) {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
+              setRowActionMenuAnchor(null);
+              row = selectedRow.row;
+              payload = {
+                path: row.path,
+                authoringBase: CrafterCMSNext.system.store.getState().env.authoringBase,
+                site: StudioAPI.siteId(),
+                readonly: false
+              };
+
+              onEditedSussessful = function onEditedSussessful(response) {
+                var model = selectedRow;
+                model.path = response.updatedModel[model.field];
+                model.value = response.updatedModel[model.field];
+                var fieldIds = columns.map(function (cl) {
+                  return cl.field;
+                }).filter(function (field) {
+                  return field !== 'id' && field !== 'path' && field !== 'action';
+                });
+
+                for (var i = 0; i < fieldIds.length; i += 1) {
+                  var field = fieldIds[i];
+                  sessionRows[model.id][field] = response.updatedModel[field];
+                }
+
+                setSessionRows(sessionRows);
+                setSelectedRow({});
+              };
+
+              onEditedFailed = function onEditedFailed(error) {
+                setSelectedRow({});
+              };
+
+              DialogHelper.showEditDialog(payload, onEditedSussessful, onEditedFailed);
+
+            case 6:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function handleRowMenuActionEdit() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  var handleRowMenuActionSave = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+      var row, path, newContent, fieldIds;
+      return regeneratorRuntime.wrap(function _callee6$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
               row = selectedRow.row;
 
               if (!(!row || !row.path)) {
-                _context6.next = 4;
+                _context7.next = 4;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context6.abrupt("return");
+              return _context7.abrupt("return");
 
             case 4:
               path = row.path;
 
               if (editedRows[path]) {
-                _context6.next = 8;
+                _context7.next = 8;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context6.abrupt("return");
+              return _context7.abrupt("return");
 
             case 8:
-              _context6.next = 10;
+              _context7.next = 10;
               return writeContent(path, editedRows[path], contentType);
 
             case 10:
-              newContent = _context6.sent;
+              newContent = _context7.sent;
 
               if (newContent) {
                 fieldIds = columns.map(function (cl) {
@@ -26254,64 +26313,64 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 13:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee5);
+      }, _callee6);
     }));
 
     return function handleRowMenuActionSave() {
-      return _ref4.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }();
 
   var handleRowMenuActionClear = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
       var row, path, content, meta, fieldIds, rowFromApi;
-      return regeneratorRuntime.wrap(function _callee6$(_context7) {
+      return regeneratorRuntime.wrap(function _callee7$(_context8) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               row = selectedRow.row;
 
               if (!(!row || !row.path)) {
-                _context7.next = 4;
+                _context8.next = 4;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context7.abrupt("return");
+              return _context8.abrupt("return");
 
             case 4:
               path = row.path;
-              _context7.next = 7;
+              _context8.next = 7;
               return StudioAPI.getContent(path);
 
             case 7:
-              content = _context7.sent;
+              content = _context8.sent;
 
               if (content) {
-                _context7.next = 11;
+                _context8.next = 11;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context7.abrupt("return");
+              return _context8.abrupt("return");
 
             case 11:
-              _context7.next = 13;
+              _context8.next = 13;
               return StudioAPI.getSandboxItemByPath(path);
 
             case 13:
-              meta = _context7.sent;
+              meta = _context8.sent;
 
               if (meta) {
-                _context7.next = 17;
+                _context8.next = 17;
                 break;
               }
 
               setRowActionMenuAnchor(null);
-              return _context7.abrupt("return");
+              return _context8.abrupt("return");
 
             case 17:
               fieldIds = columns.map(function (cl) {
@@ -26328,14 +26387,14 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
 
             case 24:
             case "end":
-              return _context7.stop();
+              return _context8.stop();
           }
         }
-      }, _callee6);
+      }, _callee7);
     }));
 
     return function handleRowMenuActionClear() {
-      return _ref5.apply(this, arguments);
+      return _ref6.apply(this, arguments);
     };
   }();
 
@@ -26371,6 +26430,7 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
       return setRowActionMenuAnchor(null);
     },
     handleUnlockAction: handleRowMenuActionUnlock,
+    handleEditAction: handleRowMenuActionEdit,
     handleSaveAction: handleRowMenuActionSave,
     handleClearAction: handleRowMenuActionClear,
     selectedCell: selectedRow
