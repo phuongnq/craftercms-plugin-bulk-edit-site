@@ -26275,42 +26275,45 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               row = selectedRow.row;
 
               if (!(!row || !row.path)) {
-                _context7.next = 3;
+                _context7.next = 4;
                 break;
               }
 
+              setRowActionMenuAnchor(null);
               return _context7.abrupt("return");
 
-            case 3:
+            case 4:
               path = row.path;
-              _context7.next = 6;
+              _context7.next = 7;
               return StudioAPI.getContent(path);
 
-            case 6:
+            case 7:
               content = _context7.sent;
 
               if (content) {
-                _context7.next = 9;
+                _context7.next = 11;
                 break;
               }
 
+              setRowActionMenuAnchor(null);
               return _context7.abrupt("return");
 
-            case 9:
-              _context7.next = 11;
+            case 11:
+              _context7.next = 13;
               return StudioAPI.getSandboxItemByPath(path);
 
-            case 11:
+            case 13:
               meta = _context7.sent;
 
               if (meta) {
-                _context7.next = 14;
+                _context7.next = 17;
                 break;
               }
 
+              setRowActionMenuAnchor(null);
               return _context7.abrupt("return");
 
-            case 14:
+            case 17:
               fieldIds = columns.map(function (cl) {
                 return cl.field;
               }).filter(function (field) {
@@ -26321,9 +26324,8 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
               setSessionRows(_toConsumableArray$1(sessionRows));
               delete editedRows[path];
               setEditedRows(editedRows);
-              setRowActionMenuAnchor(null);
 
-            case 21:
+            case 23:
             case "end":
               return _context7.stop();
           }
