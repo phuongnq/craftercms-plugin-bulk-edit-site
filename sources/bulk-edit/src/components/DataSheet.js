@@ -477,10 +477,16 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleRowMenuActionSave = async () => {
     const { row } = selectedRow;
-    if (!row || !row.path) return;
+    if (!row || !row.path) {
+      setRowActionMenuAnchor(null);
+      return;
+    }
 
     const path = row.path;
-    if (!editedRows[path]) return;
+    if (!editedRows[path]) {
+      setRowActionMenuAnchor(null);
+      return;
+    }
 
     const newContent = await writeContent(path, editedRows[path], contentType);
     if (newContent) {
@@ -496,14 +502,23 @@ const DataSheet = React.forwardRef((props, ref) => {
 
   const handleRowMenuActionClear = async () => {
     const { row } = selectedRow;
-    if (!row || !row.path) return;
+    if (!row || !row.path) {
+      setRowActionMenuAnchor(null);
+      return;
+    }
 
     const path = row.path;
     const content = await StudioAPI.getContent(path);
-    if (!content) return;
+    if (!content) {
+      setRowActionMenuAnchor(null);
+      return;
+    }
 
     const meta = await StudioAPI.getSandboxItemByPath(path);
-    if (!meta) return;
+    if (!meta) {
+      setRowActionMenuAnchor(null);
+      return;
+    }
 
     const fieldIds = columns.map((cl) => cl.field).filter((field) => field !== 'id' && field !== 'path' && field != 'action');
     const rowFromApi = rowFromApiContent(row.id, path, content, fieldIds, meta);
