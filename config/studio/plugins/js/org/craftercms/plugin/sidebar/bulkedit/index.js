@@ -25421,7 +25421,7 @@ function RowActionMenu(_ref) {
     primary: "Unlock"
   })), /*#__PURE__*/e__default.createElement(MenuItem$1, {
     onClick: handleEditAction
-  }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(ClearIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$1, {
+  }, /*#__PURE__*/e__default.createElement(ListItemIcon$1, null, /*#__PURE__*/e__default.createElement(EditIcon, null)), /*#__PURE__*/e__default.createElement(ListItemText$1, {
     primary: "Open Edit Form"
   })), /*#__PURE__*/e__default.createElement(MenuItem$1, {
     onClick: handleSaveAction
@@ -26237,9 +26237,11 @@ var DataSheet = /*#__PURE__*/e__default.forwardRef(function (props, ref) {
                 for (var i = 0; i < fieldIds.length; i += 1) {
                   var field = fieldIds[i];
                   sessionRows[model.id][field] = response.updatedModel[field];
+                  rows[model.id][field] = response.updatedModel[field];
                 }
 
                 setSessionRows(sessionRows);
+                setRows(rows);
                 setSelectedRow({});
               };
 
